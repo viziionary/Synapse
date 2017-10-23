@@ -1,3 +1,4 @@
+import Synapse from '../../source/index';
 var entity = new Brain(20, 2, 3);
 entity.evolve(function(entity){
   // run user-designed simulation code
