@@ -54,4 +54,4 @@ function Connection(brain, source, target, callback) {
         //console.log('Refused backward connection');
     }
 }
-module.exports = connection;
+module.exports = Connection;

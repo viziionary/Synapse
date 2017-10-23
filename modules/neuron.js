@@ -121,4 +121,4 @@ function Neuron(brain, layer) {
 
       };
   }
-  export default Neuron;
+module.exports = Neuron;
