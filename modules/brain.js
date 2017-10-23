@@ -164,4 +164,4 @@ function Brain(inputSize, outputSize, layers) {
         }
     }
 }
-module.exports = Brain;
+export default Brain;
