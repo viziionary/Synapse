@@ -45,7 +45,7 @@ function Brain(inputSize, outputSize) {
       that.mutationRate = 0;
     }
     that.mutationRate += that.mutationRateGrowth;
-    console.log(that.mutationRate);
+    //console.log(that.mutationRate);
     mutate(0, that.mutationRate, that);
     return that;
   };
