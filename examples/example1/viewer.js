@@ -7,7 +7,7 @@ class Viewer {
   }
   render() {
     console.log(this.context);
-    renderBrain(brain, this.context, canvas);
+    renderBrain(this.brain, this.context, this.canvas);
   }
 }
 
