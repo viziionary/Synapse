@@ -135,4 +135,4 @@ function renderActivePaths(layer) {
   }
 }
 
-export default Viewer;
+module.exports = Viewer;

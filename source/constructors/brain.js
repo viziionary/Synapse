@@ -111,4 +111,5 @@ function Brain(inputSize, outputSize) {
     }
   }
 }
+
 module.exports = Brain;
