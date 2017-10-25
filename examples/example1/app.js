@@ -1,7 +1,8 @@
 import Viewer from './viewer';
 import Synapse from '../../source/index';
 
-document.addEventListener("load", function() {
+//document.addEventListener("load", function() {
+
 	var canvas = document.getElementById("brain");
 	var viewer = new Viewer(canvas, Synapse.brain);
 	var counter = 0;
@@ -27,4 +28,4 @@ document.addEventListener("load", function() {
 		}
 	});
 	network.run();
-})
+//})
