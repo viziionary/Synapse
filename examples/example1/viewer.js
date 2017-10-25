@@ -6,11 +6,10 @@ class Viewer {
     this.render = this.render.bind(this);
   }
   render() {
+    console.log(this.context);
     renderBrain(brain, canvas, this.context);
   }
 }
-
-export default Viewer;
 
 function renderBrain(brain, ctx, canvas) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -135,3 +134,5 @@ function renderActivePaths(layer) {
     }
   }
 }
+
+export default Viewer;
