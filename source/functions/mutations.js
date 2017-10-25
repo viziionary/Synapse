@@ -1,3 +1,6 @@
+const getRandomProperty = require('./getrandomproperty');
+const getRandomNumber = require('./getrandomnumber');
+
 var mutations = {
   connect: {
     frequencyMod: 0,
@@ -51,7 +54,7 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.time('add');
-      var layer = getRandomInt(1, brain.layers - 2);
+      var layer = getRandomNumber(1, brain.layers - 2);
       var neuron1 = new Neuron(brain, layer);
       for (var prop1 in brain.globalReferenceNeurons) {
         var neuron2 = brain.globalReferenceNeurons[prop1];
@@ -67,7 +70,7 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.time('remove');
-      var layer = getRandomInt(1, brain.layers - 2);
+      var layer = getRandomNumber(1, brain.layers - 2);
       for (var prop1 in brain.globalReferenceNeurons) {
         var neuron2 = brain.globalReferenceNeurons[prop1];
         if (neuron2.layer == layer) {
