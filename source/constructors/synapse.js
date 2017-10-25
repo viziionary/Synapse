@@ -6,6 +6,7 @@ class Synapse {
     this.runFunction = runFunction;
     this.brain = new Brain(inputSize, outputSize);
     this.run = this.run.bind(this);
+    this.runOnce = this.runOnce.bind(this);
   }
   run(times){
     if (times === null) {
