@@ -1,3 +1,5 @@
+const connection = require('./connection');
+
 function Neuron(brain, layer) {
   brain.counter++;
   brain.globalReferenceNeurons[brain.counter] = this;
