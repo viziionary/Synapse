@@ -16,5 +16,6 @@ class Synapse {
     } else {
       this.brain = child;
     }
+    this.brain.score = childScore;
   }
 }
