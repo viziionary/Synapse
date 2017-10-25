@@ -1,5 +1,6 @@
 const Neuron = require('./neuron');
 const mutate = require('../functions/mutate.js');
+const getRandomInt = require('../functions/getrandomint');
 
 function Brain(inputSize, outputSize) {
   var that = this;
