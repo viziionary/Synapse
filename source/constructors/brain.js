@@ -1,4 +1,5 @@
 const Neuron = require('./neuron');
+const mutate = require('../functions/mutate.js');
 
 function Brain(inputSize, outputSize) {
   var that = this;
