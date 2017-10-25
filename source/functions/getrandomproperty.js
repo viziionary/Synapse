@@ -13,3 +13,4 @@ function getRandomProperty(obj) {
         throw ('Null or undefined object passed to grp.');
     }
 }
+module.exports = getRandomProperty;
