@@ -12,3 +12,4 @@ function getRandomItem(list, weight) {
 		}
     }
 }
+module.exports = getRandomItem;
