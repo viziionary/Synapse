@@ -1,6 +1,6 @@
 const getRandomProperty = require('./getrandomproperty');
 const getRandomNumber = require('./getrandomnumber');
-const Nueron = require('../constructors/nueron');
+const Nueron = require('../constructors/neuron');
 
 var mutations = {
   connect: {
