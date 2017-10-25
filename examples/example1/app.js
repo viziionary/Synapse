@@ -7,6 +7,6 @@ var network = new Synapse(2,1,(run)=>{
   var output3 = run([0, 0])[0];
   var total = 3 - (output1 + output2 + output3);
   counter++;
-  return count > 100 || total < 2.7 ? total : false;
+  return counter > 100 || total < 2.7 ? total : false;
 });
 network.run();
