@@ -1,3 +1,4 @@
+const getRandomNumber = require('./getrandomnumber');
 function getRandomItem(list, weight) {
 	var total_weight = weight.reduce(function(prev, cur, i, arr) {
 		return prev + cur;
