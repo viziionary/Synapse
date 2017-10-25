@@ -1,3 +1,4 @@
+const mutations = require('./mutations');
 function mutate(count, max, child) {
   var weights = Object.values(mutations).map(mutation => {
     return mutation.frequency
