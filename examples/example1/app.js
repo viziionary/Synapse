@@ -7,7 +7,7 @@ var network = new Synapse(2,1,(run)=>{
   var output3 = run([0, 0])[0];
   var total = 3 - (output1 + output2 + output3);
   counter++;
-  if (counter > 100) {
+  if (counter > 1000) {
     console.log('Ended without reaching target: ' + total);
   	return false;
   }
