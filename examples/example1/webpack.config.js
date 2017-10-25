@@ -4,5 +4,5 @@ module.exports = {
         path: __dirname + "/build",
         filename: "bundle.js"
     },
-    watch: false
+    watch: true
 }
