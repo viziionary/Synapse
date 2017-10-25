@@ -1,4 +1,5 @@
 const Brain = require('./brain');
+const clone = require('../functions/clone');
 class Synapse {
   constructor(runFunction, inputSize, outputSize) {
     this.runFunction = runFunction;
