@@ -1,7 +1,7 @@
 import Viewer from './viewer';
 import Synapse from '../../source/index';
 
-//document.addEventListener("load", function() {
+window.addEventListener("load", function() {
 
 	var canvas = document.getElementById("brain");
 	var viewer;
@@ -29,6 +29,5 @@ import Synapse from '../../source/index';
 	});
 	viewer = new Viewer(canvas, network.brain);
 	network.run();
-
 	
-//})
+})
