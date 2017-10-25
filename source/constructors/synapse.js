@@ -19,3 +19,4 @@ class Synapse {
     this.brain.score = childScore;
   }
 }
+module.exports = Synapse;
