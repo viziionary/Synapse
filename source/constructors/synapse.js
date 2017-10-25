@@ -11,6 +11,9 @@ class Synapse {
     var child = clone(this.brain, true);
     child.generate();
     var childScore = this.runFunction(child.input);
+    if (childScore instanceof Promise){
+      childScore = await childScore;
+    }
     if (childScore === false) {
       return this.brain;
     } else {
