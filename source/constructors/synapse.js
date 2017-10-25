@@ -22,7 +22,7 @@ class Synapse {
         this.brain = child;
       }
       this.brain.score = childScore;
-      this.run();
+      return this.run();
     }
   }
 }
