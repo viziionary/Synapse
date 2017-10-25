@@ -16,6 +16,12 @@ window.addEventListener("load", function() {
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
 		counter++;
+
+		var interval = counter % 10;  
+
+		if (interval){
+			console.log(total);
+		}
 		if (counter > 1000) {
 			console.log('Ended without reaching target: ' + total);
 			return false;

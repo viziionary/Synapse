@@ -24,6 +24,7 @@ class Synapse {
       this.brain.score = childScore;
       return this.run();
     }
+    setTimeout(function(){}, 10);
   }
 }
 
