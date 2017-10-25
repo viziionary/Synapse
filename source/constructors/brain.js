@@ -20,7 +20,9 @@ function Brain(inputSize, outputSize, layers) {
   this.mutationRateGrowth = 1;
   this.mutationMax = 100;
 
-
+  this.evolve = (functionIn) => {
+    this.score = functionIn();
+  }
   this.input = (array) => {
     var inputs = [];
     Object.values(this.globalReferenceNeurons).forEach(neuron => {
