@@ -1,4 +1,4 @@
-import Viewer from 'viewer';
+import Viewer from './viewer';
 import Synapse from '../../source/index';
 
 var canvas = document.getElementById("brain");
