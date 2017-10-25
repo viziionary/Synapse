@@ -1,6 +1,6 @@
 const Neuron = require('./neuron');
 const mutate = require('../functions/mutate.js');
-const getRandomInt = require('../functions/getrandomint');
+const getRandomNumber = require('../functions/getrandomnumber');
 
 function Brain(inputSize, outputSize) {
   var that = this;
@@ -96,7 +96,7 @@ function Brain(inputSize, outputSize) {
           if (that.globalReferenceNeurons[prop2].layer == layer2) {
             passed++;
             if (Object.keys(that.globalReferenceNeurons[prop1].connections).length <= that.globalReferenceNeurons[prop1].weight) {
-              var rand = getRandomInt(0, 3);
+              var rand = getRandomNumber(0, 3);
               var existing = Object.keys(that.globalReferenceNeurons[prop1].connections).length;
               var weight = that.globalReferenceNeurons[prop1].weight;
               var needed = weight - existing;
