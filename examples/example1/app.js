@@ -3,12 +3,11 @@ import Synapse from '../../source/index';
 
 //document.addEventListener("load", function() {
 
+	var canvas = document.getElementById("brain");
+	var viewer = new Viewer(canvas, network.brain);
 	
-
 	var network = new Synapse(2, 1, (run) => {
 
-		var canvas = document.getElementById("brain");
-		var viewer = new Viewer(canvas, network.brain);
 		var counter = 0;
 		viewer.render();
 
@@ -29,4 +28,6 @@ import Synapse from '../../source/index';
 		}
 	});
 	network.run();
+
+	
 //})
