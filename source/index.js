@@ -1,2 +1,2 @@
-const Synapse = require('./modules/synapse');
+const Synapse = require('./constructor/synapse');
 module.exports = Synapse;
