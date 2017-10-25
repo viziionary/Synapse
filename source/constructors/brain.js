@@ -1,13 +1,8 @@
 const Neuron = require('./neuron');
 
-function Brain(inputSize, outputSize, layers) {
+function Brain(inputSize, outputSize) {
   var that = this;
-  if (!layers) {
-    layers = 3;
-  } else if (layers < 3) {
-    throw 'The layers parameter must be a number equal to 3 or greater.'
-  }
-  var that = this;
+  var layers = 3;
   this.inputSize = inputSize;
   this.outputSize = outputSize;
   this.layers = layers;
