@@ -4,8 +4,8 @@ import Synapse from '../../source/index';
 //document.addEventListener("load", function() {
 
 	var canvas = document.getElementById("brain");
-	var viewer = new Viewer(canvas, network.brain);
-	
+	var viewer;
+
 	var network = new Synapse(2, 1, (run) => {
 
 		var counter = 0;
@@ -27,6 +27,7 @@ import Synapse from '../../source/index';
 			return false;
 		}
 	});
+	viewer = new Viewer(canvas, network.brain);
 	network.run();
 
 	
