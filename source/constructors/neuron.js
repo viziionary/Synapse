@@ -1,4 +1,4 @@
-const connection = require('./connection');
+const Connection = require('./connection');
 
 function Neuron(brain, layer) {
   brain.counter++;
