@@ -47,6 +47,7 @@ class Brain {
     }
   }
   bindMethods(self) {
+    self.deleteConnection = this.deleteConnection.bind(self);
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
   }
@@ -65,6 +66,20 @@ class Brain {
     }).map(neuron => {
       return neuron.measure();
     });
+  }
+  deleteConnection(connectionId){
+    if (this.globalReferenceConnections.hasOwnProperty(connectionId)){
+      let connection = this.globalReferenceConnections;
+      let sourceIndex = connection.source.connections.indexOf(connection);
+      if (sourceIndex > -1) {
+        connection.source.connections.splice(sourceIndex, 1);
+      }
+      let targetIndex = connection.target.connected.indexOf(connection);
+      if (targetIndex > -1) {
+        connection.target.connections.splice(targetIndex, 1);
+      }
+      delete this.globalReferenceConnections[connectionId];
+    }
   }
   generate() {
     this.activations = 0;
