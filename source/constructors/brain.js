@@ -17,12 +17,12 @@ class Brain {
     this.mutationRateGrowth = 1;
     this.mutationMax = 100;
 
-    for (var i1 = 0; i1 < layers; i1++) {
+    for (var i1 = 0; i1 < this.layers; i1++) {
       var layer = [];
       var size = 0;
       if (i1 === 0) {
         size = inputSize;
-      } else if (i1 == layers - 1) {
+      } else if (i1 == this.layers - 1) {
         size = outputSize;
       } else {
         size = Math.round((inputSize + outputSize) / 2);
@@ -31,7 +31,7 @@ class Brain {
         new Neuron(this, i1);
       }
     }
-    for (var i1 = 0; i1 < layers - 1; i1++) {
+    for (var i1 = 0; i1 < this.layers - 1; i1++) {
       var layer1 = i1;
       var layer2 = i1 + 1;
       var list = [];
@@ -78,7 +78,7 @@ class Brain {
       input.transmit(array[index]);
     });
     return Object.values(this.globalReferenceNeurons).filter(neuron => {
-      return neuron.layer == layers - 1
+      return neuron.layer == this.layers - 1
     }).map(neuron => {
       return neuron.measure();
     });
