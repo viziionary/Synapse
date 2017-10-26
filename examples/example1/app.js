@@ -15,8 +15,7 @@ window.addEventListener("load", function() {
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
 		counter++;
-		var interval = counter % 25;  
-		if (interval == 0){
+		if (counter % 25 == 10){
 			console.log(total);
 		}
 		if (counter > 1000) {
@@ -24,7 +23,7 @@ window.addEventListener("load", function() {
 			return false;
 		}
 		if (total < 2.7) {
-			return getTimer(50,total);
+			return getTimer(0,total);
 		} else {
 			console.log("Done: " + total);
 			return false;
