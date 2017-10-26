@@ -45,7 +45,7 @@ function Brain(inputSize, outputSize) {
     }
     that.mutationRate += that.mutationRateGrowth;
     //console.log(that.mutationRate);
-    mutate(0, that.mutationRate, that);
+    mutate(that.mutationRate, that);
   };
   for (var i1 = 0; i1 < layers; i1++) {
     var layer = [];
