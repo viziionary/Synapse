@@ -54,7 +54,7 @@ function Neuron(brain, layer) {
       this.polarization = 0;
       Object.values(this.connections).forEach(connection => {
         if (connection.active == true && isNumber(charge)) {
-          connection.activate(charge);
+          connection.activate(this.recentCharges.reduce((charge)=>{return charge/this.recentCharges.length},0));
         }
       });
     }
