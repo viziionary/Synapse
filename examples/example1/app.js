@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
 	var counter = 0;
 
 	var network = new Synapse(2, 1, (run) => {
-		viewer.render(network.brain);
+		viewer.render(network.child);
 		var output1 = run([1, 1])[0];
 		var output2 = 1 - run([1, 0])[0];
 		var output3 = run([0, 0])[0];
