@@ -3,7 +3,7 @@ const mutate = require('../functions/mutate.js');
 const getRandomNumber = require('../functions/getrandomnumber');
 
 class Brain {
-  constructor(inputSize, outputSize){
+  constructor(inputSize, outputSize) {
     this.bindMethods(this);
     this.inputSize = inputSize;
     this.outputSize = outputSize;
@@ -37,33 +37,16 @@ class Brain {
       var list = [];
       for (var prop1 in this.globalReferenceNeurons) {
         if (this.globalReferenceNeurons[prop1].layer == layer1) {
-          var passed = 0;
-          var total = 0;
           for (var prop2 in this.globalReferenceNeurons) {
             if (this.globalReferenceNeurons[prop2].layer == layer2) {
-              total++;
-            }
-          }
-          for (var prop2 in this.globalReferenceNeurons) {
-            if (this.globalReferenceNeurons[prop2].layer == layer2) {
-              passed++;
-              if (Object.keys(this.globalReferenceNeurons[prop1].connections).length <= this.globalReferenceNeurons[prop1].weight) {
-                var rand = getRandomNumber(0, 3);
-                var existing = Object.keys(this.globalReferenceNeurons[prop1].connections).length;
-                var weight = this.globalReferenceNeurons[prop1].weight;
-                var needed = weight - existing;
-                var remaining = total - passed;
-                if (needed === remaining || rand === 1) {
-                  this.globalReferenceNeurons[prop1].connect(this.globalReferenceNeurons[prop2]);
-                }
-              }
+              this.globalReferenceNeurons[prop1].connect(this.globalReferenceNeurons[prop2]);
             }
           }
         }
       }
     }
   }
-  bindMethods(self){
+  bindMethods(self) {
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
   }
@@ -83,7 +66,7 @@ class Brain {
       return neuron.measure();
     });
   }
-  generate(){
+  generate() {
     this.activations = 0;
     var max = Math.floor(this.mutationRate);
     if (max === this.mutationMax) {
