@@ -12,7 +12,7 @@ function cloneBrain(brain){
     clone.globalReferenceNeurons[connectionPair[0]] = cloneConnection(connectionPair[1]);
   });
   Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
-    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone.globalReferenceConnections);
+    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,clone.globalReferenceConnections);
   });
   return clone;
 }

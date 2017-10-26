@@ -1,11 +1,13 @@
 const Neuron = require('../constructors/neuron');
 const setPrototypeOf = require('./setprototypeof');
-function cloneNeuron(neuron,globalReferenceConnections){
+function cloneNeuron(neuron,newBrain,globalReferenceConnections){
   var toClone = Object.assign({},neuron);
+  delete toClone.brain;
   delete toClone.connections;
   delete toClone.connected;
   var clone = {connections:{},connected:{}};
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
+  clone.brain = newBrain;
   if (globalReferenceConnections) {
     clone.connected = {};
     Object.keys(neuron.connected).forEach(id=>{
