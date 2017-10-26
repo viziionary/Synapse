@@ -1,3 +1,4 @@
+// DO NOT USE THIS FUNCTION, FOR cloneBrain USE ONLY!
 const Connection = require('../constructors/neuron');
 const setPrototypeOf = require('./setprototypeof');
 function cloneConnection(connection){
