@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
 	var counter = 0;
 
 	var network = new Synapse(2, 1, (run) => {
-		viewer.render(network.brain);
+		viewer.render(network.child);
 		var output1 = run([1, 1])[0];
 		var output2 = run([0, 0])[0];
 		var output3 = run([1, 0])[0];
@@ -24,13 +24,13 @@ window.addEventListener("load", function() {
 		}
 		if (output1 < 0.5 && output2 < 0.5 && output3 > 0.5 && output4 > 0.5) {
 			console.log('Done!');
-			console.log(network.brain = network.child);
-			console.log(network.brain);
+			network.brain = network.child;
+			console.log(network.child);
 			console.log('Verfiying:');
-			console.log('[1,1]:' + network.brain.input([1, 1]));
-			console.log('[0,0]:' + network.brain.input([0, 0]));
-			console.log('[1,0]:' + network.brain.input([1, 0]));
-			console.log('[0,1]:' + network.brain.input([0, 1]));
+			console.log('[1,1]:' + network.child.input([1, 1]));
+			console.log('[0,0]:' + network.child.input([0, 0]));
+			console.log('[1,0]:' + network.child.input([1, 0]));
+			console.log('[0,1]:' + network.child.input([0, 1]));
 			return false;
 		} else {
 			return getTimer(0, 1);
