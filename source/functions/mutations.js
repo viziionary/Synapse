@@ -23,10 +23,7 @@ var mutations = {
       console.log('Disconnecting neurons.');
       //console.time('disconnect');
       var connection = getRandomProperty(brain.globalReferenceConnections);
-      console.log(brain.globalReferenceConnections[connection.id]);
       connection.delete();
-      console.log(brain.globalReferenceConnections[connection.id]);
-      console.log(brain);
       //console.timeEnd('disconnect');
     }
   },
@@ -63,7 +60,7 @@ var mutations = {
       //console.log('Adding neurons.');
       //console.time('add');
       var layer = getRandomNumber(1, brain.layers - 2);
-      var neuron1 = new Neuron(brain, layer);
+      new Neuron(brain, layer);
       //console.timeEnd('add');
     }
   },
@@ -74,8 +71,8 @@ var mutations = {
       //console.log('Removing neurons.');
       //console.time('remove');
       var layer = getRandomNumber(1, brain.layers - 2);
-      for (var prop1 in brain.globalReferenceNeurons) {
-        var neuron = brain.globalReferenceNeurons[prop1];
+      for (var prop in brain.globalReferenceNeurons) {
+        var neuron = brain.globalReferenceNeurons[prop];
         if (neuron.layer == layer) {
           neuron.delete();
         }
