@@ -26,7 +26,6 @@ class Neuron {
   bindMethods(self){
     self.connect = this.connect.bind(self);
     self.disconnect = this.disconnect.bind(self);
-    self.destroy = this.destroy.bind(self);
     self.measure = this.measure.bind(self);
     self.delete = this.delete.bind(self);
   }
@@ -43,15 +42,6 @@ class Neuron {
     delete(){
       this.brain.deleteNeuron(this.id);
     }
-    destroy(){
-      this.active = false;
-      Object.values(this.connected).forEach(connection => {
-        connection.active = false;
-      });
-      Object.values(this.connections).forEach(connection => {
-        connection.active = false;
-      });
-    };
     measure(){
       var total = 0;
       var bias;
