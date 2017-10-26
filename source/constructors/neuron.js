@@ -28,6 +28,7 @@ class Neuron {
     self.disconnect = this.disconnect.bind(self);
     self.destroy = this.destroy.bind(self);
     self.measure = this.measure.bind(self);
+    self.delete = this.delete.bind(self);
   }
     connect(target){
       //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
@@ -39,6 +40,9 @@ class Neuron {
     disconnect(id){
       this.connections[id].active = false;
     };
+    delete(){
+      this.brain.deleteNeuron(this.id);
+    }
     destroy(){
       this.active = false;
       Object.values(this.connected).forEach(connection => {
