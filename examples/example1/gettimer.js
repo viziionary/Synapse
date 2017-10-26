@@ -1,7 +1,7 @@
-function getTimer(time){
+function getTimer(time,returnValue=null){
   return new Promise(resolve=>{
     setTimeout(()=>{
-      resolve();
+      resolve(returnValue);
     },time);
   })
 }

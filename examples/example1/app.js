@@ -25,12 +25,11 @@ window.addEventListener("load", function() {
 			return false;
 		}
 		if (total < 2.7) {
-			return total;
+			return getTimer(50,total);
 		} else {
 			console.log("Done: " + total);
 			return false;
 		}
-		return getTimer(50);
 	});
 	viewer = new Viewer(canvas, network.brain);
 	network.run();
