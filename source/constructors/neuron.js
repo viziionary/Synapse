@@ -2,6 +2,8 @@ const Connection = require('./connection');
 const isNumber = require('../functions/isnumber');
 
 function Neuron(brain, layer) {
+  console.log('Brain counter:');
+  console.log(brain.counter);
   brain.counter++;
   brain.globalReferenceNeurons[brain.counter] = this;
   this.active = true;

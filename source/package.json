@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/viziionary/Synapse/issues"
   },
-  "homepage": "https://github.com/viziionary/Synapse#readme"
+  "homepage": "https://github.com/viziionary/Synapse#readme",
+  "dependencies": {
+    "circular-json": "^0.4.0"
+  }
 }
