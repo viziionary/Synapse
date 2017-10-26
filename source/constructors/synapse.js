@@ -1,5 +1,5 @@
 const Brain = require('./brain');
-const clone = require('../functions/clone');
+const deepClone = require('../functions/deepclone');
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
@@ -9,7 +9,7 @@ class Synapse {
   }
   async run() {
     //console.log('score',this.brain.score);
-    var child = clone(this.brain, true);
+    var child = deepClone(this.brain, true);
     child.generate();
     console.log(child);
     console.log(child.counter);
