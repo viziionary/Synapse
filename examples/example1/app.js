@@ -15,16 +15,7 @@ window.addEventListener("load", function() {
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
 		counter++;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		var interval = counter % 100;  
-=======
-		var interval = counter % 10;
->>>>>>> 21efc0e1c272672d79375e12a528deb73067c9d7
-=======
-		var interval = counter % 10;
->>>>>>> 21efc0e1c272672d79375e12a528deb73067c9d7
-
 		if (interval){
 			console.log(total);
 		}
