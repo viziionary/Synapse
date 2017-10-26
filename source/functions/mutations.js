@@ -69,7 +69,14 @@ var mutations = {
       var count = getRandomNumber(1, 10);
       var layer = getRandomNumber(1, brain.layers - 2);
       for (let i = 0; i < count; i++) {
-        new Neuron(brain, layer);
+        var neuron1 = new Neuron(brain, layer);
+        for (prop in brain.globalReferenceNeurons) {
+          if (brain.globalReferenceNeurons[prop].layer === layer + 1) {
+            var neuron2 = brain.globalReferenceNeurons[prop];
+            neuron1.connect(neuron2);
+            //break
+          }
+        }
       }
       //console.timeEnd('add');
     }

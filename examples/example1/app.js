@@ -9,25 +9,31 @@ window.addEventListener("load", function() {
 	var counter = 0;
 
 	var network = new Synapse(2, 1, (run) => {
-		viewer.render(network.child);
+		viewer.render(network.brain);
 		var output1 = run([1, 1])[0];
-		var output2 = 1 - run([1, 0])[0];
-		var output3 = run([0, 0])[0];
-		var total = 3 - (output1 + output2 + output3);
-
+		var output2 = run([0, 0])[0];
+		var output3 = run([1, 0])[0];
+		var output4 = run([0, 1])[0];
+		counter++;
 		if (counter % 10 == 0){
-			console.log(total);
+			console.log("Working...");
 		}
 		if (counter > 1000000) {
 			console.log('Ended without reaching target: ' + total);
 			return false;
 		}
-		if (total < 2.7) {
-			counter++;
-			return getTimer(0,total);
-		} else {
-			console.log("Done: " + total);
+		if (output1 < 0.5 && output2 < 0.5 && output3 > 0.5 && output4 > 0.5) {
+			console.log('Done!');
+			console.log(network.brain = network.child);
+			console.log(network.brain);
+			console.log('Verfiying:');
+			console.log('[1,1]:' + network.brain.input([1, 1]));
+			console.log('[0,0]:' + network.brain.input([0, 0]));
+			console.log('[1,0]:' + network.brain.input([1, 0]));
+			console.log('[0,1]:' + network.brain.input([0, 1]));
 			return false;
+		} else {
+			return getTimer(0, 1);
 		}
 	});
 	viewer = new Viewer(canvas);
