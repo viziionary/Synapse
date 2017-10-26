@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
 		if (counter % 10 == 0){
 			console.log(total);
 		}
-		if (counter > 1000) {
+		if (counter > 1000000) {
 			console.log('Ended without reaching target: ' + total);
 			return false;
 		}

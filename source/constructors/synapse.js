@@ -26,8 +26,10 @@ class Synapse {
       if (this.brain.score) {
         if (this.brain.score < childScore) {
           this.brain = child;
+          console.log('EVOLVED from ' + this.brain.score + ' to ' + child.score);
         }
       } else {
+        console.log('Brain born with score of ' + child.score);
         this.brain = child;
       }
       return this.run();

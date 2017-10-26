@@ -10,9 +10,11 @@ var mutations = {
       //console.log('Connecting neurons.');
       //console.time('connect');
       console.log()
-      var neuron1 = getRandomProperty(brain.globalReferenceNeurons);
-      var neuron2 = getRandomProperty(brain.globalReferenceNeurons);
-      neuron1.connect(neuron2);
+      for (let i = 0; i < getRandomNumber(1, 3); i++) {
+        var neuron1 = getRandomProperty(brain.globalReferenceNeurons);
+        var neuron2 = getRandomProperty(brain.globalReferenceNeurons);
+        neuron1.connect(neuron2);
+      }
       //console.timeEnd('connect');
     }
   },
@@ -20,13 +22,14 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Disconnecting neurons.');
+      //console.log('Disconnecting neurons.');
       //console.time('disconnect');
-      var connection = getRandomProperty(brain.globalReferenceConnections);
-      if (connection) { /* FUCKUP */
-        connection.delete();
+      for (let i = 0; i < getRandomNumber(1, 3); i++) {
+        var connection = getRandomProperty(brain.globalReferenceConnections);
+        if (connection) { /* FUCKUP */
+          connection.delete();
+        }
       }
-      
       //console.timeEnd('disconnect');
     }
   },
@@ -37,7 +40,7 @@ var mutations = {
       //console.time('bias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
-        connection.bias += 0.1;
+        connection.bias += getRandomNumber(0, 1);
         if (connection.bias > 1) connection.bias = 1;
       }
       //console.timeEnd('bias');
@@ -50,7 +53,7 @@ var mutations = {
       //console.time('unbias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
-        connection.bias -= 0.1;
+        connection.bias -= getRandomNumber(0, 1);
         if (connection.bias < 0) connection.bias = 0;
       }
       //console.timeEnd('unbias');
@@ -63,7 +66,9 @@ var mutations = {
       //console.log('Adding neurons.');
       //console.time('add');
       var layer = getRandomNumber(1, brain.layers - 2);
-      new Neuron(brain, layer);
+      for (let i = 0; i < getRandomNumber(1, 3); i++) {
+        new Neuron(brain, layer);
+      }
       //console.timeEnd('add');
     }
   },
@@ -74,10 +79,12 @@ var mutations = {
       //console.log('Removing neurons.');
       //console.time('remove');
       var layer = getRandomNumber(1, brain.layers - 2);
-      for (var prop in brain.globalReferenceNeurons) {
-        var neuron = brain.globalReferenceNeurons[prop];
-        if (neuron.layer == layer) {
-          neuron.delete();
+      for (let i = 0; i < getRandomNumber(1, 3); i++) {
+        for (var prop in brain.globalReferenceNeurons) {
+          var neuron = brain.globalReferenceNeurons[prop];
+          if (neuron.layer == layer) {
+            neuron.delete();
+          }
         }
       }
       //console.timeEnd('remove');
