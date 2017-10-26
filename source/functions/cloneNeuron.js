@@ -10,7 +10,6 @@ function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
   clone.brain = newBrain;
   if (oldGlobalReferenceConnections) {
-    clone.connected = {};
     Object.keys(neuron.connected).forEach(id=>{
       if (oldGlobalReferenceConnections.hasOwnProperty(id) && newBrain.globalReferenceConnections.hasOwnProperty(id)){
         newBrain.globalReferenceConnections[id].target = clone;

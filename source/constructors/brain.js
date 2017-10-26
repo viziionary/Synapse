@@ -70,14 +70,12 @@ class Brain {
   }
   deleteConnection(connectionId){
     if (this.globalReferenceConnections.hasOwnProperty(connectionId)){
-      let connection = this.globalReferenceConnections;
-      let sourceIndex = connection.source.connections.indexOf(connection);
-      if (sourceIndex > -1) {
-        connection.source.connections.splice(sourceIndex, 1);
+      let connection = this.globalReferenceConnections[connectionId];
+      if (connection.connections && connection.connections.hasOwnProperty(connectionId)) {
+        delete connection.connections[connectionId];
       }
-      let targetIndex = connection.target.connected.indexOf(connection);
-      if (targetIndex > -1) {
-        connection.target.connections.splice(targetIndex, 1);
+      if (connection.connected && connection.connected.hasOwnProperty(connectionId)) {
+        delete connection.connected[connectionId];
       }
       delete this.globalReferenceConnections[connectionId];
     }
