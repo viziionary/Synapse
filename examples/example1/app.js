@@ -30,7 +30,7 @@ window.addEventListener("load", function() {
 			console.log("Done: " + total);
 			return false;
 		}
-		return timer(50);
+		return getTimer(50);
 	});
 	viewer = new Viewer(canvas, network.brain);
 	network.run();
