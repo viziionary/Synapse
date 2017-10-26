@@ -96,17 +96,21 @@ var mutations = {
   fillMemory: { //add memory capacity
     frequencyMod: 0,
     frequency: 0,
-    mutate: function(brain) {}
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.memory += 1;
+    }
   },
   drainMemory: { //shorten memory capacity
     frequencyMod: 0,
     frequency: 0,
-    mutate: function(brain) {}
-  },
-  memoryToggle: { //toggle whether or not neuron or connection uses memory
-    frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.memory -= 1;
+      if (neuron.memory < 1) {
+        neuron.memory = 1;
+      }
+    }
   },
   polarize: {
     frequencyMod: 0,

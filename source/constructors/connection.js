@@ -34,9 +34,6 @@ class Connection {
       }
     }
   }
-  destroy(){
-    this.active = false;
-  }
   updateBias(charge) {
     if (this.active == true) {
       var total = 0;
