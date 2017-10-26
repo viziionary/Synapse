@@ -18,7 +18,7 @@ class Synapse {
       return this.brain;
     } else {
       if (this.brain.score) {
-        if (this.brain.score > childScore) {
+        if (this.brain.score < childScore) {
           this.brain = child;
         }
       } else {
