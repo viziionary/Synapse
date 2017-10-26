@@ -3,8 +3,9 @@ const isNumber = require('../functions/isnumber');
 
 class Neuron {
   constructor(brain, layer){
-    brain.counter++;
-    brain.globalReferenceNeurons[brain.counter] = this;
+    this.brain = brain;
+    this.brain.counter++;
+    this.brain.globalReferenceNeurons[this.brain.counter] = this;
     this.active = true;
     this.layer = layer;
     this.id = brain.counter;
@@ -26,8 +27,8 @@ class Neuron {
     this.measure = this.measure.bind(this);
   }
     connect(target){
-      new Connection(brain, this, target, (id, connection) => {
-        brain.globalReferenceConnections[id] = connection;
+      new Connection(this.brain, this, target, (id, connection) => {
+        this.brain.globalReferenceConnections[id] = connection;
         this.connections[id] = connection;
       });
     };
