@@ -1,6 +1,8 @@
 const Brain = require('../constructors/brain');
 const setPrototypeOf = require('./setprototypeof');
 const cloneNeuron = require('./cloneNeuron');
+const cloneConnection = require('./cloneConnection');
+
 function cloneBrain(brain){
   var toClone = Object.assign({},brain);
   delete toClone.globalReferenceNeurons;
