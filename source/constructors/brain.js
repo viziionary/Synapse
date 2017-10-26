@@ -47,6 +47,7 @@ class Brain {
     }
   }
   bindMethods(self) {
+    self.deleteNeuron = this.deleteNeuron.bind(self);
     self.deleteConnection = this.deleteConnection.bind(self);
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
