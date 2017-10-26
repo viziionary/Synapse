@@ -23,7 +23,7 @@ var mutations = {
       //console.log('Disconnecting neurons.');
       //console.time('disconnect');
       var connection = getRandomProperty(brain.globalReferenceConnections);
-      connection.destroy();
+      //connection.destroy();
       //console.timeEnd('disconnect');
     }
   },
