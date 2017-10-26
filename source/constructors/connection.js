@@ -3,7 +3,7 @@ class Connection {
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
     var check1 = Object.values(source.connections).includes(target);
     var check2 = Object.values(target.connections).includes(source);
-    if (source.id === target.id || source.layer > target.layer || check1 == true || check2 == true) {
+    if (source.id === target.id || source.layer >= target.layer || check1 == true || check2 == true) {
       //console.log('Synapse: Refused backward connection: source layer ' + source.layer + ' > ' + target.layer + ' || check1 !== true [' + check1 + '] || check2 !== true [' + check2 + ']');
       return new Error('Refused backwards connection');
     }
