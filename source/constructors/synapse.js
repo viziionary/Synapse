@@ -14,6 +14,7 @@ class Synapse {
     if (childScore instanceof Promise){
       childScore = await childScore;
     }
+    child.score = childScore;
     if (childScore === false) {
       return this.brain;
     } else {
@@ -24,7 +25,6 @@ class Synapse {
       } else {
         this.brain = child;
       }
-      this.brain.score = childScore;
       return this.run();
     }
     setTimeout(function(){}, 10);
