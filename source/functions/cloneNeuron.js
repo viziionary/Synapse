@@ -1,7 +1,7 @@
 // DO NOT USE THIS FUNCTION, FOR cloneBrain USE ONLY!
 const Neuron = require('../constructors/neuron');
 const setPrototypeOf = require('./setprototypeof');
-function cloneNeuron(neuron,newBrain,globalReferenceConnections){
+function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
   var toClone = Object.assign({},neuron);
   delete toClone.brain;
   delete toClone.connections;
@@ -9,18 +9,18 @@ function cloneNeuron(neuron,newBrain,globalReferenceConnections){
   var clone = {connections:{},connected:{}};
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
   clone.brain = newBrain;
-  if (globalReferenceConnections) {
+  if (oldGlobalReferenceConnections) {
     clone.connected = {};
     Object.keys(neuron.connected).forEach(id=>{
-      if (globalReferenceConnections.hasOwnProperty(id)){
-        globalReferenceConnections[id].target = clone;
-        clone.connected[id] = globalReferenceConnections[id];
+      if (oldGlobalReferenceConnections.hasOwnProperty(id) && newBrain.globalReferenceConnections.hasOwnProperty(id)){
+        newBrain.globalReferenceConnections[id].target = clone;
+        clone.connected[id] = newBrain.globalReferenceConnections[id];
       }
     });
     Object.keys(neuron.connections).forEach(id=>{
-      if (globalReferenceConnections.hasOwnProperty(id)){
-        globalReferenceConnections[id].source = clone;
-        clone.connections[id] = globalReferenceConnections[id];
+      if (oldGlobalReferenceConnections.hasOwnProperty(id) && newBrain.globalReferenceConnections.hasOwnProperty(id)){
+        newBrain.globalReferenceConnections[id].source = clone;
+        clone.connections[id] = newBrain.globalReferenceConnections[id];
       }
     });
   }
