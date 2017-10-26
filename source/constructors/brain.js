@@ -84,7 +84,7 @@ class Brain {
   deleteNeuron(neuronId){
     if (this.globalReferenceNeurons.hasOwnProperty(neuronId)){
       let neuron = this.globalReferenceNeurons[neuronId];
-      neuron.connections.concat(neuron.connected).forEach(connection=>{
+      Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
       });
       delete this.globalReferenceNeurons[neuronId];
