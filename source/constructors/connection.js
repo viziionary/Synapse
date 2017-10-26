@@ -1,7 +1,7 @@
 function Connection(brain, source, target, callback) {
   var that = this;
-  var check1 = Object.keys(source.connections).indexOf(target); // FUCK UP
-  var check2 = Object.keys(target.connections).indexOf(source); // FUCK UP
+  var check1 = Object.values(source.connections).indexOf(target); // FUCK UP
+  var check2 = Object.values(target.connections).indexOf(source); // FUCK UP
 
   // Source.connections for example looks something like this {id:connection,id:connection,id:connection}
   // Object.keys(source.connections) would then return an array of ID's like this [id,id,id]
