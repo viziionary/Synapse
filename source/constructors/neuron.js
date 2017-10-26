@@ -29,7 +29,6 @@ class Neuron {
     self.measure = this.measure.bind(self);
     self.delete = this.delete.bind(self);
   }
-<<<<<<< HEAD
     connect(target){
       //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
       return new Connection(this.brain, this, target, (id, connection) => {
@@ -64,7 +63,6 @@ class Neuron {
           }
         });
       }
-=======
   connect(target) {
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     return new Connection(this.brain, this, target, (id, connection) => {
@@ -97,7 +95,6 @@ class Neuron {
           }, 0));
         }
       });
->>>>>>> e56bb54b871819e0704b7b559b3033627c4a88e6
     }
   }
 }
