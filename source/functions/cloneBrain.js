@@ -8,11 +8,11 @@ function cloneBrain(brain){
   clone = {globalReferenceNeurons:{},globalReferenceConnections:{}};
   setPrototypeOf(clone,Brain.prototype);
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
-  Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
-    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1]);
-  });
   Object.entries(brain.globalReferenceConnections).forEach((connectionPair)=>{
-    clone.globalReferenceNeurons[connectionPair[0]] = cloneNeuron(connectionPair[1]);
+    clone.globalReferenceNeurons[connectionPair[0]] = cloneConnection(connectionPair[1]);
+  });
+  Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
+    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone.globalReferenceConnections);
   });
   return clone;
 }
