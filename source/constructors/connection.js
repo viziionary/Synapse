@@ -36,15 +36,12 @@ class Connection {
       }
     }
   }
-<<<<<<< HEAD
   delete(){
     this.brain.deleteConnection(this.id);
   }
   destroy(){
     this.active = false;
   }
-=======
->>>>>>> e56bb54b871819e0704b7b559b3033627c4a88e6
   updateBias(charge) {
     if (this.active == true) {
       var total = 0;
