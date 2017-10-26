@@ -14,6 +14,7 @@ function cloneBrain(brain){
   Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
     clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,clone.globalReferenceConnections);
   });
+  clone.bindMethods(clone);
   return clone;
 }
 module.exports = cloneBrain;

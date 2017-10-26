@@ -21,10 +21,13 @@ class Neuron {
     this.chargeRate = 0.3;
     this.threshold = 1;
     this.resistanceGain = 0.1;
-    this.connect = this.connect.bind(this);
-    this.disconnect = this.disconnect.bind(this);
-    this.destroy = this.destroy.bind(this);
-    this.measure = this.measure.bind(this);
+    this.bindMethods(this);
+  }
+  bindMethods(self){
+    self.connect = this.connect.bind(self);
+    self.disconnect = this.disconnect.bind(self);
+    self.destroy = this.destroy.bind(self);
+    self.measure = this.measure.bind(self);
   }
     connect(target){
       new Connection(this.brain, this, target, (id, connection) => {

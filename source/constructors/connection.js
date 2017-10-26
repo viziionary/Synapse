@@ -16,10 +16,13 @@ class Connection {
     this.memory = 5;
     this.weight = [0.5, 0.5, 0.5];
     target.connected[this.id] = this;
-    this.updateBias = this.updateBias.bind(this);
-    this.activate = this.activate.bind(this);
-    this.destroy = this.destroy.bind(this);
+    this.bindMethods(this);
     callback(this.id, this);
+  }
+  bindMethods(self){
+    self.updateBias = this.updateBias.bind(self);
+    self.activate = this.activate.bind(self);
+    self.destroy = this.destroy.bind(self);
   }
   activate(){
     if (this.active == true) {

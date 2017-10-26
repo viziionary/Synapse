@@ -25,10 +25,7 @@ function cloneNeuron(neuron,newBrain,globalReferenceConnections){
     });
   }
   setPrototypeOf(clone,Neuron.prototype);
-  clone.connect = clone.connect.bind(clone);
-  clone.disconnect = clone.disconnect.bind(clone);
-  clone.destroy = clone.destroy.bind(clone);
-  clone.measure = clone.measure.bind(clone);
+  clone.bindMethods(clone);
   return clone;
 }
 module.exports = cloneNeuron;
