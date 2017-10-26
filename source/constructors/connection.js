@@ -26,6 +26,7 @@ class Connection {
     self.updateBias = this.updateBias.bind(self);
     self.activate = this.activate.bind(self);
     self.destroy = this.destroy.bind(self);
+    self.delete = this.delete.bind(this);
   }
   activate(charge){
     if (this.active == true) {
