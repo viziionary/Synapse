@@ -15,8 +15,8 @@ window.addEventListener("load", function() {
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
 		counter++;
-		var interval = counter % 100;  
-		if (interval){
+		var interval = 25 % counter;  
+		if (interval == 0){
 			console.log(total);
 		}
 		if (counter > 1000) {
