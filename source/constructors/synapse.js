@@ -5,7 +5,7 @@ class Synapse {
   constructor(inputSize, outputSize, runFunction) {
     this.runFunction = runFunction;
     this.brain = new Brain(inputSize, outputSize);
-    console.log('Global Reference Connections:',this.brain.globalReferenceConnections.length,this.brain.globalReferenceConnections);
+    console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
     this.run = this.run.bind(this);
   }
   async run() {
