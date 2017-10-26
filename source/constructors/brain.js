@@ -2,9 +2,6 @@ const Neuron = require('./neuron');
 const mutate = require('../functions/mutate.js');
 const getRandomNumber = require('../functions/getrandomnumber');
 
-function Brain(inputSize, outputSize) {
-
-}
 class Brain {
   constructor(inputSize, outputSize){
     this.bindMethods(this);
