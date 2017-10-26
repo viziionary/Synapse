@@ -20,16 +20,21 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      //console.log('Disconnecting neurons.');
+      console.log('Disconnecting neurons.');
       //console.time('disconnect');
       var connection = getRandomProperty(brain.globalReferenceConnections);
-      //connection.destroy();
+      console.log(brain.globalReferenceConnections[connection.id]);
+      delete brain.globalReferenceConnections[connection.id].source.connections[connection.id];
+      delete brain.globalReferenceConnections[connection.id].target.connected[connection.id];
+      delete brain.globalReferenceConnections[connection.id];
+      console.log(brain.globalReferenceConnections[connection.id]);
+      console.log(brain);
       //console.timeEnd('disconnect');
     }
   },
   bias: {
     frequencyMod: 0,
-    frequency: 0,
+    frequency: 1,
     mutate: function(brain) {
       //console.time('bias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
@@ -42,7 +47,7 @@ var mutations = {
   },
   unbias: {
     frequencyMod: 0,
-    frequency: 0,
+    frequency: 1,
     mutate: function(brain) {
       //console.time('unbias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
@@ -61,27 +66,28 @@ var mutations = {
       //console.time('add');
       var layer = getRandomNumber(1, brain.layers - 2);
       var neuron1 = new Neuron(brain, layer);
-      for (var prop1 in brain.globalReferenceNeurons) {
-        var neuron2 = brain.globalReferenceNeurons[prop1];
-        if (neuron2.layer == layer + 1) {
-          neuron1.connect(neuron2);
-        }
-      }
       //console.timeEnd('add');
     }
   },
   remove: { //remove a neuron
     frequencyMod: 0,
-    frequency: 1,
+    frequency: 0,
     mutate: function(brain) {
       //console.log('Removing neurons.');
       //console.time('remove');
       var layer = getRandomNumber(1, brain.layers - 2);
       for (var prop1 in brain.globalReferenceNeurons) {
-        var neuron2 = brain.globalReferenceNeurons[prop1];
-        if (neuron2.layer == layer) {
-          neuron2.destroy();
-          break;
+        var neuron = brain.globalReferenceNeurons[prop1];
+        if (neuron.layer == layer) {
+          for (prop in brain.globalReferenceNeurons[neuron.id].connected) {
+            var connected = brain.globalReferenceNeurons[neuron.id].connected[prop];
+            delete brain.globalReferenceConnections[connected.id].source.connections[connected.id];
+            delete brain.globalReferenceConnections[connected.id].target.connected[connected.id];
+            delete brain.globalReferenceConnections[connected.id];
+          }
+          delete brain.globalReferenceNeurons[neuron.id];
+          delete brain.globalReferenceNeurons[neuron.id];
+          delete brain.globalReferenceNeurons[neuron.id];
         }
       }
       //console.timeEnd('remove');

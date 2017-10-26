@@ -11,6 +11,7 @@ class Synapse {
   async run() {
     //console.log('score',this.brain.score);
     var child = cloneBrain(this.brain);
+    this.child = child;
     child.generate();
     //console.log(child);
     //console.log(child.counter);
