@@ -30,7 +30,7 @@ class Neuron {
     self.measure = this.measure.bind(self);
   }
     connect(target){
-      console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
+      //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
       new Connection(this.brain, this, target, (id, connection) => {
         this.brain.globalReferenceConnections[id] = connection;
         this.connections[id] = connection;

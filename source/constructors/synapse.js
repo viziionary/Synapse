@@ -5,15 +5,15 @@ class Synapse {
   constructor(inputSize, outputSize, runFunction) {
     this.runFunction = runFunction;
     this.brain = new Brain(inputSize, outputSize);
-    console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
+    //console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
     this.run = this.run.bind(this);
   }
   async run() {
     //console.log('score',this.brain.score);
     var child = cloneBrain(this.brain);
     child.generate();
-    console.log(child);
-    console.log(child.counter);
+    //console.log(child);
+    //console.log(child.counter);
     var childScore = this.runFunction(child.input);
     if (childScore instanceof Promise){
       childScore = await childScore;
