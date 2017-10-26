@@ -1,5 +1,5 @@
 // DO NOT USE THIS FUNCTION, FOR cloneBrain USE ONLY!
-const Connection = require('../constructors/neuron');
+const Connection = require('../constructors/connection');
 const setPrototypeOf = require('./setprototypeof');
 function cloneConnection(connection){
   var toClone = Object.assign({},connection);
