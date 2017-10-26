@@ -7,7 +7,9 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
+      console.log('Connecting neurons.');
       //console.time('connect');
+      console.log()
       var neuron1 = getRandomProperty(brain.globalReferenceNeurons);
       var neuron2 = getRandomProperty(brain.globalReferenceNeurons);
       neuron1.connect(neuron2);
@@ -18,6 +20,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
+      console.log('Disconnecting neurons.');
       //console.time('disconnect');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       connection.destroy();
@@ -54,6 +57,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
+      console.log('Adding neurons.');
       //console.time('add');
       var layer = getRandomNumber(1, brain.layers - 2);
       var neuron1 = new Neuron(brain, layer);
@@ -70,6 +74,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
+      console.log('Removing neurons.');
       //console.time('remove');
       var layer = getRandomNumber(1, brain.layers - 2);
       for (var prop1 in brain.globalReferenceNeurons) {
