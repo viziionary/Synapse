@@ -11,7 +11,7 @@ function cloneBrain(brain){
   setPrototypeOf(clone,Brain.prototype);
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
   Object.entries(brain.globalReferenceConnections).forEach((connectionPair)=>{
-    clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1]);
+    clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1],clone);
   });
   Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
     clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,brain.globalReferenceConnections);
