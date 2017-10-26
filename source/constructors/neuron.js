@@ -66,39 +66,39 @@ class Neuron {
       });
     }
   }
-    connect(target) {
-      //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-      return new Connection(this.brain, this, target, (id, connection) => {
-        this.brain.globalReferenceConnections[id] = connection;
-        this.connections[id] = connection;
+  connect(target) {
+    //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
+    return new Connection(this.brain, this, target, (id, connection) => {
+      this.brain.globalReferenceConnections[id] = connection;
+      this.connections[id] = connection;
+    });
+  }
+  disconnect(id) {
+    this.connections[id].active = false;
+  }
+  measure() {
+    var total = 0;
+    var bias;
+    for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
+      total += this.recentCharges[i1];
+    }
+    bias = total / this.recentCharges.length;
+    return bias;
+  }
+  transmit(charge) {
+    this.recentCharges.push(charge);
+    if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
+    this.polarization += charge;
+    if (this.polarization >= this.threshold) {
+      this.polarization = 0;
+      Object.values(this.connections).forEach(connection => {
+        if (connection.active == true && isNumber(charge)) {
+          connection.activate(this.recentCharges.reduce((cur, element) => {
+            return cur + (element / this.recentCharges.length)
+          }, 0));
+        }
       });
     }
-    disconnect(id) {
-      this.connections[id].active = false;
-    }
-    measure() {
-      var total = 0;
-      var bias;
-      for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
-        total += this.recentCharges[i1];
-      }
-      bias = total / this.recentCharges.length;
-      return bias;
-    }
-    transmit(charge) {
-      this.recentCharges.push(charge);
-      if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-      this.polarization += charge;
-      if (this.polarization >= this.threshold) {
-        this.polarization = 0;
-        Object.values(this.connections).forEach(connection => {
-          if (connection.active == true && isNumber(charge)) {
-            connection.activate(this.recentCharges.reduce((cur, element) => {
-              return cur + (element / this.recentCharges.length)
-            }, 0));
-          }
-        });
-      }
-    }
   }
-  module.exports = Neuron;
+}
+module.exports = Neuron;
