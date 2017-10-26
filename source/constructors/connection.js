@@ -26,7 +26,7 @@ class Connection {
     self.activate = this.activate.bind(self);
     self.destroy = this.destroy.bind(self);
   }
-  activate(){
+  activate(charge){
     if (this.active == true) {
       brain.activations++;
       if (this.target.active == true) {
