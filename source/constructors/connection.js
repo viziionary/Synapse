@@ -7,8 +7,9 @@ class Connection {
       //console.log('Synapse: Refused backward connection: source layer ' + source.layer + ' > ' + target.layer + ' || check1 !== true [' + check1 + '] || check2 !== true [' + check2 + ']');
       return new Error('Refused backwards connection');
     }
-    brain.counter++;
-    brain.globalReferenceConnections[brain.counter] = this;
+    this.brain = brain;
+    this.brain.counter++;
+    this.brain.globalReferenceConnections[this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
     this.bias = 0.5;
@@ -28,11 +29,14 @@ class Connection {
   }
   activate(charge){
     if (this.active == true) {
-      brain.activations++;
+      this.brain.activations++;
       if (this.target.active == true) {
         this.target.transmit((charge + this.bias) / 2);
       }
     }
+  }
+  delete(){
+    this.brain.deleteConnection(this.id);
   }
   destroy(){
     this.active = false;
