@@ -7,7 +7,7 @@ class Synapse {
     this.brain = new Brain(inputSize, outputSize);
     this.run = this.run.bind(this);
   }
-  run() {
+  async run() {
     var child = clone(this.brain, true);
     child.generate();
     var childScore = this.runFunction(child.input);
