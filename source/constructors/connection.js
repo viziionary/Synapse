@@ -1,4 +1,4 @@
-class Connection(){
+class Connection {
   constructor(brain, source, target, callback){
     var check1 = Object.values(source.connections).includes(target);
     var check2 = Object.values(target.connections).includes(source);
