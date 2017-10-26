@@ -81,6 +81,15 @@ class Brain {
       delete this.globalReferenceConnections[connectionId];
     }
   }
+  deleteNeuron(neuronId){
+    if (this.globalReferenceNeurons.hasOwnProperty(neuronId)){
+      let neuron = this.globalReferenceNeurons[neuronId];
+      neuron.connections.concat(neuron.connected).forEach(connection=>{
+        this.deleteConnection(connection.id);
+      });
+      delete this.globalReferenceNeurons[neuronId];
+    }
+  }
   generate() {
     this.activations = 0;
     var max = Math.floor(this.mutationRate);
