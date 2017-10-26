@@ -42,8 +42,13 @@ function renderBrain(brain, ctx, canvas) {
   }
 
   function drawNode(node) {
-    ctx.strokeStyle = '#56cc41';
-    ctx.fillStyle = '#adf442';
+    if (node.layer == 0) {
+      ctx.strokeStyle = '#4747f3';
+      ctx.fillStyle = '#4040b3';
+    } else {
+      ctx.strokeStyle = '#56cc41';
+      ctx.fillStyle = '#adf442';
+    }
     ctx.lineWidth = 2;
     coord = nodePosition(node, coord);
     ctx.beginPath();
