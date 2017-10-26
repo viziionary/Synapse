@@ -7,7 +7,7 @@ function Connection(brain, source, target, callback) {
   // Object.keys(source.connections) would then return an array of ID's like this [id,id,id]
   // So we are looking inside the array of ids for a neuron instance which doesn't make sense
 
-  if (source.id !== target.id && source.layer < target.layer && /*FUCK UP*/ check1 === -1 && check2 === -1 /*FUCK UP*/ ) {
+  if (source.id !== target.id && source.layer < target.layer && check1 === -1 && check2 === -1) {
     brain.counter++;
     brain.globalReferenceConnections[brain.counter] = this;
     this.active = true;
@@ -22,15 +22,15 @@ function Connection(brain, source, target, callback) {
     this.updateBias = function(charge) {
       if (that.active == true) {
         var total = 0;
-        this.recentCharges.push(charge); /*FUCK UP: 'THIS' IS A BAD REFERENCE*/
-        if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
+        that.recentCharges.push(charge); /*FUCK UP: 'THIS' IS A BAD REFERENCE*/
+        if (that.recentCharges.length > that.memory) that.recentCharges.splice(0, 1);
         for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
-          total += this.recentCharges[i1];
+          total += that.recentCharges[i1];
         }
-        for (var i1 = 0; i1 < this.weight.length; i1++) {
-          total += this.weight[i1];
+        for (var i1 = 0; i1 < that.weight.length; i1++) {
+          total += that.weight[i1];
         }
-        this.bias = total / (this.recentCharges.length + this.weight.length);
+        that.bias = total / (that.recentCharges.length + that.weight.length);
       }
     };
     this.destroy = () => {
