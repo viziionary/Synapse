@@ -3,7 +3,7 @@ class Connection {
     var check1 = Object.values(source.connections).includes(target);
     var check2 = Object.values(target.connections).includes(source);
     if (source.id === target.id || source.layer > target.layer || check1 !== true || check2 !== true) {
-      throw new Error('Synapse: Refused backward connection')
+      return new Error('Synapse: Refused backward connection');
     }
     brain.counter++;
     brain.globalReferenceConnections[brain.counter] = this;
