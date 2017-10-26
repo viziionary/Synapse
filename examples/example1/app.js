@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
 		var output2 = 1 - run([1, 0])[0];
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
-		counter++;
+		
 		if (counter % 25 == 10){
 			console.log(total);
 		}
@@ -23,6 +23,7 @@ window.addEventListener("load", function() {
 			return false;
 		}
 		if (total < 2.7) {
+			counter++;
 			return getTimer(0,total);
 		} else {
 			console.log("Done: " + total);
@@ -31,5 +32,4 @@ window.addEventListener("load", function() {
 	});
 	viewer = new Viewer(canvas, network.brain);
 	network.run();
-
-})
+});
