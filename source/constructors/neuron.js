@@ -31,7 +31,7 @@ class Neuron {
   }
     connect(target){
       //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-      new Connection(this.brain, this, target, (id, connection) => {
+      return new Connection(this.brain, this, target, (id, connection) => {
         this.brain.globalReferenceConnections[id] = connection;
         this.connections[id] = connection;
       });
