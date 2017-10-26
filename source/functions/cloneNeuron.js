@@ -25,7 +25,7 @@ function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
     });
   }
   setPrototypeOf(clone,Neuron.prototype);
-  clone.bindMethods(clone);
+  Neuron.prototype.bindMethods(clone);
   return clone;
 }
 module.exports = cloneNeuron;

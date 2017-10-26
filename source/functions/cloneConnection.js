@@ -6,7 +6,7 @@ function cloneConnection(connection){
   delete toClone.source;
   delete toClone.target;
   var clone = Object.assign({},JSON.parse(JSON.stringify(toClone)));
-  clone.bindMethods(clone);
+  Connection.prototype.bindMethods(clone);
   setPrototypeOf(clone,Connection.prototype);
   return clone;
 }
