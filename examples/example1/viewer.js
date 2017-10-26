@@ -1,12 +1,11 @@
 class Viewer {
-  constructor(canvas, brain) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
-    this.brain = brain
     this.render = this.render.bind(this);
   }
-  render() {
-    renderBrain(this.brain, this.context, this.canvas);
+  render(brain) {
+    renderBrain(brain, this.context, this.canvas);
   }
 }
 
