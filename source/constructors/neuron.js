@@ -69,10 +69,10 @@ class Neuron {
       this.brain.globalReferenceConnections[id] = connection;
       this.connections[id] = connection;
     });
-  };
+  }
   disconnect(id) {
     this.connections[id].active = false;
-  };
+  }
   measure() {
     var total = 0;
     var bias;
