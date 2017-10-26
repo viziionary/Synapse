@@ -11,7 +11,7 @@ function Brain(inputSize, outputSize) {
   this.counter = 0;
   this.globalReferenceNeurons = {};
   this.globalReferenceConnections = {};
-  this.score = 0;
+  //this.score = 0;
   this.activations = 0;
   this.mutationRate = 1;
   this.mutationRateGrowth = 1;
