@@ -39,7 +39,6 @@ function Brain(inputSize, outputSize) {
 
   this.generate = function() {
     that.activations = 0;
-
     var max = Math.floor(that.mutationRate);
     if (max === that.mutationMax) {
       that.mutationRate = 0;
@@ -47,7 +46,6 @@ function Brain(inputSize, outputSize) {
     that.mutationRate += that.mutationRateGrowth;
     //console.log(that.mutationRate);
     mutate(0, that.mutationRate, that);
-    return that;
   };
   for (var i1 = 0; i1 < layers; i1++) {
     var layer = [];
