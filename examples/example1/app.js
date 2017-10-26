@@ -1,5 +1,6 @@
 import Viewer from './viewer';
 import Synapse from '../../source/index';
+import getTimer from './gettimer';
 
 window.addEventListener("load", function() {
 
@@ -14,7 +15,7 @@ window.addEventListener("load", function() {
 		var output3 = run([0, 0])[0];
 		var total = 3 - (output1 + output2 + output3);
 		counter++;
-		var interval = counter % 10;  
+		var interval = counter % 10;
 
 		if (interval){
 			console.log(total);
@@ -29,8 +30,9 @@ window.addEventListener("load", function() {
 			console.log("Done: " + total);
 			return false;
 		}
+		return timer(50);
 	});
 	viewer = new Viewer(canvas, network.brain);
 	network.run();
-	
+
 })
