@@ -27,7 +27,6 @@ window.addEventListener("load", function() {
 			console.log('Done!');
 			console.log(network.child);
 			console.log('Verfiying:');
-			document1
 			console.time('test');
 			var xor = function(array){
 				if (array[0] == array[1]){
