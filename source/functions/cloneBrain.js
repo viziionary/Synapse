@@ -23,7 +23,7 @@ function cloneBrain(brain){
 }
 function createStructure(brain){
   var output = [];
-  brain.globalReferenceNeurons.forEach(neuron=>{
+  Object.values(brain.globalReferenceNeurons).forEach(neuron=>{
     if (!output[neuron.layer]) {
       output[neuron.layer] = {};
     }
