@@ -402,7 +402,7 @@ window.addEventListener("load", function() {
 			var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerveLength);
 			entity.nerves[i1] = [p2, p3];
 			renderNerve(context1, entity.nerves[i1]);
-			console.log('Debug 1:', entity.nerves[i1]);
+			//console.log('Debug 1:', entity.nerves[i1]);
 			renderObject(context1, points[i1]);
 			var sourcePoint = {
 				location: {
@@ -414,20 +414,20 @@ window.addEventListener("load", function() {
 				stroke: '#0f1623'
 			}
 			renderObject(context1, sourcePoint);
-			console.log('Debug 2:', sourcePoint);
+			//console.log('Debug 2:', sourcePoint);
 			renderLine(context1, p3, points[i1].location, '#1d273c');
 		}
 		for (var i1 = 0; i1 < contents.length; i1++) {
 			renderObject(context1, contents[i1]);
-			console.log('Debug 3:', contents[i1]);
+			//console.log('Debug 3:', contents[i1]);
 			if (interceptCircles(self, contents[i1])) {
 				result.state = 'complete';
 			}
 		}
 		renderObject(context1, self);
-		console.log('Debug 4:', self);
+		//console.log('Debug 4:', self);
 		renderObject(context1, target);
-		console.log('Debug 5:', target);
+		//console.log('Debug 5:', target);
 
 		if (interceptCircles(self, target)) {
 			result.state = 'complete';
