@@ -7,6 +7,7 @@ function cloneBrain(brain){
   var toClone = Object.assign({},brain);
   delete toClone.globalReferenceNeurons;
   delete toClone.globalReferenceConnections;
+  delete toClone.structure;
   clone = {globalReferenceNeurons:{},globalReferenceConnections:{}};
   setPrototypeOf(clone,Brain.prototype);
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
@@ -17,6 +18,17 @@ function cloneBrain(brain){
     clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,brain.globalReferenceConnections);
   });
   Brain.prototype.bindMethods(clone);
+  clone.structure = createStructure(brain);
   return clone;
+}
+function createStructure(brain){
+  var output = [];
+  brain.globalReferenceNeurons.forEach(neuron=>{
+    if (!output[neuron.layer]) {
+      output[neuron.layer] = {};
+    }
+    output[neuron.layer][neuron.id] = neuron;
+  });
+  return output;
 }
 module.exports = cloneBrain;
