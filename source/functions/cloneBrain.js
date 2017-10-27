@@ -18,7 +18,7 @@ function cloneBrain(brain){
     clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,brain.globalReferenceConnections);
   });
   Brain.prototype.bindMethods(clone);
-  clone.structure = createStructure(brain);
+  clone.structure = createStructure(clone);
   return clone;
 }
 function createStructure(brain){
