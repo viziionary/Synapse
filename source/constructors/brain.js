@@ -16,6 +16,7 @@ class Brain {
     this.mutationRate = 1;
     this.mutationRateGrowth = 1;
     this.mutationMax = 100;
+    this.structure = [];
 
     for (var i1 = 0; i1 < this.layers; i1++) {
       var layer = [];
@@ -29,20 +30,6 @@ class Brain {
       }
       for (var i2 = 0; i2 < size; i2++) {
         new Neuron(this, i1);
-      }
-    }
-    for (var i1 = 0; i1 < this.layers - 1; i1++) {
-      var layer1 = i1;
-      var layer2 = i1 + 1;
-      var list = [];
-      for (var prop1 in this.globalReferenceNeurons) {
-        if (this.globalReferenceNeurons[prop1].layer == layer1) {
-          for (var prop2 in this.globalReferenceNeurons) {
-            if (this.globalReferenceNeurons[prop2].layer == layer2) {
-              this.globalReferenceNeurons[prop1].connect(this.globalReferenceNeurons[prop2]);
-            }
-          }
-        }
       }
     }
   }
@@ -86,6 +73,7 @@ class Brain {
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
       });
+      delete this.structure[this.globalReferenceNeurons[neuronId].layer][neuronId];
       delete this.globalReferenceNeurons[neuronId];
     }
   }

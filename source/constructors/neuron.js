@@ -1,5 +1,6 @@
 const Connection = require('./connection');
 const isNumber = require('../functions/isnumber');
+const getRandomNumber = require('../functions/getrandomnumber');
 
 class Neuron {
   constructor(brain, layer) {
@@ -22,6 +23,27 @@ class Neuron {
     this.threshold = 1;
     this.resistanceGain = 0.1;
     this.bindMethods(this);
+
+
+    if (!brain.structure[layer]) {
+      brain.structure[layer] = {};
+    }
+    brain.structure[layer][this.id] = this;
+    console.log(this.layer);
+    if (this.layer !== 0 && brain.structure[layer - 1]) {
+      console.log(brain.structure[layer - 1]);
+      if (Object.keys(brain.structure[layer - 1]).length > 0) {
+        console.log('Debug 1');
+        var size = Object.keys(brain.structure[this.layer - 1]).length;
+        var rand = getRandomNumber(1, size);
+        console.log(rand);
+        var keys = Object.keys(brain.structure[this.layer - 1]).sort(() => Math.random() - 0.5).slice(0, rand);
+        console.log(keys);
+        for (let i = 0; i < keys.length; i++) {
+          brain.globalReferenceNeurons[keys[i]].connect(this);
+        }
+      }
+    }
   }
   bindMethods(self) {
     self.connect = this.connect.bind(self);
