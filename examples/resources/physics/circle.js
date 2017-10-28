@@ -10,8 +10,7 @@ class Circle {
     if (!isNumber(y)){
       throw new Error('Invalid Circle: Invalid Y');
     }
-    this.width = width;
-    this.height = height;
+    this.radius = radius;
     this.x = x;
     this.y = y;
   }

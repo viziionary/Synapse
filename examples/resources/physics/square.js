@@ -15,7 +15,11 @@ class Square {
     }
     if (rotation !== null && rotation !== undefined) {
       if (isNumber(rotation)) {
-        this.rotation = this.rotation % 360;
+        if (rotation >= 0) {
+          this.rotation = rotation % 360;
+        } else {
+          this.rotation = -(-rotation % 360);
+        }
       } else {
         throw new Error('Invalid Square: Invalid Rotation');
       }
