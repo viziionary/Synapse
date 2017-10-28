@@ -12,21 +12,22 @@ window.addEventListener("load", function() {
 		viewer.render(network.child);
 		var evolution = new Evolution(network, 1, 0, 10000);
 		var score = await evolution.simulate(network);
-		console.log('Score final', score);
+		//console.log('Child score', score);
+		//console.log('Score final', score);
 		counter++;
 		if (counter % 10 == 0) {
 			console.log("Score: " + score);
 		}
 		if (counter > 1000) {
-			console.log('Ended without reaching target: ' + total);
+			console.log('Ended without reaching target score: ' + 0);
 			return false;
 		}
-		if (score > 1000) {
+		if (score > 0) {
 			console.log('Done!');
 			console.log(network.child);
 			return false;
 		} else {
-			return getTimer(0, 1);
+			return getTimer(0, score);
 		}
 	});
 	viewer = new Viewer(canvas);
@@ -493,8 +494,8 @@ window.addEventListener("load", function() {
 				time += tick;
 				var input = entity.think(bounds);
 				var result = process(input, contents, self, entity, canvas1, context1, network);
-				console.log('Result output', result);
-				console.log('Score output', result.score);
+				//console.log('Result output', result);
+				//console.log('Score output', result.score);
 				entity.contents = result.contents;
 				entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {

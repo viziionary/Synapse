@@ -18,6 +18,7 @@ class Synapse {
     var childScore = this.runFunction(child.input);
     if (childScore instanceof Promise){
       childScore = await childScore;
+      //console.log(childScore);
     }
     child.score = childScore;
     if (childScore === false) {

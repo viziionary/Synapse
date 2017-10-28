@@ -83,7 +83,10 @@ class Brain {
     if (max === this.mutationMax) {
       this.mutationRate = 0;
     }
+    console.log('Current mutation rate: ', this.mutationRate);
+    console.log('Mutation rate mutationRateGrowth: ', this.mutationRateGrowth);
     this.mutationRate += this.mutationRateGrowth;
+    console.log('New mutation rate: ', this.mutationRate);
     //console.log(this.mutationRate);
     mutate(this.mutationRate, this);
   }
