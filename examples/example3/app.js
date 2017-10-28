@@ -390,7 +390,7 @@ window.addEventListener("load", function() {
 		}
 		var points = [];
 		for (var i1 = 0; i1 < child.inputSize; i1++) {
-			var space = canvas1.height / network.child.inputSize;
+			var space = canvas1.height / child.inputSize;
 			var distance = ((i1 + 1) * space) - (0.5 * space);
 			var point = {
 				location: {

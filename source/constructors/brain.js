@@ -106,7 +106,7 @@ class Brain {
     //console.log('Current mutation rate: ', this.mutationRate);
     //console.log('Mutation rate mutationRateGrowth: ', this.mutationRateGrowth);
     this.mutationRate = getRandomLowNumber(1, 100, 0.1); //change the max to be based on the current complexity of the network
-    console.log('New mutation rate: ', this.mutationRate);
+    //console.log('New mutation rate: ', this.mutationRate);
     //console.log(this.mutationRate);
     mutate(this.mutationRate, this);
   }
