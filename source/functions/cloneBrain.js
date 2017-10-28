@@ -2,6 +2,7 @@ const Brain = require('../constructors/brain');
 const setPrototypeOf = require('./setprototypeof');
 const cloneNeuron = require('./cloneNeuron');
 const cloneConnection = require('./cloneConnection');
+const createStructure = require('./createStructure');
 
 function cloneBrain(brain){
   //console.log('OLD BRAIN MUTATION RATE',brain.mutationRate);
@@ -24,14 +25,5 @@ function cloneBrain(brain){
 
   return clone;
 }
-function createStructure(brain){
-  var output = [];
-  Object.values(brain.globalReferenceNeurons).forEach(neuron=>{
-    if (!output[neuron.layer]) {
-      output[neuron.layer] = {};
-    }
-    output[neuron.layer][neuron.id] = neuron;
-  });
-  return output;
 }
 module.exports = cloneBrain;

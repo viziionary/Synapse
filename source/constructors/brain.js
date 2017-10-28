@@ -54,6 +54,10 @@ class Brain {
     self.deleteConnection = this.deleteConnection.bind(self);
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
+    self.addLayer = this.addLayer.bind(self);
+  }
+  addLayer(index){
+
   }
   input(array) {
     var inputs = [];
