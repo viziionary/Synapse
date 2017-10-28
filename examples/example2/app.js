@@ -8,10 +8,10 @@ window.addEventListener("load", function() {
 	var viewer;
 	var counter = 0;
 
-	var network = new Synapse(20, 2, (run) => {
+	var network = new Synapse(20, 2, async (run) => {
 		viewer.render(network.child);
 		var evolution = new Evolution(network, 1, 0, 10000);
-		var score = evolution.simulate(network);
+		var score = await evolution.simulate(network);
 		console.log('Score final', score);
 		counter++;
 		if (counter % 10 == 0) {
