@@ -1,8 +1,7 @@
 import drawGame from './drawGame';
 var doNextTick = [];
 function gameTick(gameData){
-  doNextTick.forEach(item=>{item()});
-  doNextTick = [];
+  doNextTick.splice(0,doNextTick.length).forEach(item=>{item()});
   let player = gameData.player;
   let keys = gameData.keys;
   //console.log('y',player.ySpeed);
@@ -20,7 +19,10 @@ function gameTick(gameData){
     console.log('Collision');
     player.color = 'red';
     doNextTick.push(()=>{
-      player.color = 'white';
+    player.color = 'orange';
+      doNextTick.push(()=>{
+        player.color = 'white';
+      });
     });
     player.xSpeed = 0;
     player.ySpeed = 0;
