@@ -1,6 +1,6 @@
 const isNumber = require('./isnumber');
 class Square {
-  constructor(width,height,x,y,rotation){
+  constructor(evironment,width,height,x,y,rotation){
     if (!isNumber(width)) {
       throw new Error('Invalid Square: Invalid Width');
     }
@@ -12,6 +12,9 @@ class Square {
     }
     if (isNumber(y)){
       throw new Error('Invalid Square: Invalid Y');
+    }
+    if (!(environment instanceof Enviroment)) {
+      throw new Error('Invalid Square: Invalid Environment!');
     }
     if (rotation !== null && rotation !== undefined) {
       if (isNumber(rotation)) {
@@ -28,6 +31,8 @@ class Square {
     this.height = height;
     this.x = x;
     this.y = y;
+    this.environment = environment;
+    this.environment.addObject(this);
   }
 }
 module.exports = Square;
