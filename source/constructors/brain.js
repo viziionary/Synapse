@@ -5,15 +5,19 @@ const getRandomLowNumber = require('../functions/getrandomlownumber');
 
 var list = {};
 var times = 1000000;
-for (let i = 1; i < 101; i++) {
+for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(1,100);
+  var number = getRandomLowNumber();
   list[number]++;
 }
 Object.entries(list).forEach(numberSet=>{
+<<<<<<< HEAD
   list[numberSet[0]] = Math.round(numberSet[1]/times*10000)/1000+'%';
+=======
+  list[numberSet[0]] = Math.round((numberSet[1] || 0)/times*10000)/100+'%';
+>>>>>>> 4af3882e19995bc8773c6bf38eb6fd0bc9dcae08
 });
 console.log('List: ', list);
 
