@@ -18,4 +18,13 @@ function getRandomLowNumber(min=0,max=100,curveFactor){
   }
   return Math.floor(result) + min;
 }
+
+/*
+function getRandomLowNumber(min, max, curveFactor){
+  var list = []
+  for (let i = 0; i < max; i++) {
+
+  }
+}
+*/
 module.exports = getRandomLowNumber;

@@ -11,6 +11,7 @@ class Synapse {
   }
   async getScoredChild() {
     var child = cloneBrain(this.brain);
+    console.log('Debug 1:', this.child);
     let oldChild = this.child;
     this.child = child;
     var childScore;
@@ -19,7 +20,8 @@ class Synapse {
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
-    return [child, childScore];
+    console.log('Debug 2:', this.child);
+    return [this.child, childScore];
   }
   async run() {
     //console.log('score',this.brain.score);
@@ -29,9 +31,9 @@ class Synapse {
       this.child.generate()
     } else {
       for (let i = 0; i < 1000; i++) {
-        console.log('Debug 1');
+        console.log('Debug 3');
         var childData = await this.getScoredChild();
-        console.log('Debug 2');
+        console.log('Debug 4');
         var child = childData[0];
         var childScore = childData[1];
         children[childScore] = child;
