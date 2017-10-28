@@ -28,7 +28,7 @@ class Environment {
       object.y = y;
       return true;
     } else {
-      if (this.outsideBoundaries(object,x,y)) {
+      if (this.outsideBoundaries(object,x,y,true)) {
         return false;
       }
       var output = true;
@@ -38,9 +38,9 @@ class Environment {
       object.y = y;
       this.objects.forEach(checkObject=>{
         let collision = collides(object,checkObject);
-        if (collision) {
-          console.log('collision',checkObject);
-        }
+        // if (collision) {
+        //   //console.log('collision',checkObject);
+        // }
         if (output === true && object !==checkObject && collision) {
           output = false;
         }
@@ -52,11 +52,35 @@ class Environment {
       return output;
     }
   }
-  outsideBoundaries(object,x,y){
+  outsideBoundaries(object,x,y,rebound=false){
     if (object.constructor.name === 'Square') {
+      if (rebound){
+        if (x - object.width / 2 < 0) {
+          object.x = object.width/2;
+        } else if (x + object.width / 2 > this.width) {
+          object.x = this.width - object.width/2;
+        }
+        if (y - object.height / 2 < 0) {
+          object.y = object.height/2;
+        } else if (y + object.height / 2 > this.height) {
+          object.y = this.height - object.height/2;
+        }
+      }
       return x - object.width / 2 < 0 || x + object.width / 2 > this.width || /*HEIGHT*/y - object.height / 2 < 0 || y + object.height / 2 > this.height;
     } else if (object.constructor.name === 'circle') {
-
+      if (rebound) {
+        if (x - object.radius < 0) {
+          object.x = object.radius;
+        } else if (x + object.radius > this.width) {
+          object.x = this.width - object.radius;
+        }
+        if (y - object.radius < 0) {
+          object.y = object.radius;
+        } else if (y + object.radius > this.height) {
+          object.y = this.height - object.radius;
+        }
+      }
+      return x - object.radius < 0 || x+ object.radius > this.width || y - object.radius < 0 || y + object.radius > this.height;
     }
   }
 }

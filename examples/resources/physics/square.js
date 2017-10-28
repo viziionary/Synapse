@@ -39,8 +39,7 @@ class Square {
     this.environment.addObject(this);
   }
   move(x,y){
-    console.log('MOVING',x,y)
-    this.environment.setObjectPosition(this,this.x+x,this.y+y);
+    return this.environment.setObjectPosition(this,this.x+x,this.y+y);
   }
   set(x,y){
     this.environment.setObjectPosition(this,x,y);

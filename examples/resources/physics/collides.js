@@ -3,6 +3,7 @@ import Square from './square.js';
 import isValidObjectType from './isvalidobjecttype';
 import insideSquare from './insidesquare';
 import getCorners from './getcorners';
+import getSides from './getsides';
 import insideCircle from './insidecircle';
 import pivotPointAroundPoint from './pivotpointaroundpoint';
 
@@ -37,9 +38,9 @@ function collides(object1,object2){
       square = object2;
       circle = object1;
     }
-    console.log({square,circle});
+    //console.log({square,circle});
     var output = false;
-    getCorners(square).forEach(cornerPair=>{
+    getSides(square).concat(getCorners(square)).forEach(cornerPair=>{
       if (output !== false) {
         return;
       }
@@ -53,10 +54,10 @@ function collides(object1,object2){
       } else {
         if (insideCircle(circle,cornerPair[0],cornerPair[1])){
           output = true;
-          console.log('inside square');
-        } else {
-          console.log('Not inside square');
-        }
+          //console.log('inside square');
+        } //else {
+        //   console.log('Not inside square');
+        // }
       }
     });
     return output;

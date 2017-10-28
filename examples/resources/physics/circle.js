@@ -25,7 +25,7 @@ class Circle {
     this.environment.addObject(this);
   }
   move(x,y){
-    this.environment.setObjectPosition(this,this.x+x,this.y+y);
+    return this.environment.setObjectPosition(this,this.x+x,this.y+y);
   }
   set(x,y){
     this.environment.setObjectPosition(this,x,y);
