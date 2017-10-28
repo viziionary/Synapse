@@ -10,9 +10,25 @@ class Synapse {
   }
   async run() {
     //console.log('score',this.brain.score);
-    var child = cloneBrain(this.brain);
-    this.child = child;
-    child.generate();
+    var chosenOne;
+    var children = {};
+    for (let i = 0; i < 1000; i++) {
+      var child = cloneBrain(this.brain);
+      child.generate();
+      console.log('Debug 1');
+      var childScore = this.runFunction(child.input);
+      console.log('Debug 2');
+      if (childScore instanceof Promise){
+        console.log('Debug 3');
+        childScore = await childScore;
+        console.log('Debug 4');
+        children[score] = child;
+        //console.log(childScore);
+      }
+    }
+
+    this.child = Object.keys(children).sort((a,b)=>{return a>b ? 1 : -1});
+    console.log('Found the chosen one!', this.child);
     //console.log(child);
     //console.log(child.counter);
     var childScore = this.runFunction(child.input);

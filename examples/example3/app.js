@@ -87,6 +87,21 @@ window.addEventListener("load", function() {
 	function Entity(network) {
 		var that = this;
 		this.contents = [];
+		for (let i1 = 0; i1 < 5; i1++) {
+			for (let i2 = 0; i2 < 5; i2++) {
+				this.contents.push({
+					location: {
+						x: 125 * i1,
+						y: 125 * i2
+					},
+					radius: 15,
+					color: '#1fa71f',
+					stroke: '#003300'
+				});
+			}
+		}
+
+
 		this.self = {
 			radius: 30,
 			location: {
@@ -348,6 +363,7 @@ window.addEventListener("load", function() {
 
 	function process(input, contents, entity, canvas1, context1, network) {
 		var self = entity.self;
+		var contents = entity.contents;
 		if (input[0] >= 0.5) self.location.x++;
 		if (input[0] < 0.5) self.location.x--;
 		if (input[1] >= 0.5) self.location.y++;
@@ -368,103 +384,6 @@ window.addEventListener("load", function() {
 		}, self.location);
 		var score = distanceFromCenter + (distanceFromTarget * 2);
 		//console.log('Score source', score);
-		contents = [{
-			location: {
-				x: 350,
-				y: 100
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 350,
-				y: 200
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 350,
-				y: 300
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 350,
-				y: 400
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 250,
-				y: 100
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 250,
-				y: 200
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 250,
-				y: 300
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 250,
-				y: 400
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 150,
-				y: 100
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 150,
-				y: 200
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 150,
-				y: 300
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}, {
-			location: {
-				x: 150,
-				y: 400
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}];
 		context1.clearRect(0, 0, canvas1.width, canvas1.height);
 		var result = {
 			contents: contents,
@@ -533,7 +452,7 @@ window.addEventListener("load", function() {
 		var generationCount = 0;
 		var canvas1 = document.getElementById('environment');
 		var context1 = canvas1.getContext('2d');
-		var self = new Entity()
+		var self = new Entity();
 		var bounds = [
 			[{
 				x: 0,
