@@ -6,10 +6,10 @@ class Synapse {
     this.runFunction = runFunction;
     this.brain = new Brain(inputSize, outputSize);
     //console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
-    this.run = this.run.bind(this);
+    this.initiate = this.initiate.bind(this);
     this.getScoredChild = this.getScoredChild.bind(this);
   }
-  async run() {
+  async initiate() {
     //console.log('score',this.brain.score);
 
     if (this.child) {

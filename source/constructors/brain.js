@@ -5,12 +5,12 @@ const getRandomLowNumber = require('../functions/getrandomlownumber');
 const createStructure = require('../functions/createstructure');
 
 var list = {};
-var times = 100000;
+var times = 1000;
 for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(1, 100)
+  var number = getRandomLowNumber(1, 100);
   list[number]++;
 }
 
