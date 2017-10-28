@@ -7,7 +7,7 @@ var list = {};
 for (let i = 1; i < 101; i++) {
   list[i] = 0;
 }
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 1000000; i++) {
   var number = getRandomLowNumber(1,100);
   list[number]++;
 }
