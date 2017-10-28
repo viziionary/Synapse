@@ -5,17 +5,14 @@ const getRandomLowNumber = require('../functions/getrandomlownumber');
 const createStructure = require('../functions/createstructure');
 
 var list = {};
-var times = 1000000;
+var times = 100000;
 for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(0, 100, 0.01);
+  var number = getRandomLowNumber(1, 100, 0.8)
   list[number]++;
 }
-Object.entries(list).forEach(numberSet=>{
-  list[numberSet[0]] = numberSet[1];
-});
 
 console.log('List: ', list);
 
