@@ -1,5 +1,5 @@
-import isValidObjectType from './isvalidobjecttype';
-import collides from './collides';
+const isValidObjectType = require('./isvalidobjecttype');
+const collides = require('./collides');
 class Environment {
   constructor(width,height){
     this.width = width;
@@ -8,7 +8,6 @@ class Environment {
     this.allowCollision = false;
     this.addObject = this.addObject.bind(this);
     this.setObjectPosition = this.setObjectPosition.bind(this);
-    this.outsideBoundaries = this.outsideBoundaries.bind(this);
   }
   addObject(object){
     if (typeof object !== 'object' || !isValidObjectType(object)) {
@@ -28,36 +27,18 @@ class Environment {
       object.y = y;
       return true;
     } else {
-      if (this.outsideBoundaries(object,x,y)) {
-        return false;
-      }
-      var output = true;
-      var oldX = object.x;
-      var oldY = object.y;
-      object.x = x;
-      object.y = y;
+      output = true;
       this.objects.forEach(checkObject=>{
-        let collision = collides(object,checkObject);
-        if (collision) {
-          console.log('collision',checkObject);
-        }
-        if (output === true && object !==checkObject && collision) {
+        if (object === true && object !==checkObject && collides(object,checkObject)) {
           output = false;
         }
       });
-      if (output !== true) {
-        object.x = oldX;
-        object.y = oldY;
+      if (output === true) {
+        object.x = x;
+        object.y = y;
       }
       return output;
     }
   }
-  outsideBoundaries(object,x,y){
-    if (object.constructor.name === 'Square') {
-      return x - object.width / 2 < 0 || x + object.width / 2 > this.width || /*HEIGHT*/y - object.height / 2 < 0 || y + object.height / 2 > this.height;
-    } else if (object.constructor.name === 'circle') {
-
-    }
-  }
 }
-export default Environment;
+module.exports = Environment;

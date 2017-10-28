@@ -1,5 +1,5 @@
-import Circle from './circle.js';
-import Square from './square.js';
+const Circle = require('./circle.js');
+const Square = require('./square.js');
 const validObjectTypes = [Circle,Square];
 
 function isValidObjectType(object){
@@ -11,4 +11,4 @@ function isValidObjectType(object){
   });
   return output;
 }
-export default isValidObjectType;
+module.exports = isValidObjectType;

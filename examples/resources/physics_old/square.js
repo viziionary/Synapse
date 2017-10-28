@@ -1,5 +1,5 @@
-import Environment from './environment';
-import isNumber from './isnumber';
+const Environment = require('./environment');
+const isNumber = require('./isnumber');
 class Square {
   constructor(environment,x,y,width,height,rotation){
     if (!isNumber(width)) {
@@ -34,16 +34,7 @@ class Square {
     this.x = x;
     this.y = y;
     this.environment = environment;
-    this.move = this.move.bind(this);
-    this.set = this.set.bind(this);
     this.environment.addObject(this);
   }
-  move(x,y){
-    console.log('MOVING',x,y)
-    this.environment.setObjectPosition(this,this.x+x,this.y+y);
-  }
-  set(x,y){
-    this.environment.setObjectPosition(this,x,y);
-  }
 }
-export default Square;
+module.exports = Square;

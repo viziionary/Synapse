@@ -1,10 +1,10 @@
-import Circle from './circle.js';
-import Square from './square.js';
-import isValidObjectType from './isvalidobjecttype';
-import insideSquare from './insidesquare';
-import getCorners from './getcorners';
-import insideCircle from './insidecircle';
-import pivotPointAroundPoint from './pivotpointaroundpoint';
+const Circle = require('./circle.js');
+const Square = require('./square.js');
+const isValidObjectType = require('./isvalidobjecttype');
+const insideSquare = require('./insidesquare');
+const getCorners = require('./getcorners');
+const insideCircle = require('./insidecircle');
+const pivotPointAroundPoint = require('./pivotpointaroundpoint');
 
 
 function collides(object1,object2){
@@ -37,7 +37,6 @@ function collides(object1,object2){
       square = object2;
       circle = object1;
     }
-    console.log({square,circle});
     var output = false;
     getCorners(square).forEach(cornerPair=>{
       if (output !== false) {
@@ -51,11 +50,8 @@ function collides(object1,object2){
           output = true;
         }
       } else {
-        if (insideCircle(circle,cornerPair[0],cornerPair[1])){
+        if (insideSquare(circle,cornerPair[0],cornerPair[1])){
           output = true;
-          console.log('inside square');
-        } else {
-          console.log('Not inside square');
         }
       }
     });
@@ -64,4 +60,4 @@ function collides(object1,object2){
     throw new Error('Collision: Cannot Compare, Invalid Object Types.');
   }
 }
-export default collides;
+module.exports = collides;

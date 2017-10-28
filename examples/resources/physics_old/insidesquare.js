@@ -1,5 +1,5 @@
-import Square from './square.js';
-import isNumber from './isnumber';
+const Square = require('./square.js');
+const isNumber = require('./isnumber');
 
 function insideSquare(square,x,y){
   if (!square instanceof Square) {
@@ -7,4 +7,4 @@ function insideSquare(square,x,y){
   }
   return (x >= square.x - square.width / 2 && x <= square.x + square.width / 2) && (y >= square.y - square.height / 2 && y <= square.y + square.height / 2);
 }
-export default insideSquare;
+module.exports = insideSquare;
