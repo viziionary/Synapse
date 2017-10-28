@@ -2,7 +2,7 @@ const Brain = require('../constructors/brain');
 const setPrototypeOf = require('./setprototypeof');
 const cloneNeuron = require('./cloneNeuron');
 const cloneConnection = require('./cloneConnection');
-const createStructure = require('./createStructure');
+const createStructure = require('./createstructure');
 
 function cloneBrain(brain){
   //console.log('OLD BRAIN MUTATION RATE',brain.mutationRate);
@@ -24,6 +24,5 @@ function cloneBrain(brain){
   //console.log('NEW BRAIN MUTATION RATE',clone.mutationRate);
 
   return clone;
-}
 }
 module.exports = cloneBrain;
