@@ -1,9 +1,18 @@
-const getRandomDecimal = require('./getRandomDecimal');
-function getRandomLowNumber(min=1,max=100,factor=1){
-  let num = getRandomDecimal(min,max);
-  let rollDiff = num - min;
-  let percent = (rollDiff) / (max - min);
-  percent = 1 - (1 - percent) / factor;
-  return Math.round(rollDiff * percent + min);
+const getRandomDecimal = require('./getrandomdecimal');
+const getRandomNumber = require('./getrandomnumber');
+function getRandomLowNumber(min=0,max=100){
+  let range = max-min;
+  var factor = getRandomDecimal(0,1);
+  var result = Math.pow(range + 1, factor) - 1;
+  //console.log('num:',num,'divide:',divide);
+  //console.log('num',num,'rollDiff',rollDiff,'divide',divide);
+  //console.log('factor:',factor,'result:',result);
+  if (Math.round(result + min) > max){
+    console.log('ALERTALERTALERT',{result,factor,range});
+  }
+  if (Math.round(result + min) < min) {
+    console.log('BELOW ALERT',{result,factor,range});
+  }
+  return Math.round(result) + min;
 }
 module.exports = getRandomLowNumber;
