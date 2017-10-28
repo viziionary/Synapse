@@ -365,7 +365,7 @@ window.addEventListener("load", function() {
 			x: canvas1.width / 2,
 			y: canvas1.height / 2
 		}, self.location);
-		var score = distanceFromCenter + distanceFromTarget;
+		var score = distanceFromCenter + (distanceFromTarget * 2);
 		//console.log('Score source', score);
 		contents = [{
 			location: {

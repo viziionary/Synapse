@@ -13,7 +13,7 @@ for (let i = 0; i < times; i++) {
   list[number]++;
 }
 Object.entries(list).forEach(numberSet=>{
-  list[numberSet[0]] = Math.round(numberSet[1]/times*10000)/100+'%';
+  list[numberSet[0]] = Math.round(numberSet[1]/times*10000)/1000+'%';
 });
 console.log('List: ', list);
 
