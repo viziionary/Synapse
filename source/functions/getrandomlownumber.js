@@ -1,8 +1,11 @@
 const getRandomDecimal = require('./getrandomdecimal');
 const getRandomNumber = require('./getrandomnumber');
-function getRandomLowNumber(min=0,max=100){
+function getRandomLowNumber(min=0,max=100,curveFactor){
   let range = max-min;
   var factor = getRandomDecimal(0,1);
+  if (curveFactor) {
+    factor = Math.pow(factor,1/curveFactor);
+  }
   var result = Math.pow(range + 1, factor) - 1;
   //console.log('num:',num,'divide:',divide);
   //console.log('num',num,'rollDiff',rollDiff,'divide',divide);
