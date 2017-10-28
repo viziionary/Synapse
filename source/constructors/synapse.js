@@ -30,7 +30,7 @@ class Synapse {
       console.log('Chosen One:', this.child);
     }
 
-    var childScore = this.runFunction(this.child.input);
+    var childScore = this.runFunction(this.child.input,this.child);
     if (childScore instanceof Promise) {
       childScore = await childScore;
       //console.log(childScore);
@@ -62,7 +62,7 @@ class Synapse {
     this.child = child;
     var childScore;
     console.log('Debug 3:', this.child); // expected execution order
-    childScore = this.runFunction(child.input);
+    childScore = this.runFunction(child.input,child);
     console.log('Debug 4:', this.child); // expected execution order
     this.child = oldChild;
     while (childScore instanceof Promise) {
