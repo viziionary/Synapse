@@ -9,16 +9,13 @@ for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber();
+  var number = getRandomLowNumber(0, 100);
   list[number]++;
 }
 Object.entries(list).forEach(numberSet=>{
-<<<<<<< HEAD
-  list[numberSet[0]] = Math.round(numberSet[1]/times*10000)/1000+'%';
-=======
   list[numberSet[0]] = Math.round((numberSet[1] || 0)/times*10000)/100+'%';
->>>>>>> 4af3882e19995bc8773c6bf38eb6fd0bc9dcae08
 });
+
 console.log('List: ', list);
 
 class Brain {
