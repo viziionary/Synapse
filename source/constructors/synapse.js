@@ -16,18 +16,18 @@ class Synapse {
       this.child = cloneBrain(this.brain);
       this.child.generate();
     } else {
+      var newChild = null;
       for (let i = 0; i < 1000; i++) {
         console.log('Debug 1'); // expected execution order
         var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
         console.log('Debug 6'); // expected execution order
         var child = childData[0];
         var childScore = childData[1];
-        children[childScore] = child;
+        child.score = childScore;
+        if (newChild === null || newChild.score < child.score) {
+          newChild = child;
+        }
       }
-      this.child = children[Object.keys(children).sort((a, b) => {
-        return a > b ? 1 : -1
-      })[0]];
-      console.log('Chosen One:', this.child);
     }
 
     var childScore = this.runFunction(this.child.input,this.child);
