@@ -17,9 +17,9 @@ class Synapse {
       this.child.generate();
     } else {
       for (let i = 0; i < 1000; i++) {
-        console.log('Debug 1');
-        var childData = await this.getScoredChild();
-        console.log('Debug 2');
+        console.log('Debug 1'); // expected execution order
+        var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
+        console.log('Debug 4'); // expected execution order
         var child = childData[0];
         var childScore = childData[1];
         children[childScore] = child;
@@ -57,7 +57,7 @@ class Synapse {
   }
   async getScoredChild() {
     var child = cloneBrain(this.brain);
-    console.log('Debug 3:', this.child);
+    console.log('Debug 2:', this.child); // expected execution order
     let oldChild = this.child;
     this.child = child;
     var childScore;
@@ -66,7 +66,7 @@ class Synapse {
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
-    console.log('Debug 4:', this.child);
+    console.log('Debug 3:', this.child); // expected execution order
     return [this.child, childScore];
   }
 }
