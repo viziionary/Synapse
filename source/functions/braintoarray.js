@@ -1,18 +1,23 @@
+const connectionToArray = require('./connectionToArray');
 function brainToArray(brain){
-  var neuronIdConversionMap = new WeakMap();
+  var neuronIdConversionMap = {}
+  console.log('brain to convert',brain);
   var neurons = brain.structure.map((layer,layerIndex)=>{
     return Object.entries(layer).map((neuronPair,neuronIndex)=>{
-      neuronIdConversionMap.set(neuronPair[1].id,[layerIndex,neuronIndex]);
+      let neuron = neuronPair[1];
+      console.log('id:',neuron.id);
+      neuronIdConversionMap[neuron.id] = [layerIndex,neuronIndex];
       return [[],neuron.weight,neuron.memory,neuron.polarization];
     });
   });
-  brain.globalReferenceConnections.forEach(connection=>{
-    let parent = neuronIdConversionMap.get(connection.source.id);
-    let child = neuronIdConversionMap.get(connection.target.id);
-    if (parent && child) {
-      let parent = neurons[parent[0]][parent[1]];
-      parent[0].push(child);
+  Object.values(brain.globalReferenceConnections).forEach(connection=>{
+    let parentLocation = neuronIdConversionMap[connection.source.id];
+    let childLocation = neuronIdConversionMap[connection.target.id];
+    if (parentLocation && childLocation) {
+      let parent = neurons[parentLocation[0]][parentLocation[1]];
+      parent[0].push([childLocation,connectionToArray(connection)]);
     } else {
+      console.log(parentLocation,childLocation);
       console.log('Synapse: convert brain to array error, connection parent child mismatch');
     }
   });
