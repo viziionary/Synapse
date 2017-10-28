@@ -7,6 +7,16 @@ class Synapse {
     this.brain = new Brain(inputSize, outputSize);
     //console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
     this.run = this.run.bind(this);
+    this.getScoredChild = this.getScoredChild.bind(this);
+  }
+  async getScoredChild(){
+    var child = cloneBrain(this.brain);
+    var childScore;
+    childScore = this.runFunction(child.input);
+    while (childScore instanceof Promise) {
+      childScore = await childScore;
+    }
+    return [child,childScore];
   }
   async run() {
     //console.log('score',this.brain.score);
