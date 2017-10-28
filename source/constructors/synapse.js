@@ -38,7 +38,7 @@ class Synapse {
       }
       return this.run();
     }
-    setTimeout(function(){}, 10);
+    //setTimeout(function(){}, 10);
   }
 }
 

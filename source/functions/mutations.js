@@ -1,5 +1,6 @@
 const getRandomProperty = require('./getrandomproperty');
 const getRandomNumber = require('./getrandomnumber');
+const getRandomDecimal = require('./getrandomdecimal');
 const Neuron = require('../constructors/neuron');
 
 var mutations = {
@@ -41,7 +42,7 @@ var mutations = {
       //console.time('bias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
-        connection.bias += getRandomNumber(0, 1);
+        connection.bias += getRandomDecimal(0, 1);
         if (connection.bias > 1) connection.bias = 1;
       }
       //console.timeEnd('bias');
@@ -54,7 +55,7 @@ var mutations = {
       //console.time('unbias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
-        connection.bias -= getRandomNumber(0, 1);
+        connection.bias -= getRandomDecimal(0, 1);
         if (connection.bias < 0) connection.bias = 0;
       }
       //console.timeEnd('unbias');

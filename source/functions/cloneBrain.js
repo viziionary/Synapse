@@ -4,7 +4,7 @@ const cloneNeuron = require('./cloneNeuron');
 const cloneConnection = require('./cloneConnection');
 
 function cloneBrain(brain){
-  console.log('OLD BRAIN MUTATION RATE',brain.mutationRate);
+  //console.log('OLD BRAIN MUTATION RATE',brain.mutationRate);
   var toClone = Object.assign({},brain);
   delete toClone.globalReferenceNeurons;
   delete toClone.globalReferenceConnections;
@@ -20,7 +20,7 @@ function cloneBrain(brain){
   });
   Brain.prototype.bindMethods(clone);
   clone.structure = createStructure(clone);
-  console.log('NEW BRAIN MUTATION RATE',clone.mutationRate);
+  //console.log('NEW BRAIN MUTATION RATE',clone.mutationRate);
 
   return clone;
 }

@@ -27,7 +27,7 @@ window.addEventListener("load", function() {
 			console.log(network.child);
 			return false;
 		} else {
-			return getTimer(0, score);
+			return score;
 		}
 	});
 	viewer = new Viewer(canvas);

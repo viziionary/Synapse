@@ -6,7 +6,7 @@ var weights = Object.values(mutations).map(mutation => {
 var mutationList = Object.keys(mutations);
 
 function mutate(max, child) {
-  console.log('Max mutations: ', max);
+  //console.log('Max mutations: ', max);
   for (let i = 0; i < max; i++) {
     var mutation = getRandomItem(mutationList, weights);
     mutations[mutation].mutate(child);
