@@ -1,6 +1,17 @@
 const Neuron = require('./neuron');
 const mutate = require('../functions/mutate.js');
 const getRandomNumber = require('../functions/getrandomnumber');
+const getRandomLowNumber = require('../functions/getrandomlownumber');
+
+var list = {};
+for (let i = 1; i < 101; i++) {
+  list[i] = 0;
+}
+for (let i = 0; i < 10000; i++) {
+  var number = getRandomLowNumber(1,100);
+  list[number]++;
+}
+console.log('List: ', list);
 
 class Brain {
   constructor(inputSize, outputSize) {
@@ -79,13 +90,9 @@ class Brain {
   }
   generate() {
     this.activations = 0;
-    var max = Math.floor(this.mutationRate);
-    if (max === this.mutationMax) {
-      this.mutationRate = 0;
-    }
     console.log('Current mutation rate: ', this.mutationRate);
     console.log('Mutation rate mutationRateGrowth: ', this.mutationRateGrowth);
-    this.mutationRate += this.mutationRateGrowth;
+    this.mutationRate = getRandomLowNumber(1, 50); //change the max to be based on the current complexity of the network
     console.log('New mutation rate: ', this.mutationRate);
     //console.log(this.mutationRate);
     mutate(this.mutationRate, this);
