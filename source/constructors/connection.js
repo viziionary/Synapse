@@ -1,3 +1,6 @@
+const getRandomNumber = require('../functions/getrandomnumber');
+const getRandomDecimal = require('../functions/getrandomdecimal');
+
 class Connection {
   constructor(brain, source, target, callback){
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
@@ -12,12 +15,12 @@ class Connection {
     this.brain.globalReferenceConnections[this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
-    this.bias = 0.5;
+    this.bias = getRandomDecimal(0,1);
     this.source = source;
     this.target = target;
-    this.recentCharges = [0.5, 0.5, 0.5, 0.5, 0.5];
-    this.memory = 5;
-    this.weight = [0.5, 0.5, 0.5];
+    this.recentCharges = [getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1)];
+    this.memory = getRandomNumber(1,10); // maybe 0,10 ?
+    this.weight = [getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1)];
     target.connected[this.id] = this;
     this.bindMethods(this);
     callback(this.id, this);

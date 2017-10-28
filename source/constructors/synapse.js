@@ -3,24 +3,30 @@ const cloneBrain = require('../functions/clonebrain');
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
+    this.inputSize = inputSize;
+    this.outputSize = outputSize;
     this.runFunction = runFunction;
     this.brain = new Brain(inputSize, outputSize);
     //console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
-    this.run = this.run.bind(this);
+    this.initiate = this.initiate.bind(this);
     this.getScoredChild = this.getScoredChild.bind(this);
   }
-  async run() {
+  async initiate() {
     //console.log('score',this.brain.score);
 
     if (this.child) {
       this.child = cloneBrain(this.brain);
       this.child.generate();
     } else {
+<<<<<<< HEAD
       var newChild = null;
+=======
+      var children = {};
+>>>>>>> c185fb6e4d4682872f587236416af334cab80388
       for (let i = 0; i < 1000; i++) {
-        console.log('Debug 1'); // expected execution order
+        console.log('Searching for chosen one... [' + i + ']'); // expected execution order
         var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
-        console.log('Debug 6'); // expected execution order
+        //console.log('Debug 6'); // expected execution order
         var child = childData[0];
         var childScore = childData[1];
         child.score = childScore;
@@ -56,19 +62,19 @@ class Synapse {
     //setTimeout(function(){}, 10);
   }
   async getScoredChild() {
-    var child = cloneBrain(this.brain);
-    console.log('Debug 2:', child); // expected execution order
+    var child = new Brain(this.inputSize, this.outputSize);
+    //console.log('Debug 2:', child); // expected execution order
     let oldChild = this.child;
     this.child = child;
     var childScore;
-    console.log('Debug 3:', this.child); // expected execution order
+    //console.log('Debug 3:', this.child); // expected execution order
     childScore = this.runFunction(child.input,child);
-    console.log('Debug 4:', this.child); // expected execution order
+    //console.log('Debug 4:', this.child); // expected execution order
     this.child = oldChild;
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
-    console.log('Debug 5:', this.child); // expected execution order
+    //console.log('Debug 5:', this.child); // expected execution order
     return [this.child, childScore];
   }
 }

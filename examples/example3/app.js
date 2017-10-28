@@ -8,11 +8,10 @@ window.addEventListener("load", function() {
 	var viewer;
 	var counter = 0;
 
-	var network = new Synapse(20, 2, async(run) => {
-		viewer.render(network.child);
-		console.log('Debug ??', network.child);
-		var evolution = new Evolution(network, 1, 0, 10000);
-		var score = await evolution.simulate(network);
+	var network = new Synapse(20, 2, async(run, child) => {
+		viewer.render(child);
+		var evolution = new Evolution(run, child, 1, 0, 10000);
+		var score = await evolution.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
 		counter++;
@@ -25,14 +24,14 @@ window.addEventListener("load", function() {
 		}
 		if (score > 0) {
 			console.log('Done!');
-			console.log(network.child);
+			console.log(child);
 			return false;
 		} else {
 			return score;
 		}
 	});
 	viewer = new Viewer(canvas);
-	network.run();
+	network.initiate();
 
 	function findNewPoint(x, y, angle, distance) {
 		var result = {};
@@ -84,8 +83,7 @@ window.addEventListener("load", function() {
 		}
 	}
 
-
-	function Entity(network) {
+	function Entity(run) {
 		var that = this;
 		this.contents = [];
 		for (let i1 = 0; i1 < 5; i1++) {
@@ -101,7 +99,6 @@ window.addEventListener("load", function() {
 				});
 			}
 		}
-
 
 		this.self = {
 			radius: 30,
@@ -186,7 +183,7 @@ window.addEventListener("load", function() {
 				input[i1] = inputMin;
 			}
 
-			var result = network.child.input(input);
+			var result = run(input);
 			return result;
 		}
 	};
@@ -362,7 +359,7 @@ window.addEventListener("load", function() {
 
 
 
-	function process(input, contents, entity, canvas1, context1, network) {
+	function process(input, contents, entity, canvas1, context1, run, child) {
 		var self = entity.self;
 		var contents = entity.contents;
 		if (input[0] >= 0.5) self.location.x++;
@@ -392,8 +389,8 @@ window.addEventListener("load", function() {
 			self: self
 		}
 		var points = [];
-		for (var i1 = 0; i1 < network.child.inputSize; i1++) {
-			var space = canvas1.height / network.child.inputSize;
+		for (var i1 = 0; i1 < child.inputSize; i1++) {
+			var space = canvas1.height / child.inputSize;
 			var distance = ((i1 + 1) * space) - (0.5 * space);
 			var point = {
 				location: {
@@ -449,7 +446,7 @@ window.addEventListener("load", function() {
 		return result;
 	}
 
-	function Evolution(network, tick, targetScore, maxGens) {
+	function Evolution(run, child, tick, targetScore, maxGens) {
 		var generationCount = 0;
 		var canvas1 = document.getElementById('environment');
 		var context1 = canvas1.getContext('2d');
@@ -484,17 +481,17 @@ window.addEventListener("load", function() {
 				y: canvas1.height
 			}]
 		];
-		this.simulate = function sim(network) {
+		this.simulate = function sim() {
 			return new Promise((resolve, reject) => {
 				var contents = [];
 				var endResult;
-				var entity = new Entity(network);
+				var entity = new Entity(run);
 				var maxTime = 2000;
 				var time = 0;
 				var timer = setInterval(() => {
 					time += tick;
 					var input = entity.think(bounds);
-					var result = process(input, contents, entity, canvas1, context1, network);
+					var result = process(input, contents, entity, canvas1, context1, run, child);
 					//console.log('Result output', result);
 					//console.log('Score output', result.score);
 					entity.contents = result.contents;
