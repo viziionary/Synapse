@@ -4,13 +4,17 @@ const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomLowNumber = require('../functions/getrandomlownumber');
 
 var list = {};
+var times = 1000000;
 for (let i = 1; i < 101; i++) {
   list[i] = 0;
 }
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < times; i++) {
   var number = getRandomLowNumber(1,100);
   list[number]++;
 }
+Object.entries(list).forEach(numberSet=>{
+  list[numberSet[0]] = Math.round(numberSet[1]/times*100)+'%';
+});
 console.log('List: ', list);
 
 class Brain {
