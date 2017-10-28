@@ -1,4 +1,4 @@
-function BrainToArray(brain){
+function brainToArray(brain){
   var neuronIdConversionMap = new WeakMap();
   var neurons = brain.structure.map((layer,layerIndex)=>{
     return Object.entries(layer).map((neuronPair,neuronIndex)=>{
@@ -16,4 +16,6 @@ function BrainToArray(brain){
       console.log('Synapse: convert brain to array error, connection parent child mismatch');
     }
   });
+  return neurons;
 }
+module.exports = brainToArray;
