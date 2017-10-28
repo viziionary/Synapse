@@ -1,7 +1,7 @@
 const getRandomDecimal = require('./getrandomdecimal');
 const getRandomNumber = require('./getrandomnumber');
 
-/*
+
 function getRandomLowNumber(min = 0, max = 100, curveFactor) {
 	let range = max - min;
 	var factor = getRandomDecimal(0, 1);
@@ -28,13 +28,13 @@ function getRandomLowNumber(min = 0, max = 100, curveFactor) {
 	}
 	return Math.floor(result) + min;
 }
-*/
 
+/*
 function getRandomLowNumber(min, max, curveFactor, log) {
 	var rand = getRandomNumber(min, max);
 	var list = [];
 	var factor = Math.round(curveFactor * max);
-	for (let i1 = min, i2 = min, i3 = min; i2 < max && factor > 0.000000001; i1++, i3++) {
+	for (let i1 = min, i2 = min, i3 = min; i2 < max && factor > 0.000000001; i1 += 1, i3++) {
 		list.push(i2);
 		if (i1 > factor) {
 			i2++;
@@ -52,6 +52,7 @@ function getRandomLowNumber(min, max, curveFactor, log) {
 }
 
 console.log('Test:');
-var test = getRandomLowNumber(1, 100, 0.8, true);
+var test = getRandomLowNumber(1, 100, 0.5, true);
+*/
 
 module.exports = getRandomLowNumber;
