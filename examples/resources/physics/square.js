@@ -37,9 +37,17 @@ class Square {
     this.move = this.move.bind(this);
     this.set = this.set.bind(this);
     this.environment.addObject(this);
+    this.canMove = this.canMove.bind(this);
+  }
+  canMove(x,y){
+    return this.noClip === true || !this.environment.isObstructed(this,x,y);
   }
   move(x,y){
-    return this.environment.setObjectPosition(this,this.x+x,this.y+y);
+    if (this.canMove(this.x+x,this.x+y)){
+      return this.set(this.x+x,this.y+y);
+    } else {
+      return false;
+    }
   }
   set(x,y){
     this.environment.setObjectPosition(this,x,y);
