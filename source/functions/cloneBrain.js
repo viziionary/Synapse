@@ -1,7 +1,7 @@
 const Brain = require('../constructors/brain');
 const setPrototypeOf = require('./setprototypeof');
-const cloneNeuron = require('./cloneNeuron');
-const cloneConnection = require('./cloneConnection');
+const cloneNeuron = require('./cloneneuron');
+const cloneConnection = require('./cloneconnection');
 const createStructure = require('./createstructure');
 
 function cloneBrain(brain){
