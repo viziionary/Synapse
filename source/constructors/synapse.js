@@ -18,11 +18,7 @@ class Synapse {
       this.child = cloneBrain(this.brain);
       this.child.generate();
     } else {
-<<<<<<< HEAD
       var newChild = null;
-=======
-      var children = {};
->>>>>>> c185fb6e4d4682872f587236416af334cab80388
       for (let i = 0; i < 1000; i++) {
         console.log('Searching for chosen one... [' + i + ']'); // expected execution order
         var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
@@ -34,6 +30,7 @@ class Synapse {
           newChild = child;
         }
       }
+      this.child = newChild;
     }
 
     var childScore = this.runFunction(this.child.input,this.child);
