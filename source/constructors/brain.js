@@ -8,11 +8,7 @@ var times = 1000000;
 for (let i = 1; i < 101; i++) {
   list[i] = 0;
 }
-<<<<<<< HEAD
-for (let i = 0; i < 1000000; i++) {
-=======
 for (let i = 0; i < times; i++) {
->>>>>>> aa13201368098c26d4c8cbb49134c40262c458ab
   var number = getRandomLowNumber(1,100);
   list[number]++;
 }
