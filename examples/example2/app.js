@@ -12,7 +12,7 @@ window.addEventListener("load", function() {
 		viewer.render(network.child);
 		var evolution = new Evolution(network, 1, 0, 10000);
 		var score = evolution.simulate(network);
-
+		console.log('Score final', score);
 		counter++;
 		if (counter % 10 == 0) {
 			console.log("Score: " + score);
@@ -365,6 +365,7 @@ window.addEventListener("load", function() {
 			y: canvas1.height / 2
 		}, self.location);
 		var score = distanceFromCenter + distanceFromTarget;
+		//console.log('Score source', score);
 		contents = [{
 			location: {
 				x: 310,
@@ -483,6 +484,7 @@ window.addEventListener("load", function() {
 				color: '#0088ff',
 				stroke: '#0041ff'
 			}
+			var endResult;
 			var entity = new Entity(network);
 			var maxTime = 2000;
 			var time = 0;
@@ -490,6 +492,8 @@ window.addEventListener("load", function() {
 				time += tick;
 				var input = entity.think(bounds);
 				var result = process(input, contents, self, entity, canvas1, context1, network);
+				console.log('Result output', result);
+				console.log('Score output', result.score);
 				entity.contents = result.contents;
 				entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {
