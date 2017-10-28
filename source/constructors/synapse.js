@@ -11,8 +11,11 @@ class Synapse {
   }
   async getScoredChild() {
     var child = cloneBrain(this.brain);
+    let oldChild = this.child;
+    this.child = child;
     var childScore;
     childScore = this.runFunction(child.input);
+    this.child = oldChild;
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
