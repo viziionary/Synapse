@@ -27,6 +27,7 @@ class Square {
         throw new Error('Invalid Square: Invalid Rotation');
       }
     }
+    this.noClip = false;
     this.width = width;
     this.height = height;
     this.x = x;

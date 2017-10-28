@@ -1,4 +1,5 @@
 const isValidObjectType = require('./isvalidobjecttype');
+const collides = require('./collides');
 class Environment {
   constructor(width,height){
     this.width = width;
@@ -21,7 +22,7 @@ class Environment {
     if (!this.objects.includes(object)) {
       throw new Error('Environment: Cannot Set Position Of Unsaved Object!');
     }
-    if (this.allowCollision === true) {
+    if (this.allowCollision === true  || object.noClip === true) {
       object.x = x;
       object.y = y;
       return true;

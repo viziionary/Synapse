@@ -15,6 +15,7 @@ class Circle {
       throw new Error('Invalid Circle: Invalid Environment!');
     }
     this.radius = radius;
+    this.noClip = false;
     this.x = x;
     this.y = y;
     this.environment = environment;
