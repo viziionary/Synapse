@@ -9,7 +9,7 @@ function setupGame(canvasIn){
   gameData.player.ySpeed = 0;
   gameData.player.acceleration = 1;
   gameData.player.maxSpeed = 20;
-  new Physics.Circle(gameData.environment,300,300,50,50);
+  new Physics.Square(gameData.environment,300,300,50,50);
   gameTick(gameData);
   setInterval(()=>{gameTick(gameData)},50);
 }
