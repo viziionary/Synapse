@@ -1,6 +1,6 @@
-const getRandomNumber = require('./getRandomNumber');
+const getRandomDecimal = require('./getRandomDecimal');
 function getRandomLowNumber(min=1,max=100,factor=1){
-  let num = getRandomNumber(min,max);
+  let num = getRandomDecimal(min,max);
   let rollDiff = num - min;
   let percent = (rollDiff) / (max - min);
   percent = 1 - (1 - percent) / factor;
