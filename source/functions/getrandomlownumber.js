@@ -16,6 +16,6 @@ function getRandomLowNumber(min=0,max=100,curveFactor){
   if (Math.round(result + min) < min) {
     console.log('BELOW ALERT',{result,factor,range});
   }
-  return Math.round(result) + min;
+  return Math.floor(result) + min;
 }
 module.exports = getRandomLowNumber;

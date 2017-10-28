@@ -9,7 +9,7 @@ for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(0, 100,2);
+  var number = getRandomLowNumber(0, 100);
   list[number]++;
 }
 Object.entries(list).forEach(numberSet=>{
