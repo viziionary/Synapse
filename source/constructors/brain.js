@@ -2,6 +2,7 @@ const Neuron = require('./neuron');
 const mutate = require('../functions/mutate.js');
 const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomLowNumber = require('../functions/getrandomlownumber');
+const createStructure = require('../functions/createstructure';)
 
 var list = {};
 var times = 1000000;
@@ -57,7 +58,13 @@ class Brain {
     self.addLayer = this.addLayer.bind(self);
   }
   addLayer(index){
-
+    this.layers++;
+    this.globalReferenceNeurons.forEach(neuron=>{
+      if (neuron.layer >= index) {
+        neuron.layer++;
+      }
+    });
+    this.structure = createStructure(this);
   }
   input(array) {
     var inputs = [];
