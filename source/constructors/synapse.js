@@ -9,31 +9,17 @@ class Synapse {
     this.run = this.run.bind(this);
     this.getScoredChild = this.getScoredChild.bind(this);
   }
-  async getScoredChild() {
-    var child = cloneBrain(this.brain);
-    console.log('Debug 1:', this.child);
-    let oldChild = this.child;
-    this.child = child;
-    var childScore;
-    childScore = this.runFunction(child.input);
-    this.child = oldChild;
-    while (childScore instanceof Promise) {
-      childScore = await childScore;
-    }
-    console.log('Debug 2:', this.child);
-    return [this.child, childScore];
-  }
   async run() {
     //console.log('score',this.brain.score);
 
     if (this.child) {
       this.child = cloneBrain(this.brain);
-      this.child.generate()
+      this.child.generate();
     } else {
       for (let i = 0; i < 1000; i++) {
-        console.log('Debug 3');
+        console.log('Debug 1');
         var childData = await this.getScoredChild();
-        console.log('Debug 4');
+        console.log('Debug 2');
         var child = childData[0];
         var childScore = childData[1];
         children[childScore] = child;
@@ -68,6 +54,20 @@ class Synapse {
       return this.run();
     }
     //setTimeout(function(){}, 10);
+  }
+  async getScoredChild() {
+    var child = cloneBrain(this.brain);
+    console.log('Debug 3:', this.child);
+    let oldChild = this.child;
+    this.child = child;
+    var childScore;
+    childScore = this.runFunction(child.input);
+    this.child = oldChild;
+    while (childScore instanceof Promise) {
+      childScore = await childScore;
+    }
+    console.log('Debug 4:', this.child);
+    return [this.child, childScore];
   }
 }
 
