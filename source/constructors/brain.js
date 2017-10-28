@@ -9,11 +9,11 @@ for (let i = 0; i < 101; i++) {
   list[i] = 0;
 }
 for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(0, 100);
+  var number = getRandomLowNumber(0, 100,2);
   list[number]++;
 }
 Object.entries(list).forEach(numberSet=>{
-  list[numberSet[0]] = Math.round((numberSet[1] || 0)/times*10000)/100+'%';
+  list[numberSet[0]] = numberSet[1];
 });
 
 console.log('List: ', list);
