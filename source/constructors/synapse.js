@@ -26,14 +26,17 @@ class Synapse {
       this.child.generate()
     } else {
       for (let i = 0; i < 1000; i++) {
-        var childData = getScoredChild();
-        var child = childData[0]
-        var childScore = [1]
+        console.log('Debug 1');
+        var childData = await this.getScoredChild();
+        console.log('Debug 2');
+        var child = childData[0];
+        var childScore = childData[1];
         children[childScore] = child;
       }
-      this.child = Object.keys(children).sort((a, b) => {
+      this.child = children[Object.keys(children).sort((a, b) => {
         return a > b ? 1 : -1
-      })[0];
+      })[0]];
+      console.log('Chosen One:', this.child);
     }
 
     var childScore = this.runFunction(this.child.input);
