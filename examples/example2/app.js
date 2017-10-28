@@ -474,6 +474,7 @@ window.addEventListener("load", function() {
 			}]
 		];
 		this.simulate = function sim(network) {
+			return new Promise((resolve,reject)=>{
 			var contents = [];
 			var self = {
 				location: {
@@ -488,7 +489,7 @@ window.addEventListener("load", function() {
 			var entity = new Entity(network);
 			var maxTime = 2000;
 			var time = 0;
-			var timer = setInterval(function() {
+			var timer = setInterval(()=>{
 				time += tick;
 				var input = entity.think(bounds);
 				var result = process(input, contents, self, entity, canvas1, context1, network);
@@ -498,9 +499,10 @@ window.addEventListener("load", function() {
 				entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {
 					clearInterval(timer);
-					return result.score;
+					resolve(result.score);
 				}
 			}, tick);
+			});
 		}
 	}
 });
