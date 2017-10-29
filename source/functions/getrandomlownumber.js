@@ -1,6 +1,6 @@
 const getRandomDecimal = require('./getrandomdecimal');
 const getRandomNumber = require('./getrandomnumber');
-const logb = require('./getbaselog');
+const logb = require('./logb');
 
 
 /*
