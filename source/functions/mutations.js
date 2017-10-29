@@ -156,16 +156,6 @@ var mutations = {
     frequencyMod: 0,
     frequency: 0,
     mutate: function(brain) {}
-  },
-  inputShift: { //shift a neuron's input weight (how many neurons connect to it from the previous layer)
-    frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
-  },
-  outputShift: { //shift a neuron's output weight (how many neurons in the next layer it connects to)
-    frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
   }
 };
 module.exports = mutations;
