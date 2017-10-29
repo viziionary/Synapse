@@ -4,12 +4,6 @@ const getRandomDecimal = require('../functions/getrandomdecimal');
 class Connection {
   constructor(brain, source, target) {
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
-    var check1 = Object.values(source.connections).includes(target);
-    var check2 = Object.values(target.connections).includes(source);
-    if (source.id === target.id || check1 == true || check2 == true) {
-      //console.log('Synapse: Refused backward connection: source layer ' + source.layer + ' > ' + target.layer + ' || check1 !== true [' + check1 + '] || check2 !== true [' + check2 + ']');
-      return new Error('Refused backwards connection');
-    }
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceConnections[this.brain.counter] = this;
@@ -23,7 +17,7 @@ class Connection {
     this.memory = getRandomNumber(1, 10); // maybe 0,10 ?
     this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.deresistanceRate = getRandomDecimal(0, 1);
-    this.resistanceGain = 0.1;
+    this.resistanceGain = getRandomDecimal(0, 1);
     this.resistance = 0;
     source.connections[target.id] = this;
     target.connected[this.id] = this;
@@ -37,10 +31,9 @@ class Connection {
   }
   activate(charge) {
     this.brain.activations++;
-    if (this.target.active == true) {
-      this.target.transmit((charge + this.bias) / 2);
-      updateBias(charge);
-    }
+    this.resistance += this.resistanceGain;
+    this.target.transmit(((charge + this.bias) / 2) - this.resistance);
+    updateBias(charge);
   }
   delete() {
     this.brain.deleteConnection(this.id);

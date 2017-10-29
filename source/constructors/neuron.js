@@ -82,7 +82,7 @@ class Neuron {
   transmit(charge) {
     this.recentCharges.push(charge);
     if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-    this.polarization += charge * chargeRate;
+    this.polarization += charge * this.chargeRate;
     if (this.polarization >= this.threshold) {
       this.polarization = 0;
       Object.values(this.connections).forEach(connection => {
