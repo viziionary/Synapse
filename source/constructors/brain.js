@@ -83,9 +83,13 @@ class Brain {
     self.generate = this.generate.bind(self);
     self.resetResistance = this.resetResistance.bind(self);
     self.getAllNeurons = this.getAllNeurons.bind(self);
+    self.getAllConnections = this.getAllConnections.bind(self);
   }
   getAllNeurons() {
-    return this.layers.hidden.concat(this.layers.input).concat(this.layers.output);
+    return Object.values(this.globalReferenceNeurons);
+  }
+  getAllConnections() {
+    return Object.values(this.globalReferenceConnections);
   }
   resetResistance() {
     this.getAllNeurons().forEach(neuron => {
