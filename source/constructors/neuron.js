@@ -3,7 +3,7 @@ const isNumber = require('../functions/isnumber');
 const getRandomNumber = require('../functions/getrandomnumber');
 
 class Neuron {
-  constructor(brain, layer) {
+  constructor(brain) {
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
@@ -24,7 +24,7 @@ class Neuron {
     this.bindMethods(this);
     //console.log(this.layer);
 
-    //THIS PART IS FUCKED UP MAAAAAN FOR REAL 
+    //THIS PART IS FUCKED UP MAAAAAN FOR REAL
     if (this.layer !== 0 && brain.structure[layer - 1]) {
       //console.log(brain.structure[layer - 1]);
       if (Object.keys(brain.structure[layer - 1]).length > 0) {
