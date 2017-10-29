@@ -53,7 +53,6 @@ class Brain {
 
     for (var i = 0; i < totalNeurons; i++) {
       if (currentChain.length >= currentChainMax) {
-        this.layers.hidden.push(currentChain);
         currentChain[currentChain.length - 1].connect(getRandomNumber(0, this.layers.output.length - 1));
         currentChain = [inputs[currentInputNumber % inputs.length]];
         console.log('next',{currentChain});
