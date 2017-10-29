@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
 		//if (counter % 10 == 0) {
 		console.log("Score: " + score);
 		//}
-		if (counter > 1000) {
+		if (counter > 100000) {
 			console.log('Ended without reaching target score: ' + 0);
 			return false;
 		}
