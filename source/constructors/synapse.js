@@ -43,7 +43,7 @@ class Synapse {
       return this.brain;
     } else if (childScore instanceof Brain) {
       this.brain = childScore;
-      return this.run();
+      return this.initiate();
     } else {
       if (this.brain.score) {
         if (this.brain.score < childScore) {
