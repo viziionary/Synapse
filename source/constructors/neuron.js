@@ -8,7 +8,6 @@ class Neuron {
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
     this.active = true;
-    this.layer = layer;
     this.id = brain.counter;
     this.weight = 2;
     this.connected = {};
@@ -23,12 +22,9 @@ class Neuron {
     this.threshold = 1;
     this.resistanceGain = 0.1;
     this.bindMethods(this);
-
-    if (!brain.structure[layer]) {
-      brain.structure[layer] = {};
-    }
-    brain.structure[layer][this.id] = this;
     //console.log(this.layer);
+
+    //THIS PART IS FUCKED UP MAAAAAN FOR REAL 
     if (this.layer !== 0 && brain.structure[layer - 1]) {
       //console.log(brain.structure[layer - 1]);
       if (Object.keys(brain.structure[layer - 1]).length > 0) {
