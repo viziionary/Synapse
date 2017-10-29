@@ -9,14 +9,12 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Connecting neurons.');
-      //console.time('connect');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
         var neuron1 = getRandomProperty(brain.globalReferenceNeurons);
         var neuron2 = getRandomProperty(brain.globalReferenceNeurons);
         neuron1.connect(neuron2);
       }
-      //console.timeEnd('connect');
     }
   },
   disconnect: {
@@ -24,7 +22,6 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Disconnecting neurons.');
-      //console.time('disconnect');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
         var connection = getRandomProperty(brain.globalReferenceConnections);
@@ -32,33 +29,28 @@ var mutations = {
           connection.delete();
         }
       }
-      //console.timeEnd('disconnect');
     }
   },
   bias: {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      //console.time('bias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
         connection.bias += getRandomDecimal(0, 1);
         if (connection.bias > 1) connection.bias = 1;
       }
-      //console.timeEnd('bias');
     }
   },
   unbias: {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      //console.time('unbias');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
         connection.bias -= getRandomDecimal(0, 1);
         if (connection.bias < 0) connection.bias = 0;
       }
-      //console.timeEnd('unbias');
     }
   },
   add: { //add a neuron
@@ -66,7 +58,6 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Adding neurons.');
-      //console.time('add');
       var count = getRandomNumber(1, 10);
       var layer = getRandomNumber(1, brain.layers - 2);
       for (let i = 0; i < count; i++) {
@@ -79,7 +70,6 @@ var mutations = {
           }
         }
       }
-      //console.timeEnd('add');
     }
   },
   remove: { //remove a neuron
@@ -87,7 +77,6 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Removing neurons.');
-      //console.time('remove');
       var count = getRandomNumber(1, 10);
       var layer = getRandomNumber(1, brain.layers - 2);
       for (let i = 0; i < count; i++) {
@@ -98,7 +87,6 @@ var mutations = {
           }
         }
       }
-      //console.timeEnd('remove');
     }
   },
   fillMemory: { //add memory capacity
@@ -129,15 +117,6 @@ var mutations = {
     frequencyMod: 0,
     frequency: 0,
     mutate: function(brain) {}
-  }
-
-  // these mutations are useful potentially but we aren't using action potential mechanics right now, may add later. Not required for basic processes.
-
-  /*
-  toggleThreshold: { //choose whether to use threshold adjustment
-    frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
   },
   excite: { //lower action threshold
     frequencyMod: 0,
@@ -149,6 +128,5 @@ var mutations = {
     frequency: 0,
     mutate: function(brain) {}
   }
-  */
 };
 module.exports = mutations;

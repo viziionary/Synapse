@@ -6,12 +6,14 @@ const createStructure = require('../functions/createstructure');
 
 var list = {};
 var times = 1000000;
-for (let i = 0; i < 101; i++) {
-  list[i] = 0;
-}
-for (let i = 0; i < times; i++) {
-  var number = getRandomLowNumber(0, 100);
-  list[number]++;
+
+for (let i = 1; i < times; i++) {
+  var number = getRandomLowNumber(1, 100);
+  if (typeof list[number] == 'number'){
+    list[number]++;
+  } else {
+    list[number] = 0;
+  }
 }
 
 console.log('List: ', list);
