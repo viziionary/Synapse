@@ -4,10 +4,12 @@ const getRandomDecimal = require('../functions/getrandomdecimal');
 class Connection {
   constructor(brain, source, target) {
     if (typeof source !== 'object' || source.constructor.name !== 'Neuron') {
-      throw new Error('Connection: Source not Neuron! Source:',source);
+      console.log('Source:',source);
+      throw new Error('Connection: Source not Neuron!');
     }
     if (typeof target !== 'object' || target.constructor.name !== 'Neuron') {
-      throw new Error('Connection: Target not Neuron! Target:',target);
+      console.log('Target:',target);
+      throw new Error('Connection: Target not Neuron!');
     }
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
     this.brain = brain;
