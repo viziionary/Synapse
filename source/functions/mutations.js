@@ -86,11 +86,8 @@ var mutations = {
     frequencyMod:0,
     frequency: 1,
     mutate: (brain)=>{
-      if (Object.values(brain.structure[brain.layers-1]).length > 0) {
+      if (brain.structure[brain.layers-1].length > 0) {
         brain.addLayer(brain.layers-1);
-        console.log('addlayer',brain);
-      } else {
-        console.log('not adding layer',brain);
       }
     }
   },
@@ -141,6 +138,15 @@ var mutations = {
     frequencyMod: 0,
     frequency: 0,
     mutate: function(brain) {}
+  }
+
+  // these mutations are useful potentially but we aren't using action potential mechanics right now, may add later. Not required for basic processes. 
+
+  /*
+  toggleThreshold: { //choose whether to use threshold adjustment
+    frequencyMod: 0,
+    frequency: 0,
+    mutate: function(brain) {}
   },
   excite: { //lower action threshold
     frequencyMod: 0,
@@ -151,11 +157,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 0,
     mutate: function(brain) {}
-  },
-  toggleThreshold: { //choose whether to use threshold adjustment
-    frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
   }
+  */
 };
 module.exports = mutations;
