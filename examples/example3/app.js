@@ -15,9 +15,9 @@ window.addEventListener("load", function() {
 		//console.log('Child score', score);
 		//console.log('Score final', score);
 		counter++;
-		if (counter % 10 == 0) {
+		//if (counter % 10 == 0) {
 			console.log("Score: " + score);
-		}
+		//}
 		if (counter > 1000) {
 			console.log('Ended without reaching target score: ' + 0);
 			return false;
@@ -85,6 +85,7 @@ window.addEventListener("load", function() {
 
 	function Entity(run) {
 		var that = this;
+		this.age = 0;
 		this.contents = [];
 		for (let i1 = 0; i1 < 5; i1++) {
 			for (let i2 = 0; i2 < 5; i2++) {
@@ -376,11 +377,14 @@ window.addEventListener("load", function() {
 			stroke: '#f3663a'
 		}
 		var distanceFromTarget = getDistance(self.location, target.location) * -1;
-		var distanceFromCenter = getDistance({
-			x: canvas1.width / 2,
-			y: canvas1.height / 2
+		var distanceFromStart = getDistance({
+			x: 75,
+			y: 75
 		}, self.location);
-		var score = distanceFromCenter + (distanceFromTarget * 2);
+		//console.log('Distance from target: ', distanceFromTarget);
+		//console.log('Distance from start: ', distanceFromStart);
+		//console.log('Age: ', entity.age)
+		var score = distanceFromStart + (distanceFromTarget * 2) - Math.round(entity.age / 2);
 		//console.log('Score source', score);
 		context1.clearRect(0, 0, canvas1.width, canvas1.height);
 		var result = {
@@ -490,6 +494,7 @@ window.addEventListener("load", function() {
 				var time = 0;
 				var timer = setInterval(() => {
 					time += tick;
+					entity.age = time;
 					var input = entity.think(bounds);
 					var result = process(input, contents, entity, canvas1, context1, run, child);
 					//console.log('Result output', result);
