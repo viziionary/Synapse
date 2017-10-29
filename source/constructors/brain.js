@@ -23,28 +23,42 @@ class Brain {
     this.bindMethods(this);
     this.inputSize = inputSize;
     this.outputSize = outputSize;
-    this.types = {};
-    this.types.input = {};
-    this.types.hidden = {};
-    this.types.output = {};
+    this.layers = {};
+    this.layers.input = [];
+    this.layers.hidden = [];
+    this.layer.output = [];
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
     //this.score = 0;
     this.activations = 0;
     this.mutationRate = 1;
-    for (let i1 = 0; i1 < inputSize; i1++) {
-       new Neuron(this, 'output');
+
+    for (var i = 0; i < inputSize; i++) {
+      this.layers.input.push(new Neuron(this, 'input'));
     }
-    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) * 2)); i1++) {
-       new Neuron(this, 'hidden');
+    for (var i = 0; i < outputSize; i++) {
+      this.layers.output.push(new Neuron(this, 'output'));
     }
-    for (let i1 = 0; i1 < outputSize; i1++) {
-       new Neuron(this, 'input');
+    let totalNeurons = getRandomLowNumber(0,100,0.9);
+
+    var currentInputNumber = 0;
+    var currentChain = [];
+    var currentChainMax = getRandomLowNumber(1,20);
+
+    for (var i = 0; i < totalNeurons; i++) {
+      if (currentChain.length >= currentChainMax) {
+        this.layers.hidden.push(currentChain);
+        currentChain[currentChain.length-1].connect(getRandomNumber(0,this.layers.output.length-1));
+        currentChain = [this.layers.input[currentInputNumber]];
+        currentInputNumber++;
+        currentChainMax = getRandomLowNumber(1,20);
+      }
+      let newNeuron = new Neuron(this,'hidden');
+      currentChain[currentChain.length-1].connect(newNeuron);
+      currentChain.push(newNeuron);
     }
-    for (let prop in this.types.hidden) {
-      this.types.hidden[prop].test();
-    }
+    
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
@@ -82,8 +96,8 @@ class Brain {
       delete this.globalReferenceConnections[connectionId];
     }
   }
-  deleteNeuron(neuronId){
-    if (this.globalReferenceNeurons.hasOwnProperty(neuronId)){
+  deleteNeuron(neuron){
+    if (this.globalReferenceNeurons.hasOwnProperty(neuron.id)){
       let neuron = this.globalReferenceNeurons[neuronId];
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
