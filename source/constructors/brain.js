@@ -23,29 +23,26 @@ class Brain {
     this.bindMethods(this);
     this.inputSize = inputSize;
     this.outputSize = outputSize;
+    this.types = {};
+    this.types['input'] = {};
+    this.types['hidden'] = {};
+    this.types['output'] = {};
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
     //this.score = 0;
     this.activations = 0;
     this.mutationRate = 1;
-    this.mutationRateGrowth = 1;
-    this.mutationMax = 100;
-
-    for (var i1 = 0; i1 < this.layers; i1++) {
-      var layer = [];
-      var size = 0;
-      if (i1 === 0) {
-        size = inputSize;
-      } else if (i1 == this.layers - 1) {
-        size = outputSize;
-      } else {
-        size = Math.round((inputSize + outputSize) / 2);
-      }
-      for (var i2 = 0; i2 < size; i2++) {
-        new Neuron(this, i1);
-      }
+    for (let i1 = 0; i1 < inputSize; i1++) {
+       new Neuron(this, 'output');
     }
+    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) * 2)); i1++) {
+       new Neuron(this, 'hidden');
+    }
+    for (let i1 = 0; i1 < outputSize; i1++) {
+       new Neuron(this, 'input');
+    }
+       
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
@@ -57,7 +54,7 @@ class Brain {
   resetResistance(){
     this.globalReferenceNeurons.forEach(neuron=>{
       neuron.resistance = 0;
-    })
+    });
   }
   input(array) {
     var inputs = [];

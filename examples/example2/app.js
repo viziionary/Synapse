@@ -1,139 +1,64 @@
-import Viewer from './viewer';
-import Synapse from '../../source/index';
-import getTimer from './gettimer';
-
+const Viewer = require('./viewer');
+const Synapse = require('../../source/index');
+const getTimer = require('../resources/gettimer');
+const findNewPoint = require('../resources/findnewpoint');
+const getDistance = require('../resources/getdistance');
+const interceptCircles = require('../resources/interceptcircles');
+const lineSegmentIntersection = require('../resources/linesegmentintersection');
+const interceptOnCircle = require('../resources/interceptoncircle');
+const renderObject = require('../resources/renderobject');
 window.addEventListener("load", function() {
 
 	var canvas = document.getElementById("brain");
 	var viewer;
 	var counter = 0;
 
-	var network = new Synapse(20, 2, async (run) => {
-		viewer.render(network.child);
-		var evolution = new Evolution(network, 1, 0, 10000);
-		var score = await evolution.simulate(network);
+	var network = new Synapse(20, 2, async(run, child) => {
+		viewer.render(child);
+		var evolution = new Evolution(run, child, 1, 0, 10000);
+		var score = await evolution.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
 		counter++;
-		if (counter % 10 == 0) {
-			console.log("Score: " + score);
-		}
-		if (counter > 1000) {
+		//if (counter % 10 == 0) {
+		console.log("Score: " + score);
+		//}
+		if (counter > 100000) {
 			console.log('Ended without reaching target score: ' + 0);
 			return false;
 		}
 		if (score > 0) {
 			console.log('Done!');
-			console.log(network.child);
+			console.log(child);
 			return false;
 		} else {
 			return score;
 		}
 	});
 	viewer = new Viewer(canvas);
-	network.run();
+	network.initiate();
 
-	function findNewPoint(x, y, angle, distance) {
-		var result = {};
-		result.x = Math.round(Math.cos(angle * Math.PI / 180) * distance + x);
-		result.y = Math.round(Math.sin(angle * Math.PI / 180) * distance + y);
-		return result;
-	}
-
-	function getDistance(point1, point2) {
-		return Math.hypot(point2.x - point1.x, point2.y - point1.y);
-	}
-
-	function interceptCircles(circle1, circle2) {
-		var dx = circle1.location.x - circle2.location.x;
-		var dy = circle1.location.y - circle2.location.y;
-		var distance = Math.sqrt(dx * dx + dy * dy);
-		if (distance < circle1.radius + circle2.radius) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	function lineSegmentIntersection(line1, line2) {
-		var x1 = line1[0].x;
-		var x2 = line1[1].x;
-		var x3 = line2[0].x;
-		var x4 = line2[1].x;
-		var y1 = line1[0].y;
-		var y2 = line1[1].y;
-		var y3 = line2[0].y;
-		var y4 = line2[1].y;
-
-		var a_dx = x2 - x1;
-		var a_dy = y2 - y1;
-		var b_dx = x4 - x3;
-		var b_dy = y4 - y3;
-		var s = (-a_dy * (x1 - x3) + a_dx * (y1 - y3)) / (-b_dx * a_dy + a_dx * b_dy);
-		var t = (+b_dx * (y1 - y3) - b_dy * (x1 - x3)) / (-b_dx * a_dy + a_dx * b_dy);
-		if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
-			var collision = {
-				x: x1 + t * a_dx,
-				y: y1 + t * a_dy
-			};
-			var distance = getDistance(line1[0], collision);
-			return distance;
-		} else {
-			return false;
-		}
-	}
-
-
-	function Entity(network) {
+	function Entity(run) {
 		var that = this;
-		this.contents = [];
+		this.age = 0;
+		this.contents = [{
+					location: {
+						x: 310 * i1,
+						y: 310 * i2
+					},
+					radius: 15,
+					color: '#1fa71f',
+					stroke: '#003300'
+				}];
 		this.self = {
-			radius: 50,
+			radius: 30,
 			location: {
 				x: 250,
 				y: 250
 			}
 		}
-
-		function interceptOnCircle(p1, p2, c, r) {
-			var p3 = {
-				x: p1.x - c.x,
-				y: p1.y - c.y
-			};
-			var p4 = {
-				x: p2.x - c.x,
-				y: p2.y - c.y
-			};
-			var m = (p4.y - p3.y) / (p4.x - p3.x); //slope of the line
-			var b = p3.y - m * p3.x; //y-intercept of line
-			var underRadical = Math.pow(r, 2) * Math.pow(m, 2) + Math.pow(r, 2) - Math.pow(b, 2); //the value under the square root sign
-			if (underRadical < 0) {
-				return false;
-			} else {
-				var t1 = (-m * b + Math.sqrt(underRadical)) / (Math.pow(m, 2) + 1); //one of the intercept x's
-				var t2 = (-m * b - Math.sqrt(underRadical)) / (Math.pow(m, 2) + 1); //other intercept's x
-				var i1 = {
-					x: t1 + c.x,
-					y: m * t1 + b + c.y
-				};
-				var i2 = {
-					x: t2 + c.x,
-					y: m * t2 + b + c.y
-				};
-				var length = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-				var distance1 = Math.hypot(p1.x - i2.x, p1.y - i2.y);
-				var distance2 = Math.hypot(p1.x - i1.x, p1.y - i1.y);
-				var lowerBounds = Math.min(distance1, distance2);
-				if (lowerBounds < length) {
-					return lowerBounds;
-				} else {
-					return false;
-				}
-			}
-		}
-
 		this.nerveCount = 20;
-		this.nerveLength = 50;
+		this.nerveLength = 150;
 		this.nerves = [];
 		for (var i1 = 0; i1 < this.nerveCount; i1++) {
 			for (var i1 = 0; i1 < this.nerveCount; i1++) {
@@ -144,7 +69,6 @@ window.addEventListener("load", function() {
 				this.nerves.push([p2, p3]);
 			}
 		}
-
 		this.think = function(bounds) {
 			var input = [];
 			for (var i1 = 0; i1 < that.nerves.length - 1; i1++) {
@@ -169,8 +93,7 @@ window.addEventListener("load", function() {
 				}
 				input[i1] = inputMin;
 			}
-
-			var result = network.child.input(input);
+			var result = run(input);
 			return result;
 		}
 	};
@@ -187,21 +110,6 @@ window.addEventListener("load", function() {
 		}
 	}
 
-	function renderObject(context, object) {
-		var x = object.location.x;
-		var y = object.location.y;
-		var radius = object.radius;
-		var color = object.color;
-		var stroke = object.stroke;
-		context.beginPath();
-		context.arc(x, y, radius, 0, 2 * Math.PI, false);
-		context.fillStyle = color;
-		context.fill();
-		context.lineWidth = 2;
-		context.strokeStyle = stroke;
-		context.stroke();
-	}
-
 	function renderNerve(context, nerve) {
 		var p1 = nerve[0];
 		var p2 = nerve[1];
@@ -210,7 +118,7 @@ window.addEventListener("load", function() {
 		context.lineTo(p2.x, p2.y);
 		context.lineWidth = 1;
 		context.strokeStyle = '#a0f6ff';
-		context.stroke();
+		context.stroke(); 
 	}
 
 	function renderLine(context, p1, p2, color) {
@@ -294,13 +202,12 @@ window.addEventListener("load", function() {
 					}
 				}
 			}
-			return false;
+			return false; 
 		}
 
 		function renderPath(node) {
-			var i;
-			paths = Object.keys(node.connections).map(key => node.connections[key]);
-			for (i = 0; i < paths.length; i++) {
+			var paths = Object.keys(node.connections).map(key => node.connections[key]);
+			for (var i = 0; i < paths.length; i++) {
 				nextNode = paths[i].target;
 				if (isPathActive(nextNode)) {
 					var duplicate = effectiveLinkList.findIndex(function(item) {
@@ -319,21 +226,18 @@ window.addEventListener("load", function() {
 					renderPath(nextNode);
 				}
 			}
-			var duplicate = effectiveLayerList[node.layer].find(item => item.id === node.id);
-			if (!duplicate) {
-				effectiveLayerList[node.layer].push(node);
-			}
 		}
 
-		function renderActivePaths(layer) {
-			var i;
-			for (i = 0; i < layer.length; i++) {
-				if (isPathActive(layer[i])) {
-					renderPath(layer[i])
+		function renderActivePaths(brain) {
+			for (let prop in brain.globalReferenceNeurons) {
+				if (isPathActive(brain.globalReferenceNeurons[prop])) {
+					renderPath(brain.globalReferenceNeurons[prop])
 				}
 			}
 		}
-		renderActivePaths(layerList[0]);
+
+
+		renderActivePaths(brain);
 		for (var i1 = 0; i1 < effectiveLinkList.length; i1++) {
 			drawLink(effectiveLinkList[i1].node1, effectiveLinkList[i1].node2);
 		}
@@ -346,36 +250,32 @@ window.addEventListener("load", function() {
 
 
 
-	function process(input, contents, self, entity, canvas1, context1, network) {
+	function process(input, contents, entity, canvas1, context1, run, child) {
+		var self = entity.self;
+		var contents = entity.contents;
 		if (input[0] >= 0.5) self.location.x++;
 		if (input[0] < 0.5) self.location.x--;
 		if (input[1] >= 0.5) self.location.y++;
 		if (input[1] < 0.5) self.location.y--;
 		var target = {
 			location: {
-				x: 400,
-				y: 400
+				x: 450,
+				y: 450
 			},
 			radius: 30,
 			color: '#f3a13a',
 			stroke: '#f3663a'
 		}
 		var distanceFromTarget = getDistance(self.location, target.location) * -1;
-		var distanceFromCenter = getDistance({
-			x: canvas1.width / 2,
-			y: canvas1.height / 2
+		var distanceFromStart = getDistance({
+			x: 75,
+			y: 75
 		}, self.location);
-		var score = distanceFromCenter + (distanceFromTarget * 2);
+		//console.log('Distance from target: ', distanceFromTarget);
+		//console.log('Distance from start: ', distanceFromStart);
+		//console.log('Age: ', entity.age)
+		var score = distanceFromStart + (distanceFromTarget * 2) - Math.round(entity.age / 2);
 		//console.log('Score source', score);
-		contents = [{
-			location: {
-				x: 310,
-				y: 310
-			},
-			radius: 15,
-			color: '#1fa71f',
-			stroke: '#003300'
-		}];
 		context1.clearRect(0, 0, canvas1.width, canvas1.height);
 		var result = {
 			contents: contents,
@@ -383,8 +283,8 @@ window.addEventListener("load", function() {
 			self: self
 		}
 		var points = [];
-		for (var i1 = 0; i1 < network.child.inputSize; i1++) {
-			var space = canvas1.height / network.child.inputSize;
+		for (var i1 = 0; i1 < child.inputSize; i1++) {
+			var space = canvas1.height / child.inputSize;
 			var distance = ((i1 + 1) * space) - (0.5 * space);
 			var point = {
 				location: {
@@ -440,10 +340,11 @@ window.addEventListener("load", function() {
 		return result;
 	}
 
-	function Evolution(network, tick, targetScore, maxGens) {
+	function Evolution(run, child, tick, targetScore, maxGens) {
 		var generationCount = 0;
 		var canvas1 = document.getElementById('environment');
 		var context1 = canvas1.getContext('2d');
+		var self = new Entity();
 		var bounds = [
 			[{
 				x: 0,
@@ -474,35 +375,27 @@ window.addEventListener("load", function() {
 				y: canvas1.height
 			}]
 		];
-		this.simulate = function sim(network) {
-			return new Promise((resolve,reject)=>{
-			var contents = [];
-			var self = {
-				location: {
-					x: 250,
-					y: 250
-				},
-				radius: 20,
-				color: '#0088ff',
-				stroke: '#0041ff'
-			}
-			var endResult;
-			var entity = new Entity(network);
-			var maxTime = 2000;
-			var time = 0;
-			var timer = setInterval(()=>{
-				time += tick;
-				var input = entity.think(bounds);
-				var result = process(input, contents, self, entity, canvas1, context1, network);
-				//console.log('Result output', result);
-				//console.log('Score output', result.score);
-				entity.contents = result.contents;
-				entity.self = result.self;
-				if (result.state == 'complete' || time > maxTime) {
-					clearInterval(timer);
-					resolve(result.score);
-				}
-			}, tick);
+		this.simulate = function sim() {
+			return new Promise((resolve, reject) => {
+				var contents = [];
+				var endResult;
+				var entity = new Entity(run);
+				var maxTime = 2000;
+				var time = 0;
+				var timer = setInterval(() => {
+					time += tick;
+					entity.age = time;
+					var input = entity.think(bounds);
+					var result = process(input, contents, entity, canvas1, context1, run, child);
+					//console.log('Result output', result);
+					//console.log('Score output', result.score);
+					entity.contents = result.contents;
+					entity.self = result.self;
+					if (result.state == 'complete' || time > maxTime) {
+						clearInterval(timer);
+						resolve(result.score);
+					}
+				}, tick);
 			});
 		}
 	}

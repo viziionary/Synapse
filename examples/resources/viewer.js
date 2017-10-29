@@ -5,13 +5,11 @@ class Viewer {
     this.render = this.render.bind(this);
   }
   render(brain) {
-    console.log('Debug 2', brain);
     renderBrain(brain, this.context, this.canvas);
   }
 }
 
 function renderBrain(brain, ctx, canvas) {
-  console.log('Debug 4', brain);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   var width = canvas.width;
   var height = canvas.height;
@@ -116,7 +114,6 @@ function renderBrain(brain, ctx, canvas) {
     }
 
     function renderActivePaths(brain) {
-      console.log('Debug 5');
       for (let prop in brain.globalReferenceNeurons) {
         if (isPathActive(brain.globalReferenceNeurons[prop])) {
           renderPath(brain.globalReferenceNeurons[prop])

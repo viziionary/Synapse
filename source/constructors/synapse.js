@@ -63,13 +63,15 @@ class Synapse {
     //console.log('Debug 2:', child); // expected execution order
     let oldChild = this.child;
     this.child = child;
-    var childScore = this.runFunction(child.input,child);
+    console.log('Debug 1 ', child);
+    var childScore = this.runFunction(child.input, child);
     //console.log('Debug 4:', this.child); // expected execution order
     this.child = oldChild;
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
     //console.log('Debug 5:', this.child); // expected execution order
+    
     return [child, childScore];
   }
 }

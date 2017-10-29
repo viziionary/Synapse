@@ -4,10 +4,11 @@ const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomLowNumber = require('../functions/getrandomlownumber');
 
 class Neuron {
-  constructor(brain) {
+  constructor(brain, type) {
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
+    this.brain.types[type][this.brain.counter] = this;
     this.active = true;
     this.layer = layer;
     this.id = brain.counter;
