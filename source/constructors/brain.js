@@ -44,7 +44,7 @@ class Brain {
     let totalNeurons = getRandomLowNumber(0, 100, 0.9);
 
     var currentInputNumber = 0;
-    var currentChain = this.layers.input[currentInputNumber];
+    var currentChain = this.layers.input[currentInputNumber % this.layers.input.length];
     currentInputNumber++;
     var currentChainMax = getRandomLowNumber(1, 20);
 
@@ -52,7 +52,7 @@ class Brain {
       if (currentChain.length >= currentChainMax) {
         this.layers.hidden.push(currentChain);
         currentChain[currentChain.length - 1].connect(getRandomNumber(0, this.layers.output.length - 1));
-        currentChain = [this.layers.input[currentInputNumber]];
+        currentChain = [this.layers.input[currentInputNumber % this.layers.input.length]];
         currentInputNumber++;
         currentChainMax = getRandomLowNumber(1, 20);
       }
