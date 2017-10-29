@@ -23,10 +23,10 @@ class Brain {
     this.bindMethods(this);
     this.inputSize = inputSize;
     this.outputSize = outputSize;
-    this.types = {};
-    this.types.input = {};
-    this.types.hidden = {};
-    this.types.output = {};
+    this.layers = {};
+    this.layers.input = {};
+    this.layers.hidden = {};
+    this.layer.output = {};
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
@@ -44,6 +44,35 @@ class Brain {
     }
     for (let prop in this.types.hidden) {
       this.types.hidden[prop].test();
+    }
+    let totalNeurons = getRandomLowNumber(0,100,0.9);
+    var currentNeuron = null;
+    var currentInput = 0;
+    var currentChain = null;
+    var currentChainNumber = null;
+    var currentOutput = 0;
+    var currentChainLimit = null;
+    for (var i = 0; i < totalNeurons; i++) {
+      if (currentNeuron) {
+        if (!currentChain) {
+          currentChain = new Neuron(this,'hidden');
+          currentChainNumber = 1;
+          currentChainLimit = getRandomLowNumber(1,20);
+          currentNeuron.connect(currentChain);
+        } else {
+          if (currentChainNumber > currentChainLimit) {
+            currentChain.connect()
+          } else {
+            let newChain = new Neuron(this,'hidden');
+            currentChain.connect(newChain);
+            currentChain = newChain;
+            currentChainNumber++;
+          }
+        }
+      } else {
+        currentNeuron = new Neuron(this,'input',this.currentInput % this.inputSize);
+        this.currentInput++;
+      }
     }
   }
   bindMethods(self) {
