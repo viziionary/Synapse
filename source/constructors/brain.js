@@ -66,21 +66,21 @@ class Brain {
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
     self.resetResistance = this.resetResistance.bind(self);
+    self.getAllNeurons = this.getAllNeurons.bind(self);
+  }
+  getAllNeurons(){
+    return this.layers.hidden.concat(this.layers.input).concat(this.layers.output);
   }
   resetResistance(){
-    this.globalReferenceNeurons.forEach(neuron=>{
+    this.getAllNeurons().forEach(neuron=>{
       neuron.resistance = 0;
     });
   }
   input(array) {
-    var inputs = [];
-    Object.values(this.types.input).forEach(neuron => {
-        inputs.push(neuron);
-    });
-    inputs.forEach((input, index) => {
+    this.layers.input.forEach((input, index) => {
       input.transmit(array[index]);
     });
-    return Object.values(this.types.output).map(neuron => {
+    return this.layers.output.map(neuron => {
       return neuron.measure();
     });
   }
