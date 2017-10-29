@@ -52,6 +52,12 @@ class Brain {
     self.deleteConnection = this.deleteConnection.bind(self);
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
+    self.resetResistance = this.resetResistance.bind(self);
+  }
+  resetResistance(){
+    this.globalReferenceNeurons.forEach(neuron=>{
+      neuron.resistance = 0;
+    })
   }
   input(array) {
     var inputs = [];
