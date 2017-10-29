@@ -2,7 +2,7 @@ const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomDecimal = require('../functions/getrandomdecimal');
 
 class Connection {
-  constructor(brain, source, target, callback) {
+  constructor(brain, source, target) {
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
     var check1 = Object.values(source.connections).includes(target);
     var check2 = Object.values(target.connections).includes(source);
@@ -15,6 +15,7 @@ class Connection {
     this.brain.globalReferenceConnections[this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
+    this.brain.globalReferenceConnections[this.id] = this;
     this.bias = getRandomDecimal(0, 1);
     this.source = source;
     this.target = target;
@@ -24,9 +25,9 @@ class Connection {
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = 0.1;
     this.resistance = 0;
+    source.connections[target.id] = this;
     target.connected[this.id] = this;
     this.bindMethods(this);
-    callback(this.id, this);
   }
   bindMethods(self) {
     self.updateBias = this.updateBias.bind(self);

@@ -43,11 +43,7 @@ class Neuron {
   }
   connect(target) {
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-    return new Connection(this.brain, this, target, (id, connection) => {
-      this.brain.globalReferenceConnections[id] = connection;
-      this.connections[id] = connection;
-      target.connected[this.id] = this;
-    });
+    return new Connection(this.brain, this, target);
   };
   disconnect(id) {
     this.connections[id].active = false;
