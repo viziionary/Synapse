@@ -21,6 +21,9 @@ class Connection {
     this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.memory = getRandomNumber(1, 10); // maybe 0,10 ?
     this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
+    this.deresistanceRate = getRandomDecimal(0, 1);
+    this.resistanceGain = 0.1;
+    this.resistance = 0;
     target.connected[this.id] = this;
     this.bindMethods(this);
     callback(this.id, this);

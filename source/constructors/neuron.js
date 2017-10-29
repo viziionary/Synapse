@@ -8,23 +8,24 @@ class Neuron {
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
     this.active = true;
+    this.layer = layer;
     this.id = brain.counter;
     this.weight = 2;
     this.connected = {};
     this.connections = {};
-    this.recentCharges = [0.5, 0.5, 0.5, 0.5, 0.5];
+    this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.memory = 5;
-    this.polarization = 0.5;
+    this.polarization = getRandomDecimal(0, 1);
     this.depolarizationRate = 0.1;
-    this.deresistanceRate = 0.05;
-    this.resistance = 0;
-    this.chargeRate = 0.3;
+    this.chargeRate = getRandomDecimal(0, 1);
     this.threshold = 1;
-    this.resistanceGain = 0.1;
     this.bindMethods(this);
-    //console.log(this.layer);
 
-    //THIS PART IS FUCKED UP MAAAAAN FOR REAL 
+    if (!brain.structure[layer]) {
+      brain.structure[layer] = {};
+    }
+    brain.structure[layer][this.id] = this;
+    //console.log(this.layer);
     if (this.layer !== 0 && brain.structure[layer - 1]) {
       //console.log(brain.structure[layer - 1]);
       if (Object.keys(brain.structure[layer - 1]).length > 0) {
@@ -69,21 +70,6 @@ class Neuron {
     bias = total / this.recentCharges.length;
     return bias;
   }
-  transmit(charge) {
-    this.recentCharges.push(charge);
-    if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-    this.polarization += charge;
-    if (this.polarization >= this.threshold) {
-      this.polarization = 0;
-      Object.values(this.connections).forEach(connection => {
-        if (connection.active == true && isNumber(charge)) {
-          connection.activate(this.recentCharges.reduce((cur, element) => {
-            return cur + (element / this.recentCharges.length)
-          }, 0));
-        }
-      });
-    }
-  }
   connect(target) {
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     return new Connection(this.brain, this, target, (id, connection) => {
@@ -106,13 +92,13 @@ class Neuron {
   transmit(charge) {
     this.recentCharges.push(charge);
     if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-    this.polarization += charge;
+    this.polarization += charge * chargeRate;
     if (this.polarization >= this.threshold) {
       this.polarization = 0;
       Object.values(this.connections).forEach(connection => {
         if (connection.active == true && isNumber(charge)) {
           connection.activate(this.recentCharges.reduce((cur, element) => {
-            return cur + (element / this.recentCharges.length)
+            return cur + (element / this.recentCharges.length);
           }, 0));
         }
       });
