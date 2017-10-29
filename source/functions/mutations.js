@@ -82,15 +82,6 @@ var mutations = {
       //console.timeEnd('add');
     }
   },
-  addLayer: {
-    frequencyMod:0,
-    frequency: 1,
-    mutate: (brain)=>{
-      if (brain.structure[brain.layers-1].length > 0) {
-        brain.addLayer(brain.layers-1);
-      }
-    }
-  },
   remove: { //remove a neuron
     frequencyMod: 0,
     frequency: 1,
@@ -140,7 +131,7 @@ var mutations = {
     mutate: function(brain) {}
   }
 
-  // these mutations are useful potentially but we aren't using action potential mechanics right now, may add later. Not required for basic processes. 
+  // these mutations are useful potentially but we aren't using action potential mechanics right now, may add later. Not required for basic processes.
 
   /*
   toggleThreshold: { //choose whether to use threshold adjustment
