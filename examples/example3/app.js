@@ -207,13 +207,12 @@ window.addEventListener("load", function() {
 					}
 				}
 			}
-			return false;
+			return false; 
 		}
 
 		function renderPath(node) {
-			var i;
-			paths = Object.keys(node.connections).map(key => node.connections[key]);
-			for (i = 0; i < paths.length; i++) {
+			var paths = Object.keys(node.connections).map(key => node.connections[key]);
+			for (var i = 0; i < paths.length; i++) {
 				nextNode = paths[i].target;
 				if (isPathActive(nextNode)) {
 					var duplicate = effectiveLinkList.findIndex(function(item) {
@@ -232,21 +231,18 @@ window.addEventListener("load", function() {
 					renderPath(nextNode);
 				}
 			}
-			var duplicate = effectiveLayerList[node.layer].find(item => item.id === node.id);
-			if (!duplicate) {
-				effectiveLayerList[node.layer].push(node);
-			}
 		}
 
-		function renderActivePaths(layer) {
-			var i;
-			for (i = 0; i < layer.length; i++) {
-				if (isPathActive(layer[i])) {
-					renderPath(layer[i])
+		function renderActivePaths(brain) {
+			for (let prop in brain.globalReferenceNeurons) {
+				if (isPathActive(brain.globalReferenceNeurons[prop])) {
+					renderPath(brain.globalReferenceNeurons[prop])
 				}
 			}
 		}
-		renderActivePaths(layerList[0]);
+
+
+		renderActivePaths(brain);
 		for (var i1 = 0; i1 < effectiveLinkList.length; i1++) {
 			drawLink(effectiveLinkList[i1].node1, effectiveLinkList[i1].node2);
 		}
