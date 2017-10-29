@@ -26,7 +26,7 @@ class Brain {
     this.layers = {};
     this.layers.input = [];
     this.layers.hidden = [];
-    this.layer.output = [];
+    this.layers.output = [];
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
@@ -58,7 +58,7 @@ class Brain {
       currentChain[currentChain.length-1].connect(newNeuron);
       currentChain.push(newNeuron);
     }
-    
+
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
