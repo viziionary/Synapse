@@ -47,7 +47,6 @@ class Brain {
     var outputs = Object.values(this.layers.output);
     var currentInputNumber = 0;
     var currentChain = [inputs[currentInputNumber % inputs.length]];
-    console.log('first',{currentChain});
     currentInputNumber++;
     var currentChainMax = getRandomLowNumber(1, 20);
 
@@ -55,7 +54,6 @@ class Brain {
       if (currentChain.length >= currentChainMax) {
         currentChain[currentChain.length - 1].connect(outputs[getRandomNumber(0, outputs.length-1)]);
         currentChain = [inputs[currentInputNumber % inputs.length]];
-        console.log('next',{currentChain});
         currentInputNumber++;
         currentChainMax = getRandomLowNumber(1, 20);
       }
