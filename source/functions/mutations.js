@@ -86,7 +86,7 @@ var mutations = {
     frequencyMod:0,
     frequency: 1,
     mutate: (brain)=>{
-      if (brain.schema[brain.layers-1].length > 0) {
+      if (brain.structure[brain.layers-1].length > 0) {
         brain.addLayer(brain.layers-1);
       }
     }
