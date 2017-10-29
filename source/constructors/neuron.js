@@ -49,6 +49,10 @@ class Neuron {
   */
 
   connect(target) {
+    if (typeof target !== 'object' || target.constructor.name !== 'Neuron') {
+      console.log('Target:',target);
+      throw new Error('Neuron: Cannot connect to non-neuron');
+    }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     return new Connection(this.brain, this, target);
   };
@@ -57,25 +61,6 @@ class Neuron {
   };
   delete() {
     this.brain.deleteNeuron(this.id);
-  }
-  measure() {
-    var total = 0;
-    var bias;
-    for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
-      total += this.recentCharges[i1];
-    }
-    bias = total / this.recentCharges.length;
-    return bias;
-  }
-  connect(target) {
-    //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-    return new Connection(this.brain, this, target, (id, connection) => {
-      this.brain.globalReferenceConnections[id] = connection;
-      this.connections[id] = connection;
-    });
-  }
-  disconnect(id) {
-    this.connections[id].active = false;
   }
   measure() {
     var total = 0;
