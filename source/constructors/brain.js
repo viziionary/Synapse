@@ -56,7 +56,8 @@ class Brain {
   }
   addLayer(index){
     this.layers++;
-    this.globalReferenceNeurons.forEach(neuron=>{
+    console.log('n',this.globalReferenceNeurons);
+    Object.values(this.globalReferenceNeurons).forEach(neuron=>{
       if (neuron.layer >= index) {
         neuron.layer++;
       }
