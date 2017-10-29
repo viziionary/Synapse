@@ -25,7 +25,6 @@ class Brain {
     this.outputSize = outputSize;
     this.layers = {};
     this.layers.input = [];
-    this.layers.hidden = [];
     this.layers.output = [];
     this.counter = 0;
     this.globalReferenceNeurons = {};
