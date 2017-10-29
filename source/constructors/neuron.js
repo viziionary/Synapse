@@ -49,6 +49,10 @@ class Neuron {
   */
 
   connect(target) {
+    if (typeof target !== 'object' || target.constructor.name !== 'Neuron') {
+      console.log('Target:',target);
+      throw new Error('Neuron: Cannot connect to non-neuron');
+    }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     return new Connection(this.brain, this, target);
   };
