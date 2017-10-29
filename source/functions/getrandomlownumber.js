@@ -29,6 +29,14 @@ function getRandomLowNumber(min = 0, max = 100, curveFactor) {
 	return Math.floor(result) + min;
 }
 
+function getRandomLowNumber(min, max, factor) {
+	int rndnum = getRandomNumber(1, (1.0/factor)^(max-min+1)-1);
+	int expflr = Math.floor(Math.log2(rndnum, 1.0/factor));
+	int rndres = max - expflr + min;
+	return rndres;
+}
+
+
 /*
 function getRandomLowNumber(min, max, curveFactor, log) {
 	var rand = getRandomNumber(min, max);

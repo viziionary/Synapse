@@ -26,11 +26,11 @@ class Neuron {
     let initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
     let neurons = Object.values(this.brain.globalReferenceNeurons);
     for (var i = 0; i < initialParentCount; i++){
-      let parent = neurons[Math.floor(Math.random() * neurons.length];
+      let parent = neurons[Math.floor(Math.random() * neurons.length)];
       parent.connect(this);
     }
     for (var i = 0; i < initialChildrenCount; i++){
-      let child = neurons[Math.floor(Math.random() * neurons.length];
+      let child = neurons[Math.floor(Math.random() * neurons.length)];
       this.connect(child);
     }
   }
