@@ -38,6 +38,14 @@ class Connection {
   }
   delete() {
     this.brain.deleteConnection(this.id);
+    let sourceIndex = this.source.connected.indexOf(this);
+    if (sourceIndex > -1) {
+      delete this.source.connected[this.id];
+    }
+    let targetIndex = this.target.connected.indexOf(this);
+    if (targetIndex > -1) {
+      delete this.target.connected[this.id];
+    }
   }
   destroy() {
     this.active = false;

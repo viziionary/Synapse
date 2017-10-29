@@ -25,7 +25,6 @@ class Brain {
     this.outputSize = outputSize;
     this.layers = {};
     this.layers.input = [];
-    this.layers.hidden = [];
     this.layers.output = [];
     this.counter = 0;
     this.globalReferenceNeurons = {};
@@ -60,8 +59,8 @@ class Brain {
     }
 
     // Alternate brain structuring system
-    
-    /*  
+
+    /*
     for (let i1 = 0; i1 < inputSize; i1++) {
       new Neuron(this, 'output');
     }
@@ -84,9 +83,13 @@ class Brain {
     self.generate = this.generate.bind(self);
     self.resetResistance = this.resetResistance.bind(self);
     self.getAllNeurons = this.getAllNeurons.bind(self);
+    self.getAllConnections = this.getAllConnections.bind(self);
   }
   getAllNeurons() {
-    return this.layers.hidden.concat(this.layers.input).concat(this.layers.output);
+    return Object.values(this.globalReferenceNeurons);
+  }
+  getAllConnections() {
+    return Object.values(this.globalReferenceConnections);
   }
   resetResistance() {
     this.getAllNeurons().forEach(neuron => {
@@ -113,11 +116,11 @@ class Brain {
       delete this.globalReferenceConnections[connectionId];
     }
   }
-  deleteNeuron(neuron) {
-    if (this.globalReferenceNeurons.hasOwnProperty(neuron.id)) {
+  deleteNeuron(neuronId) {
+    if (this.globalReferenceNeurons.hasOwnProperty(neuronId)) {
       let neuron = this.globalReferenceNeurons[neuronId];
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection => {
-        this.deleteConnection(connection.id);
+        connection.delete();
       });
       delete this.globalReferenceNeurons[neuronId];
     }
