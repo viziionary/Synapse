@@ -20,6 +20,7 @@ class Connection {
     this.resistanceGain = getRandomDecimal(0, 1);
     this.resistance = 0;
     source.connections[target.id] = this;
+    console.log({target});
     target.connected[this.id] = this;
     this.bindMethods(this);
   }
