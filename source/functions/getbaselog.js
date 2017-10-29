@@ -1,4 +1,4 @@
-function logb(x) {
-  return Math.log(Math.abs(x))/Math.log(2)
+function logb(val, base) {
+  return Math.log10(val) / Math.log10(base)
 }
 module.exports = logb;
