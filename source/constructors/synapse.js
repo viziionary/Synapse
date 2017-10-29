@@ -54,7 +54,7 @@ class Synapse {
         console.log('Brain born with score of ' + child.score);
         this.brain = this.child;
       }
-      return this.run();
+      return this.initiate();
     }
     //setTimeout(function(){}, 10);
   }
