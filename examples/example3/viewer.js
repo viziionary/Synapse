@@ -16,13 +16,19 @@ class Viewer {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var width = canvas.width;
     var height = canvas.height;
-    var nextLayer = [];
+    var hiddenLayerCount = 0;
+    var hiddenLayers = [];
     for (let i = 0; i < brain.layers.input.length; i++) {
       var x = (width / brain.layers.input.length) * i;
       var y = padding;
       drawNode(brain.types.input[i], ctx, 'input', x, y);
-      for (let prop in )
+      hiddenLayers[0] = [];
+      for (let prop in brain.types.input[i].connections) {
+        hiddenLayers[hiddenLayerCount].push(brain.types.input[i].connections[prop].target);
+      }
     }
+    hiddenLayerCount++;
+    console.log(hiddenLayers);
     for (let i = 0; i < brain.layers.output.length; i++) {
       var x = (width / brain.layers.output.length) * i;
       var y = height - padding;
