@@ -34,10 +34,12 @@ class Brain {
     this.mutationRate = 1;
 
     for (var i = 0; i < inputSize; i++) {
-      this.layers.input.push(new Neuron(this, 'input'));
+      let newInput = new Neuron(this, 'input');
+      this.layers.input[newInput.id] = newInput;
     }
     for (var i = 0; i < outputSize; i++) {
-      this.layers.output.push(new Neuron(this, 'output'));
+      let newOutput = new Neuron(this, 'output');
+      this.layers.output[newOutput.id] = newOutput;
     }
     let totalNeurons = getRandomLowNumber(0, 100, 0.9);
 

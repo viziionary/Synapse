@@ -6,10 +6,10 @@ const getRandomDecimal = require('../functions/getrandomdecimal');
 
 class Neuron {
   constructor(brain, type) {
+    this.type = type;
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
-    this.brain.layers[type][this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
     this.weight = 2;
