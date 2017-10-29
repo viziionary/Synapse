@@ -24,9 +24,9 @@ class Brain {
     this.inputSize = inputSize;
     this.outputSize = outputSize;
     this.types = {};
-    this.types['input'] = {};
-    this.types['hidden'] = {};
-    this.types['output'] = {};
+    this.types.input = {};
+    this.types.hidden = {};
+    this.types.output = {};
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
@@ -41,8 +41,7 @@ class Brain {
     }
     for (let i1 = 0; i1 < outputSize; i1++) {
        new Neuron(this, 'input');
-    }
-       
+    } 
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
@@ -58,17 +57,13 @@ class Brain {
   }
   input(array) {
     var inputs = [];
-    Object.values(this.globalReferenceNeurons).forEach(neuron => {
-      if (neuron.layer == 0) {
+    Object.values(this.types.input).forEach(neuron => {
         inputs.push(neuron);
-      }
     });
     inputs.forEach((input, index) => {
       input.transmit(array[index]);
     });
-    return Object.values(this.globalReferenceNeurons).filter(neuron => {
-      return neuron.layer == this.layers - 1
-    }).map(neuron => {
+    return Object.values(this.types.output).map(neuron => {
       return neuron.measure();
     });
   }
@@ -90,7 +85,7 @@ class Brain {
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
       });
-      delete this.structure[this.globalReferenceNeurons[neuronId].layer][neuronId];
+      delete this.structure[this.globalReferenceNeurons[neuronId].layer][neuronId]; // remove layers
       delete this.globalReferenceNeurons[neuronId];
     }
   }
