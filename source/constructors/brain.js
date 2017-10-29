@@ -60,8 +60,8 @@ class Brain {
     }
 
     // Alternate brain structuring system
-    
-    /*  
+
+    /*
     for (let i1 = 0; i1 < inputSize; i1++) {
       new Neuron(this, 'output');
     }
@@ -113,11 +113,11 @@ class Brain {
       delete this.globalReferenceConnections[connectionId];
     }
   }
-  deleteNeuron(neuron) {
-    if (this.globalReferenceNeurons.hasOwnProperty(neuron.id)) {
+  deleteNeuron(neuronId) {
+    if (this.globalReferenceNeurons.hasOwnProperty(neuronId)) {
       let neuron = this.globalReferenceNeurons[neuronId];
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection => {
-        this.deleteConnection(connection.id);
+        connection.delete();
       });
       delete this.globalReferenceNeurons[neuronId];
     }
