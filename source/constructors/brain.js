@@ -58,28 +58,7 @@ class Brain {
       currentChain[currentChain.length-1].connect(newNeuron);
       currentChain.push(newNeuron);
     }
-    for (var i = 0; i < totalNeurons; i++) {
-      if (currentNeuron) {
-        if (!currentChain) {
-          currentChain = new Neuron(this,'hidden');
-          currentChainNumber = 1;
-          currentChainLimit = getRandomLowNumber(1,20);
-          currentNeuron.connect(currentChain);
-        } else {
-          if (currentChainNumber > currentChainLimit) {
-            currentChain.connect()
-          } else {
-            let newChain = new Neuron(this,'hidden');
-            currentChain.connect(newChain);
-            currentChain = newChain;
-            currentChainNumber++;
-          }
-        }
-      } else {
-        currentNeuron = this.layers.input[]
-        currentInput++;
-      }
-    }
+    
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
