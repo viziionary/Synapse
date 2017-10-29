@@ -18,13 +18,15 @@ class Viewer {
     var height = canvas.height;
     var hiddenLayerCount = 0;
     var hiddenLayers = [];
-    for (let i = 0; i < brain.layers.input.length; i++) {
+
+    /*
+    for (let prop in brain.layers.input) {
       var x = (width / brain.layers.input.length) * i;
       var y = padding;
-      drawNode(brain.types.input[i], ctx, 'input', x, y);
+      drawNode(brain.layers.input[i], ctx, 'input', x, y);
       hiddenLayers[0] = [];
-      for (let prop in brain.types.input[i].connections) {
-        hiddenLayers[hiddenLayerCount].push(brain.types.input[i].connections[prop].target);
+      for (let prop in brain.layers.input[i].connections) {
+        hiddenLayers[hiddenLayerCount].push(brain.layers.input[i].connections[prop].target);
       }
     }
     hiddenLayerCount++;
@@ -32,8 +34,9 @@ class Viewer {
     for (let i = 0; i < brain.layers.output.length; i++) {
       var x = (width / brain.layers.output.length) * i;
       var y = height - padding;
-      drawNode(brain.types.output[i], ctx, 'input', x, y);
+      drawNode(brain.layers.output[i], ctx, 'input', x, y);
     }
+    */
   }
 }
 module.exports = Viewer
