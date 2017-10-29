@@ -3,8 +3,13 @@ const interceptOnCircle = require('./entity/interceptoncircle');
 const lineSegmentIntersection = require('./entity/linesegmentintersection');
 
 function Entity(run, surroundings, self) {
+	console.log('Self', self);
 	var that = this;
 	this.age = 0;
+	this.origin = {
+		x : self.location.x,
+		y : self.location.y
+	};
 	this.surroundings = surroundings;
 	this.self = self;
 	this.nerveCount = 20;
@@ -13,8 +18,8 @@ function Entity(run, surroundings, self) {
 	for (var i1 = 0; i1 < this.nerveCount; i1++) {
 		for (var i1 = 0; i1 < this.nerveCount; i1++) {
 			var angle = (360 / this.nerveCount) * i1;
-			var p1 = this.self.location;
-			var p2 = findNewPoint(this.self.location.x, this.self.location.y, angle, this.self.radius);
+			var p1 = self.location;
+			var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
 			var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
 			this.nerves.push([p2, p3]);
 		}

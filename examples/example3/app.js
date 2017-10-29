@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
 		var surroundings = [];
 		for (let i1 = 0; i1 < 5; i1++) {
 			for (let i2 = 0; i2 < 5; i2++) {
-				this.surroundings.push({
+				surroundings.push({
 					location: {
 						x: 125 * i1,
 						y: 125 * i2
@@ -41,7 +41,7 @@ window.addEventListener("load", function() {
 			color: '#f3a13a',
 			stroke: '#f3663a'
 		};
-		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, motion, target);
+		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, motion, target);		
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);

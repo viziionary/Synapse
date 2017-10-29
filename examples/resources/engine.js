@@ -1,11 +1,11 @@
 const Entity = require('./engine/entity');
 const compute = require('./engine/compute');
 
-function Engine(run, child, tick, targetScore, maxGens, contents, surroundings, self, motion, target) {
+function Engine(run, child, tick, targetScore, maxGens, surroundings, self, motion, target) {
 	var generationCount = 0;
 	var canvas1 = document.getElementById('environment');
 	var context1 = canvas1.getContext('2d');
-	var self = new Entity(run, contents, self, motion);
+	var entity = new Entity(run, surroundings, self);
 	var bounds = [
 		[{
 			x: 0,
@@ -40,7 +40,7 @@ function Engine(run, child, tick, targetScore, maxGens, contents, surroundings, 
 		return new Promise((resolve, reject) => {
 			var contents = [];
 			var endResult;
-			var entity = new Entity(run, surroundings, self);
+			//var entity = new Entity(run, surroundings, self);
 			var maxTime = 2000;
 			var time = 0;
 			var timer = setInterval(() => {
