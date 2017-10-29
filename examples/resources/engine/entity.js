@@ -31,7 +31,6 @@ function Entity(run, surroundings, self) {
 				if (collision) {
 					var length = collision / that.nerveLength;
 					if (inputMin > length) inputMin = length;
-
 				}
 			}
 			for (var i2 = 0; i2 < bounds.length; i2++) {

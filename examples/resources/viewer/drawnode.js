@@ -1,7 +1,6 @@
 const getRandomNumber = require('../../source/functions/getrandomnumber');
 const drawLink = require('./viewer/drawlink');
-const findOpenCoords = require('./viewer/findopencoords');
-function drawNode(node, ctx, type, occupiedCoords, width, height) {
+function drawNode(node, ctx, type, x, y) {
   if (type == 'input') {
     ctx.strokeStyle = '#4747f3';
     ctx.fillStyle = '#4040b3';
@@ -13,9 +12,8 @@ function drawNode(node, ctx, type, occupiedCoords, width, height) {
     ctx.fillStyle = '#59afff';
   }
   ctx.lineWidth = 2;
-  coords = findOpenCoords(occupiedCoords, width, height, padding)
   ctx.beginPath();
-  ctx.arc(coords.x, coords.y, 5, 0, 2 * Math.PI);
+  ctx.arc(x, y, 5, 0, 2 * Math.PI);
   ctx.fill();
   ctx.stroke();
 }

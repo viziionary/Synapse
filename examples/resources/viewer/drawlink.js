@@ -1,11 +1,9 @@
-function drawLink(node1, node2, ctx) {
+function drawLink(x1, y1, x2, y2 ctx) {
 	ctx.strokeStyle = '#56cc41';
 	ctx.lineWidth = 1;
-	coord = nodePosition(node1, coord);
 	ctx.beginPath();
-	ctx.moveTo(coord.x, coord.y);
-	coord = nodePosition(node2, coord);
-	ctx.lineTo(coord.x, coord.y);
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
 	ctx.stroke();
 }
 module.exports = drawLink;
