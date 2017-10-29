@@ -1,4 +1,4 @@
-function getBaseLog(x, y) {
-  return Math.log(y) / Math.log(x);
+function logb(x) {
+  return Math.log(Math.abs(x))/Math.log(2)
 }
-module.exports = getBaseLog;
+module.exports = logb;
