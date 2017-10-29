@@ -30,13 +30,12 @@ function getRandomLowNumber(min = 0, max = 100, curveFactor) {
 }
 
 function getRandomLowNumber(min, max, factor) {
-	var rndnum = getRandomNumber(1, Math.pow((1.0/factor),(max-min+1))-1);
-	var expflr = Math.floor(Math.log2(rndnum, 1.0/factor));
-	var rndres = max - expflr + min;
-	console.log(rndres)
+	var rndnum = getRandomNumber(1, Math.pow((1 / factor),(max - min + 1)) - 1);
+	var expflr = Math.floor(Math.log2(rndnum));
+    var rndres = max - expflr;
+	console.log(rndres);
 	return Math.round(rndres);
 }
-
 
 /*
 function getRandomLowNumber(min, max, curveFactor, log) {
