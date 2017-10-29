@@ -1,6 +1,7 @@
 const Connection = require('./connection');
 const isNumber = require('../functions/isnumber');
 const getRandomNumber = require('../functions/getrandomnumber');
+const getRandomLowNumber = require('../functions/getrandomlownumber');
 
 class Neuron {
   constructor(brain) {
@@ -21,19 +22,16 @@ class Neuron {
     this.threshold = 1;
     this.bindMethods(this);
 
-    if (this.layer !== 0 && brain.structure[layer - 1]) {
-      //console.log(brain.structure[layer - 1]);
-      if (Object.keys(brain.structure[layer - 1]).length > 0) {
-        //console.log('Debug 1');
-        var size = Object.keys(brain.structure[this.layer - 1]).length;
-        var rand = getRandomNumber(1, size);
-        //console.log(rand);
-        var keys = Object.keys(brain.structure[this.layer - 1]).sort(() => Math.random() - 0.5).slice(0, rand);
-        //console.log(keys);
-        for (let i = 0; i < keys.length; i++) {
-          brain.globalReferenceNeurons[keys[i]].connect(this);
-        }
-      }
+    let initialParentCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
+    let initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
+    let neurons = Object.values(this.brain.globalReferenceNeurons);
+    for (var i = 0; i < initialParentCount; i++){
+      let parent = neurons[Math.floor(Math.random() * neurons.length];
+      parent.connect(this);
+    }
+    for (var i = 0; i < initialChildrenCount; i++){
+      let child = neurons[Math.floor(Math.random() * neurons.length];
+      this.connect(child);
     }
   }
 
@@ -48,6 +46,7 @@ class Neuron {
     return new Connection(this.brain, this, target, (id, connection) => {
       this.brain.globalReferenceConnections[id] = connection;
       this.connections[id] = connection;
+      target.connected[this.id] = this;
     });
   };
   disconnect(id) {
