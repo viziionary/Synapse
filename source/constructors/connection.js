@@ -2,7 +2,7 @@ const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomDecimal = require('../functions/getrandomdecimal');
 
 class Connection {
-  constructor(brain, source, target, callback){
+  constructor(brain, source, target, callback) {
     //console.log('Connection initiated: source id' + source.id + ', target id: ' + target.id);
     var check1 = Object.values(source.connections).includes(target);
     var check2 = Object.values(target.connections).includes(source);
@@ -15,34 +15,36 @@ class Connection {
     this.brain.globalReferenceConnections[this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
-    this.bias = getRandomDecimal(0,1);
+    this.bias = getRandomDecimal(0, 1);
     this.source = source;
     this.target = target;
-    this.recentCharges = [getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1)];
-    this.memory = getRandomNumber(1,10); // maybe 0,10 ?
-    this.weight = [getRandomDecimal(0,1), getRandomDecimal(0,1), getRandomDecimal(0,1)];
+    this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
+    this.memory = getRandomNumber(1, 10); // maybe 0,10 ?
+    this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
+    this.deresistanceRate = getRandomDecimal(0, 1);
+    this.resistanceGain = 0.1;
+    this.resistance = 0;
     target.connected[this.id] = this;
     this.bindMethods(this);
     callback(this.id, this);
   }
-  bindMethods(self){
+  bindMethods(self) {
     self.updateBias = this.updateBias.bind(self);
     self.activate = this.activate.bind(self);
     self.destroy = this.destroy.bind(self);
     self.delete = this.delete.bind(self);
   }
-  activate(charge){
-    if (this.active == true) {
-      this.brain.activations++;
-      if (this.target.active == true) {
-        this.target.transmit((charge + this.bias) / 2);
-      }
+  activate(charge) {
+    this.brain.activations++;
+    if (this.target.active == true) {
+      this.target.transmit((charge + this.bias) / 2);
+      updateBias(charge);
     }
   }
-  delete(){
+  delete() {
     this.brain.deleteConnection(this.id);
   }
-  destroy(){
+  destroy() {
     this.active = false;
   }
   updateBias(charge) {
