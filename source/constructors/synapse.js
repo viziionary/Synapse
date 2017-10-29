@@ -30,6 +30,7 @@ class Synapse {
           newChild = child;
         }
       }
+      this.child = newChild;
     }
 
     var childScore = this.runFunction(this.child.input,this.child);
