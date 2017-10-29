@@ -41,7 +41,7 @@ function getRandomLowNumber(min, max, factor) { //only works where min is 0
 }
 */
 
-function getRandomLowNumber(min, max, factor) {
+function getRandomLowNumber(min=0, max=100, factor=0.9) {
 	var rndnum = getRandomNumber(1, Math.pow((1.0/factor),(max-min+1))-1);
     var expflr = Math.floor(logb(rndnum, 1.0/factor));
     var rndres = max - expflr + min;
