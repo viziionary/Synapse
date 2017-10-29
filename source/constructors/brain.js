@@ -21,7 +21,6 @@ class Brain {
     this.bindMethods(this);
     this.inputSize = inputSize;
     this.outputSize = outputSize;
-    this.layers = 3;
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
@@ -30,7 +29,6 @@ class Brain {
     this.mutationRate = 1;
     this.mutationRateGrowth = 1;
     this.mutationMax = 100;
-    this.structure = [];
 
     for (var i1 = 0; i1 < this.layers; i1++) {
       var layer = [];
@@ -53,15 +51,6 @@ class Brain {
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
     self.addLayer = this.addLayer.bind(self);
-  }
-  addLayer(index){
-    this.layers++;
-    Object.values(this.globalReferenceNeurons).forEach(neuron=>{
-      if (neuron.layer >= index) {
-        neuron.layer++;
-      }
-    });
-    this.structure = createStructure(this);
   }
   input(array) {
     var inputs = [];
