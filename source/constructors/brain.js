@@ -8,11 +8,11 @@ var list = {};
 var times = 1000000;
 
 for (let i = 1; i < times; i++) {
-  var number = getRandomLowNumber(1, 100);
+  var number = getRandomLowNumber(1, 100, 0.5);
   if (typeof list[number] == 'number'){
     list[number]++;
   } else {
-    list[number] = 0;
+    list[number] = 1;
   }
 }
 
