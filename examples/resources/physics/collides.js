@@ -14,6 +14,7 @@ function collides(object1,object2){
     getCorners(object1).forEach(cornerPair=>{
       if (object1.rotation) {
         let newPair = pivotPointAroundPoint(cornerPair[0],cornerPair[1],object1.x,object.y,0-object.rotation);
+        console.log('rotating');
         var x = newPair[0];
         var y = newPair[1];
         if (insideSquare(object2,x,y)){
