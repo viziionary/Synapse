@@ -1,7 +1,12 @@
-import Viewer from './viewer';
-import Synapse from '../../source/index';
-import getTimer from './gettimer';
-
+const Viewer = require('./viewer');
+const Synapse = require('../../source/index');
+const getTimer = require('../resources/gettimer');
+const findNewPoint = require('../resources/findnewpoint');
+const getDistance = require('../resources/getdistance');
+const interceptCircles = require('../resources/interceptcircles');
+const lineSegmentIntersection = require('../resources/linesegmentintersection');
+const interceptOnCircle = require('../resources/interceptoncircle');
+const renderObject = require('../resources/renderobject');
 window.addEventListener("load", function() {
 
 	var canvas = document.getElementById("brain");
@@ -16,7 +21,7 @@ window.addEventListener("load", function() {
 		//console.log('Score final', score);
 		counter++;
 		//if (counter % 10 == 0) {
-			console.log("Score: " + score);
+		console.log("Score: " + score);
 		//}
 		if (counter > 1000) {
 			console.log('Ended without reaching target score: ' + 0);
@@ -32,56 +37,6 @@ window.addEventListener("load", function() {
 	});
 	viewer = new Viewer(canvas);
 	network.initiate();
-
-	function findNewPoint(x, y, angle, distance) {
-		var result = {};
-		result.x = Math.round(Math.cos(angle * Math.PI / 180) * distance + x);
-		result.y = Math.round(Math.sin(angle * Math.PI / 180) * distance + y);
-		return result;
-	}
-
-	function getDistance(point1, point2) {
-		return Math.hypot(point2.x - point1.x, point2.y - point1.y);
-	}
-
-	function interceptCircles(circle1, circle2) {
-		var dx = circle1.location.x - circle2.location.x;
-		var dy = circle1.location.y - circle2.location.y;
-		var distance = Math.sqrt(dx * dx + dy * dy);
-		if (distance < circle1.radius + circle2.radius) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	function lineSegmentIntersection(line1, line2) {
-		var x1 = line1[0].x;
-		var x2 = line1[1].x;
-		var x3 = line2[0].x;
-		var x4 = line2[1].x;
-		var y1 = line1[0].y;
-		var y2 = line1[1].y;
-		var y3 = line2[0].y;
-		var y4 = line2[1].y;
-
-		var a_dx = x2 - x1;
-		var a_dy = y2 - y1;
-		var b_dx = x4 - x3;
-		var b_dy = y4 - y3;
-		var s = (-a_dy * (x1 - x3) + a_dx * (y1 - y3)) / (-b_dx * a_dy + a_dx * b_dy);
-		var t = (+b_dx * (y1 - y3) - b_dy * (x1 - x3)) / (-b_dx * a_dy + a_dx * b_dy);
-		if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
-			var collision = {
-				x: x1 + t * a_dx,
-				y: y1 + t * a_dy
-			};
-			var distance = getDistance(line1[0], collision);
-			return distance;
-		} else {
-			return false;
-		}
-	}
 
 	function Entity(run) {
 		var that = this;
@@ -100,7 +55,6 @@ window.addEventListener("load", function() {
 				});
 			}
 		}
-
 		this.self = {
 			radius: 30,
 			location: {
@@ -108,44 +62,6 @@ window.addEventListener("load", function() {
 				y: 75
 			}
 		}
-
-		function interceptOnCircle(p1, p2, c, r) {
-			var p3 = {
-				x: p1.x - c.x,
-				y: p1.y - c.y
-			};
-			var p4 = {
-				x: p2.x - c.x,
-				y: p2.y - c.y
-			};
-			var m = (p4.y - p3.y) / (p4.x - p3.x); //slope of the line
-			var b = p3.y - m * p3.x; //y-intercept of line
-			var underRadical = Math.pow(r, 2) * Math.pow(m, 2) + Math.pow(r, 2) - Math.pow(b, 2); //the value under the square root sign
-			if (underRadical < 0) {
-				return false;
-			} else {
-				var t1 = (-m * b + Math.sqrt(underRadical)) / (Math.pow(m, 2) + 1); //one of the intercept x's
-				var t2 = (-m * b - Math.sqrt(underRadical)) / (Math.pow(m, 2) + 1); //other intercept's x
-				var i1 = {
-					x: t1 + c.x,
-					y: m * t1 + b + c.y
-				};
-				var i2 = {
-					x: t2 + c.x,
-					y: m * t2 + b + c.y
-				};
-				var length = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-				var distance1 = Math.hypot(p1.x - i2.x, p1.y - i2.y);
-				var distance2 = Math.hypot(p1.x - i1.x, p1.y - i1.y);
-				var lowerBounds = Math.min(distance1, distance2);
-				if (lowerBounds < length) {
-					return lowerBounds;
-				} else {
-					return false;
-				}
-			}
-		}
-
 		this.nerveCount = 20;
 		this.nerveLength = 150;
 		this.nerves = [];
@@ -158,7 +74,6 @@ window.addEventListener("load", function() {
 				this.nerves.push([p2, p3]);
 			}
 		}
-
 		this.think = function(bounds) {
 			var input = [];
 			for (var i1 = 0; i1 < that.nerves.length - 1; i1++) {
@@ -183,7 +98,6 @@ window.addEventListener("load", function() {
 				}
 				input[i1] = inputMin;
 			}
-
 			var result = run(input);
 			return result;
 		}
@@ -199,21 +113,6 @@ window.addEventListener("load", function() {
 		} else {
 			return true;
 		}
-	}
-
-	function renderObject(context, object) {
-		var x = object.location.x;
-		var y = object.location.y;
-		var radius = object.radius;
-		var color = object.color;
-		var stroke = object.stroke;
-		context.beginPath();
-		context.arc(x, y, radius, 0, 2 * Math.PI, false);
-		context.fillStyle = color;
-		context.fill();
-		context.lineWidth = 2;
-		context.strokeStyle = stroke;
-		context.stroke();
 	}
 
 	function renderNerve(context, nerve) {
