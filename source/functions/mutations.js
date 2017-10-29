@@ -86,14 +86,9 @@ var mutations = {
     frequencyMod:0,
     frequency: 1,
     mutate: (brain)=>{
-<<<<<<< HEAD
-      brain.addLayer(brain.layers-1);
-      console.log(brain);
-=======
       if (brain.schema[brain.layers-1].length > 0) {
         brain.addLayer(brain.layers-1);
       }
->>>>>>> 87e72b6dafe7360ea8bfb08de06b204a770fc808
     }
   },
   remove: { //remove a neuron
