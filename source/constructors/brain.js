@@ -24,34 +24,40 @@ class Brain {
     this.inputSize = inputSize;
     this.outputSize = outputSize;
     this.layers = {};
-    this.layers.input = {};
-    this.layers.hidden = {};
-    this.layer.output = {};
+    this.layers.input = [];
+    this.layers.hidden = [];
+    this.layer.output = [];
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
     //this.score = 0;
     this.activations = 0;
     this.mutationRate = 1;
-    for (let i1 = 0; i1 < inputSize; i1++) {
-       new Neuron(this, 'output');
+
+    for (var i = 0; i < inputSize; i++) {
+      this.layers.input.push(new Neuron(this, 'input'));
     }
-    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) * 2)); i1++) {
-       new Neuron(this, 'hidden');
-    }
-    for (let i1 = 0; i1 < outputSize; i1++) {
-       new Neuron(this, 'input');
-    }
-    for (let prop in this.types.hidden) {
-      this.types.hidden[prop].test();
+    for (var i = 0; i < outputSize; i++) {
+      this.layers.output.push(new Neuron(this, 'output'));
     }
     let totalNeurons = getRandomLowNumber(0,100,0.9);
-    var currentNeuron = null;
-    var currentInput = 0;
-    var currentChain = null;
-    var currentChainNumber = null;
-    var currentOutput = 0;
-    var currentChainLimit = null;
+
+    var currentInputNumber = 0;
+    var currentChain = [];
+    var currentChainMax = getRandomLowNumber(1,20);
+
+    for (var i = 0; i < totalNeurons; i++) {
+      if (currentChain.length >= currentChainMax) {
+        this.layers.hidden.push(currentChain);
+        currentChain[currentChain.length-1].connect(getRandomNumber(0,this.layers.output.length-1));
+        currentChain = [this.layers.input[currentInputNumber]];
+        currentInputNumber++;
+        currentChainMax = getRandomLowNumber(1,20);
+      }
+      let newNeuron = new Neuron(this,'hidden');
+      currentChain[currentChain.length-1].connect(newNeuron);
+      currentChain.push(newNeuron);
+    }
     for (var i = 0; i < totalNeurons; i++) {
       if (currentNeuron) {
         if (!currentChain) {
@@ -70,8 +76,8 @@ class Brain {
           }
         }
       } else {
-        currentNeuron = new Neuron(this,'input',this.currentInput % this.inputSize);
-        this.currentInput++;
+        currentNeuron = this.layers.input[]
+        currentInput++;
       }
     }
   }
@@ -111,8 +117,8 @@ class Brain {
       delete this.globalReferenceConnections[connectionId];
     }
   }
-  deleteNeuron(neuronId){
-    if (this.globalReferenceNeurons.hasOwnProperty(neuronId)){
+  deleteNeuron(neuron){
+    if (this.globalReferenceNeurons.hasOwnProperty(neuron.id)){
       let neuron = this.globalReferenceNeurons[neuronId];
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
