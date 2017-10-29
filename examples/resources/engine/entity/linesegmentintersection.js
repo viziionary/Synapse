@@ -1,5 +1,4 @@
 const getDistance = require('../getdistance');
-
 function lineSegmentIntersection(line1, line2) {
 	var x1 = line1[0].x;
 	var x2 = line1[1].x;
@@ -27,5 +26,4 @@ function lineSegmentIntersection(line1, line2) {
 		return false;
 	}
 }
-
 module.exports = lineSegmentIntersection;

@@ -41,7 +41,10 @@ class Brain {
     }
     for (let i1 = 0; i1 < outputSize; i1++) {
        new Neuron(this, 'input');
-    } 
+    }
+    for (let prop in this.types.hidden) {
+      this.types.hidden[prop].test();
+    }
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);
@@ -85,7 +88,6 @@ class Brain {
       Object.values(neuron.connections).concat(Object.values(neuron.connected)).forEach(connection=>{
         this.deleteConnection(connection.id);
       });
-      delete this.structure[this.globalReferenceNeurons[neuronId].layer][neuronId]; // remove layers
       delete this.globalReferenceNeurons[neuronId];
     }
   }

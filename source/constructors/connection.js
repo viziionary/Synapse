@@ -14,7 +14,7 @@ class Connection {
     this.source = source;
     this.target = target;
     this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
-    this.memory = getRandomNumber(1, 10); // maybe 0,10 ?
+    this.memory = getRandomNumber(1, 10); // maybe 0, 10 ?
     this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = getRandomDecimal(0, 1);
@@ -44,7 +44,7 @@ class Connection {
   updateBias(charge) {
     if (this.active == true) {
       var total = 0;
-      this.recentCharges.push(charge); /*FUCK UP: 'THIS' IS A BAD REFERENCE*/
+      this.recentCharges.push(charge);
       if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
       for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
         total += this.recentCharges[i1];
