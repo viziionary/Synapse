@@ -7,7 +7,7 @@ window.addEventListener("load", function() {
 	var viewer;
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
-		console.log('Debug 2', child)
+		console.log('Debug 2', child);
 		viewer.render(child);
 		var targetScore = 0;
 		var motion = false;
