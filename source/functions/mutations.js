@@ -1,6 +1,7 @@
 const getRandomProperty = require('./getrandomproperty');
 const getRandomNumber = require('./getrandomnumber');
 const getRandomDecimal = require('./getrandomdecimal');
+const getRandomLowNumber = require('./getrandomlownumber');
 const Neuron = require('../constructors/neuron');
 
 var mutations = {
@@ -91,7 +92,7 @@ var mutations = {
   },
   fillMemory: { //add memory capacity
     frequencyMod: 0,
-    frequency: 0,
+    frequency: 1,
     mutate: function(brain) {
       var neuron = getRandomProperty(brain.globalReferenceNeurons);
       neuron.memory += 1;
@@ -99,7 +100,7 @@ var mutations = {
   },
   drainMemory: { //shorten memory capacity
     frequencyMod: 0,
-    frequency: 0,
+    frequency: 1,
     mutate: function(brain) {
       var neuron = getRandomProperty(brain.globalReferenceNeurons);
       neuron.memory -= 1;
@@ -110,23 +111,69 @@ var mutations = {
   },
   polarize: {
     frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.polarization += getRandomDecimal(0, 1);
+      if (neuron.polarization > 1) {
+        neuron.polarization = 1;
+      }
+    }
   },
   depolarize: {
     frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.polarization -= getRandomDecimal(0, 1);
+      if (neuron.polarization < 0) {
+        neuron.polarization = 0;
+      }
+    }
   },
   excite: { //lower action threshold
     frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.threshold += getRandomDecimal(0, 1);
+      if (neuron.threshold > 1) {
+        neuron.threshold = 1;
+      }
+    }
   },
   calm: { //raise action threshold
     frequencyMod: 0,
-    frequency: 0,
-    mutate: function(brain) {}
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.threshold -= getRandomDecimal(0, 1);
+      if (neuron.threshold < 0) {
+        neuron.threshold = 0;
+      }
+    }
+  },
+  charge: { //raise action threshold
+    frequencyMod: 0,
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.chargeRate -= getRandomDecimal(0, 1);
+      if (neuron.chargeRate < 0) {
+        neuron.chargeRate = 0;
+      }
+    }
+  },
+  decharge: { //raise action threshold
+    frequencyMod: 0,
+    frequency: 1,
+    mutate: function(brain) {
+      var neuron = getRandomProperty(brain.globalReferenceNeurons);
+      neuron.chargeRate -= getRandomDecimal(0, 1);
+      if (neuron.chargeRate < 0) {
+        neuron.chargeRate = 0;
+      }
+    }
   }
 };
 module.exports = mutations;

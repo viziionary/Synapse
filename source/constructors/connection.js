@@ -34,6 +34,7 @@ class Connection {
     this.resistance += this.resistanceGain;
     this.target.transmit(((charge + this.bias) / 2) - this.resistance);
     updateBias(charge);
+    this.resistance = 0; // shortcut to a more complex solution involving gradual deresistance over time
   }
   delete() {
     this.brain.deleteConnection(this.id);
