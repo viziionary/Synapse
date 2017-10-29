@@ -1,5 +1,5 @@
-const getRandomNumber = require('../../source/functions/getrandomnumber');
-const drawLink = require('./viewer/drawlink');
+const getRandomNumber = require('../../../source/functions/getrandomnumber');
+const drawLink = require('./drawlink');
 function drawNode(node, ctx, type, x, y) {
   if (type == 'input') {
     ctx.strokeStyle = '#4747f3';
