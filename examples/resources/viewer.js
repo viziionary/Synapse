@@ -24,9 +24,9 @@ class Viewer {
     //console.log('Structure', structure)
     console.log('Brain', brain)
 
-    var inputList = Object.values(brain.layers.input);
+    //var inputList = Object.values(brain.layers.input);
     var hiddenList = Object.values(brain.layers.hidden);
-    var outputList = Object.values(brain.layers.output);
+    //var outputList = Object.values(brain.layers.output);
 
     console.log('Map', this.map)
     if (!this.map) {
@@ -48,14 +48,20 @@ class Viewer {
       //     y: y
       //   };
       // }
-      for (let i = 0; i < outputList.length; i++) {
-        var x = (width / outputList.length) * (i + 0.5);
-        var y = height - padding;
-        this.map[outputList[i].id] = {
-          x: x,
-          y: y
+      Object.values(brain.layers.output).forEach((outputNeuron,index,outputArray)=>{
+        this.map[outputNeuron.id] = {
+          x: (width / outputArray.length) * (index + 0.5),
+          y: height - padding
         };
       }
+      // for (let i = 0; i < outputList.length; i++) {
+      //   var x = (width / outputList.length) * (i + 0.5);
+      //   var y = height - padding;
+      //   this.map[outputList[i].id] = {
+      //     x: x,
+      //     y: y
+      //   };
+      // }
       for (let i = 0; i < hiddenList.length; i++) {
         var x = (padding * 4) + getRandomNumber(0, width - (padding * 8));
         var y = (padding * 4) + getRandomNumber(0, height - (padding * 8));
