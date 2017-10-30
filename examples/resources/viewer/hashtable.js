@@ -57,12 +57,10 @@ class HashTable {
     }
   }
   set(property,value){
-    console.log('setting',property,value);
     if (!this.keys.includes(property)) {
       this.keys.push(property);
     }
     this.values[this.keys.indexOf(property)] = value;
-    console.log('after',this);
     return true;
   }
 
