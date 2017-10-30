@@ -1,7 +1,10 @@
 const HashTable = require('./hashtable');
 
 function visualizeLayers(brain){
-  return treeToArray(getTree(brain));
+  let tree = getTree(brain);
+  let output = treeToArray(tree);
+  console.log(tree,output);
+  return output;
 }
 function treeToArray(tree){
   var output = [];
