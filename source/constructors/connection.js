@@ -25,7 +25,7 @@ class Connection {
     this.memory = getRandomNumber(1, 10); // maybe 0, 10 ?
     this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.deresistanceRate = getRandomDecimal(0, 1);
-    this.resistanceGain = getRandomDecimal(0, 1);
+    this.resistanceGain = getRandomDecimal(0, 0.01);
     this.resistance = 0;
     source.connections[target.id] = this;
     target.connected[this.id] = this;
