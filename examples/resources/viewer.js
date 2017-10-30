@@ -62,14 +62,20 @@ class Viewer {
       //     y: y
       //   };
       // }
-      for (let i = 0; i < hiddenList.length; i++) {
-        var x = (padding * 4) + getRandomNumber(0, width - (padding * 8));
-        var y = (padding * 4) + getRandomNumber(0, height - (padding * 8));
-        this.map[hiddenList[i].id] = {
-          x: x,
-          y: y
-        };
-      }
+      Object.values(brain.layers.hidden).forEach((hiddenNeuron,index,hiddenArray)=>{
+        this.map[hiddenNeuron.id] = {
+          x: (padding * 4) + getRandomNumber(0, width - (padding * 8)),
+          y: (padding * 4) + getRandomNumber(0, height - (padding * 8))
+        }
+      });
+      // for (let i = 0; i < hiddenList.length; i++) {
+      //   var x = ;
+      //   var y = ;
+      //   this.map[hiddenList[i].id] = {
+      //     x: x,
+      //     y: y
+      //   };
+      // }
     }
     for (let prop1 in brain.globalReferenceConnections) {
       try {
