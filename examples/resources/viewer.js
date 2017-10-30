@@ -1,5 +1,6 @@
 const drawNode = require('./viewer/drawnode');
 const drawLink = require('./viewer/drawlink');
+const visualizeLayers = require('./viewer/vizualizelayers');
 class Viewer {
   constructor(canvas) {
     this.canvas = canvas;
@@ -18,6 +19,9 @@ class Viewer {
     var height = canvas.height;
     var hiddenLayerCount = 0;
     var hiddenLayers = [];
+
+    var structure = visualizeLayers(brain);
+    console.log('Structure', structure)
 
     /*
     for (let prop in brain.layers.input) {
