@@ -1,4 +1,4 @@
-const HashTable = require('./viewer/hashtable');
+const HashTable = require('./hashtable');
 
 function visualizeLayers(brain){
   return treeToArray(getTree(brain));

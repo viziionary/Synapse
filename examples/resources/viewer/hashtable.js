@@ -37,7 +37,6 @@ const HashHandler = {ownKeys:(target)=>{
 }};
 class HashTable {
   constructor(){
-
     console.log();
     this.keys = [];
     this.values = [];
