@@ -33,7 +33,6 @@ class Neuron {
 
   bindMethods(self) {
     self.connect = this.connect.bind(self);
-    self.disconnect = this.disconnect.bind(self);
     self.measure = this.measure.bind(self);
     self.delete = this.delete.bind(self);
   }
@@ -43,7 +42,7 @@ class Neuron {
   ///*
   test() {
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-    if (Object.keys(this.connected).length === 0) {
+    if ((Object.keys(this.connected).length === 0 || Object.keys(this.connections).length === 0) && this.type != 'input' && this.type != 'output') {
       this.delete();
     }
   };
@@ -54,9 +53,6 @@ class Neuron {
       return new Connection(this.brain, this, target);
     }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
-  };
-  disconnect(id) {
-    this.connections[id].active = false;
   };
   delete() {
     this.brain.deleteNeuron(this.id);
