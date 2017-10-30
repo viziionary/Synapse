@@ -8,6 +8,7 @@ window.addEventListener("load", function() {
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		//console.log('Debug 2', child);
+		viewer = new Viewer(canvas);
 		viewer.render(child);
 		var targetScore = 0;
 		var motion = false;
@@ -61,6 +62,6 @@ window.addEventListener("load", function() {
 			return score;
 		}
 	});
-	viewer = new Viewer(canvas);
+	//viewer = new Viewer(canvas);
 	network.initiate();
 });

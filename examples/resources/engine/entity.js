@@ -14,7 +14,7 @@ function Entity(run, surroundings, self) {
 	//console.log('Surroundings', surroundings);
 	this.self = self;
 	this.nerveCount = 20;
-	this.nerveLength = 150;
+	this.nerveLength = 50;
 	this.nerves = [];
 	for (var i1 = 0; i1 < this.nerveCount; i1++) {
 		for (var i1 = 0; i1 < this.nerveCount; i1++) {

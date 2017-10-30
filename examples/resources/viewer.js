@@ -22,13 +22,13 @@ class Viewer {
 
     //var structure = visualizeLayers(brain);
     //console.log('Structure', structure)
-    console.log('Brain', brain)
+    //console.log('Brain', brain)
 
     var inputList = Object.values(brain.layers.input);
     var hiddenList = Object.values(brain.layers.hidden);
     var outputList = Object.values(brain.layers.output);
 
-    console.log('Map', this.map)
+    //console.log('Map', this.map)
     if (!this.map) {
       this.map = {};
       //console.log('Input', inputList);
@@ -70,13 +70,13 @@ class Viewer {
       if (this.map[connection.source.id] && this.map[connection.target.id]) {
         drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
       } else {
-        console.log('Else', connection, this.map);
+        //console.log('Else', connection, this.map);
       }
     }
-    console.log('Map', this.map);
+    //console.log('Map', this.map);
     for (var prop in this.map) {
       if (brain.globalReferenceNeurons[prop]) {
-        console.log('Debug 1', brain.globalReferenceNeurons[prop])
+        //console.log('Debug 1', brain.globalReferenceNeurons[prop])
         drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, this.map[prop].x, this.map[prop].y);
       }
     }

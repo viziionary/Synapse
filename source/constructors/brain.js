@@ -37,7 +37,7 @@ class Brain {
     for (let i1 = 0; i1 < outputSize; i1++) {
       new Neuron(this, 'output');
     }
-    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) * 2)); i1++) {
+    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) / 4)); i1++) {
       new Neuron(this, 'hidden');
     }
     for (let i1 = 0; i1 < inputSize; i1++) {
