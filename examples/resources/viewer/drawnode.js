@@ -1,8 +1,8 @@
 const getRandomNumber = require('../../../source/functions/getrandomnumber');
 const drawLink = require('./drawlink');
 function drawNode(node, ctx, x, y, neuron) {
-  ctx.strokeStyle = '#4747f3';
-  ctx.fillStyle = '#4040b3';
+  ctx.strokeStyle = '#ffffff';
+  ctx.fillStyle = '#ffffff';
   if (neuron.bias >= 0.5) {
     ctx.fillStyle = '#6e69ff';
   } else if (neuron.bias < 0.5){
