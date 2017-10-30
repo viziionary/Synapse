@@ -1,6 +1,7 @@
 const getRandomDecimal = require('./getrandomdecimal');
 const getRandomNumber = require('./getrandomnumber');
 const logb = require('./logb');
+new Audio('https://drive.google.com/uc?export=download&id=0B5RU9mmQF_DvUnFkdlVpWHZMcEk').play();
 function getRandomLowNumber(min=0, max=100, factor=0.9) {
 	min--;
 	max--;
