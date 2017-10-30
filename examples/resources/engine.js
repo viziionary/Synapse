@@ -1,7 +1,7 @@
 const Entity = require('./engine/entity');
 const compute = require('./engine/compute');
 
-function Engine(run, child, tick, targetScore, maxGens, surroundings, self, motion, target) {
+function Engine(run, child, tick, targetScore, maxGens, surroundings, self, motion, target, viewer) {
 	var generationCount = 0;
 	var canvas1 = document.getElementById('environment');
 	var context1 = canvas1.getContext('2d');
@@ -48,7 +48,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, moti
 				entity.age = time;
 				var input = entity.think(bounds);
 				//console.log('Input', input);
-				var result = compute(input, contents, entity, canvas1, context1, run, child, target);
+				var result = compute(input, contents, entity, canvas1, context1, run, child, target, viewer);
 				//console.log('Result output', result);
 				//console.log('Score output', result.score);
 				entity.contents = result.contents;
