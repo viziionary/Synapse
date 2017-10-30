@@ -49,9 +49,9 @@ function Entity(run, surroundings, self) {
 			}
 			input[i1] = inputMin;
 		}
-		//console.log('Input', input)
+		console.log('Input', input);
 		var result = run(input);
-		//console.log(result);
+		console.log('Result', result);
 		return result;
 	}
 };
