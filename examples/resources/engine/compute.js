@@ -12,7 +12,7 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	var surroundings = entity.surroundings;
 	//console.log('Self before:', entity.self.location);
 	//console.log('Input', input);
-	var speed = 5;
+	var speed = 1;
 	if (input[0] >= 0.5) entity.self.location.x += (0.5 - input[0]) * speed;
 	if (input[0] < 0.5) entity.self.location.x -= (input[0] - 0.5) * speed;
 	if (input[1] >= 0.5) entity.self.location.y += (0.5 - input[1]) * speed;

@@ -27,7 +27,7 @@ class Connection {
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = getRandomDecimal(0, 0.001, 0.5);
     this.resistance = 0;
-    this.energy = 1000;
+    this.energy = 100;
     this.lastTime = 0;
     this.lastCharge = 0.5;
     this.inverse = getRandomNumber(0,1);

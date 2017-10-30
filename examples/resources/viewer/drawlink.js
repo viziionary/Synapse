@@ -8,7 +8,7 @@ function drawLink(x1, y1, x2, y2, ctx, connection) {
 		ctx.strokeStyle = '#69ff7a';
 	}
 
-	ctx.lineWidth = 0.75;
+	ctx.lineWidth = 1;
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
