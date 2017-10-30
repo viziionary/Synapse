@@ -17,7 +17,6 @@ class Connection {
     this.brain.globalReferenceConnections[this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
-    this.brain.globalReferenceConnections[this.id] = this;
     this.bias = getRandomDecimal(0, 1);
     this.source = source;
     this.target = target;
