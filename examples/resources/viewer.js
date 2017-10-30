@@ -34,14 +34,20 @@ class Viewer {
       //console.log('Input', inputList);
       //console.log('Hidden', hiddenList);
       //console.log('Output', outputList);
-      for (let i = 0; i < inputList.length; i++) {
-        var x = (width / inputList.length) * (i + 0.5);
-        var y = padding;
-        this.map[inputList[i].id] = {
-          x: x,
-          y: y
+      Object.values(brain.layers.input).forEach((inputNeuron,index)=>{
+        this.map[inputNeuron.id] = {
+          x: (width / inputList.length) * (index + 0.5),
+          y: padding
         };
-      }
+      });
+      // for (let i = 0; i < inputList.length; i++) {
+      //   var x = (width / inputList.length) * (i + 0.5);
+      //   var y = padding;
+      //   this.map[inputList[i].id] = {
+      //     x: x,
+      //     y: y
+      //   };
+      // }
       for (let i = 0; i < outputList.length; i++) {
         var x = (width / outputList.length) * (i + 0.5);
         var y = height - padding;
