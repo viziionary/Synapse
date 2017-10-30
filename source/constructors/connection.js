@@ -38,7 +38,9 @@ class Connection {
 
     source.connections[target.id] = this; // :( 
 
-    RIP October 29 - Sunday Night Deadline. It was born into a cruel, cruel world with high expectations, and was conquered by it brutally, meeting none of them.
+    [][] https://i.imgur.com/PbSV9DP.png [][]
+
+    RIP Sunday Night Deadline - October 28th, 2017 - October 29th, 2017 -  It was born into a cruel, cruel world with high expectations, and was conquered by it brutally, meeting none of them.
     
     */
 
