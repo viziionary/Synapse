@@ -1,14 +1,18 @@
 const findNewPoint = require('./findnewpoint');
 const interceptOnCircle = require('./entity/interceptoncircle');
 const lineSegmentIntersection = require('./entity/linesegmentintersection');
+const getDistance = require('./getdistance');
+const findNewPoint = require('./findnewpoint');
+const interceptCircles = require('./interceptcircles');
+const circleInBounds = require('./circleinbounds');
 
-function Entity(run, surroundings, self) {
+function Entity(run, surroundings, self, viewer) {
 	//console.log('Self', self);
 	var that = this;
 	this.age = 0;
 	this.origin = {
-		x : self.location.x,
-		y : self.location.y
+		x: self.location.x,
+		y: self.location.y
 	};
 	this.surroundings = surroundings;
 	//console.log('Surroundings', surroundings);
@@ -50,8 +54,42 @@ function Entity(run, surroundings, self) {
 			input[i1] = inputMin;
 		}
 		//console.log('Input', input)
-		var result = run(input, time);
+		var input = run(input, time);
 		//console.log(result);
+		var self = entity.self;
+		var surroundings = entity.surroundings;
+		//console.log('Self before:', entity.self.location);
+		//console.log('Input', input);
+		var speed = 1;
+		if (input[0] >= 0.5) entity.self.location.x += (0.5 - input[0]) * speed;
+		if (input[0] < 0.5) entity.self.location.x -= (input[0] - 0.5) * speed;
+		if (input[1] >= 0.5) entity.self.location.y += (0.5 - input[1]) * speed;
+		if (input[1] < 0.5) entity.self.location.y -= (input[1] - 0.5) * speed;
+		//console.log('Self after:', entity.self.location);
+		var distanceFromTarget = getDistance(self.location, target.location);
+		var distanceFromStart = getDistance(entity.origin, self.location);
+		var score = distanceFromStart + (distanceFromTarget * -1); //- Math.round(entity.age / 10);
+
+		var result = {
+			surroundings: surroundings,
+			score: score,
+			self: self
+		}
+		
+
+		for (var i1 = 0; i1 < surroundings.length; i1++) {
+			if (interceptCircles(self, surroundings[i1])) {
+				result.state = 'complete';
+			}
+		}
+
+		if (interceptCircles(self, target)) {
+			result.state = 'complete';
+		}
+		if (!circleInBounds(canvas1, self)) {
+			result.state = 'complete';
+		}
+		viewer.render(child, entity);
 		return result;
 	}
 };

@@ -5,7 +5,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, moti
 	var generationCount = 0;
 	var canvas1 = document.getElementById('environment');
 	var context1 = canvas1.getContext('2d');
-	var entity = new Entity(run, surroundings, self);
+	var entity = new Entity(run, surroundings, self, viewer);
 	var bounds = [
 		[{
 			x: 0,
@@ -47,12 +47,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, moti
 
 				time += tick;
 				entity.age = time;
-				var input = entity.think(bounds, time);
-				//console.log('Input', input);
-				var result = compute(input, contents, entity, canvas1, context1, run, child, target, viewer);
-				viewer.render(child);
-				//console.log('Result output', result);
-				//console.log('Score output', result.score);
+				var result = entity.think(bounds, time);
 				entity.contents = result.contents;
 				entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {
