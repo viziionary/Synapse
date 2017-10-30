@@ -43,10 +43,6 @@ class Brain {
     for (let i1 = 0; i1 < inputSize; i1++) {
       new Neuron(this, 'input');
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 06f6c8b3a77e1c9c85f657c430cdc4a899047021
     for (let prop in this.layers.hidden) {
       this.layers.hidden[prop].test();
     }
