@@ -41,7 +41,7 @@ window.addEventListener("load", function() {
 			color: '#f3a13a',
 			stroke: '#f3663a'
 		};
-		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, motion, target);		
+		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, motion, target, viewer);		
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
