@@ -73,7 +73,11 @@ class Viewer {
     }
     for (let prop1 in brain.globalReferenceConnections) {
       var connection = brain.globalReferenceConnections[prop1];
+      if (!connection.source) {
+        console.log('WTF', connection)
+      }
       if (this.map[connection.source.id] && this.map[connection.target.id]) {
+        //console.log('Connection', connection);
         drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
       } else {
         //console.log('Else', connection, this.map);
