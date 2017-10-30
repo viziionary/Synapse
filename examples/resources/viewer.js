@@ -72,6 +72,7 @@ class Viewer {
       }
     }
     for (let prop1 in brain.globalReferenceConnections) {
+      try {
       var connection = brain.globalReferenceConnections[prop1];
       if (typeof connection !== 'object' || connection.constructor.name !=='Connection') {
         console.log('connection:',connection);
@@ -90,6 +91,9 @@ class Viewer {
         drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
       } else {
         //console.log('Else', connection, this.map);
+      }
+      } catch(error){
+
       }
     }
     //console.log('Map', this.map);
