@@ -101,6 +101,7 @@ var mutations = {
       }
     }
   },
+  /*
   polarize: {
     frequencyMod: 0,
     frequency: 1,
@@ -167,5 +168,6 @@ var mutations = {
       }
     }
   }
+  */
 };
 module.exports = mutations;

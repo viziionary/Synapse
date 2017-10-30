@@ -1,15 +1,17 @@
 const getRandomNumber = require('../../../source/functions/getrandomnumber');
 const drawLink = require('./drawlink');
-function drawNode(node, ctx, type, x, y) {
-  if (type == 'input') {
-    ctx.strokeStyle = '#4747f3';
-    ctx.fillStyle = '#4040b3';
-  } else if (type == 'hidden') {
-    ctx.strokeStyle = '#56cc41';
-    ctx.fillStyle = '#adf442';
-  } else if (type == 'output') {
-    ctx.strokeStyle = '#428cd1';
-    ctx.fillStyle = '#59afff';
+function drawNode(node, ctx, x, y, neuron) {
+  ctx.strokeStyle = '#4747f3';
+  ctx.fillStyle = '#4040b3';
+  if (neuron.bias >= 0.5) {
+    ctx.fillStyle = '#6e69ff';
+  } else if (neuron.bias < 0.5){
+    ctx.fillStyle = '#69ff7a';
+  }
+  if (neuron.recentCharge >= 0.5) {
+    ctx.fillStyle = '#6e69ff';
+  } else if (neuron.recentCharge < 0.5){
+    ctx.fillStyle = '#69ff7a';
   }
   ctx.lineWidth = 2;
   ctx.beginPath();

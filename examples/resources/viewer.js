@@ -38,7 +38,7 @@ class Viewer {
       //console.log('Input', inputList);
       //console.log('Hidden', hiddenList);
       //console.log('Output', outputList);
-      Object.values(brain.layers.input).forEach((inputNeuron,index,inputArray)=>{
+      Object.values(brain.layers.input).forEach((inputNeuron, index, inputArray) => {
         this.map[inputNeuron.id] = {
           x: (width / inputArray.length) * (index + 0.5),
           y: padding
@@ -52,7 +52,7 @@ class Viewer {
       //     y: y
       //   };
       // }
-      Object.values(brain.layers.output).forEach((outputNeuron,index,outputArray)=>{
+      Object.values(brain.layers.output).forEach((outputNeuron, index, outputArray) => {
         this.map[outputNeuron.id] = {
           x: (width / outputArray.length) * (index + 0.5),
           y: height - padding
@@ -66,7 +66,7 @@ class Viewer {
       //     y: y
       //   };
       // }
-      Object.values(brain.layers.hidden).forEach((hiddenNeuron,index,hiddenArray)=>{
+      Object.values(brain.layers.hidden).forEach((hiddenNeuron, index, hiddenArray) => {
         this.map[hiddenNeuron.id] = {
           x: (padding * 4) + getRandomNumber(0, width - (padding * 8)),
           y: (padding * 4) + getRandomNumber(0, height - (padding * 8))
@@ -83,30 +83,32 @@ class Viewer {
     }
     for (let prop1 in brain.globalReferenceConnections) {
       var connection = brain.globalReferenceConnections[prop1];
-      if (typeof connection !== 'object' || connection.constructor.name !=='Connection') {
-        //console.log('connection:',connection);
-        throw new Error('Connection is not a connection :(')
-      }
-      if (!connection.hasOwnProperty('source') || typeof connection.source !== 'object' || connection.source.constructor.name !== 'Neuron') {
-        //console.log('connection:',connection);
-        throw new Error('connection does not have a valid source :(');
-      }
-      if (!connection.hasOwnProperty('target') || typeof connection.target !== 'object' || connection.target.constructor.name !== 'Neuron'){
-        //console.log('connection:',connection);
-        throw new Error('connection does not have a valid target :(');
-      }
-      if (this.map[connection.source.id] && this.map[connection.target.id]) {
+      if (connection.hasOwnProperty('source') && connection.hasOwnProperty('target') && typeof connection.source == 'object' && connection.source.constructor.name == 'Neuron' && typeof connection.target == 'object' && connection.target.constructor.name == 'Neuron') {
+        //console.log('Map', this.map);
+        if (this.map[connection.source.id] && this.map[connection.target.id]) {
         //console.log('Connection', connection);
-        drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
+          drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx, connection);
+        }
       } else {
-        //console.log('Else', connection, this.map);
+        if (typeof connection !== 'object' || connection.constructor.name !== 'Connection') {
+          console.log('Connection not correct type of object', onnection);
+          //throw new Error('Connection is not a connection :(')
+        }
+        if (!connection.hasOwnProperty('source') || typeof connection.source !== 'object' || connection.source.constructor.name !== 'Neuron') {
+          console.log('Connection has missing or invalid source', connection);
+          //throw new Error('connection does not have a valid source :(');
+        }
+        if (!connection.hasOwnProperty('target') || typeof connection.target !== 'object' || connection.target.constructor.name !== 'Neuron') {
+          console.log('Connection has missing or invalid target', connection);
+          //throw new Error('connection does not have a valid target :(');
+        };
+        console.log('!!! ANOMALY connection was missing vital property, interaction skipped.')
       }
     }
-    //console.log('Map', this.map);
     for (var prop in this.map) {
       if (brain.globalReferenceNeurons[prop]) {
         //console.log('Debug 1', brain.globalReferenceNeurons[prop])
-        drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, this.map[prop].x, this.map[prop].y);
+        drawNode(brain.globalReferenceNeurons[prop], ctx, this.map[prop].x, this.map[prop].y, brain.globalReferenceNeurons[prop]);
       }
     }
     brain.map = this.map;

@@ -68,7 +68,7 @@ class Brain {
     self.deleteConnection = this.deleteConnection.bind(self);
     self.input = this.input.bind(self);
     self.generate = this.generate.bind(self);
-    self.resetResistance = this.resetResistance.bind(self);
+    self.resetLimiters = this.resetLimiters.bind(self);
     self.getAllNeurons = this.getAllNeurons.bind(self);
     self.getAllConnections = this.getAllConnections.bind(self);
   }
@@ -78,16 +78,19 @@ class Brain {
   getAllConnections() {
     return Object.values(this.globalReferenceConnections);
   }
-  resetResistance() {
-    this.getAllNeurons().forEach(neuron => {
-      neuron.resistance = 0;
+  resetLimiters() {
+    //this.getAllNeurons().forEach(neuron => {
+    //  neuron.resistance = 0;
+    //});
+    this.getAllConnections().forEach(connection => {
+      connection.energy = 100;
     });
   }
   input(array, time) {
     Object.values(this.layers.input).forEach((input, index) => {
       input.transmit(array[index], time);
     });
-    //this.resetResistance();
+    this.resetLimiters();
     return Object.values(this.layers.output).map(neuron => {
       return neuron.measure();
     });
@@ -105,8 +108,12 @@ class Brain {
       } else {
         console.log('!!! [ANOMALY] Connection was deleted but had no source.');
       }
-      if (target.connected[connectionId]) {
-        delete target.connected[connectionId];
+      if (target) {
+        if (target.connected[connectionId]) {
+          delete target.connected[connectionId];
+        }
+      } else {
+        console.log('!!! [ANOMALY] Connection was deleted but had no target.');
       }
       delete this.globalReferenceConnections[connectionId];
     }

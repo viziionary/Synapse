@@ -27,8 +27,9 @@ class Connection {
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = getRandomDecimal(0, 0.001, 0.5);
     this.resistance = 0;
-    this.energy = 100;
+    this.energy = 1000;
     this.lastTime = 0;
+    this.lastCharge = 0.5;
     this.inverse = getRandomNumber(0,1);
 
     /*
@@ -57,10 +58,10 @@ class Connection {
     self.delete = this.delete.bind(self);
   }
   activate(charge, time) {
-    if (time - this.lastTime > 1000) {
-      this.lastTime = time;
+    //if (time - this.lastTime > 1000) {
+      //this.lastTime = time;
       //this.energy = 1000;
-    }
+    //}
     this.energy--;
     if (this.energy > 0) {
       if (this.inverse === 1) {
@@ -69,7 +70,11 @@ class Connection {
       this.brain.activations++;
       this.resistance += this.resistanceGain;
       this.updateBias(charge);
-      this.target.transmit((((charge + this.bias) / 2) - this.resistance), time);
+      if (this.target) {
+        var value = ((charge + this.bias) / 2) - this.resistance;
+        this.lastCharge = value;
+        this.target.transmit(value, time);
+      }
     }
   }
   delete() {
