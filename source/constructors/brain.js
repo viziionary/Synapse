@@ -107,6 +107,7 @@ class Brain {
     return Object.values(this.layers.output).map(neuron => {
       return neuron.measure();
     });
+    this.resetResistance();
   }
   deleteConnection(connectionId) {
     if (this.globalReferenceConnections.hasOwnProperty(connectionId)) {

@@ -21,6 +21,9 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	var distanceFromTarget = getDistance(self.location, target.location) * -1;
 	var distanceFromStart = getDistance(entity.origin, self.location);
 	var score = distanceFromStart + (distanceFromTarget * 2) - Math.round(entity.age / 2);
+
+	// FUCKUP: Nothing below this point belongs in compute, should be moved to the viewer
+
 	context1.clearRect(0, 0, canvas1.width, canvas1.height);
 	var result = {
 		surroundings: surroundings,
