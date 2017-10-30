@@ -47,6 +47,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, moti
 				time += tick;
 				entity.age = time;
 				var input = entity.think(bounds);
+				console.log('Input', input);
 				var result = compute(input, contents, entity, canvas1, context1, run, child, target);
 				//console.log('Result output', result);
 				//console.log('Score output', result.score);
