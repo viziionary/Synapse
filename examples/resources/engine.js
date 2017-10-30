@@ -1,39 +1,9 @@
 const Entity = require('./engine/entity');
 const compute = require('./engine/compute');
 
-function Engine(run, child, tick, targetScore, maxGens, surroundings, self, motion, target, viewer) {
+function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, target, viewer) {
 	var generationCount = 0;
 	var entity = new Entity(run, surroundings, self, viewer);
-	var bounds = [
-		[{
-			x: 0,
-			y: 0
-		}, {
-			x: 0,
-			y: canvas1.width
-		}],
-		[{
-			x: canvas1.width,
-			y: 0
-		}, {
-			x: canvas1.width,
-			y: canvas1.height
-		}],
-		[{
-			x: 0,
-			y: canvas1.height
-		}, {
-			x: canvas1.width,
-			y: canvas1.height
-		}],
-		[{
-			x: 0,
-			y: 0
-		}, {
-			x: 0,
-			y: canvas1.height
-		}]
-	];
 	this.simulate = function sim() {
 		return new Promise((resolve, reject) => {
 			var contents = [];

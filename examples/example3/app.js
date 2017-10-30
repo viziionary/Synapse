@@ -11,8 +11,37 @@ window.addEventListener("load", function() {
 		var canvas2 = document.getElementById('brain');
 		var canvas3 = document.getElementById('overlay');
 		viewer = new Viewer(canvas1, canvas2, canvas3, child);
+		var bounds = [
+			[{
+				x: 0,
+				y: 0
+			}, {
+				x: 0,
+				y: canvas1.width
+			}],
+			[{
+				x: canvas1.width,
+				y: 0
+			}, {
+				x: canvas1.width,
+				y: canvas1.height
+			}],
+			[{
+				x: 0,
+				y: canvas1.height
+			}, {
+				x: canvas1.width,
+				y: canvas1.height
+			}],
+			[{
+				x: 0,
+				y: 0
+			}, {
+				x: 0,
+				y: canvas1.height
+			}]
+		];
 		var targetScore = 1000;
-		var motion = false;
 		var surroundings = [];
 		for (let i1 = 0; i1 < 5; i1++) {
 			for (let i2 = 0; i2 < 5; i2++) {
@@ -43,7 +72,7 @@ window.addEventListener("load", function() {
 			color: '#f3a13a',
 			stroke: '#f3663a'
 		};
-		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, motion, target, viewer);		
+		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, target, viewer);
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
