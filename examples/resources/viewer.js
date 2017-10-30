@@ -27,9 +27,9 @@ class Viewer {
     var hiddenList = Object.values(brain.layers.hidden);
     var outputList = Object.values(brain.layers.output);
     var map = {};
-    console.log('Input', inputList);
-    console.log('Hidden', hiddenList);
-    console.log('Output', outputList);
+    //console.log('Input', inputList);
+    //console.log('Hidden', hiddenList);
+    //console.log('Output', outputList);
     for (let i = 0; i < inputList.length; i++) {
       var x = (width / inputList.length) * (i + 0.5);
       var y = padding;
@@ -61,7 +61,7 @@ class Viewer {
     console.log('Map', map);
     for (var prop in map) {
       if (brain.globalReferenceNeurons[prop]) {
-        console.log('Debug 1', brain.globalReferenceNeurons[prop])
+        //console.log('Debug 1', brain.globalReferenceNeurons[prop])
         drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, map[prop].x, map[prop].y);
       }
     }
