@@ -73,10 +73,7 @@ class Viewer {
     }
     for (let prop1 in brain.globalReferenceConnections) {
       var connection = brain.globalReferenceConnections[prop1];
-<<<<<<< HEAD
-      if (!connection.source) {
-        console.log('WTF', connection)
-=======
+      /*
       if (typeof connection !== 'object' || connection.constructor.name !=='Connection') {
         console.log('connection:',connection);
         throw new Error('Connection is not a connection :(')
@@ -88,8 +85,8 @@ class Viewer {
       if (!connection.hasOwnProperty('target') || typeof connection.target !== 'object' || connection.target.constructor.name !== 'Neuron'){
         console.log('connection:',connection);
         throw new Error('connection does not have a valid target :(');
->>>>>>> 1ba0002757132af7e91e14ae270cb03a3a346adb
       }
+      */
       if (this.map[connection.source.id] && this.map[connection.target.id]) {
         //console.log('Connection', connection);
         drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
