@@ -19,7 +19,7 @@ function cloneBrain(brain){
     clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1],clone);
   });
     console.log('doing some stuff');
-  Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
+    Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
     console.log('doing some more stuff');
     clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,brain.globalReferenceConnections);
   });

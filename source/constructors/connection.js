@@ -15,6 +15,7 @@ class Connection {
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceConnections[this.brain.counter] = this;
+    console.log('Assigned Connection #', this.brain.counter, '[', this,'] from Neuron # ', source.id, '[', source,'] -> Neuron # ', target.id, '[', target, ']');
     this.active = true;
     this.id = brain.counter;
     this.bias = getRandomDecimal(0, 1);
@@ -26,14 +27,28 @@ class Connection {
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = getRandomDecimal(0, 0.01);
     this.resistance = 0;
-    source.connections[target.id] = this;
+
+    /*
+
+    -|- -|- -|-              -|- -|- -|-
+    |_|_|_|_|_| NEVER FORGET |_|_|_|_|_|
+
+    .................
+    ..............................
+
+    source.connections[target.id] = this; // :( 
+
+    RIP October 29 - Sunday Night Deadline. It was born into a cruel, cruel world with high expectations, and was conquered by it brutally, meeting none of them.
+    
+    */
+
+    source.connections[this.id] = this;
     target.connected[this.id] = this;
     this.bindMethods(this);
   }
   bindMethods(self) {
     self.updateBias = this.updateBias.bind(self);
     self.activate = this.activate.bind(self);
-    self.destroy = this.destroy.bind(self);
     self.delete = this.delete.bind(self);
   }
   activate(charge) {
@@ -44,9 +59,6 @@ class Connection {
   }
   delete() {
     this.brain.deleteConnection(this.id);
-  }
-  destroy() {
-    this.active = false;
   }
   updateBias(charge) {
     if (this.active == true) {

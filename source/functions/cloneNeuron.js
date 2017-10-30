@@ -2,7 +2,7 @@
 const Neuron = require('../constructors/neuron');
 const setPrototypeOf = require('./setprototypeof');
 function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
-  console.log('CLONIN NEURON');
+  //console.log('CLONIN NEURON');
   var toClone = Object.assign({},neuron);
   delete toClone.brain;
   delete toClone.connections;
@@ -16,8 +16,9 @@ function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
         newBrain.globalReferenceConnections[id].target = clone;
         clone.connected[id] = newBrain.globalReferenceConnections[id];
       } else {
-        console.log('globalref:',oldGlobalReferenceConnections);
-        throw new Error('Global Reference Connections Missing Connection #'+id);
+        console.log('Problematic Neuron', neuron);
+        console.log('Global Reference',oldGlobalReferenceConnections);
+        throw new Error('Global Reference Connections Missing CONNECTED #' + id);
       }
     });
     Object.keys(neuron.connections).forEach(id=>{
@@ -26,8 +27,9 @@ function cloneNeuron(neuron,newBrain,oldGlobalReferenceConnections){
         newBrain.globalReferenceConnections[id].source = clone;
         clone.connections[id] = newBrain.globalReferenceConnections[id];
       } else {
-        console.log('globalref:',oldGlobalReferenceConnections);
-        throw new Error('Global Reference Connections Missing Connection #'+id);
+        console.log('Problematic Neuron', neuron);
+        console.log('Global Reference',oldGlobalReferenceConnections);
+        throw new Error('Global Reference Connections Missing CONNECTION #' + id);
       }
     });
   }

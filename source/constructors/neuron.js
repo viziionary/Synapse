@@ -23,11 +23,15 @@ class Neuron {
     this.chargeRate = getRandomDecimal(0, 1);
     this.threshold = 1;
     this.bindMethods(this);
-    let initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
-    let neurons = Object.values(this.brain.globalReferenceNeurons);
-    for (var i = 0; i < initialChildrenCount; i++){
+    var initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
+    var neurons = Object.values(this.brain.globalReferenceNeurons);
+    //if (this.id === 4) {
+    //  console.log('FIRST', neurons);
+    //  throw 'stop';
+    //}
+    for (let i = 0; i < initialChildrenCount; i++){
       let child = neurons[Math.floor(Math.random() * neurons.length)];
-      this.connect(child);
+        this.connect(child);
     }
   }
 
@@ -49,7 +53,7 @@ class Neuron {
   //*/
 
   connect(target) {
-    if (typeof target == 'object' && target.constructor.name == 'Neuron' && this.type != 'output' && target.type != 'input' ) {
+    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && target.id != this.id) {
       return new Connection(this.brain, this, target);
     }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);

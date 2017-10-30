@@ -34,6 +34,7 @@ class Brain {
     this.activations = 0;
     this.mutationRate = 1;
 
+
     for (let i1 = 0; i1 < outputSize; i1++) {
       new Neuron(this, 'output');
     }
@@ -45,6 +46,20 @@ class Brain {
     }
     for (let prop in this.layers.hidden) {
       this.layers.hidden[prop].test();
+    }
+
+
+    //create(this, 'input', 0, inputSize);
+    //create(this, 'hidden', 0, 10); //getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) / 4)));
+    //create(this, 'output', 0, 2);
+    //console.log('Brain', this)
+
+    function create(brain, type, count, max){
+      if (count < max) {
+        count++;
+        new Neuron(brain, type);
+        create(brain, type, count, max);
+      }
     }
 
   }
@@ -82,12 +97,12 @@ class Brain {
       let connection = this.globalReferenceConnections[connectionId];
       let source = connection.source;
       let target = connection.target;
-      //if (source.connections[connectionId]){
+      if (source.connections[connectionId]){
         delete source.connections[connectionId];
-      //}
-      //if (target.connected[connectionId]){
+      }
+      if (target.connected[connectionId]){
         delete target.connected[connectionId];
-      //}
+      }
       delete this.globalReferenceConnections[connectionId];
     }
   }
