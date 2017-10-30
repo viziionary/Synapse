@@ -36,11 +36,9 @@ class Brain {
 
     for (var i = 0; i < inputSize; i++) {
       let newInput = new Neuron(this, 'input');
-      this.layers.input[newInput.id] = newInput;
     }
     for (var i = 0; i < outputSize; i++) {
       let newOutput = new Neuron(this, 'output');
-      this.layers.output[newOutput.id] = newOutput;
     }
     let totalNeurons = getRandomLowNumber(0, 100, 0.9);
 
