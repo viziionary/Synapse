@@ -3,8 +3,6 @@ const compute = require('./engine/compute');
 
 function Engine(run, child, tick, targetScore, maxGens, surroundings, self, motion, target, viewer) {
 	var generationCount = 0;
-	var canvas1 = document.getElementById('environment');
-	var context1 = canvas1.getContext('2d');
 	var entity = new Entity(run, surroundings, self, viewer);
 	var bounds = [
 		[{

@@ -1,4 +1,5 @@
 const getRandomNumber = require('../functions/getrandomnumber');
+const getRandomLowNumber = require('../functions/getrandomlownumber');
 const getRandomDecimal = require('../functions/getrandomdecimal');
 
 class Connection {
@@ -21,9 +22,12 @@ class Connection {
     this.bias = getRandomDecimal(0, 1);
     this.source = source;
     this.target = target;
-    this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
-    this.memory = getRandomNumber(1, 10); // maybe 0, 10 ?
-    this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
+    this.recentCharges = [];
+    this.memory = getRandomLowNumber(1, 10, 0.5);
+    //console.log(this.memory)
+    for (let i = 0; i < this.memory; i++){
+      this.recentCharges.push(getRandomDecimal(0, 1));
+    }
     this.deresistanceRate = getRandomDecimal(0, 1);
     this.resistanceGain = getRandomDecimal(0, 0.001, 0.5);
     this.resistance = 0;
@@ -44,7 +48,7 @@ class Connection {
 
     [][] https://i.imgur.com/PbSV9DP.png [][]
 
-    RIP Sunday Night Deadline - October 28th, 2017 - October 29th, 2017 -  It was born into a cruel, cruel world with high expectations, and was conquered by it brutally, meeting none of them.
+    RIP Sunday Night Deadline - October 28th, 2017 - October 29th, 2017 -  It was born into a cruel, cruel world with high expectations, and was conquered brutally, meeting none of them.
     
     */
 
@@ -68,12 +72,13 @@ class Connection {
         charge = charge / 2;
       }
       this.brain.activations++;
-      this.resistance += this.resistanceGain;
       this.updateBias(charge);
       if (this.target) {
-        var value = ((charge + this.bias) / 2) - this.resistance;
-        this.lastCharge = value;
-        this.target.transmit(value, time);
+        if (this.memory > 0){
+          charge = ((charge + charge + this.bias) / 3);
+        }
+        this.lastCharge = charge;
+        this.target.transmit(charge, time);
       }
     }
   }
@@ -88,10 +93,7 @@ class Connection {
       for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
         total += this.recentCharges[i1];
       }
-      for (var i1 = 0; i1 < this.weight.length; i1++) {
-        total += this.weight[i1];
-      }
-      this.bias = total / (this.recentCharges.length + this.weight.length);
+      this.bias = total / this.recentCharges.length;
     }
   }
 }

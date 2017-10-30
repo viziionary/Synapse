@@ -2,7 +2,6 @@ const findNewPoint = require('./findnewpoint');
 const interceptOnCircle = require('./entity/interceptoncircle');
 const lineSegmentIntersection = require('./entity/linesegmentintersection');
 const getDistance = require('./getdistance');
-const findNewPoint = require('./findnewpoint');
 const interceptCircles = require('./interceptcircles');
 const circleInBounds = require('./circleinbounds');
 

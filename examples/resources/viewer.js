@@ -1,9 +1,9 @@
 const drawNode = require('./viewer/drawnode');
 const drawLink = require('./viewer/drawlink');
 const getRandomNumber = require('../../source/functions/getrandomnumber');
-const renderNerve = require('./rendernerve');
-const renderObject = require('./renderobject');
-const renderLine = require('./renderline');
+const renderNerve = require('./viewer/rendernerve');
+const renderObject = require('./viewer/renderobject');
+const renderLine = require('./viewer/renderline');
 //const visualizeLayers = require('./viewer/vizualizelayers');
 class Viewer {
   constructor(canvas1, canvas2, canvas3, brain) {
@@ -19,7 +19,7 @@ class Viewer {
       this.map = brain.map;
     }
   }
-  render(brain) {
+  render(brain, entity) {
     //console.log('Debug 2', brain);
     var padding = 10;
     var occupiedCoords = [];

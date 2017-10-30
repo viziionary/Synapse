@@ -3,13 +3,14 @@ const Synapse = require('../../source/index');
 const Engine = require('../resources/engine');
 
 window.addEventListener("load", function() {
-	var canvas = document.getElementById("brain");
 	var viewer;
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		//console.log('Debug 2', child);
-		viewer = new Viewer(canvas, child);
-		viewer.render(child);
+		var canvas1 = document.getElementById('environment');
+		var canvas2 = document.getElementById('brain');
+		var canvas3 = document.getElementById('overlay');
+		viewer = new Viewer(canvas1, canvas2, canvas3, child);
 		var targetScore = 1000;
 		var motion = false;
 		var surroundings = [];
