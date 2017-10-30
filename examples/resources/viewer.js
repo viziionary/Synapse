@@ -7,6 +7,7 @@ class Viewer {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.render = this.render.bind(this);
+    this.map = false;
   }
   render(brain) {
     //console.log('Debug 2', brain);
@@ -26,43 +27,49 @@ class Viewer {
     var inputList = Object.values(brain.layers.input);
     var hiddenList = Object.values(brain.layers.hidden);
     var outputList = Object.values(brain.layers.output);
-    var map = {};
-    console.log('Input', inputList);
-    console.log('Hidden', hiddenList);
-    console.log('Output', outputList);
-    for (let i = 0; i < inputList.length; i++) {
-      var x = (width / inputList.length) * (i + 0.5);
-      var y = padding;
-      map[inputList[i].id] = {
-        x: x,
-        y: y
-      };
-    }
-    for (let i = 0; i < outputList.length; i++) {
-      var x = (width / outputList.length) * (i + 0.5);
-      var y = height - padding;
-      map[outputList[i].id] = {
-        x: x,
-        y: y
-      };
-    }
-    for (let i = 0; i < hiddenList.length; i++) {
-      var x = (padding * 4) + getRandomNumber(0, width - (padding * 8));
-      var y = (padding * 4) + getRandomNumber(0, height - (padding * 8));
-      map[hiddenList[i].id] = {
-        x: x,
-        y: y
-      };
+
+    console.log('Map', this.map)
+    if (!this.map) {
+      this.map = {};
+      //console.log('Input', inputList);
+      //console.log('Hidden', hiddenList);
+      //console.log('Output', outputList);
+      for (let i = 0; i < inputList.length; i++) {
+        var x = (width / inputList.length) * (i + 0.5);
+        var y = padding;
+        this.map[inputList[i].id] = {
+          x: x,
+          y: y
+        };
+      }
+      for (let i = 0; i < outputList.length; i++) {
+        var x = (width / outputList.length) * (i + 0.5);
+        var y = height - padding;
+        this.map[outputList[i].id] = {
+          x: x,
+          y: y
+        };
+      }
+      for (let i = 0; i < hiddenList.length; i++) {
+        var x = (padding * 4) + getRandomNumber(0, width - (padding * 8));
+        var y = (padding * 4) + getRandomNumber(0, height - (padding * 8));
+        this.map[hiddenList[i].id] = {
+          x: x,
+          y: y
+        };
+      }
     }
     for (let prop1 in brain.globalReferenceConnections) {
       var connection = brain.globalReferenceConnections[prop1];
-      drawLink(map[connection.source.id].x, map[connection.source.id].y, map[connection.target.id].x, map[connection.target.id].y, ctx);
+      if (this.map[connection.source.id] && this.map[connection.target.id]) {
+        drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, ctx);
+      }
     }
-    console.log('Map', map);
-    for (var prop in map) {
+    console.log('Map', this.map);
+    for (var prop in this.map) {
       if (brain.globalReferenceNeurons[prop]) {
         console.log('Debug 1', brain.globalReferenceNeurons[prop])
-        drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, map[prop].x, map[prop].y);
+        drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, this.map[prop].x, this.map[prop].y);
       }
     }
   }
