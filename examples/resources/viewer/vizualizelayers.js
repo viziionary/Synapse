@@ -3,7 +3,6 @@ const HashTable = require('./hashtable');
 function visualizeLayers(brain){
   let tree = getTree(brain);
   let output = treeToArray(tree);
-  console.log(tree,output);
   return output;
 }
 function treeToArray(tree){
