@@ -16,12 +16,15 @@ class Neuron {
     this.weight = 2;
     this.connected = {};
     this.connections = {};
-    this.recentCharges = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
-    this.memory = 5;
+    this.recentCharges = [];
+    this.memory = getRandomLowNumber(1, 10, 0.5);
+    for (let i = 0; i < this.memory; i++){
+      this.recentCharges.push(getRandomDecimal(0, 1));
+    }
     this.polarization = getRandomDecimal(0, 1);
     this.depolarizationRate = 0.1;
     this.chargeRate = getRandomDecimal(0, 1);
-    this.threshold = getRandomLowNumber(0, 10);
+    this.threshold = getRandomLowNumber(1, 10);
     this.inverse = getRandomNumber(0, 1);
     this.bias = 0.5;
     this.recentCharge = 0.5;
@@ -80,7 +83,9 @@ class Neuron {
     }
     var bias = total / this.recentCharges.length;
     this.bias = bias;
-    charge = (bias + charge) / 2;
+    if (this.memory > 0) {
+      charge = (bias + charge + charge) / 3;
+    }
     if (this.inverse === 1) {
       charge = charge / 2;
     }
