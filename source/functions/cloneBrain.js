@@ -13,7 +13,6 @@ function cloneBrain(brain){
   delete toClone.layers;
   clone = {globalReferenceNeurons:{},globalReferenceConnections:{}};
   setPrototypeOf(clone,Brain.prototype);
-  console.log('circular:',toClone);
   Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
   Object.entries(brain.globalReferenceConnections).forEach((connectionPair)=>{
     clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1],clone);
