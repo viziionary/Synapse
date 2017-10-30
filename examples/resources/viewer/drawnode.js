@@ -9,9 +9,9 @@ function drawNode(node, ctx, x, y, neuron) {
     ctx.fillStyle = '#69ff7a';
   }
   if (neuron.recentCharge >= 0.5) {
-    ctx.fillStyle = '#6e69ff';
+    ctx.strokeStyle = '#6e69ff';
   } else if (neuron.recentCharge < 0.5){
-    ctx.fillStyle = '#69ff7a';
+    ctx.strokeStyle = '#69ff7a';
   }
   ctx.lineWidth = 2;
   ctx.beginPath();
