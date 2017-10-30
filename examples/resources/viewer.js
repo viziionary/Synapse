@@ -22,6 +22,7 @@ class Viewer {
 
     var structure = visualizeLayers(brain);
     console.log('Structure', structure)
+    console.log('Brain', brain)
 
     /*
     for (let prop in brain.layers.input) {

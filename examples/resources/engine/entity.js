@@ -11,7 +11,7 @@ function Entity(run, surroundings, self) {
 		y : self.location.y
 	};
 	this.surroundings = surroundings;
-	console.log('Surroundings', surroundings);
+	//console.log('Surroundings', surroundings);
 	this.self = self;
 	this.nerveCount = 20;
 	this.nerveLength = 150;
@@ -35,7 +35,7 @@ function Entity(run, surroundings, self) {
 				var objectRadius = that.surroundings[i2].radius;
 				var collision = interceptOnCircle(that.nerves[i1][0], that.nerves[i1][1], objectCoords, objectRadius);
 				if (collision) {
-					console.log('Collision', collision);
+					//console.log('Collision', collision);
 					var length = collision / that.nerveLength;
 					if (inputMin > length) inputMin = length;
 				}
@@ -49,9 +49,9 @@ function Entity(run, surroundings, self) {
 			}
 			input[i1] = inputMin;
 		}
-		console.log('Input', input)
+		//console.log('Input', input)
 		var result = run(input);
-		console.log(result);
+		//console.log(result);
 		return result;
 	}
 };
