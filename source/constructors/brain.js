@@ -43,6 +43,10 @@ class Brain {
     for (let i1 = 0; i1 < inputSize; i1++) {
       new Neuron(this, 'input');
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06f6c8b3a77e1c9c85f657c430cdc4a899047021
     for (let prop in this.layers.hidden) {
       this.layers.hidden[prop].test();
     }
@@ -80,11 +84,13 @@ class Brain {
   deleteConnection(connectionId) {
     if (this.globalReferenceConnections.hasOwnProperty(connectionId)) {
       let connection = this.globalReferenceConnections[connectionId];
-      if (connection.connections && connection.connections.hasOwnProperty(connectionId)) {
-        delete connection.connections[connectionId];
+      let source = connection.source;
+      let target = connection.target;
+      if (source.connections[connectionId]){
+        delete source.connections[connectionId];
       }
-      if (connection.connected && connection.connected.hasOwnProperty(connectionId)) {
-        delete connection.connected[connectionId];
+      if (target.connected[connectionId]){
+        delete target.connected[connectionId];
       }
       delete this.globalReferenceConnections[connectionId];
     }
