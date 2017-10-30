@@ -22,12 +22,12 @@ class Neuron {
     this.chargeRate = getRandomDecimal(0, 1);
     this.threshold = 1;
     this.bindMethods(this);
-    let initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
-    let neurons = Object.values(this.brain.globalReferenceNeurons);
-    for (var i = 0; i < initialChildrenCount; i++){
-      let child = neurons[Math.floor(Math.random() * neurons.length)];
-      this.connect(child);
-    }
+    // let initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
+    // let neurons = Object.values(this.brain.globalReferenceNeurons);
+    // for (var i = 0; i < initialChildrenCount; i++){
+    //   let child = neurons[Math.floor(Math.random() * neurons.length)];
+    //   this.connect(child);
+    // }
   }
 
   bindMethods(self) {
