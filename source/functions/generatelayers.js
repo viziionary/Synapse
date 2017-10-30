@@ -1,6 +1,6 @@
 function generateLayers(brain){
   var output = {};
-  brain.globalReferenceNeurons.forEach(neuron=>{
+  brain.getAllNeurons().forEach(neuron=>{
     if (!output[neuron.type]) {
       output[neuron.type] = [];
     }
