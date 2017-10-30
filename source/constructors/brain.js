@@ -82,12 +82,12 @@ class Brain {
       let connection = this.globalReferenceConnections[connectionId];
       let source = connection.source;
       let target = connection.target;
-      if (source.connections[connectionId]){
+      //if (source.connections[connectionId]){
         delete source.connections[connectionId];
-      }
-      if (target.connected[connectionId]){
+      //}
+      //if (target.connected[connectionId]){
         delete target.connected[connectionId];
-      }
+      //}
       delete this.globalReferenceConnections[connectionId];
     }
   }
