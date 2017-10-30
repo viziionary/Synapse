@@ -24,8 +24,8 @@ class Brain {
     this.inputSize = inputSize;
     this.outputSize = outputSize;
     this.layers = {};
-    this.layers.input = [];
-    this.layers.output = [];
+    this.layers.input = {};
+    this.layers.output = {};
     this.counter = 0;
     this.globalReferenceNeurons = {};
     this.globalReferenceConnections = {};
