@@ -53,6 +53,9 @@ class Neuron {
       console.log('Target:',target);
       throw new Error('Neuron: Cannot connect to non-neuron');
     }
+    if (target.layer === 'input') {
+      throw new Error('Neuron: Cannot connect to input neuron');
+    }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     return new Connection(this.brain, this, target);
   };
