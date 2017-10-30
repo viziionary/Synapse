@@ -10,13 +10,13 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	//console.log(surroundings);
 	var self = entity.self;
 	var surroundings = entity.surroundings;
-	console.log('Self before:', entity.self.location);
-	console.log('Input', input);
+	//console.log('Self before:', entity.self.location);
+	//console.log('Input', input);
 	if (input[0] >= 0.5) entity.self.location.x++;
 	if (input[0] < 0.5) entity.self.location.x--;
 	if (input[1] >= 0.5) entity.self.location.y++;
 	if (input[1] < 0.5) entity.self.location.y--;
-	console.log('Self after:', entity.self.location);
+	//console.log('Self after:', entity.self.location);
 	var distanceFromTarget = getDistance(self.location, target.location) * -1;
 	var distanceFromStart = getDistance(entity.origin, self.location);
 	var score = distanceFromStart + (distanceFromTarget * 2) - Math.round(entity.age / 2);

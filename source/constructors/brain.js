@@ -101,10 +101,10 @@ class Brain {
     });
   }
   input(array) {
-    this.layers.input.forEach((input, index) => {
+    Object.values(this.layers.input).forEach((input, index) => {
       input.transmit(array[index]);
     });
-    return this.layers.output.map(neuron => {
+    return Object.values(this.layers.output).map(neuron => {
       return neuron.measure();
     });
   }

@@ -7,12 +7,12 @@ class Viewer {
     this.render = this.render.bind(this);
   }
   render(brain) {
-    console.log('Debug 2', brain);
+    //console.log('Debug 2', brain);
     var padding = 10;
     var occupiedCoords = [];
     var ctx = this.context;
     var canvas = this.canvas;
-    console.log('Debug 4', brain);
+    //console.log('Debug 4', brain);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var width = canvas.width;
     var height = canvas.height;

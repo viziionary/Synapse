@@ -3,7 +3,7 @@ const interceptOnCircle = require('./entity/interceptoncircle');
 const lineSegmentIntersection = require('./entity/linesegmentintersection');
 
 function Entity(run, surroundings, self) {
-	console.log('Self', self);
+	//console.log('Self', self);
 	var that = this;
 	this.age = 0;
 	this.origin = {
