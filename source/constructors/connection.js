@@ -25,7 +25,7 @@ class Connection {
     this.memory = getRandomNumber(1, 10); // maybe 0, 10 ?
     this.weight = [getRandomDecimal(0, 1), getRandomDecimal(0, 1), getRandomDecimal(0, 1)];
     this.deresistanceRate = getRandomDecimal(0, 1);
-    this.resistanceGain = getRandomDecimal(0, 0.1);
+    this.resistanceGain = getRandomDecimal(0, 1);
     this.resistance = 0;
     source.connections[target.id] = this;
     target.connected[this.id] = this;
@@ -45,14 +45,6 @@ class Connection {
   }
   delete() {
     this.brain.deleteConnection(this.id);
-    let sourceIndex = this.source.connected.indexOf(this);
-    if (sourceIndex > -1) {
-      delete this.source.connected[this.id];
-    }
-    let targetIndex = this.target.connected.indexOf(this);
-    if (targetIndex > -1) {
-      delete this.target.connected[this.id];
-    }
   }
   destroy() {
     this.active = false;
