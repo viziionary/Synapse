@@ -12,15 +12,15 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	var surroundings = entity.surroundings;
 	//console.log('Self before:', entity.self.location);
 	//console.log('Input', input);
-	var speed = 1;
-	if (input[0] >= 0.5) entity.self.location.x ++; //+= (0.5 - input[0]) * speed;
-	if (input[0] < 0.5) entity.self.location.x --; //-= (input[0] - 0.5) * speed;
-	if (input[1] >= 0.5) entity.self.location.y ++; //+= (0.5 - input[1]) * speed;
-	if (input[1] < 0.5) entity.self.location.y --; //-= (input[1] - 0.5) * speed;
+	var speed = 10;
+	if (input[0] >= 0.5) entity.self.location.x += (0.5 - input[0]) * speed;
+	if (input[0] < 0.5) entity.self.location.x -= (input[0] - 0.5) * speed;
+	if (input[1] >= 0.5) entity.self.location.y += (0.5 - input[1]) * speed;
+	if (input[1] < 0.5) entity.self.location.y -= (input[1] - 0.5) * speed;
 	//console.log('Self after:', entity.self.location);
-	var distanceFromTarget = getDistance(self.location, target.location) * -1;
+	var distanceFromTarget = getDistance(self.location, target.location);
 	var distanceFromStart = getDistance(entity.origin, self.location);
-	var score = distanceFromStart + (distanceFromTarget * 2) - Math.round(entity.age / 2);
+	var score = distanceFromStart + (distanceFromTarget * -1); //- Math.round(entity.age / 10);
 
 	// FUCKUP: Nothing below this point belongs in compute, should be moved to the viewer
 
@@ -80,7 +80,7 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	if (!circleInBounds(canvas1, self)) {
 		result.state = 'complete';
 	}
-	viewer.render(child);
+
 	return result;
 }
 module.exports = compute;

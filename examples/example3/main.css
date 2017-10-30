@@ -43,8 +43,4 @@ canvas {
     border-color: green;
 }
 
-#brain {
-    border-style: solid;
-    border-width: 2px;
-    border-color: green;
-}
+#brain {}

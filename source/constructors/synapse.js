@@ -19,17 +19,21 @@ class Synapse {
       this.child.generate();
     } else {
       var newChild = null;
-      for (let i = 0; i < 10; i++) {
-        console.log('Searching for chosen one... [' + i + ']'); // expected execution order
+      for (let i = 0; i < 100; i++) {
+        console.log('Searching for Chosen One... [' + i + ']'); // expected execution order
         var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
         //console.log('Debug 6'); // expected execution order
         var child = childData[0];
         var childScore = childData[1];
         child.score = childScore;
+        if (newChild) {
+          console.log('Comparing top child score [' + newChild.score + '] to tested child score [' + child.score + ']');
+        }
         if (newChild === null || newChild.score < child.score) {
           newChild = child;
         }
       }
+      console.log('Chosen One:', newChild, 'Score:', newChild.score);
       this.child = newChild;
     }
 

@@ -3,11 +3,15 @@ const drawLink = require('./viewer/drawlink');
 const getRandomNumber = require('../../source/functions/getrandomnumber');
 //const visualizeLayers = require('./viewer/vizualizelayers');
 class Viewer {
-  constructor(canvas) {
+  constructor(canvas, brain) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
     this.render = this.render.bind(this);
     this.map = false;
+    console.log(brain);
+    if (brain.map) {
+      this.map = brain.map;
+    }
   }
   render(brain) {
     //console.log('Debug 2', brain);
@@ -80,15 +84,15 @@ class Viewer {
     for (let prop1 in brain.globalReferenceConnections) {
       var connection = brain.globalReferenceConnections[prop1];
       if (typeof connection !== 'object' || connection.constructor.name !=='Connection') {
-        console.log('connection:',connection);
+        //console.log('connection:',connection);
         throw new Error('Connection is not a connection :(')
       }
       if (!connection.hasOwnProperty('source') || typeof connection.source !== 'object' || connection.source.constructor.name !== 'Neuron') {
-        console.log('connection:',connection);
+        //console.log('connection:',connection);
         throw new Error('connection does not have a valid source :(');
       }
       if (!connection.hasOwnProperty('target') || typeof connection.target !== 'object' || connection.target.constructor.name !== 'Neuron'){
-        console.log('connection:',connection);
+        //console.log('connection:',connection);
         throw new Error('connection does not have a valid target :(');
       }
       if (this.map[connection.source.id] && this.map[connection.target.id]) {
@@ -105,6 +109,7 @@ class Viewer {
         drawNode(brain.globalReferenceNeurons[prop], ctx, brain.globalReferenceNeurons[prop].type, this.map[prop].x, this.map[prop].y);
       }
     }
+    brain.map = this.map;
   }
 }
 module.exports = Viewer

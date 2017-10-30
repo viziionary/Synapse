@@ -8,9 +8,9 @@ window.addEventListener("load", function() {
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		//console.log('Debug 2', child);
-		viewer = new Viewer(canvas);
+		viewer = new Viewer(canvas, child);
 		viewer.render(child);
-		var targetScore = 0;
+		var targetScore = 1000;
 		var motion = false;
 		var surroundings = [];
 		for (let i1 = 0; i1 < 5; i1++) {
@@ -48,7 +48,7 @@ window.addEventListener("load", function() {
 		//console.log('Score final', score);
 		counter++;
 		//if (counter % 10 == 0) {
-		console.log("Score: " + score);
+		//console.log("Score: " + score);
 		//}
 		if (counter > 100000) {
 			console.log('Ended without reaching target score: ' + targetScore);

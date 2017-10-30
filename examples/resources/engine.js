@@ -44,11 +44,13 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, moti
 			var maxTime = 2000;
 			var time = 0;
 			var timer = setInterval(() => {
+
 				time += tick;
 				entity.age = time;
-				var input = entity.think(bounds);
+				var input = entity.think(bounds, time);
 				//console.log('Input', input);
 				var result = compute(input, contents, entity, canvas1, context1, run, child, target, viewer);
+				viewer.render(child);
 				//console.log('Result output', result);
 				//console.log('Score output', result.score);
 				entity.contents = result.contents;

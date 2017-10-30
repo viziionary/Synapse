@@ -25,7 +25,7 @@ function Entity(run, surroundings, self) {
 			this.nerves.push([p2, p3]);
 		}
 	}
-	this.think = function(bounds) {
+	this.think = function(bounds, time) {
 		var input = [];
 		for (var i1 = 0; i1 < that.nerves.length - 1; i1++) {
 			input.push(1);
@@ -50,7 +50,7 @@ function Entity(run, surroundings, self) {
 			input[i1] = inputMin;
 		}
 		//console.log('Input', input)
-		var result = run(input);
+		var result = run(input, time);
 		//console.log(result);
 		return result;
 	}

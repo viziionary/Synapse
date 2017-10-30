@@ -21,9 +21,10 @@ class Neuron {
     this.polarization = getRandomDecimal(0, 1);
     this.depolarizationRate = 0.1;
     this.chargeRate = getRandomDecimal(0, 1);
-    this.threshold = 1;
+    this.threshold = getRandomLowNumber(0, 10);
+    this.inverse = getRandomNumber(0,1);
     this.bindMethods(this);
-    var initialChildrenCount = getRandomLowNumber(1,Object.keys(this.brain.globalReferenceNeurons).length);
+    var initialChildrenCount = getRandomLowNumber(1, Object.keys(this.brain.globalReferenceNeurons).length);
     var neurons = Object.values(this.brain.globalReferenceNeurons);
     //if (this.id === 4) {
     //  console.log('FIRST', neurons);
@@ -53,7 +54,7 @@ class Neuron {
   //*/
 
   connect(target) {
-    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && target.id != this.id) {
+    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && !(this.type == 'output' && target.type == 'output') && target.id != this.id) {
       return new Connection(this.brain, this, target);
     }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
@@ -70,20 +71,26 @@ class Neuron {
     bias = total / this.recentCharges.length;
     return bias;
   }
-  transmit(charge) {
+  transmit(charge, time) {
     this.recentCharges.push(charge);
-    if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-    this.polarization += charge * this.chargeRate;
-    if (this.polarization >= this.threshold) {
-      this.polarization = 0;
+    //if (this.recentCharges.length > this.memory) {
+    //  this.recentCharges.splice(0, 1);
+    //}
+    //this.polarization += charge * this.chargeRate;
+    //if (this.polarization >= this.threshold) {
+      //this.polarization = 0;
       Object.values(this.connections).forEach(connection => {
         if (connection.active == true && isNumber(charge)) {
-          connection.activate(this.recentCharges.reduce((cur, element) => {
-            return cur + (element / this.recentCharges.length);
-          }, 0));
+          //var value = this.recentCharges.reduce((cur, element) => {
+          //  return cur + (element / this.recentCharges.length);
+          //}, 0);
+          if (this.inverse === 1) {
+            charge = charge / 2;
+          }
+          connection.activate(charge, time);
         }
       });
-    }
+    //}
   }
 }
 module.exports = Neuron;

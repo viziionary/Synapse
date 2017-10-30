@@ -38,7 +38,7 @@ class Brain {
     for (let i1 = 0; i1 < outputSize; i1++) {
       new Neuron(this, 'output');
     }
-    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) / 4)); i1++) {
+    for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 4), Math.round((inputSize + outputSize) / 2)); i1++) {
       new Neuron(this, 'hidden');
     }
     for (let i1 = 0; i1 < inputSize; i1++) {
@@ -54,7 +54,7 @@ class Brain {
     //create(this, 'output', 0, 2);
     //console.log('Brain', this)
 
-    function create(brain, type, count, max){
+    function create(brain, type, count, max) {
       if (count < max) {
         count++;
         new Neuron(brain, type);
@@ -83,24 +83,29 @@ class Brain {
       neuron.resistance = 0;
     });
   }
-  input(array) {
+  input(array, time) {
     Object.values(this.layers.input).forEach((input, index) => {
-      input.transmit(array[index]);
+      input.transmit(array[index], time);
     });
+    //this.resetResistance();
     return Object.values(this.layers.output).map(neuron => {
       return neuron.measure();
     });
-    this.resetResistance();
+
   }
   deleteConnection(connectionId) {
     if (this.globalReferenceConnections.hasOwnProperty(connectionId)) {
       let connection = this.globalReferenceConnections[connectionId];
       let source = connection.source;
       let target = connection.target;
-      if (source.connections[connectionId]){
-        delete source.connections[connectionId];
+      if (source) {
+        if (source.connections[connectionId]) {
+          delete source.connections[connectionId];
+        }
+      } else {
+        console.log('!!! [ANOMALY] Connection was deleted but had no source.');
       }
-      if (target.connected[connectionId]){
+      if (target.connected[connectionId]) {
         delete target.connected[connectionId];
       }
       delete this.globalReferenceConnections[connectionId];
@@ -119,7 +124,7 @@ class Brain {
     this.activations = 0;
     //console.log('Current mutation rate: ', this.mutationRate);
     //console.log('Mutation rate mutationRateGrowth: ', this.mutationRateGrowth);
-    this.mutationRate = getRandomLowNumber(1, 100, 0.1); //change the max to be based on the current complexity of the network
+    this.mutationRate = getRandomLowNumber(1, 100, 0.75); //change the max to be based on the current complexity of the network
     //console.log('New mutation rate: ', this.mutationRate);
     //console.log(this.mutationRate);
     mutate(this.mutationRate, this);

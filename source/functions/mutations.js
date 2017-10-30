@@ -12,9 +12,14 @@ var mutations = {
       //console.log('Connecting neurons.');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
-        var neuron1 = getRandomProperty(brain.globalReferenceNeurons);
-        var neuron2 = getRandomProperty(brain.globalReferenceNeurons);
-        neuron1.connect(neuron2);
+        var rand = getRandomNumber(0, 1);
+        var neuron1 = getRandomProperty(brain.layers.hidden);
+        var neuron2 = getRandomProperty(brain.layers.input);
+        if (rand === 1) {
+          neuron1 = neuron2;
+        }
+        var neuron3 = getRandomProperty(brain.layers.hidden);
+        neuron1.connect(neuron3);
       }
     }
   },
@@ -59,17 +64,9 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Adding neurons.');
-      var count = getRandomNumber(1, 10);
-      var layer = getRandomNumber(1, brain.layers - 2);
+      var count = getRandomLowNumber(1, 10);
       for (let i = 0; i < count; i++) {
-        var neuron1 = new Neuron(brain, layer);
-        for (prop in brain.globalReferenceNeurons) {
-          if (brain.globalReferenceNeurons[prop].layer === layer + 1) {
-            var neuron2 = brain.globalReferenceNeurons[prop];
-            neuron1.connect(neuron2);
-            //break
-          }
-        }
+        var neuron = new Neuron(brain, 'hidden');
       }
     }
   },
@@ -78,15 +75,10 @@ var mutations = {
     frequency: 1,
     mutate: function(brain) {
       //console.log('Removing neurons.');
-      var count = getRandomNumber(1, 10);
-      var layer = getRandomNumber(1, brain.layers - 2);
+      var count = getRandomLowNumber(1, 10);
       for (let i = 0; i < count; i++) {
-        for (var prop in brain.globalReferenceNeurons) {
-          var neuron = brain.globalReferenceNeurons[prop];
-          if (neuron.layer == layer) {
-            neuron.delete();
-          }
-        }
+          var neuron = getRandomProperty(brain.layers.hidden);
+          neuron.delete();
       }
     }
   },
