@@ -25,6 +25,7 @@ class Brain {
     this.outputSize = outputSize;
     this.layers = {};
     this.layers.input = {};
+    this.layers.hidden = {};
     this.layers.output = {};
     this.counter = 0;
     this.globalReferenceNeurons = {};
@@ -33,6 +34,7 @@ class Brain {
     this.activations = 0;
     this.mutationRate = 1;
 
+    /*
     for (var i = 0; i < inputSize; i++) {
       let newInput = new Neuron(this, 'input');
       this.layers.input[newInput.id] = newInput;
@@ -41,6 +43,8 @@ class Brain {
       let newOutput = new Neuron(this, 'output');
       this.layers.output[newOutput.id] = newOutput;
     }
+
+
     let totalNeurons = getRandomLowNumber(0, 100, 0.9);
 
     var inputs = Object.values(this.layers.input);
@@ -61,23 +65,24 @@ class Brain {
       currentChain[currentChain.length - 1].connect(newNeuron);
       currentChain.push(newNeuron);
     }
+    */
 
     // Alternate brain structuring system
 
-    /*
+    ///*
     for (let i1 = 0; i1 < inputSize; i1++) {
-      new Neuron(this, 'output');
+      new Neuron(this, 'input');
     }
     for (let i1 = 0; i1 < getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) * 2)); i1++) {
       new Neuron(this, 'hidden');
     }
     for (let i1 = 0; i1 < outputSize; i1++) {
-      new Neuron(this, 'input');
+      new Neuron(this, 'output');
     }
     for (let prop in this.layers.hidden) {
       this.layers.hidden[prop].test();
     }
-    */
+    //*/
 
   }
   bindMethods(self) {

@@ -60,6 +60,7 @@ class Synapse {
   }
   async getScoredChild() {
     var child = new Brain(this.inputSize, this.outputSize);
+    console.log('Child', child);
     //console.log('Debug 2:', child); // expected execution order
     let oldChild = this.child;
     this.child = child;

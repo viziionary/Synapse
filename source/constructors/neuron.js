@@ -10,6 +10,7 @@ class Neuron {
     this.brain = brain;
     this.brain.counter++;
     this.brain.globalReferenceNeurons[this.brain.counter] = this;
+    this.brain.layers[type][this.brain.counter] = this;
     this.active = true;
     this.id = brain.counter;
     this.weight = 2;
@@ -39,14 +40,14 @@ class Neuron {
 
   // Alternate brain structuring system
 
-  /*
+  ///*
   test() {
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
     if (Object.keys(this.connected).length === 0) {
       this.delete();
     }
   };
-  */
+  //*/
 
   connect(target) {
     if (typeof target !== 'object' || target.constructor.name !== 'Neuron') {
