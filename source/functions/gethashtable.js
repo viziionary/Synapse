@@ -1,10 +1,12 @@
 function validHashTable(hashtable){
   return typeof hashtable === 'object' && hashtable instanceof HashTable && hashtable.hasOwnProperty('keys') && hashtable.hasOwnProperty('values') && Array.isArray(hashtable.keys) && Array.isArray(hashtable.values);
 }
-const HashHandler = {get:(target,property)=>{
-  if (!validHashTable(target)) {
-    throw new Error('HashTable Proxy: Cannot Set on Non-HashTable');
-  }
+const HashHandler = {ownKeys:(target)=>{
+  return target.slice(0);
+},get:(target,property)=>{
+  // if (!validHashTable(target)) {
+  //   throw new Error('HashTable Proxy: Cannot Set on Non-HashTable');
+  // }
   let keyIndex = target.keys.indexOf(property);
   if (keyIndex > -1) {
     let targetValue = target.values[keyIndex];
@@ -17,9 +19,9 @@ const HashHandler = {get:(target,property)=>{
     return undefined;
   }
 },set:(target, property, value, receiver)=>{
-  if (!validHashTable(target)) {
-    throw new Error('HashTable Proxy: Cannot Set on Non-HashTable');
-  }
+  // if (!validHashTable(target)) {
+  //   throw new Error('HashTable Proxy: Cannot Set on Non-HashTable');
+  // }
   if (!target.keys.includes(property)) {
     target.keys.push(property);
   }
