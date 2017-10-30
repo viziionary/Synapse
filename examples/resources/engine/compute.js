@@ -6,7 +6,7 @@ const renderObject = require('./renderobject');
 const renderLine = require('./renderline');
 const circleInBounds = require('./circleinbounds');
 
-function compute(input, surroundings, entity, canvas1, context1, run, child, target) {
+function compute(input, surroundings, entity, canvas1, context1, run, child, target, viewer) {
 	//console.log(surroundings);
 	var self = entity.self;
 	var surroundings = entity.surroundings;
@@ -80,6 +80,7 @@ function compute(input, surroundings, entity, canvas1, context1, run, child, tar
 	if (!circleInBounds(canvas1, self)) {
 		result.state = 'complete';
 	}
+	viewer.render(child);
 	return result;
 }
 module.exports = compute;
