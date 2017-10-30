@@ -17,31 +17,34 @@ function treeToArray(tree){
   });
   return output;
 }
+function checkConnection(neuron,layer,tree){
+  let check = tree.get(neuron);
+  if (check === undefined || check === null) {
+    tree.set(neuron,layer);
+    //console.log('NR',neuron);
+    var output = [];
+    Object.values(neuron.connections).forEach(connection=>{
+      output.push(connection.target);
+    });
+    return output;
+  } else {
+    return null;
+  }
+}
 function getTree(brain){
   //console.log('brain',brain);
   var tree = new HashTable();
-  var toCheck = [];
-  let checkConnection = (neuron,layer=0)=>{
-    let check = tree.get(neuron);
-    //console.log('check',check);
-    if (check === undefined || check === null) {
-      tree.set(neuron,layer);
-      //console.log('NR',neuron);
-      Object.values(neuron.connections).forEach(connection=>{
-        toCheck.push(connection.target);
-      })
-    }
-  }
-  Object.values(brain.layers.input).forEach(input=>{
-    checkConnection(input,0);
-  });
-  var layer = 1;
+  var toCheck = Object.values(brain.layers.input);
+  var layer = 0;
   while (toCheck.length > 0 ) {
     var checking = toCheck.slice(0);
     toCheck = [];
     checking.forEach(neuron=>{
-      checkConnection(neuron,layer);
-    })
+      let newChecks = checkConnection(neuron,layer,tree);
+      if (newChecks) {
+        toCheck = toCheck.concat(newChecks);
+      }
+    });
     layer++;
   }
   return tree;
