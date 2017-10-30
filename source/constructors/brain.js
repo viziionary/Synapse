@@ -3,6 +3,7 @@ const mutate = require('../functions/mutate.js');
 const getRandomNumber = require('../functions/getrandomnumber');
 const getRandomLowNumber = require('../functions/getrandomlownumber');
 const createStructure = require('../functions/createstructure');
+const visualizeLayers = require('../functions/vizualizelayers');
 
 var list = {};
 var times = 1000000;
@@ -61,6 +62,7 @@ class Brain {
       currentChain[currentChain.length - 1].connect(newNeuron);
       currentChain.push(newNeuron);
     }
+    console.log('vl',visualizeLayers(this));
 
     // Alternate brain structuring system
 
