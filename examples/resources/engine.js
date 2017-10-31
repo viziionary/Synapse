@@ -1,4 +1,4 @@
-const Entity = require('./engine/entity');
+const Entity = require('./engine/entityclass');
 const compute = require('./engine/compute');
 
 function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, width, height, target, viewer) {

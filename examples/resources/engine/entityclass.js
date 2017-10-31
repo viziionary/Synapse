@@ -5,7 +5,7 @@ const getDistance = require('./getdistance');
 const interceptCircles = require('./interceptcircles');
 const circleInBounds = require('./circleinbounds');
 class Entity {
-  constructor(run, surroundings, self, target, viewer) {
+  constructor(run, surroundings, self, target, viewer){
     //console.log('Self', self);
     this.age = 0;
     this.origin = {
