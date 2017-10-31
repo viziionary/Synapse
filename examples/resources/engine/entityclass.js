@@ -53,7 +53,7 @@ class Entity {
       	var objectRadius = this.surroundings[i2].radius;
       	//console.log('Nerves 1', this.nerves, 'i1', i1);
         //var nerves = interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4));
-      	var collision = [i1].points[0], interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4))[i1].points[1], objectCoords, objectRadius);
+      	var collision = interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4))[i1].points[0], JSON.parse(JSON.stringify(this.nerves, null, 4))[i1].points[1], objectCoords, objectRadius);
       	if (collision) {
       		//console.log('Collision', collision);
       		var length = collision / this.nerveLength;
