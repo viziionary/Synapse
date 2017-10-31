@@ -20,8 +20,8 @@ window.addEventListener("load", function() {
 				x: 0,
 				y: 0
 			}, {
-				x: 0,
-				y: canvas2.width
+				x: canvas2.width,
+				y: 0
 			}],
 			[{
 				x: canvas2.width,
