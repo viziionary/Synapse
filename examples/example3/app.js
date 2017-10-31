@@ -21,28 +21,28 @@ window.addEventListener("load", function() {
 				y: 0
 			}, {
 				x: 0,
-				y: canvas1.width
+				y: canvas2.width
 			}],
 			[{
-				x: canvas1.width,
+				x: canvas2.width,
 				y: 0
 			}, {
-				x: canvas1.width,
-				y: canvas1.height
+				x: canvas2.width,
+				y: canvas2.height
 			}],
 			[{
 				x: 0,
-				y: canvas1.height
+				y: canvas2.height
 			}, {
-				x: canvas1.width,
-				y: canvas1.height
+				x: canvas2.width,
+				y: canvas2.height
 			}],
 			[{
 				x: 0,
 				y: 0
 			}, {
 				x: 0,
-				y: canvas1.height
+				y: canvas2.height
 			}]
 		];
 		var targetScore = 1000;

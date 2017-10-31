@@ -30,9 +30,7 @@ class Entity {
         points : [p2, p3],
         size: this.nerveLength
       }
-      //console.log('before nerves', this.nerves);
       this.nerves[i1] = nerve;
-      //console.log('after nerves', this.nerves);
     }
     this.nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
     console.log('JSON nerves', JSON.parse(JSON.stringify(this.nerves, null, 4)));
@@ -43,6 +41,18 @@ class Entity {
     self.think = this.think.bind(self);
   }
   think(bounds, width, height, time, child) {
+
+    for (var i1 = 0; i1 < this.nerveCount; i1++) {
+      var angle = (360 / this.nerveCount) * i1;
+      var p1 = this.self.location;
+      var p2 = findNewPoint(this.self.location.x, this.self.location.y, angle, this.self.radius);
+      var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
+      var nerve = {
+        points : [p2, p3],
+        size: this.nerveLength
+      }
+      this.nerves[i1] = nerve;
+    }
     var input = [];
 
     for (let i1 in this.nerves) {
@@ -73,6 +83,7 @@ class Entity {
       		}
       	}
       }
+      //entity.nerves[i].points = [p2, p3];
 
       this.nerves[i1].size = inputMin * this.nerveLength;
       input.push(inputMin);

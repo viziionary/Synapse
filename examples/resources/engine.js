@@ -12,11 +12,10 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 			var maxTime = 2000;
 			var time = 0;
 			var timer = setInterval(() => {
-
 				time += tick;
 				entity.age = time;
 				var result = entity.think(bounds, width, height, time, child);
-				//entity.contents = result.contents;
+				//entity.surroundings = result.surroundings;
 				//entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {
 					clearInterval(timer);

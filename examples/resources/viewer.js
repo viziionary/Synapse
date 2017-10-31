@@ -21,7 +21,7 @@ class Viewer {
     }
   }
   render(brain, entity, surroundings, target) {
-    console.log(entity);
+    //console.log(entity);
     //console.log('Debug 2', brain);
     var padding = 10;
     var occupiedCoords = [];
