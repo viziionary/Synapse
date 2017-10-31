@@ -77,32 +77,32 @@ class Entity {
     //console.log('Self before:', entity.self.location);
     //console.log('Input', input);
     var speed = 1;
-    if (input[0] >= 0.5) self.location.x += (0.5 - input[0]) * speed;
-    if (input[0] < 0.5) self.location.x -= (input[0] - 0.5) * speed;
-    if (input[1] >= 0.5) self.location.y += (0.5 - input[1]) * speed;
-    if (input[1] < 0.5) self.location.y -= (input[1] - 0.5) * speed;
+    if (input[0] >= 0.5) this.self.location.x += (0.5 - input[0]) * speed;
+    if (input[0] < 0.5) this.self.location.x -= (input[0] - 0.5) * speed;
+    if (input[1] >= 0.5) this.self.location.y += (0.5 - input[1]) * speed;
+    if (input[1] < 0.5) this.self.location.y -= (input[1] - 0.5) * speed;
     //console.log('Self after:', entity.self.location);
-    var distanceFromTarget = getDistance(self.location, target.location);
-    var distanceFromStart = getDistance(this.origin, self.location);
+    var distanceFromTarget = getDistance(this.self.location, this.target.location);
+    var distanceFromStart = getDistance(this.origin, this.self.location);
     var score = distanceFromStart + (distanceFromTarget * -1); //- Math.round(entity.age / 10);
 
     var result = {
       surroundings: surroundings,
       score: score,
-      self: self
+      self: this.self
     }
 
 
     for (var i1 = 0; i1 < surroundings.length; i1++) {
-      if (interceptCircles(self, this.surroundings[i1])) {
+      if (interceptCircles(this.self, this.surroundings[i1])) {
         result.state = 'complete';
       }
     }
 
-    if (interceptCircles(self, target)) {
+    if (interceptCircles(this.self, this.target)) {
       result.state = 'complete';
     }
-    if (!circleInBounds(width, height, self)) {
+    if (!circleInBounds(width, height, this.self)) {
       result.state = 'complete';
     }
     this.viewer.render(child, this, this.surroundings, this.target);
