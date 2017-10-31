@@ -9,7 +9,7 @@ class Entity {
     //console.log('Self', self);
     this.run = run;
     this.age = 0;
-    this.target = run;
+    this.target = target;
     this.origin = {
       x: self.location.x,
       y: self.location.y
