@@ -7,7 +7,9 @@ const circleInBounds = require('./circleinbounds');
 class Entity {
   constructor(run, surroundings, self, target, viewer){
     //console.log('Self', self);
+    this.run = run;
     this.age = 0;
+    this.target = run;
     this.origin = {
       x: self.location.x,
       y: self.location.y
@@ -15,6 +17,7 @@ class Entity {
     this.surroundings = surroundings;
     //console.log('Surroundings', surroundings);
     this.self = self;
+    this.viewer = viewer;
     this.nerveCount = 20;
     this.nerveLength = 50;
     this.nerves = {};
@@ -67,7 +70,7 @@ class Entity {
       input.push(inputMin);
     }
     //console.log('Input', input)
-    var input = run(input, time);
+    var input = this.run(input, time);
     //console.log(result);
     var self = this.self;
     var surroundings = this.surroundings;
@@ -91,7 +94,7 @@ class Entity {
 
 
     for (var i1 = 0; i1 < surroundings.length; i1++) {
-      if (interceptCircles(self, surroundings[i1])) {
+      if (interceptCircles(self, this.surroundings[i1])) {
         result.state = 'complete';
       }
     }
@@ -102,7 +105,7 @@ class Entity {
     if (!circleInBounds(width, height, self)) {
       result.state = 'complete';
     }
-    viewer.render(child, this, surroundings, target);
+    this.viewer.render(child, this, this.surroundings, this.target);
     return result;
   }
 }
