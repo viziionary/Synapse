@@ -7,9 +7,13 @@ window.addEventListener("load", function() {
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		//console.log('Debug 2', child);
-		var canvas1 = document.getElementById('environment');
-		var canvas2 = document.getElementById('brain');
+		var canvas1 = document.getElementById('brain');
+		var canvas2 = document.getElementById('environment');
 		var canvas3 = document.getElementById('overlay');
+		canvas3.width = document.body.clientWidth;
+		canvas3.height = document.body.clientHeight;
+		var width = canvas1.width;
+		var height = canvas1.height;
 		viewer = new Viewer(canvas1, canvas2, canvas3, child);
 		var bounds = [
 			[{
@@ -47,8 +51,8 @@ window.addEventListener("load", function() {
 			for (let i2 = 0; i2 < 5; i2++) {
 				surroundings.push({
 					location: {
-						x: 125 * i1,
-						y: 125 * i2
+						x: (width * 0.25) * i1,
+						y: (height * 0.25) * i2
 					},
 					radius: 15,
 					color: '#1fa71f',
@@ -61,18 +65,20 @@ window.addEventListener("load", function() {
 			location: {
 				x: 50,
 				y: 50
-			}
+			},
+			color : '#bc82e5',
+			stroke : '#7a5ebc'
 		}
 		var target = {
 			location: {
-				x: 450,
-				y: 450
+				x: width * 0.875,
+				y: height * 0.875
 			},
 			radius: 30,
 			color: '#f3a13a',
 			stroke: '#f3663a'
 		};
-		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, target, viewer);
+		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);

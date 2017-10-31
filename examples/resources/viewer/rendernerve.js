@@ -5,7 +5,7 @@ function renderNerve(context, nerve) {
 	context.moveTo(p1.x, p1.y);
 	context.lineTo(p2.x, p2.y);
 	context.lineWidth = 1;
-	context.strokeStyle = '#a0f6ff';
+	context.strokeStyle = '#7a5ebc';
 	context.stroke();
 }
 module.exports = renderNerve;

@@ -1,9 +1,9 @@
 const Entity = require('./engine/entity');
 const compute = require('./engine/compute');
 
-function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, target, viewer) {
+function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, width, height, target, viewer) {
 	var generationCount = 0;
-	var entity = new Entity(run, surroundings, self, viewer);
+	var entity = new Entity(run, surroundings, self, target, viewer);
 	this.simulate = function sim() {
 		return new Promise((resolve, reject) => {
 			var contents = [];
@@ -15,7 +15,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 
 				time += tick;
 				entity.age = time;
-				var result = entity.think(bounds, time);
+				var result = entity.think(bounds, width, height, time, child);
 				entity.contents = result.contents;
 				entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {

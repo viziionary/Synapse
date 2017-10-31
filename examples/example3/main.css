@@ -4,10 +4,18 @@ div, html, body, canvas {
     box-sizing: border-box;
     overflow: hidden;
 }
-
 html, body {
     width: 100%;
     height: 100%;
+}
+
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f1c3a+0,274e75+100 */
+background: #1f1c3a; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #1f1c3a 0%, #274e75 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #1f1c3a 0%,#274e75 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #1f1c3a 0%,#274e75 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', endColorstr='#274e75',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .wrapper {
@@ -20,13 +28,12 @@ html, body {
     width: 50%;
     height: 100%;
     flex: 1;
-    background-color: #131b2b;
     position: relative;
 }
 
 #environment, #brain  {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     position: absolute;
     left: 0;
     right: 0;
@@ -43,8 +50,20 @@ html, body {
     border-color: green;
 }
 
-#brain {}
+#brain {
+}
 
 #overlay {
-    
+    position:absolute;
+    z-index:10;
+}
+
+#title {
+    position:absolute;
+    width:100%;
+    text-align:center;
+    font-size:60;
+    top:2vh;
+    font-family: 'Montserrat';
+    color:#afd1dd;
 }

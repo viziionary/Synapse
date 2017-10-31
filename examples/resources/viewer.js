@@ -1,5 +1,6 @@
 const drawNode = require('./viewer/drawnode');
 const drawLink = require('./viewer/drawlink');
+const findNewPoint = require('./engine/findnewpoint');
 const getRandomNumber = require('../../source/functions/getrandomnumber');
 const renderNerve = require('./viewer/rendernerve');
 const renderObject = require('./viewer/renderobject');
@@ -19,7 +20,7 @@ class Viewer {
       this.map = brain.map;
     }
   }
-  render(brain, entity) {
+  render(brain, entity, surroundings, target) {
     //console.log('Debug 2', brain);
     var padding = 10;
     var occupiedCoords = [];
@@ -29,63 +30,85 @@ class Viewer {
     var brainCanvas = this.canvas1;
     var simCanvas = this.canvas2;
     var linkCanvas = this.canvas3;
+    var offsetX = simCanvas.getBoundingClientRect().left;
+    var offsetY = simCanvas.getBoundingClientRect().top;
+
+    //console.log('x', offsetX);
+    //console.log('y', offsetY);
+
+    var self = entity.self;
     
+    // SIM CANVAS RENDERING
     
-    simContext.clearRect(0, 0, canvas1.width, canvas1.height);
-    var points = [];
-    for (var i1 = 0; i1 < child.inputSize; i1++) {
-      var space = canvas1.height / child.inputSize;
-      var distance = ((i1 + 1) * space) - (0.5 * space);
-      var point = {
-        location: {
-          x: distance,
-          y: 5
-        },
-        radius: 5,
-        color: '#1d273c',
-        stroke: '#0f1623'
-      }
-      points.push(point);
+    simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
+    for (var i1 = 0; i1 < surroundings.length; i1++) {
+      renderObject(simContext, surroundings[i1]);
     }
-    for (var i1 = 0; i1 < entity.nerves.length; i1++) {
+    for (let i1 in entity.nerves) {
       var angle = (360 / entity.nerveCount) * i1;
       var p1 = self.location;
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
-      var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerveLength);
+      var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
       entity.nerves[i1] = [p2, p3];
       renderNerve(simContext, entity.nerves[i1]);
-      renderObject(simContext, points[i1]);
       var sourcePoint = {
         location: {
           x: p3.x,
           y: p3.y
         },
         radius: 3,
-        color: '#1d273c',
-        stroke: '#0f1623'
+        color: '#859db2',
+        stroke: '#859db2'
       }
-      renderObject(simContext, sourcePoint);
-      renderLine(simContext, p3, points[i1].location, '#1d273c');
+      renderObject(linkContext, sourcePoint, offsetX, offsetY);
     }
-    for (var i1 = 0; i1 < surroundings.length; i1++) {
-      renderObject(simContext, surroundings[i1]);
-    }
+    //console.log(self);
     renderObject(simContext, self);
     renderObject(simContext, target);
 
+    // LINK CANVAS RENDERING
 
-    brainContext.clearRect(0, 0, canvas.width, canvas.height);
-    var width = canvas.width;
-    var height = canvas.height;
+    linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    var points = [];
+    for (var i1 = 0; i1 < brain.inputSize; i1++) {
+      var space = (linkCanvas.width / 2) / brain.inputSize;
+      var distance = ((i1 + 1) * space) - (0.5 * space) + linkCanvas.width / 4;
+      //console.log(distance);
+      var point = {
+        location: {
+          x: distance,
+          y: document.body.clientHeight * 0.15
+        },
+        radius: 5,
+        color: '#5872a3',
+        stroke: '#465893'
+      }
+      points.push(point);
+    }
+    for (let i = 0; i < points.length; i++){
+      var angle = (360 / entity.nerveCount) * i;
+      var p1 = self.location;
+      //console.log('p1', p1)
+      var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
+      //console.log('p2', p2)
+      //console.log('nerves', entity.nerves)
+      var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i].size);
+      //console.log('p3', p3)
+      renderObject(linkContext, points[i]);
+      renderLine(linkContext, p3, points[i].location, '#1d273c', offsetX, offsetY);
+    }
 
+    // BRAIN CANVAS RENDERING
+
+    brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
+    var width = brainCanvas.width;
+    var height = brainCanvas.height;
     //var structure = visualizeLayers(brain);
     //console.log('Structure', structure)
     //console.log('Brain', brain)
-
     //var inputList = Object.values(brain.layers.input);
     var hiddenList = Object.values(brain.layers.hidden);
     //var outputList = Object.values(brain.layers.output);
-
     //console.log('Map', this.map)
     if (!this.map) {
       this.map = {};

@@ -1,6 +1,8 @@
-function renderObject(context, object) {
-	var x = object.location.x;
-	var y = object.location.y;
+function renderObject(context, object, offsetX = 0, offsetY = 0) {
+	var x = object.location.x + offsetX;
+	var y = object.location.y + offsetY;
+	//console.log('render X', x);
+	//console.log('render Y', y);
 	var radius = object.radius;
 	var color = object.color;
 	var stroke = object.stroke;
