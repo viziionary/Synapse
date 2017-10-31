@@ -58,6 +58,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', end
     z-index:10;
 }
 
+#underlay {
+    position:absolute;
+    z-index:-10;
+}
+
 #title {
     position:absolute;
     width:100%;

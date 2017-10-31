@@ -10,11 +10,14 @@ window.addEventListener("load", function() {
 		var canvas1 = document.getElementById('brain');
 		var canvas2 = document.getElementById('environment');
 		var canvas3 = document.getElementById('overlay');
+		var canvas4 = document.getElementById('underlay');
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
+		canvas4.width = document.body.clientWidth;
+		canvas4.height = document.body.clientHeight;
 		var width = canvas1.width;
 		var height = canvas1.height;
-		viewer = new Viewer(canvas1, canvas2, canvas3, child);
+		viewer = new Viewer(canvas1, canvas2, canvas3, canvas4, child);
 		var bounds = [
 			[{
 				x: 0,
