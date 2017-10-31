@@ -20,21 +20,22 @@ class Entity {
     this.viewer = viewer;
     this.nerveCount = 20;
     this.nerveLength = 50;
-    this.nerves = {};
+    this.nerves = [];
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
       var angle = (360 / this.nerveCount) * i1;
       var p1 = self.location;
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
       var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
       var nerve = {
-        points: [p2, p3],
+        points : [p2, p3],
         size: this.nerveLength
       }
       //console.log('before nerves', this.nerves);
       this.nerves[i1] = nerve;
       //console.log('after nerves', this.nerves);
     }
-    console.log('JSON nerves', JSON.stringify(this.nerves, null, 4));
+    this.nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
+    console.log('JSON nerves', JSON.parse(JSON.stringify(this.nerves, null, 4)));
     console.log('Original nerves', this.nerves);
     this.bindMethods(this);
   }
@@ -51,7 +52,8 @@ class Entity {
       	var objectCoords = this.surroundings[i2].location;
       	var objectRadius = this.surroundings[i2].radius;
       	//console.log('Nerves 1', this.nerves, 'i1', i1);
-      	var collision = interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], objectCoords, objectRadius);
+        //var nerves = interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4));
+      	var collision = [i1].points[0], interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4))[i1].points[1], objectCoords, objectRadius);
       	if (collision) {
       		//console.log('Collision', collision);
       		var length = collision / this.nerveLength;
@@ -60,7 +62,7 @@ class Entity {
       }
       for (let i2 = 0; i2 < bounds.length; i2++) {
       	//console.log('Nerves 2', this.nerves)
-      	var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2]);
+      	var collision = lineSegmentIntersection(interceptOnCircle(JSON.parse(JSON.stringify(this.nerves, null, 4))[i1].points, bounds[i2]);
       	if (collision) {
       		var length = collision / this.nerveLength;
       		if (inputMin > length){
