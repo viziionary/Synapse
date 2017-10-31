@@ -46,7 +46,12 @@ class Entity {
       var angle = (360 / this.nerveCount) * i1;
       var p1 = this.self.location;
       var p2 = findNewPoint(this.self.location.x, this.self.location.y, angle, this.self.radius);
-      var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
+      if (this.nerves[i1].size) {
+        var p3 = findNewPoint(p2.x, p2.y, angle, this.nerves[i1].size);
+      } else {
+        var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
+      }
+      
       var nerve = {
         points : [p2, p3],
         size: this.nerveLength
