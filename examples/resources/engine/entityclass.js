@@ -53,7 +53,7 @@ class Entity {
       	var objectRadius = this.surroundings[i2].radius;
       	//console.log('Nerves 1', this.nerves, 'i1', i1);
         var nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
-        console.log('PARSED FUCKING NERVES OBJECT:', nerves)
+        //console.log('PARSED FUCKING NERVES OBJECT:', nerves)
       	var collision = interceptOnCircle(nerves[i1].points[0], nerves[i1].points[1], objectCoords, objectRadius);
       	if (collision) {
       		//console.log('Collision', collision);
@@ -64,7 +64,7 @@ class Entity {
       for (let i2 = 0; i2 < bounds.length; i2++) {
       	//console.log('Nerves 2', this.nerves)
         var nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
-        console.log('PARSED FUCKING NERVES OBJECT:', nerves)
+        //console.log('PARSED FUCKING NERVES OBJECT:', nerves)
       	var collision = lineSegmentIntersection(nerves[i1].points, bounds[i2]);
       	if (collision) {
       		var length = collision / this.nerveLength;
