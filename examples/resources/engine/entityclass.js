@@ -30,10 +30,11 @@ class Entity {
         points: [p2, p3],
         size: this.nerveLength
       }
-      console.log('before nerves', this.nerves);
+      //console.log('before nerves', this.nerves);
       this.nerves[i1] = nerve;
-      console.log('after nerves', this.nerves);
+      //console.log('after nerves', this.nerves);
     }
+    console.log('JSON nerves', JSON.stringify(this.nerves, null, 4));
     console.log('Original nerves', this.nerves);
     this.bindMethods(this);
   }
