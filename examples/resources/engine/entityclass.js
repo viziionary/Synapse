@@ -29,12 +29,9 @@ class Entity {
       var nerve = {
         points : [p2, p3],
         size: this.nerveLength
-      }
+      };
       this.nerves[i1] = nerve;
     }
-    this.nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
-    console.log('JSON nerves', JSON.parse(JSON.stringify(this.nerves, null, 4)));
-    console.log('Original nerves', this.nerves);
     this.bindMethods(this);
   }
   bindMethods(self){
@@ -51,13 +48,13 @@ class Entity {
       } else {
         var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
       }
-      
       var nerve = {
         points : [p2, p3],
         size: this.nerveLength
       }
       this.nerves[i1] = nerve;
     }
+
     var input = [];
 
     for (let i1 in this.nerves) {
@@ -66,9 +63,6 @@ class Entity {
       for (let i2 = 0; i2 < this.surroundings.length; i2++) {
       	var objectCoords = this.surroundings[i2].location;
       	var objectRadius = this.surroundings[i2].radius;
-      	//console.log('Nerves 1', this.nerves, 'i1', i1);
-        var nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
-        //console.log('PARSED FUCKING NERVES OBJECT:', nerves)
       	var collision = interceptOnCircle(nerves[i1].points[0], nerves[i1].points[1], objectCoords, objectRadius);
       	if (collision) {
       		//console.log('Collision', collision);
@@ -77,9 +71,6 @@ class Entity {
       	}
       }
       for (let i2 = 0; i2 < bounds.length; i2++) {
-      	//console.log('Nerves 2', this.nerves)
-        var nerves = JSON.parse(JSON.stringify(this.nerves, null, 4));
-        //console.log('PARSED FUCKING NERVES OBJECT:', nerves)
       	var collision = lineSegmentIntersection(nerves[i1].points, bounds[i2]);
       	if (collision) {
       		var length = collision / this.nerveLength;

@@ -82,7 +82,7 @@ class Viewer {
       var p1 = self.location;
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
       var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
-      //entity.nerves[i1] = [p2, p3];
+      //entity.nerves[i1].points = [p2, p3];
       //console.log('Nerves', entity.nerves[i1])
       renderNerve(simContext, entity.nerves[i1]);
       var sourcePoint = {
