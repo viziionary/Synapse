@@ -43,7 +43,7 @@ class Entity {
 
     for (let i1 in this.nerves) {
       var inputMin = 1;
-      /*
+
       for (let i2 = 0; i2 < this.surroundings.length; i2++) {
       	var objectCoords = this.surroundings[i2].location;
       	var objectRadius = this.surroundings[i2].radius;
@@ -65,7 +65,7 @@ class Entity {
       		}
       	}
       }
-      */
+
       //this.nerves[i1].size = inputMin * this.nerveLength;
       input.push(inputMin);
     }
