@@ -63,7 +63,7 @@ class Entity {
       for (let i2 = 0; i2 < this.surroundings.length; i2++) {
       	var objectCoords = this.surroundings[i2].location;
       	var objectRadius = this.surroundings[i2].radius;
-      	var collision = interceptOnCircle(nerves[i1].points[0], nerves[i1].points[1], objectCoords, objectRadius);
+      	var collision = interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], objectCoords, objectRadius);
       	if (collision) {
       		//console.log('Collision', collision);
       		var length = collision / this.nerveLength;
@@ -71,7 +71,7 @@ class Entity {
       	}
       }
       for (let i2 = 0; i2 < bounds.length; i2++) {
-      	var collision = lineSegmentIntersection(nerves[i1].points, bounds[i2]);
+      	var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2]);
       	if (collision) {
       		var length = collision / this.nerveLength;
       		if (inputMin > length){
