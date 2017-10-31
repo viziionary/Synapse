@@ -74,7 +74,7 @@ class Entity {
       	}
       }
 
-      //this.nerves[i1].size = inputMin * this.nerveLength;
+      this.nerves[i1].size = inputMin * this.nerveLength;
       input.push(inputMin);
     }
     //console.log('Input', input)

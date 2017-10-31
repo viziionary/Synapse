@@ -21,6 +21,7 @@ class Viewer {
     }
   }
   render(brain, entity, surroundings, target) {
+    console.log(entity);
     //console.log('Debug 2', brain);
     var padding = 10;
     var occupiedCoords = [];
@@ -37,34 +38,6 @@ class Viewer {
     //console.log('y', offsetY);
 
     var self = entity.self;
-    
-    // SIM CANVAS RENDERING
-    
-    simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
-    for (var i1 = 0; i1 < surroundings.length; i1++) {
-      renderObject(simContext, surroundings[i1]);
-    }
-    for (let i1 in entity.nerves) {
-      var angle = (360 / entity.nerveCount) * i1;
-      var p1 = self.location;
-      var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
-      var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
-      //entity.nerves[i1] = [p2, p3];
-      renderNerve(simContext, entity.nerves[i1]);
-      var sourcePoint = {
-        location: {
-          x: p3.x,
-          y: p3.y
-        },
-        radius: 3,
-        color: '#859db2',
-        stroke: '#859db2'
-      }
-      renderObject(linkContext, sourcePoint, offsetX, offsetY);
-    }
-    //console.log(self);
-    renderObject(simContext, self);
-    renderObject(simContext, target);
 
     // LINK CANVAS RENDERING
 
@@ -97,6 +70,35 @@ class Viewer {
       renderObject(linkContext, points[i]);
       renderLine(linkContext, p3, points[i].location, '#1d273c', offsetX, offsetY);
     }
+    
+    // SIM CANVAS RENDERING
+    
+    simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
+    for (var i1 = 0; i1 < surroundings.length; i1++) {
+      renderObject(simContext, surroundings[i1]);
+    }
+    for (let i1 in entity.nerves) {
+      var angle = (360 / entity.nerveCount) * i1;
+      var p1 = self.location;
+      var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
+      var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
+      //entity.nerves[i1] = [p2, p3];
+      //console.log('Nerves', entity.nerves[i1])
+      renderNerve(simContext, entity.nerves[i1]);
+      var sourcePoint = {
+        location: {
+          x: p3.x,
+          y: p3.y
+        },
+        radius: 3,
+        color: '#859db2',
+        stroke: '#859db2'
+      }
+      renderObject(linkContext, sourcePoint, offsetX, offsetY);
+    }
+    //console.log(self);
+    renderObject(simContext, self);
+    renderObject(simContext, target);
 
     // BRAIN CANVAS RENDERING
 
