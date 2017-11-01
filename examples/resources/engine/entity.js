@@ -99,8 +99,10 @@ class Entity {
     var surroundings = this.surroundings;
     //console.log('Self before:', entity.self.location);
     //console.log('Input', input);
-    var speed = 7;
+
+   
     ///*
+    var speed = 14;
     if (output[0] >= 0.5) this.self.location.x += (0.5 - output[0]) * speed;
     if (output[0] < 0.5) this.self.location.x -= (output[0] - 0.5) * speed;
     if (output[1] >= 0.5) this.self.location.y += (0.5 - output[1]) * speed;
@@ -108,6 +110,7 @@ class Entity {
     //*/
 
     /*
+    var speed = 2;
     if (output[0] >= 0.5) this.self.location.x += speed;
     if (output[0] < 0.5) this.self.location.x -= speed;
     if (output[1] >= 0.5) this.self.location.y += speed;
