@@ -33,7 +33,7 @@ class Connection {
     this.resistance = 0;
     this.energy = 100;
     this.lastTime = 0;
-    this.lastCharge = 0.5;
+    this.lastCharge = null;
     this.inverse = getRandomNumber(0,1);
 
     /*

@@ -47,7 +47,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', end
 #environment {
     border-style: solid;
     border-width: 2px;
-    border-color: green;
+    border-color: #4fad8b;
 }
 
 #brain {

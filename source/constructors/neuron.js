@@ -18,6 +18,7 @@ class Neuron {
     this.connections = {};
     this.recentCharges = [];
     this.memory = getRandomLowNumber(1, 10, 0.5);
+    //console.log('Memory', this.memory)
     for (let i = 0; i < this.memory; i++){
       this.recentCharges.push(getRandomDecimal(0, 1));
     }
@@ -26,8 +27,8 @@ class Neuron {
     this.chargeRate = getRandomDecimal(0, 1);
     this.threshold = getRandomLowNumber(1, 10);
     this.inverse = getRandomNumber(0, 1);
-    this.bias = 0.5;
-    this.recentCharge = 0.5;
+    this.bias = null;
+    this.recentCharge = null;
     this.bindMethods(this);
     var initialChildrenCount = getRandomLowNumber(1, Object.keys(this.brain.globalReferenceNeurons).length, 0.65);
     var neurons = Object.values(this.brain.globalReferenceNeurons);
@@ -68,13 +69,7 @@ class Neuron {
     this.brain.deleteNeuron(this.id);
   }
   measure() {
-    var total = 0;
-    var bias;
-    for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
-      total += this.recentCharges[i1];
-    }
-    bias = total / this.recentCharges.length;
-    return bias;
+    return this.bias;
   }
   transmit(charge, time) {
     var total = 0;
@@ -83,12 +78,6 @@ class Neuron {
     }
     var bias = total / this.recentCharges.length;
     this.bias = bias;
-    if (this.memory > 0) {
-      charge = (bias + charge + charge) / 3;
-    }
-    if (this.inverse === 1) {
-      charge = charge / 2;
-    }
     this.recentCharges.push(charge);
     if (this.recentCharges.length > this.memory) {
       this.recentCharges.splice(0, 1);

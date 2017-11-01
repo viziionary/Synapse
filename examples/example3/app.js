@@ -58,8 +58,8 @@ window.addEventListener("load", function() {
 						y: (height * 0.25) * i2
 					},
 					radius: 15,
-					color: '#1fa71f',
-					stroke: '#003300'
+					color: '#388751',
+					stroke: '#4fad8b'
 				});
 			}
 		}
@@ -69,8 +69,8 @@ window.addEventListener("load", function() {
 				x: 50,
 				y: 50
 			},
-			color : '#bc82e5',
-			stroke : '#7a5ebc'
+			color : '#7a5ebc',
+			stroke : '#bc82e5'
 		}
 		var target = {
 			location: {
@@ -78,8 +78,8 @@ window.addEventListener("load", function() {
 				y: height * 0.875
 			},
 			radius: 30,
-			color: '#f3a13a',
-			stroke: '#f3663a'
+			color: '#e59f44',
+			stroke: '#ead379'
 		};
 		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();

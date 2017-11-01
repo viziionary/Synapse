@@ -3,8 +3,6 @@ const getRandomNumber = require('./getrandomnumber');
 const logb = require('./logb');
 
 function getRandomLowNumber(min=0, max=100, factor=0.9) {
-	min--;
-	max--;
 	var base = 1.0 / factor;
 		var evtcnt = Math.floor(Math.pow(base, max-min+1) - 1) / (base-1);
 		var rndnum = getRandomNumber(1, evtcnt);

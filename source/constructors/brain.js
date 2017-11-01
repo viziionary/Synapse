@@ -87,11 +87,13 @@ class Brain {
     });
   }
   input(array, time) {
+    //console.log('Brain input', array, time)
     Object.values(this.layers.input).forEach((input, index) => {
       input.transmit(array[index], time);
     });
     this.resetLimiters();
     return Object.values(this.layers.output).map(neuron => {
+      //console.log('Brain output', neuron.id, neuron.measure())
       return neuron.measure();
     });
 
