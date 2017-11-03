@@ -60,8 +60,12 @@ class Neuron {
   //*/
 
   connect(target) {
-    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && !(this.type == 'output' && target.type == 'output') && target.id != this.id && this.type != 'output') {
-      return new Connection(this.brain, this, target);
+    if (typeof target == 'object' && target.constructor.name == 'Neuron' && typeof this == 'object' && this.constructor.name == 'Neuron') {
+      if (!(this.type == 'input' && target.type == 'input') && !(this.type == 'output' && target.type == 'output') && target.id != this.id && this.type != 'output'){
+        return new Connection(this.brain, this, target);
+      }
+    } else {
+      console.log('!!!ANOMALY neuron failed to make connection because either target or source was invalid', this, target);
     }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
   };
