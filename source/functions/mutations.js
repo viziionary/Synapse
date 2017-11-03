@@ -7,7 +7,7 @@ const Neuron = require('../constructors/neuron');
 var mutations = {
   connect: {
     frequencyMod: 0,
-    frequency: 0,
+    frequency: 1,
     mutate: function(brain) {
       console.log('Connecting neurons.');
       var count = getRandomNumber(1, 10);
