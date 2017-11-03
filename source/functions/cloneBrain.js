@@ -32,10 +32,12 @@ function cloneBrain(brain) {
   //console.log('old',brain,'new',clone);
   for (let prop in clone.globalReferenceConnections) {
     if (!clone.globalReferenceConnections[prop].target) {
+      console.log('Problematic connection:', clone.globalReferenceConnections[prop]);
       console.log('Source brain:', brain);
       console.log('Cloned brain:', clone);
       throw '!!! ANOMALY clone brain failed to clone connection target';
     } else if (!clone.globalReferenceConnections[prop].source) {
+      console.log('Problematic connection:', clone.globalReferenceConnections[prop]);
       console.log('Source brain:', brain);
       console.log('Cloned brain:', clone);
       throw '!!! ANOMALY clone brain failed to clone connection source';
