@@ -5,23 +5,26 @@ const cloneConnection = require('./cloneconnection');
 const createStructure = require('./createstructure');
 const generateLayers = require('./generatelayers');
 
-function cloneBrain(brain){
+function cloneBrain(brain) {
   //console.log('DOING OSME CLONE BRAIN VWOOOSH');
   //console.log('OLD BRAIN MUTATION RATE',brain.mutationRate);
-  var toClone = Object.assign({},brain);
+  var toClone = Object.assign({}, brain);
   delete toClone.globalReferenceNeurons;
   delete toClone.globalReferenceConnections;
   delete toClone.layers;
-  clone = {globalReferenceNeurons:{},globalReferenceConnections:{}};
-  setPrototypeOf(clone,Brain.prototype);
-  Object.assign(clone,JSON.parse(JSON.stringify(toClone)));
-  Object.entries(brain.globalReferenceConnections).forEach((connectionPair)=>{
-    clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1],clone);
+  clone = {
+    globalReferenceNeurons: {},
+    globalReferenceConnections: {}
+  };
+  setPrototypeOf(clone, Brain.prototype);
+  Object.assign(clone, JSON.parse(JSON.stringify(toClone)));
+  Object.entries(brain.globalReferenceConnections).forEach((connectionPair) => {
+    clone.globalReferenceConnections[connectionPair[0]] = cloneConnection(connectionPair[1], clone);
   });
-    //console.log('doing some stuff');
-    Object.entries(brain.globalReferenceNeurons).forEach((neuronPair)=>{
+  //console.log('doing some stuff');
+  Object.entries(brain.globalReferenceNeurons).forEach((neuronPair) => {
     //console.log('doing some more stuff');
-    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1],clone,brain.globalReferenceConnections);
+    clone.globalReferenceNeurons[neuronPair[0]] = cloneNeuron(neuronPair[1], clone, brain.globalReferenceConnections);
   });
   clone.layers = generateLayers(clone);
   Brain.prototype.bindMethods(clone);
@@ -29,10 +32,14 @@ function cloneBrain(brain){
   //console.log('old',brain,'new',clone);
   for (let prop in clone.globalReferenceConnections) {
     if (!clone.globalReferenceConnections[prop].target) {
-    throw '!!! ANOMALY clone brain failed to clone connection target';
-  } else if (!clone.globalReferenceConnections[prop].source) {
-    throw '!!! ANOMALY clone brain failed to clone connection source';
-  }
+      console.log('Source brain:', brain);
+      console.log('Cloned brain:', clone);
+      throw '!!! ANOMALY clone brain failed to clone connection target';
+    } else if (!clone.globalReferenceConnections[prop].source) {
+      console.log('Source brain:', brain);
+      console.log('Cloned brain:', clone);
+      throw '!!! ANOMALY clone brain failed to clone connection source';
+    }
   }
   return clone;
 }
