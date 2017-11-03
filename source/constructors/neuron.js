@@ -60,7 +60,7 @@ class Neuron {
   //*/
 
   connect(target) {
-    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && !(this.type == 'output' && target.type == 'output') && target.id != this.id) {
+    if (typeof target == 'object' && target.constructor.name == 'Neuron' && !(this.type == 'input' && target.type == 'input') && !this.type == 'output' && target.id != this.id) {
       return new Connection(this.brain, this, target);
     }
     //console.log('Connecting neuron ' + this.id + ' to neuron ' + target.id);
