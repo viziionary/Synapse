@@ -7,24 +7,14 @@ const Neuron = require('../constructors/neuron');
 var mutations = {
   connect: {
     frequencyMod: 0,
-    frequency: 1,
+    frequency: 0,
     mutate: function(brain) {
       console.log('Connecting neurons.');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
-        var neuron1 = getRandomProperty(brain.layers.hidden);
-        var neuron2 = getRandomProperty(brain.layers.input);
-        var rand = getRandomNumber(0, 1);
-        if (rand === 1) {
-          neuron1 = neuron2;
-        }
-        var neuron3 = getRandomProperty(brain.layers.hidden);
-        var neuron4 = getRandomProperty(brain.layers.output);
-        var rand = getRandomNumber(0, 1);
-        if (rand === 1) {
-          neuron3 = neuron4;
-        }
-        neuron1.connect(neuron3);
+        (getRandomNumber(0,1) === 0 ? getRandomProperty(brain.layers.hidden) : getRandomProperty(brain.layers.input)).connect(
+          getRandomNumber(0,1) === 0 ? getRandomProperty(brain.layers.hidden) : getRandomProperty(brain.layers.output)
+        );
       }
     }
   },
