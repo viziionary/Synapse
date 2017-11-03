@@ -27,6 +27,13 @@ function cloneBrain(brain){
   Brain.prototype.bindMethods(clone);
   //console.log('NEW BRAIN MUTATION RATE',clone.mutationRate);
   //console.log('old',brain,'new',clone);
+  for (let prop in clone.globalReferenceConnections) {
+    if (!clone.globalReferenceConnections[prop].target) {
+    throw '!!! ANOMALY clone brain failed to clone connection target';
+  } else if (!clone.globalReferenceConnections[prop].source) {
+    throw '!!! ANOMALY clone brain failed to clone connection source';
+  }
+  }
   return clone;
 }
 module.exports = cloneBrain;
