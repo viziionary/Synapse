@@ -3,6 +3,15 @@ const cloneBrain = require('../functions/clonebrain');
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
+
+    //var brain = new Brain(inputSize, outputSize);
+    //var child = cloneBrain(brain);
+    //brain.score = 100;
+    //child.score = 200;
+    //brain.score = 100;
+    //console.log('Brain score: ' + brain.score);
+    //console.log('Child score: ' + child.score);
+
     this.inputSize = inputSize;
     this.outputSize = outputSize;
     this.runFunction = runFunction;
@@ -51,12 +60,13 @@ class Synapse {
     } else {
       if (this.brain.score) {
         if (this.brain.score < childScore) {
-          this.brain = this.child;
           console.log('EVOLVED from ' + this.brain.score + ' to ' + this.child.score);
+          this.brain = this.child;   
         }
       } else {
-        console.log('Brain born with score of ' + child.score);
         this.brain = this.child;
+        console.log('Brain born with score of ' + brain.score);
+        
       }
       return this.initiate();
     }
