@@ -9,7 +9,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 			var contents = [];
 			var endResult;
 			//var entity = new Entity(run, surroundings, self);
-			var maxTime = 2000;
+			var maxTime = 500;
 			var time = 0;
 			var timer = setInterval(() => {
 				time += tick;

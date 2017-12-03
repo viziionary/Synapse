@@ -16,10 +16,10 @@ class Synapse {
 
     if (this.child) {
       this.child = cloneBrain(this.brain);
-      //this.child.generate();
+      this.child.generate();
     } else {
       var newChild = null;
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 100; i++) {
         console.log('Searching for Chosen One... [' + i + ']'); // expected execution order
         var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
         //console.log('Debug 6'); // expected execution order

@@ -9,7 +9,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Connecting neurons.');
+      //console.log('Connecting neurons.');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
         (getRandomNumber(0,1) === 0 ? getRandomProperty(brain.layers.hidden) : getRandomProperty(brain.layers.input)).connect(
@@ -22,7 +22,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Disconnecting neurons.');
+      //console.log('Disconnecting neurons.');
       var count = getRandomNumber(1, 10);
       for (let i = 0; i < count; i++) {
         var connection = getRandomProperty(brain.globalReferenceConnections);
@@ -36,7 +36,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Biasing connections.');
+      //console.log('Biasing connections.');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
         connection.bias += getRandomDecimal(0, 1);
@@ -48,7 +48,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Unbiasing connections.');
+      //console.log('Unbiasing connections.');
       var connection = getRandomProperty(brain.globalReferenceConnections);
       if (connection) {
         connection.bias -= getRandomDecimal(0, 1);
@@ -60,7 +60,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Adding neurons.');
+      //console.log('Adding neurons.');
       var count = getRandomLowNumber(1, 10);
       for (let i = 0; i < count; i++) {
         var neuron = new Neuron(brain, 'hidden');
@@ -71,7 +71,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Removing neurons.');
+      //console.log('Removing neurons.');
       var count = getRandomLowNumber(1, 10);
       for (let i = 0; i < count; i++) {
           var neuron = getRandomProperty(brain.layers.hidden);
@@ -83,7 +83,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Filling memory.');
+      //console.log('Filling memory.');
       var neuron = getRandomProperty(brain.globalReferenceNeurons);
       neuron.memory += 1;
     }
@@ -92,7 +92,7 @@ var mutations = {
     frequencyMod: 0,
     frequency: 1,
     mutate: function(brain) {
-      console.log('Draining memory');
+      //console.log('Draining memory');
       var neuron = getRandomProperty(brain.globalReferenceNeurons);
       neuron.memory -= 1;
       if (neuron.memory < 1) {

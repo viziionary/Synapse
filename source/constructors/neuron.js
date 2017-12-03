@@ -46,6 +46,7 @@ class Neuron {
     self.connect = this.connect.bind(self);
     self.measure = this.measure.bind(self);
     self.delete = this.delete.bind(self);
+    self.transmit = this.transmit.bind(self);
   }
 
   // Alternate brain structuring system
