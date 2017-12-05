@@ -5,6 +5,9 @@ const getRandomNumber = require('../../source/functions/getrandomnumber');
 const renderNerve = require('./viewer/rendernerve');
 const renderObject = require('./viewer/renderobject');
 const renderLine = require('./viewer/renderline');
+
+var debugHistory = [];
+
 //const visualizeLayers = require('./viewer/vizualizelayers');
 class Viewer {
   constructor(canvas1, canvas2, canvas3, canvas4, brain) {
@@ -98,6 +101,18 @@ class Viewer {
       var p1 = self.location;
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
       var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
+
+      //debugging
+
+      if (i1 === '10') {
+        debugHistory.unshift(entity.nerves[i1].size);
+        debugHistory = debugHistory.slice(0,6);
+        //console.log(debugHistory);
+        if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50) && (debugHistory[3] == 50) && (debugHistory[4] < 50) && (debugHistory[5] == 50)){
+          console.log('[VIEWER] We found a blip pattern: ', debugHistory);
+        }
+      }
+
       entity.nerves[i1].points = [p2, p3];
       //console.log('Nerves', entity.nerves[i1])
       renderNerve(simContext, entity.nerves[i1]);

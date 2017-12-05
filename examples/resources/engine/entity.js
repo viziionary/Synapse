@@ -4,6 +4,9 @@ const lineSegmentIntersection = require('./entity/linesegmentintersection');
 const getDistance = require('./getdistance');
 const interceptCircles = require('./interceptcircles');
 const circleInBounds = require('./circleinbounds');
+
+var debugHistory = [];
+
 class Entity {
   constructor(run, surroundings, self, target, viewer) {
     //console.log('Self', self);
@@ -59,34 +62,61 @@ class Entity {
 
     var input = [];
 
-    for (let i1 in this.nerves) {
-      var inputMin = 1;
+    for (var i1 in this.nerves) {
+      var inputMin = 50;
 
       for (let i2 = 0; i2 < this.surroundings.length; i2++) {
         var objectCoords = this.surroundings[i2].location;
         var objectRadius = this.surroundings[i2].radius;
         var collision = interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], objectCoords, objectRadius);
-        if (collision) {
-          //console.log('Collision', collision);
-          var length = collision / this.nerveLength;
-          if (inputMin > length) {
-            inputMin = length;
-          }
+        if (isNaN(collision)) {
+          throw 'Bad collision';
+        }
+        //console.log('Circle collision: ' + collision);
+        //console.log('Collision', collision);
+        var length = collision;
+        if (inputMin > length) {
+          inputMin = length;
         }
       }
       for (let i2 = 0; i2 < bounds.length; i2++) {
-        var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2]);
-        if (collision) {
-          var length = collision / this.nerveLength;
-          if (inputMin > length) {
-            inputMin = length;
-          }
+        var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1);
+        if (isNaN(collision)) {
+          throw 'Bad collision';
+        }
+        if ((this.nerves[i1].points[0].x < 0 || this.nerves[i1].points[1].x < 0) && ((bounds[i2][0].y == 0 && bounds[i2][0].x == 0) && (bounds[i2][1].y == 400 && bounds[i2][1].x == 0)) && collision == 50) {
+          console.log('Test', {
+            line1 : this.nerves[i1].points,
+            line2 : bounds[i2]
+          });
+        }
+        //console.log(' Segment collision: ' + collision);
+        var length = collision;
+        if (inputMin > length) {
+          inputMin = length;
         }
         //this.nerves[i1].points = [p2, p3];
-        
+
       }
-      this.nerves[i1].size = inputMin * this.nerveLength;
-        input.push(inputMin);
+
+      console.log('Length: ' + inputMin);
+      this.nerves[i1].size = inputMin;
+
+      //debugging
+
+      if (i1 === '10') {
+        debugHistory.unshift(this.nerves[i1].size);
+        debugHistory = debugHistory.slice(0, 6);
+        //console.log(debugHistory);
+        if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50) && (debugHistory[3] == 50) && (debugHistory[4] < 50) && (debugHistory[5] == 50)) {
+          console.log('[ENTITY] We found a blip pattern: ', debugHistory);
+        }
+      }
+
+      //if (i1 === '1') {
+      //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
+      //}
+      input.push(inputMin / 50);
     }
     //console.log('Input', input)
 
@@ -100,7 +130,7 @@ class Entity {
     //console.log('Self before:', entity.self.location);
     //console.log('Input', input);
 
-   
+
     ///*
     var speed = 14;
     if (output[0] >= 0.5) this.self.location.x += (0.5 - output[0]) * speed;
