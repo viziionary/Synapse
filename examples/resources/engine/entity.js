@@ -65,6 +65,7 @@ class Entity {
     for (var i1 in this.nerves) {
       var inputMin = 50;
 
+      /*
       for (let i2 = 0; i2 < this.surroundings.length; i2++) {
         var objectCoords = this.surroundings[i2].location;
         var objectRadius = this.surroundings[i2].radius;
@@ -79,6 +80,7 @@ class Entity {
           inputMin = length;
         }
       }
+      */
       for (let i2 = 0; i2 < bounds.length; i2++) {
         var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1);
         if (isNaN(collision)) {
