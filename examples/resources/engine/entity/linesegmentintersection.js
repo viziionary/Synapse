@@ -39,7 +39,7 @@ function lineSegmentIntersection(line1, line2, id = false) {
 
 		//debugging
 
-		/*
+		
 		if (id === '10') {
 			debugHistory.unshift(distance);
 			debugHistory = debugHistory.slice(0, 6);
@@ -56,10 +56,10 @@ function lineSegmentIntersection(line1, line2, id = false) {
 			}
 
 		}
-		*/
+		
 		return distance;
 	} else {
-		/*
+		
 		if (id === '10') {
 
 			debugHistory.unshift(50);
@@ -76,7 +76,7 @@ function lineSegmentIntersection(line1, line2, id = false) {
 				console.log('[DETECTION] Details: ', debugHistoryDetails);
 			}
 		}
-		*/
+		
 		return 50;
 	}
 }
