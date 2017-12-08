@@ -119,7 +119,7 @@ class Entity {
             return lineSegmentIntersection(this.nerves[i1].points,bound,i1,reset);
           }).filter(distance=>{
             return distance;
-          })) || 50;
+          }));
       this.nerves[i1].size = inputMin;
 
       //debugging
