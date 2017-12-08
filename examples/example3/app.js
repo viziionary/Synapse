@@ -4,23 +4,23 @@ const Engine = require('../resources/engine');
 
 window.addEventListener("load", function() {
 	var canvas1 = document.getElementById('brain');
-		var canvas2 = document.getElementById('environment');
-		var canvas3 = document.getElementById('overlay');
-		var canvas4 = document.getElementById('underlay');
+	var canvas2 = document.getElementById('environment');
+	var canvas3 = document.getElementById('overlay');
+	var canvas4 = document.getElementById('underlay');
 	viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		viewer.update(child);
 		console.log('[NEW SIM]');
 		//console.log('Debug 2', child);
-		
+
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
 		canvas4.width = document.body.clientWidth;
 		canvas4.height = document.body.clientHeight;
 		var width = canvas1.width;
 		var height = canvas1.height;
-		
+
 		var bounds = [
 			[{
 				x: 0,
@@ -72,8 +72,8 @@ window.addEventListener("load", function() {
 				x: 50,
 				y: 50
 			},
-			color : '#7a5ebc',
-			stroke : '#bc82e5'
+			color: '#7a5ebc',
+			stroke: '#bc82e5'
 		}
 		var target = {
 			location: {
@@ -84,7 +84,7 @@ window.addEventListener("load", function() {
 			color: '#e59f44',
 			stroke: '#ead379'
 		};
-		var engine = new Engine(run, child, 100, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
+		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);

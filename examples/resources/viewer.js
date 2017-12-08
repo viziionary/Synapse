@@ -81,12 +81,8 @@ class Viewer {
     for (let i = 0; i < points.length; i++) {
       var angle = (360 / entity.nerveCount) * i;
       var p1 = self.location;
-      //console.log('p1', p1)
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
-      //console.log('p2', p2)
-      //console.log('nerves', entity.nerves)
       var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i].size);
-      //console.log('p3', p3)
       if (entity.nerves[i].size >= entity.nerveLength * 0.5) {
         linkColor = '#6e69ff';
         borderColor = '#6e69ff';
@@ -100,7 +96,6 @@ class Viewer {
 
     // SIM CANVAS RENDERING
 
-
     for (var i1 = 0; i1 < surroundings.length; i1++) {
       renderObject(simContext, surroundings[i1]);
     }
@@ -109,17 +104,6 @@ class Viewer {
       var p1 = self.location;
       var p2 = findNewPoint(self.location.x, self.location.y, angle, self.radius);
       var p3 = findNewPoint(p2.x, p2.y, angle, entity.nerves[i1].size);
-
-      //debugging
-
-      if (i1 === '10') {
-        debugHistory.unshift(entity.nerves[i1].size);
-        debugHistory = debugHistory.slice(0,6);
-        //console.log(debugHistory);
-        if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50) && (debugHistory[3] == 50) && (debugHistory[4] < 50) && (debugHistory[5] == 50)){
-          console.log('[VIEWER] We found a blip pattern: ', debugHistory);
-        }
-      }
 
       entity.nerves[i1].points = [p2, p3];
       //console.log('Nerves', entity.nerves[i1])
@@ -148,7 +132,7 @@ class Viewer {
 
     // BRAIN CANVAS RENDERING
 
-    
+
     var width = brainCanvas.width;
     var height = brainCanvas.height;
     //var structure = visualizeLayers(brain);

@@ -9,7 +9,6 @@ var debugHistory = [];
 
 class Entity {
   constructor(run, surroundings, self, target, viewer) {
-    //console.log('Self', self);
     this.run = run;
     this.age = 0;
     this.target = target;
@@ -18,7 +17,6 @@ class Entity {
       y: self.location.y
     };
     this.surroundings = surroundings;
-    //console.log('Surroundings', surroundings);
     this.self = self;
     this.viewer = viewer;
     this.nerveCount = 20;
@@ -41,8 +39,6 @@ class Entity {
     self.think = this.think.bind(self);
   }
   think(bounds, width, height, time, child) {
-    console.log('[CHECKPOINT]');
-
     var reset = true;
     var input = [];
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
@@ -57,45 +53,24 @@ class Entity {
       this.nerves[i1] = nerve;
     }
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
-      var collisions = bounds.map(bound=>{
-            return lineSegmentIntersection(this.nerves[i1].points,bound,i1,reset);
-          }).filter(distance=>{
-            return distance && distance < 50;
-          });
-      if (collisions.length > 0) {
-        this.nerves[i1].size = Math.min(...collisions);
+      var lineCollisions = bounds.map(bound => {
+        return lineSegmentIntersection(this.nerves[i1].points, bound, i1, reset);
+      }).filter(distance => {
+        return distance && distance < 50;
+      });
+      var circleCollisions = bounds.map(bound => {
+        return lineSegmentIntersection(this.nerves[i1].points, bound, i1, reset);
+      }).filter(distance => {
+        return distance && distance < 50;
+      });
+      if (totalCollisions.length > 0) {
+        this.nerves[i1].size = Math.min(...totalCollisions);
       }
-      //if (length != 50) {
-      //}
-
-
-      //debugging
-
-      if (i1 === '10') {
-        debugHistory.unshift(this.nerves[i1].size);
-        debugHistory = debugHistory.slice(0, 6);
-        //console.log(debugHistory);
-        if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50) && (debugHistory[3] == 50) && (debugHistory[4] < 50) && (debugHistory[5] == 50)) {
-          console.log('[ENTITY] We found a blip pattern: ', debugHistory);
-        }
-      }
-
-      //if (i1 === '1') {
-      //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
-      //}
     }
 
-    //console.log('Input', input)
-
-    //console.log('Thinking', input)
-    var output = this.run(this.nerves.map(nerve=>nerve.size/50), time);
-
-    //console.log('Acting', output)
-    //console.log(result);
+    var output = this.run(this.nerves.map(nerve => nerve.size / 50), time);
     var self = this.self;
     var surroundings = this.surroundings;
-    //console.log('Self before:', entity.self.location);
-    //console.log('Input', input);
 
 
     ///*
