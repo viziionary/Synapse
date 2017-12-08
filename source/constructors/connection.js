@@ -1,6 +1,6 @@
-const getRandomNumber = require('../functions/getrandomnumber');
-const getRandomLowNumber = require('../functions/getrandomlownumber');
-const getRandomDecimal = require('../functions/getrandomdecimal');
+import getRandomNumber from '../functions/getrandomnumber';
+import getRandomLowNumber from '../functions/getrandomlownumber';
+import getRandomDecimal from '../functions/getrandomdecimal';
 
 class Connection {
   constructor(brain, source, target) {
@@ -95,4 +95,4 @@ class Connection {
     }
   }
 }
-module.exports = Connection;
+export default Connection;

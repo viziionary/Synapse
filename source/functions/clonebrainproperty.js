@@ -1,6 +1,6 @@
-const Connection = require('../constructors/connection');
-const Neuron = require('../constructors/neuron');
-const Brain = require('../constructors/brain');
+import Connection from '../constructors/connection';
+import Neuron from '../constructors/neuron';
+import Brain from '../constructors/brain';
 var neurons = {};
 var connections = {};
 var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null) {
@@ -36,4 +36,4 @@ var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null) {
     }
     return clonedProperty;
 };
-module.exports = cloneBrainProperty; 
+export default cloneBrainProperty; 

@@ -1,4 +1,4 @@
-const cloneBrainProperty = require('./clonebrainproperty');
+import cloneBrainProperty from './clonebrainproperty';
 
 function cloneBrain(brain) {
 	//console.log('Source Brain: ', brain);
@@ -6,4 +6,4 @@ function cloneBrain(brain) {
 	//console.log('Cloned Brain: ', clone);
 	return clone;
 }
-module.exports = cloneBrain;
+export default cloneBrain;

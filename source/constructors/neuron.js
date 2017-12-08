@@ -1,8 +1,8 @@
-const Connection = require('./connection');
-const isNumber = require('../functions/isnumber');
-const getRandomNumber = require('../functions/getrandomnumber');
-const getRandomLowNumber = require('../functions/getrandomlownumber');
-const getRandomDecimal = require('../functions/getrandomdecimal');
+import Connection from './connection';
+import isNumber from '../functions/isnumber';
+import getRandomNumber from '../functions/getrandomnumber';
+import getRandomLowNumber from '../functions/getrandomlownumber';
+import getRandomDecimal from '../functions/getrandomdecimal';
 
 class Neuron {
   constructor(brain, type) {
@@ -91,4 +91,4 @@ class Neuron {
     //}
   }
 }
-module.exports = Neuron;
+export default Neuron;

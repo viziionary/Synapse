@@ -7,4 +7,4 @@ function circleInBounds(width, height, circle) {
 		return true;
 	}
 }
-module.exports = circleInBounds;
+export default circleInBounds;

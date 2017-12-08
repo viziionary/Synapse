@@ -1,5 +1,4 @@
-const Entity = require('./engine/entity');
-const compute = require('./engine/compute');
+import Entity from './engine/entity';
 
 function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, width, height, target, viewer) {
 	var generationCount = 0;
@@ -25,4 +24,4 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 		});
 	}
 }
-module.exports = Engine;
+export default Engine;

@@ -1,9 +1,9 @@
-const findNewPoint = require('./findnewpoint');
-const interceptOnCircle = require('./entity/interceptoncircle');
-const lineSegmentIntersection = require('./entity/linesegmentintersection');
-const getDistance = require('./getdistance');
-const interceptCircles = require('./interceptcircles');
-const circleInBounds = require('./circleinbounds');
+import findNewPoint from './findnewpoint';
+import interceptOnCircle from './entity/interceptoncircle';
+import lineSegmentIntersection from './entity/linesegmentintersection';
+import getDistance from './getdistance';
+import interceptCircles from './interceptcircles';
+import circleInBounds from './circleinbounds';
 
 var debugHistory = [];
 
@@ -111,4 +111,4 @@ class Entity {
     return result;
   }
 }
-module.exports = Entity;
+export default Entity;

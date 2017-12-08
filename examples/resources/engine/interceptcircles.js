@@ -9,4 +9,4 @@ function interceptCircles(circle1, circle2) {
 	}
 }
 
-module.exports = interceptCircles;
+export default interceptCircles;

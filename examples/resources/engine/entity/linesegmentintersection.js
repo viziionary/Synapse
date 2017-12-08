@@ -1,5 +1,4 @@
-const getDistance = require('../getdistance');
-const lineIntersect = require('line-intersect');
+import getDistance from '../getdistance';
 
 function lineSegmentIntersection(line1, line2) {
 	var x1 = line1[0].x;
@@ -27,4 +26,4 @@ function lineSegmentIntersection(line1, line2) {
 		return null;
 	}
 }
-module.exports = lineSegmentIntersection;
+export default lineSegmentIntersection;

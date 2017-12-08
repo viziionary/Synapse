@@ -4,4 +4,4 @@ function getDistance(point1, point2) {
 	//var b = point1.y - point2.y
 	//return Math.sqrt(a * a + b * b);
 }
-module.exports = getDistance;
+export default getDistance;

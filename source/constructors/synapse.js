@@ -1,6 +1,6 @@
-const Brain = require('./brain');
-const cloneBrain = require('../functions/clonebrain');
-import Worker from '../workers/sim.js';
+import Brain from './brain';
+//import Worker from './file.worker.js'; 
+import cloneBrain from '../functions/clonebrain';
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
@@ -23,7 +23,7 @@ class Synapse {
   }
   async initiate() {
     
-    const simWorker = new Worker();
+   var simWorker = new Worker('../../source/workers/sim.js');
     simWorker.postMessage('hi');
     myWorker.onmessage = function(e) {
       result.textContent = e.data;

@@ -45,4 +45,4 @@ function interceptOnCircle(p1, p2, c, r) {
     }
 }
 
-module.exports = interceptOnCircle;
+export default interceptOnCircle;

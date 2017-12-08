@@ -1,13 +1,14 @@
 import Synapse  from '../../source/index';
+import Engine from '../resources/engine';
 import Viewer from '../resources/viewer';
-const Engine = require('../resources/engine');
+console.log(Viewer);
 
 window.addEventListener("load", function() {
 	var canvas1 = document.getElementById('brain');
 	var canvas2 = document.getElementById('environment');
 	var canvas3 = document.getElementById('overlay');
 	var canvas4 = document.getElementById('underlay');
-	viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
+	var viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		viewer.update(child);
