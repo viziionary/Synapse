@@ -1,7 +1,7 @@
 const getDistance = require('../getdistance');
 const lineIntersect = require('line-intersect');
 
-function lineSegmentIntersection(line1, line2, id = false, reset = false) {
+function lineSegmentIntersection(line1, line2) {
 	var x1 = line1[0].x;
 	var x2 = line1[1].x;
 	var x3 = line2[0].x;

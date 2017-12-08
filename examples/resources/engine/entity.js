@@ -54,25 +54,23 @@ class Entity {
     }
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
       var lineCollisions = bounds.map(bound => {
-        return lineSegmentIntersection(this.nerves[i1].points, bound, i1, reset);
+        return lineSegmentIntersection(this.nerves[i1].points, bound);
       }).filter(distance => {
         return distance && distance < 50;
       });
-      var circleCollisions = bounds.map(bound => {
-        return lineSegmentIntersection(this.nerves[i1].points, bound, i1, reset);
+      var circleCollisions = this.surroundings.map(obstacle => {
+        return interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], obstacle.location, obstacle.radius);
       }).filter(distance => {
         return distance && distance < 50;
       });
+      var totalCollisions = circleCollisions.concat(lineCollisions);
       if (totalCollisions.length > 0) {
         this.nerves[i1].size = Math.min(...totalCollisions);
       }
     }
-
     var output = this.run(this.nerves.map(nerve => nerve.size / 50), time);
     var self = this.self;
     var surroundings = this.surroundings;
-
-
     ///*
     var speed = 7;
     if (output[0] >= 0.5) this.self.location.x += (0.5 - output[0]) * speed;
@@ -89,7 +87,6 @@ class Entity {
     if (output[1] < 0.5) this.self.location.y -= speed;
     */
 
-    //console.log('Self after:', entity.self.location);
     var distanceFromTarget = getDistance(this.self.location, this.target.location);
     var distanceFromStart = getDistance(this.origin, this.self.location);
     var score = distanceFromStart + (distanceFromTarget * -1); //- Math.round(entity.age / 10);
@@ -99,14 +96,11 @@ class Entity {
       score: score,
       self: this.self
     }
-
-
     for (var i1 = 0; i1 < surroundings.length; i1++) {
       if (interceptCircles(this.self, this.surroundings[i1])) {
         result.state = 'complete';
       }
     }
-
     if (interceptCircles(this.self, this.target)) {
       result.state = 'complete';
     }

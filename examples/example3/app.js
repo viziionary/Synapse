@@ -11,16 +11,14 @@ window.addEventListener("load", function() {
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		viewer.update(child);
-		console.log('[NEW SIM]');
+		//console.log('[NEW SIM]');
 		//console.log('Debug 2', child);
-
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
 		canvas4.width = document.body.clientWidth;
 		canvas4.height = document.body.clientHeight;
 		var width = canvas1.width;
 		var height = canvas1.height;
-
 		var bounds = [
 			[{
 				x: 0,
