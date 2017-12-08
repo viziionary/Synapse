@@ -6,6 +6,7 @@ window.addEventListener("load", function() {
 	var viewer;
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
+		console.log('[NEW SIM]')
 		//console.log('Debug 2', child);
 		var canvas1 = document.getElementById('brain');
 		var canvas2 = document.getElementById('environment');
@@ -81,7 +82,7 @@ window.addEventListener("load", function() {
 			color: '#e59f44',
 			stroke: '#ead379'
 		};
-		var engine = new Engine(run, child, 300, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
+		var engine = new Engine(run, child, 100, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
