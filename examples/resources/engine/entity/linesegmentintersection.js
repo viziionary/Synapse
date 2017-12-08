@@ -22,8 +22,10 @@ function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 	*/
 
 	if (id === '10') {
-		console.log('Target (line2) index 1:', line2[0]);
-		console.log('Target (line2) index 2:', line2[1]);
+		console.log('Line 1 point 1:', line1[0]);
+		console.log('Line 1 point 2:', line1[1]);
+		console.log('Line 2 point 1:', line2[0]);
+		console.log('Line 2 point 2:', line2[1]);
 	}
 
 	//counter++;
