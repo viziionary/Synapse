@@ -31,7 +31,7 @@ class Entity {
       var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
       var nerve = {
         points: [p2, p3],
-        size: 0 //this.nerveLength
+        size: 50 //this.nerveLength
       };
       this.nerves[i1] = nerve;
     }
