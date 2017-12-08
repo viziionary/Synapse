@@ -17,7 +17,7 @@ function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 		var distance = getDistance(line1[0], result.point);
 		return distance;
 	} else {
-		return 50;
+		return null;
 	}
 }
 
