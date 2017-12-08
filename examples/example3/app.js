@@ -81,7 +81,7 @@ window.addEventListener("load", function() {
 			color: '#e59f44',
 			stroke: '#ead379'
 		};
-		var engine = new Engine(run, child, 100, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
+		var engine = new Engine(run, child, 300, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();
 		//console.log('Child score', score);
 		//console.log('Score final', score);
