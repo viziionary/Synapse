@@ -74,6 +74,17 @@ class Entity {
       //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
       //}
     }
+    for (var i1 = 0; i1 < this.nerveCount; i1++) {
+      var angle = (360 / this.nerveCount) * i1;
+      var p1 = this.self.location;
+      var p2 = findNewPoint(this.self.location.x, this.self.location.y, angle, this.self.radius);
+      var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
+      var nerve = {
+        points: [p2, p3],
+        size: 50 //this.nerveLength
+      };
+      this.nerves[i1] = nerve;
+    }
     //console.log('Input', input)
 
     //console.log('Thinking', input)
