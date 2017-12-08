@@ -7,4 +7,4 @@ function renderLine(context, p1, p2, color, offsetX = 0, offsetY = 0) {
 	context.strokeStyle = color;
 	context.stroke();
 }
-module.exports = renderLine;
+export default renderLine;

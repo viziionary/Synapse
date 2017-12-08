@@ -1,5 +1,5 @@
-const Viewer = require('../resources/viewer');
-const Synapse = require('../../source/index');
+import Synapse  from '../../source/index';
+import Viewer from '../resources/viewer';
 const Engine = require('../resources/engine');
 
 window.addEventListener("load", function() {
@@ -11,8 +11,6 @@ window.addEventListener("load", function() {
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
 		viewer.update(child);
-		//console.log('[NEW SIM]');
-		//console.log('Debug 2', child);
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
 		canvas4.width = document.body.clientWidth;
@@ -84,12 +82,7 @@ window.addEventListener("load", function() {
 		};
 		var engine = new Engine(run, child, 1, 0, 10000, surroundings, self, bounds, width, height, target, viewer);
 		var score = await engine.simulate();
-		//console.log('Child score', score);
-		//console.log('Score final', score);
 		counter++;
-		//if (counter % 10 == 0) {
-		//console.log("Score: " + score);
-		//}
 		if (counter > 100000) {
 			console.log('Ended without reaching target score: ' + targetScore);
 			return false;
@@ -102,6 +95,5 @@ window.addEventListener("load", function() {
 			return score;
 		}
 	});
-	//viewer = new Viewer(canvas);
 	network.initiate();
 });

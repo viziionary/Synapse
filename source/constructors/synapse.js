@@ -1,5 +1,6 @@
 const Brain = require('./brain');
 const cloneBrain = require('../functions/clonebrain');
+import Worker from '../workers/sim.js';
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
@@ -21,12 +22,18 @@ class Synapse {
     this.getScoredChild = this.getScoredChild.bind(this);
   }
   async initiate() {
-    //console.log('score',this.brain.score);
-
+    
+    const simWorker = new Worker();
+    simWorker.postMessage('hi');
+    myWorker.onmessage = function(e) {
+      result.textContent = e.data;
+      console.log('Message received from worker: ', result.textContent);
+    }; 
+    
     if (this.child) {
-      this.child = cloneBrain(this.brain);
+      this.child = cloneBrain(this.brain); 
       this.child.generate();
-    } else {
+    } else { 
       var newChild = null;
       for (let i = 0; i < 100; i++) {
         console.log('Searching for Chosen One... [' + i + ']'); // expected execution order
@@ -46,7 +53,7 @@ class Synapse {
       this.child = newChild;
     }
 
-    var childScore = this.runFunction(this.child.input,this.child);
+    var childScore = this.runFunction(this.child.input, this.child);
     if (childScore instanceof Promise) {
       childScore = await childScore;
       //console.log(childScore);
@@ -61,12 +68,11 @@ class Synapse {
       if (this.brain.score) {
         if (this.brain.score < childScore) {
           console.log('EVOLVED from ' + this.brain.score + ' to ' + this.child.score);
-          this.brain = this.child;   
+          this.brain = this.child;
         }
       } else {
         this.brain = this.child;
         console.log('Brain born with score of ' + brain.score);
-        
       }
       return this.initiate();
     }
@@ -76,20 +82,14 @@ class Synapse {
     var child = new Brain(this.inputSize, this.outputSize);
     child.generate();
     child = cloneBrain(child);
-    //console.log('Debug 2:', child); // expected execution order
     let oldChild = this.child;
     this.child = child;
-    //console.log('Debug 1 ', child);
     var childScore = this.runFunction(child.input, child);
-    //console.log('Debug 4:', this.child); // expected execution order
     this.child = oldChild;
     while (childScore instanceof Promise) {
       childScore = await childScore;
     }
-    //console.log('Debug 5:', this.child); // expected execution order
-    
     return [child, childScore];
   }
 }
-
-module.exports = Synapse;
+export default Synapse;

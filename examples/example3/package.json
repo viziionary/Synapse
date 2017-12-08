@@ -8,7 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "webpack": "^2.5.1"
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^2.7.0",
+    "worker-loader": "^1.1.0"
   }
 }

@@ -4,4 +4,4 @@ function findNewPoint(x, y, angle, distance) {
 	result.y = Math.round(Math.sin(angle * Math.PI / 180) * distance + y);
 	return result;
 }
-module.exports = findNewPoint;
+export default findNewPoint;

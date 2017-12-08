@@ -1,8 +1,8 @@
-const Neuron = require('./neuron');
-const mutate = require('../functions/mutate.js');
-const getRandomNumber = require('../functions/getrandomnumber');
-const getRandomLowNumber = require('../functions/getrandomlownumber');
-const createStructure = require('../functions/createstructure');
+import Neuron from './neuron';
+import mutate from '../functions/mutate.js';
+import getRandomNumber from '../functions/getrandomnumber';
+import getRandomLowNumber from '../functions/getrandomlownumber';
+import createStructure from '../functions/createstructure';
 
 var list = {};
 var times = 1000000;
@@ -139,4 +139,4 @@ class Brain {
     mutate(this.mutationRate, this);
   }
 }
-module.exports = Brain;
+export default Brain;

@@ -8,4 +8,4 @@ function renderNerve(context, nerve) {
 	context.strokeStyle = '#7a5ebc';
 	context.stroke();
 }
-module.exports = renderNerve;
+export default renderNerve;

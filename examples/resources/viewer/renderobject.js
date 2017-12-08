@@ -18,4 +18,4 @@ function renderObject(context, object, offsetX = 0, offsetY = 0, forceColor = fa
 	context.stroke();
 }
 
-module.exports = renderObject;
+export default renderObject;

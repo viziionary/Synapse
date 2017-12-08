@@ -1,10 +1,10 @@
-const drawNode = require('./viewer/drawnode');
-const drawLink = require('./viewer/drawlink');
-const findNewPoint = require('./engine/findnewpoint');
-const getRandomNumber = require('../../source/functions/getrandomnumber');
-const renderNerve = require('./viewer/rendernerve');
-const renderObject = require('./viewer/renderobject');
-const renderLine = require('./viewer/renderline');
+import drawNode from './viewer/drawnode';
+import drawLink from './viewer/drawlink';
+import findNewPoint from './engine/findnewpoint';
+import getRandomNumber from '../../source/functions/getrandomnumber';
+import renderNerve from './viewer/rendernerve';
+import renderObject from './viewer/renderobject';
+import renderLine from './viewer/renderline';
 
 var debugHistory = [];
 
@@ -234,4 +234,4 @@ class Viewer {
     this.brain.map = this.map;
   }
 }
-module.exports = Viewer
+export default Viewer;

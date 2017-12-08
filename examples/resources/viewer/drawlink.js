@@ -15,4 +15,4 @@ function drawLink(x1, y1, x2, y2, ctx, connection) {
 	ctx.lineTo(x2, y2);
 	ctx.stroke();
 }
-module.exports = drawLink;
+export default drawLink;

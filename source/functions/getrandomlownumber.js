@@ -1,6 +1,6 @@
-const getRandomDecimal = require('./getrandomdecimal');
-const getRandomNumber = require('./getrandomnumber');
-const logb = require('./logb');
+import getRandomDecimal from './getrandomdecimal';
+import getRandomNumber from './getrandomnumber';
+import logb from './logb';
 
 function getRandomLowNumber(min=0, max=100, factor=0.9) {
 	var base = 1.0 / factor;
@@ -10,4 +10,4 @@ function getRandomLowNumber(min=0, max=100, factor=0.9) {
 		var rndres = max - expflr + min;
         return rndres;
 }
-module.exports = getRandomLowNumber;
+export default getRandomLowNumber;

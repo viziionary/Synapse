@@ -1,5 +1,5 @@
-const getRandomNumber = require('../../../source/functions/getrandomnumber');
-const drawLink = require('./drawlink');
+import getRandomNumber from '../../../source/functions/getrandomnumber';
+import drawLink from './drawlink';
 function drawNode(node, ctx, x, y, neuron) {
   //ctx.strokeStyle = '#ffffff';
   //ctx.fillStyle = '#ffffff';
@@ -24,4 +24,4 @@ function drawNode(node, ctx, x, y, neuron) {
   ctx.fill();
   ctx.stroke();
 }
-module.exports = drawNode;
+export default drawNode;
