@@ -63,59 +63,63 @@ class Entity {
     }
     */
 
-    var input = [];
-
-    for (let i1 in this.nerves) {
-      var inputMin = 50;
-
-      /*
-      for (let i2 = 0; i2 < this.surroundings.length; i2++) {
-        var objectCoords = this.surroundings[i2].location;
-        var objectRadius = this.surroundings[i2].radius;
-        var collision = interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], objectCoords, objectRadius);
-        if (isNaN(collision)) {
-          throw 'Bad collision';
-        }
-        //console.log('Circle collision: ' + collision);
-        //console.log('Collision', collision);
-        var length = collision;
-        if (inputMin > length) {
-          inputMin = length;
-        }
-      }
-      */
-
-      for (let i2 = 0; i2 < bounds.length; i2++) {
-        var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1, reset);
-        if (i1 === '10') {
-          reset = false;
-        }
-        //if (isNaN(collision)) {
-        //  throw 'Bad collision';
-        //}
-
-        /*
-        if ((this.nerves[i1].points[0].x < 0 || this.nerves[i1].points[1].x < 0) && ((bounds[i2][0].y == 0 && bounds[i2][0].x == 0) && (bounds[i2][1].y == 400 && bounds[i2][1].x == 0)) && collision == 50) {
-          console.log('Test', {
-            line1 : this.nerves[i1].points,
-            line2 : bounds[i2]
-          });
-        }
-        */
-
-        //console.log(' Segment collision: ' + collision);
-
-        var length = collision;
-        if (inputMin > length) {
-          inputMin = length;
-        }
-
-        //this.nerves[i1].points = [p2, p3];
-
-      }
+    // var input = [];
+    //
+    // for (let i1 in this.nerves) {
+    //   var inputMin = 50;
+    //
+    //   /*
+    //   for (let i2 = 0; i2 < this.surroundings.length; i2++) {
+    //     var objectCoords = this.surroundings[i2].location;
+    //     var objectRadius = this.surroundings[i2].radius;
+    //     var collision = interceptOnCircle(this.nerves[i1].points[0], this.nerves[i1].points[1], objectCoords, objectRadius);
+    //     if (isNaN(collision)) {
+    //       throw 'Bad collision';
+    //     }
+    //     //console.log('Circle collision: ' + collision);
+    //     //console.log('Collision', collision);
+    //     var length = collision;
+    //     if (inputMin > length) {
+    //       inputMin = length;
+    //     }
+    //   }
+    //   */
+    //
+    //   for (let i2 = 0; i2 < bounds.length; i2++) {
+    //     var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1, reset);
+    //     if (i1 === '10') {
+    //       reset = false;
+    //     }
+    //     //if (isNaN(collision)) {
+    //     //  throw 'Bad collision';
+    //     //}
+    //
+    //     /*
+    //     if ((this.nerves[i1].points[0].x < 0 || this.nerves[i1].points[1].x < 0) && ((bounds[i2][0].y == 0 && bounds[i2][0].x == 0) && (bounds[i2][1].y == 400 && bounds[i2][1].x == 0)) && collision == 50) {
+    //       console.log('Test', {
+    //         line1 : this.nerves[i1].points,
+    //         line2 : bounds[i2]
+    //       });
+    //     }
+    //     */
+    //
+    //     //console.log(' Segment collision: ' + collision);
+    //
+    //     var length = collision;
+    //     if (inputMin > length) {
+    //       inputMin = length;
+    //     }
+    //
+    //     //this.nerves[i1].points = [p2, p3];
+    //
+    //   }
 
       //console.log('Length: ' + inputMin);
-
+      var length = Math.min(50,...bounds.map(bound=>{
+            return lineSegmentIntersection(this.nerves[i1].points,bound,i1,reset);
+          }).filter(distance=>{
+            return distance;
+          })) || 50;
       this.nerves[i1].size = inputMin;
 
       //debugging
