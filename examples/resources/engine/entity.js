@@ -125,8 +125,6 @@ class Entity {
     if (!circleInBounds(width, height, this.self)) {
       result.state = 'complete';
     }
-
-
     this.viewer.render(this, this.surroundings, this.target);
     return result;
   }
