@@ -48,15 +48,15 @@ class Entity {
 
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
 
-      var length = Math.min(50,...bounds.map(bound=>{
+      var length = Math.min(...bounds.map(bound=>{
             return lineSegmentIntersection(this.nerves[i1].points,bound,i1,reset);
           }).filter(distance=>{
             return distance && distance < 50;
           }));
-      if (length != 50) {
+      //if (length != 50) {
         this.nerves[i1].size = length;
-      }
-      
+      //}
+
 
       //debugging
 
