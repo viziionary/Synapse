@@ -194,7 +194,7 @@ class Entity {
     if (!circleInBounds(width, height, this.self)) {
       result.state = 'complete';
     }
-    this.viewer.render(child, this, this.surroundings, this.target);
+    this.viewer.render(/*child,*/ this, this.surroundings, this.target);
     return result;
   }
 }
