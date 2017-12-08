@@ -5,8 +5,10 @@ const lineIntersect = require('line-intersect');
 
 var debugHistory = [];
 var debugHistoryDetails = [];
-counter = 0;
+var counter = 0;
+var skip = 0;
 
+/*
 function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 	var result = lineIntersect.checkIntersection(
 	  line1[0].x, line1[0].y, line1[1].x, line1[1].y,
@@ -20,19 +22,21 @@ function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 		return null;
 	}
 }
+*/
 
 
 // this algo and the one commented below both work and cost about 0.001ms per operation, similar performance. Unclear whether one is more reliable than the other for edge cases. 
 
-/*
 function lineSegmentIntersection(line1, line2, id = false, reset = false) {
-
-	if (id === '10') {
+	//console.log(id);
+	/*
+	if (id == '10') {
 		console.log('Line 1 point 1:', line1[0]);
 		console.log('Line 1 point 2:', line1[1]);
 		console.log('Line 2 point 1:', line2[0]);
 		console.log('Line 2 point 2:', line2[1]);
 	}
+	*/
 
 	//counter++;
 	//var startTime = performance.now();
@@ -62,53 +66,48 @@ function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 		//debugging
 
 		
-		if (id === '10') {
-			if (reset){
-				debugHistory.unshift('new set:');
-			}
+		if (id == '10') {
 			debugHistory.unshift(distance);
-			debugHistory = debugHistory.slice(0, 75);
+			debugHistory = debugHistory.slice(0, 6);
 			console.log('[DETECTION] History:', debugHistory);
-			//debugHistoryDetails.unshift({
-			//	line1,
-			//	line2,
-			//	distance
-			//});
-			//debugHistoryDetails = debugHistoryDetails.slice(0, 6);
+			debugHistoryDetails.unshift({
+				line1,
+				line2,
+				distance
+			});
+			debugHistoryDetails = debugHistoryDetails.slice(0, 6);
 			
-			//if ((debugHistory[0] != 50) && (debugHistory[1] == 50)) {
-				//console.log('[DETECTION] We found a blip pattern: ', debugHistory);
-				//console.log('[DETECTION] Details: ', debugHistoryDetails);
-			//}
+			if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50)) {
+				console.log('[DETECTION] We found a blip pattern: ', debugHistory);
+				console.log('[DETECTION] Details: ', debugHistoryDetails);
+			}
+			console.log('[DETECTION] Test: ', debugHistory);
 		}
-
+		
 		return distance;
 	} else {
 		
-		if (id === '10') {
-			if (reset){
-				debugHistory.unshift('new set:');
-			}
+		if (id == '10') {
 			debugHistory.unshift(50);
-			debugHistory = debugHistory.slice(0, 75);
+			debugHistory = debugHistory.slice(0, 6);
 			console.log('[DETECTION] History:', debugHistory);
-			//debugHistoryDetails.unshift({
-			//	line1,
-			//	line2,
-			//	distance: 50
-			//});
-			//debugHistoryDetails = debugHistoryDetails.slice(0, 50);
-			//console.log(debugHistory);
-			//if ((debugHistory[0] != 50) && (debugHistory[1] == 50)) {
-				//console.log('[DETECTION] We found a blip pattern: ', debugHistory);
-				//console.log('[DETECTION] Details: ', debugHistoryDetails);
-			//}
+			debugHistoryDetails.unshift({
+				line1,
+				line2,
+				distance: 50
+			});
+			debugHistoryDetails = debugHistoryDetails.slice(0, 6);
+			if ((debugHistory[0] < 50) && (debugHistory[1] == 50) && (debugHistory[2] < 50)) {
+				console.log('[DETECTION] We found a blip pattern: ', debugHistory);
+				console.log('[DETECTION] Details: ', debugHistoryDetails);
+			}
+			console.log('[DETECTION] Test: ', debugHistory);
 		}
 		
-		return 50;
+		return null;
 	}
 }
-*/
+
 
 
 /*

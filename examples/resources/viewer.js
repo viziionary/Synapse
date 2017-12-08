@@ -20,12 +20,17 @@ class Viewer {
     this.context3 = canvas3.getContext('2d');
     this.context4 = canvas4.getContext('2d');
     this.render = this.render.bind(this);
+    this.update = this.update.bind(this);
+  }
+
+  update(brain) {
+    this.brain = brain;
     this.map = false;
     if (brain.map) {
       this.map = brain.map;
     }
   }
-  render(brain, entity, surroundings, target) {
+  render(entity, surroundings, target) {
     //console.log('Rendering...');
     //console.log(entity);
     //console.log('Debug 2', brain);
@@ -58,8 +63,8 @@ class Viewer {
     //brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
 
     var points = [];
-    for (var i1 = 0; i1 < brain.inputSize; i1++) {
-      var space = (linkCanvas.width / 2) / brain.inputSize;
+    for (var i1 = 0; i1 < this.brain.inputSize; i1++) {
+      var space = (linkCanvas.width / 2) / this.brain.inputSize;
       var distance = ((i1 + 1) * space) - (0.5 * space) + linkCanvas.width / 4;
       //console.log(distance);
       var point = {
@@ -150,7 +155,7 @@ class Viewer {
     //console.log('Structure', structure)
     //console.log('Brain', brain)
     //var inputList = Object.values(brain.layers.input);
-    var hiddenList = Object.values(brain.layers.hidden);
+    var hiddenList = Object.values(this.brain.layers.hidden);
     //var outputList = Object.values(brain.layers.output);
     //console.log('Map', this.map)
     if (!this.map) {
@@ -158,7 +163,7 @@ class Viewer {
       //console.log('Input', inputList);
       //console.log('Hidden', hiddenList);
       //console.log('Output', outputList);
-      Object.values(brain.layers.input).forEach((inputNeuron, index, inputArray) => {
+      Object.values(this.brain.layers.input).forEach((inputNeuron, index, inputArray) => {
         this.map[inputNeuron.id] = {
           x: (width / inputArray.length) * (index + 0.5),
           y: padding
@@ -173,7 +178,7 @@ class Viewer {
       //     y: y
       //   };
       // }
-      Object.values(brain.layers.output).forEach((outputNeuron, index, outputArray) => {
+      Object.values(this.brain.layers.output).forEach((outputNeuron, index, outputArray) => {
         this.map[outputNeuron.id] = {
           x: (width / outputArray.length) * (index + 0.5),
           y: height - padding
@@ -187,7 +192,7 @@ class Viewer {
       //     y: y
       //   };
       // }
-      Object.values(brain.layers.hidden).forEach((hiddenNeuron, index, hiddenArray) => {
+      Object.values(this.brain.layers.hidden).forEach((hiddenNeuron, index, hiddenArray) => {
         this.map[hiddenNeuron.id] = {
           x: (padding * 4) + getRandomNumber(0, width - (padding * 8)),
           y: (padding * 4) + getRandomNumber(0, height - (padding * 8))
@@ -202,7 +207,7 @@ class Viewer {
       //   };
       // }
     }
-    Object.values(brain.layers.input).forEach((inputNeuron, index, inputArray) => {
+    Object.values(this.brain.layers.input).forEach((inputNeuron, index, inputArray) => {
       //console.log('Debug 1')
       if (entity.nerves[index].size >= entity.nerveLength * 0.5) {
         linkColor = '#6e69ff';
@@ -212,8 +217,8 @@ class Viewer {
       renderLine(underLinkContext, this.map[inputNeuron.id], points[index].location, linkColor, offsetXAlt, offsetYAlt);
 
     });
-    for (let prop1 in brain.globalReferenceConnections) {
-      var connection = brain.globalReferenceConnections[prop1];
+    for (let prop1 in this.brain.globalReferenceConnections) {
+      var connection = this.brain.globalReferenceConnections[prop1];
       if (connection.hasOwnProperty('source') && connection.hasOwnProperty('target') && typeof connection.source == 'object' && connection.source.constructor.name == 'Neuron' && typeof connection.target == 'object' && connection.target.constructor.name == 'Neuron') {
         //console.log('Map', this.map);
         if (this.map[connection.source.id] && this.map[connection.target.id]) {
@@ -237,12 +242,12 @@ class Viewer {
       }
     }
     for (var prop in this.map) {
-      if (brain.globalReferenceNeurons[prop]) {
+      if (this.brain.globalReferenceNeurons[prop]) {
         //console.log('Debug 1', brain.globalReferenceNeurons[prop])
-        drawNode(brain.globalReferenceNeurons[prop], brainContext, this.map[prop].x, this.map[prop].y, brain.globalReferenceNeurons[prop]);
+        drawNode(this.brain.globalReferenceNeurons[prop], brainContext, this.map[prop].x, this.map[prop].y, this.brain.globalReferenceNeurons[prop]);
       }
     }
-    brain.map = this.map;
+    this.brain.map = this.map;
   }
 }
 module.exports = Viewer

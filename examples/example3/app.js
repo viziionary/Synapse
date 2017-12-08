@@ -3,22 +3,24 @@ const Synapse = require('../../source/index');
 const Engine = require('../resources/engine');
 
 window.addEventListener("load", function() {
-	var viewer;
-	var counter = 0;
-	var network = new Synapse(20, 2, async(run, child) => {
-		console.log('[NEW SIM]')
-		//console.log('Debug 2', child);
-		var canvas1 = document.getElementById('brain');
+	var canvas1 = document.getElementById('brain');
 		var canvas2 = document.getElementById('environment');
 		var canvas3 = document.getElementById('overlay');
 		var canvas4 = document.getElementById('underlay');
+	viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
+	var counter = 0;
+	var network = new Synapse(20, 2, async(run, child) => {
+		viewer.update(child);
+		console.log('[NEW SIM]');
+		//console.log('Debug 2', child);
+		
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
 		canvas4.width = document.body.clientWidth;
 		canvas4.height = document.body.clientHeight;
 		var width = canvas1.width;
 		var height = canvas1.height;
-		viewer = new Viewer(canvas1, canvas2, canvas3, canvas4, child);
+		
 		var bounds = [
 			[{
 				x: 0,
