@@ -44,9 +44,11 @@ class Entity {
     console.log('[CHECKPOINT]');
 
     var reset = true;
-
-    /*
+    var input = [];
+    
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
+
+      /*
       var angle = (360 / this.nerveCount) * i1;
       var p1 = this.self.location;
       var p2 = findNewPoint(this.self.location.x, this.self.location.y, angle, this.self.radius);
@@ -120,7 +122,7 @@ class Entity {
           }).filter(distance=>{
             return distance;
           }));
-      this.nerves[i1].size = inputMin;
+      this.nerves[i1].size = length;
 
       //debugging
 
@@ -137,7 +139,7 @@ class Entity {
       //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
       //}
 
-      input.push(inputMin / 50);
+      input.push(length / 50);
     }
     //console.log('Input', input)
 
