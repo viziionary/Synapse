@@ -52,8 +52,11 @@ class Viewer {
 
     // LINK CANVAS RENDERING
 
-    linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
-    underLinkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    //linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    //underLinkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    //simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
+    //brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
+
     var points = [];
     for (var i1 = 0; i1 < brain.inputSize; i1++) {
       var space = (linkCanvas.width / 2) / brain.inputSize;
@@ -92,7 +95,7 @@ class Viewer {
 
     // SIM CANVAS RENDERING
 
-    simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
+
     for (var i1 = 0; i1 < surroundings.length; i1++) {
       renderObject(simContext, surroundings[i1]);
     }
@@ -140,7 +143,7 @@ class Viewer {
 
     // BRAIN CANVAS RENDERING
 
-    brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
+    
     var width = brainCanvas.width;
     var height = brainCanvas.height;
     //var structure = visualizeLayers(brain);
