@@ -73,13 +73,11 @@ class Entity {
       //if (i1 === '1') {
       //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
       //}
-
-      input.push(length / 50);
     }
     //console.log('Input', input)
 
     //console.log('Thinking', input)
-    var output = this.run(input, time);
+    var output = this.run(this.nerves.map(nerve=>nerve.size/50), time);
 
     //console.log('Acting', output)
     //console.log(result);
