@@ -41,6 +41,9 @@ class Entity {
     self.think = this.think.bind(self);
   }
   think(bounds, width, height, time, child) {
+    console.log('[CHECKPOINT]');
+
+    var reset = true;
 
     /*
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
@@ -62,7 +65,7 @@ class Entity {
 
     var input = [];
 
-    for (var i1 in this.nerves) {
+    for (let i1 in this.nerves) {
       var inputMin = 50;
 
       /*
@@ -81,27 +84,38 @@ class Entity {
         }
       }
       */
+
       for (let i2 = 0; i2 < bounds.length; i2++) {
-        var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1);
+        var collision = lineSegmentIntersection(this.nerves[i1].points, bounds[i2], i1, reset);
+        if (i1 === '10') {
+          reset = false;
+        }
         if (isNaN(collision)) {
           throw 'Bad collision';
         }
+
+        /*
         if ((this.nerves[i1].points[0].x < 0 || this.nerves[i1].points[1].x < 0) && ((bounds[i2][0].y == 0 && bounds[i2][0].x == 0) && (bounds[i2][1].y == 400 && bounds[i2][1].x == 0)) && collision == 50) {
           console.log('Test', {
             line1 : this.nerves[i1].points,
             line2 : bounds[i2]
           });
         }
+        */
+
         //console.log(' Segment collision: ' + collision);
+
         var length = collision;
         if (inputMin > length) {
           inputMin = length;
         }
+
         //this.nerves[i1].points = [p2, p3];
 
       }
 
-      console.log('Length: ' + inputMin);
+      //console.log('Length: ' + inputMin);
+
       this.nerves[i1].size = inputMin;
 
       //debugging
@@ -118,6 +132,7 @@ class Entity {
       //if (i1 === '1') {
       //  console.log('Nerve calculated size: ' + this.nerves[i1].size);
       //}
+
       input.push(inputMin / 50);
     }
     //console.log('Input', input)
