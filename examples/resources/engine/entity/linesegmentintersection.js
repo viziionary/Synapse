@@ -1,25 +1,31 @@
 const getDistance = require('../getdistance');
 //var totalTime = 0;
 //var counter = 0;
+const lineIntersect = require('line-intersect');
 
 var debugHistory = [];
 var debugHistoryDetails = [];
 counter = 0;
 
+function lineSegmentIntersection(line1, line2, id = false, reset = false) {
+	var result = lineIntersect.checkIntersection(
+	  line1[0].x, line1[0].y, line1[1].x, line1[1].y,
+	  line2[0].x, line2[0].y, line2[1].x, line2[1].y
+	);
+	if (result.point) {
+		//console.log('[!!!]', result.point);
+		var distance = getDistance(line1[0], result.point);
+		return distance;
+	} else {
+		return 50;
+	}
+}
+
 
 // this algo and the one commented below both work and cost about 0.001ms per operation, similar performance. Unclear whether one is more reliable than the other for edge cases. 
-function lineSegmentIntersection(line1, line2, id = false, reset = false) {
-	//counter++;
-	//if (counter > 1000 && counter < 10000) {
-	//	console.log(id);
-	//}
 
-	/*
-	if (reset) {
-		debugHistory = [];
-		debugHistoryDetails = []; 
-	}
-	*/
+/*
+function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 
 	if (id === '10') {
 		console.log('Line 1 point 1:', line1[0]);
@@ -102,6 +108,7 @@ function lineSegmentIntersection(line1, line2, id = false, reset = false) {
 		return 50;
 	}
 }
+*/
 
 
 /*

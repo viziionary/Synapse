@@ -90,9 +90,9 @@ class Entity {
         if (i1 === '10') {
           reset = false;
         }
-        if (isNaN(collision)) {
-          throw 'Bad collision';
-        }
+        //if (isNaN(collision)) {
+        //  throw 'Bad collision';
+        //}
 
         /*
         if ((this.nerves[i1].points[0].x < 0 || this.nerves[i1].points[1].x < 0) && ((bounds[i2][0].y == 0 && bounds[i2][0].x == 0) && (bounds[i2][1].y == 400 && bounds[i2][1].x == 0)) && collision == 50) {
