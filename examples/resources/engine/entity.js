@@ -31,7 +31,7 @@ class Entity {
       var p3 = findNewPoint(p2.x, p2.y, angle, this.nerveLength);
       var nerve = {
         points: [p2, p3],
-        size: this.nerveLength
+        size: 0 //this.nerveLength
       };
       this.nerves[i1] = nerve;
     }
@@ -53,7 +53,10 @@ class Entity {
           }).filter(distance=>{
             return distance && distance < 50;
           }));
-      this.nerves[i1].size = length;
+      if (length != 50) {
+        this.nerves[i1].size = length;
+      }
+      
 
       //debugging
 

@@ -57,10 +57,10 @@ class Viewer {
 
     // LINK CANVAS RENDERING
 
-    //linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
-    //underLinkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
-    //simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
-    //brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
+    linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    underLinkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
+    simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
+    brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
 
     var points = [];
     for (var i1 = 0; i1 < this.brain.inputSize; i1++) {
