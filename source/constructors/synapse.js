@@ -1,5 +1,5 @@
 import Brain from './brain';
-//import Worker from './file.worker.js'; 
+import Worker from './file.worker.js'; 
 import cloneBrain from '../functions/clonebrain';
 
 class Synapse {
@@ -22,18 +22,18 @@ class Synapse {
     this.getScoredChild = this.getScoredChild.bind(this);
   }
   async initiate() {
-    
-   var simWorker = new Worker('../../source/workers/sim.js');
+
+    const simWorker = new Worker();
     simWorker.postMessage('hi');
     myWorker.onmessage = function(e) {
       result.textContent = e.data;
       console.log('Message received from worker: ', result.textContent);
-    }; 
-    
+    };
+
     if (this.child) {
-      this.child = cloneBrain(this.brain); 
+      this.child = cloneBrain(this.brain);
       this.child.generate();
-    } else { 
+    } else {
       var newChild = null;
       for (let i = 0; i < 100; i++) {
         console.log('Searching for Chosen One... [' + i + ']'); // expected execution order
