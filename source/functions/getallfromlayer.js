@@ -2,4 +2,4 @@ function getAllFromLayer(brain, layer) {
 	var neurons = Object.keys(brain.globalReferenceNeurons).filter(k => brain.globalReferenceNeurons[k].layer === layer);
 	return neurons;
 }
-module.exports = getAllFromLayer;
+export default getAllFromLayer;

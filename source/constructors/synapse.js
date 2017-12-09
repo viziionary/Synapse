@@ -24,9 +24,9 @@ class Synapse {
 
     const simWorker = new Worker('worker.js');
     simWorker.postMessage('hi');
-    myWorker.onmessage = function(e) {
-      result.textContent = e.data;
-      console.log('Message received from worker: ', result.textContent);
+    simWorker.onmessage = function(e) {
+      var result = e.data;
+      console.log('Message received from worker: ', result);
     };
 
     if (this.child) {

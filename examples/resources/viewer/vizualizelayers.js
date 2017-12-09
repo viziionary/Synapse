@@ -1,4 +1,4 @@
-const HashTable = require('./hashtable');
+import HashTable from './hashtable';
 
 function visualizeLayers(brain){
   return treeToArray(getTree(brain));
@@ -43,4 +43,4 @@ function getTree(brain){
   }
   return tree;
 }
-module.exports = visualizeLayers;
+export default visualizeLayers;

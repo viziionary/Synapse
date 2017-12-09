@@ -1,4 +1,4 @@
-const getRandomNumber = require('./getrandomnumber.js');
+import getRandomNumber from './getrandomnumber.js';
 function getRandomItem(list, weight) {
 	var total_weight = weight.reduce(function(prev, cur, i, arr) {
 		return prev + cur;
@@ -13,4 +13,4 @@ function getRandomItem(list, weight) {
 		}
     }
 }
-module.exports = getRandomItem;
+export default getRandomItem;

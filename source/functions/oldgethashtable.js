@@ -47,4 +47,4 @@ function getHashTable(){
   return new Proxy(new HashTable(),HashHandler);
 }
 
-module.exports = getHashTable;
+export default getHashTable;

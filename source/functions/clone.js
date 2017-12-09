@@ -56,4 +56,4 @@ var clone = function clone(originalObject, circular) {
 
     return cloneObject;
 };
-module.exports = clone;
+export default clone;

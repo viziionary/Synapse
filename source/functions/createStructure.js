@@ -8,4 +8,4 @@ function createStructure(brain){
   });
   return output;
 }
-module.exports = createStructure;
+export default createStructure;

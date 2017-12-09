@@ -8,4 +8,4 @@ function generateLayers(brain){
   });
   return output;
 }
-module.exports = generateLayers;
+export default generateLayers;

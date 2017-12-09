@@ -97,4 +97,3 @@ window.addEventListener("load", function() {
 	});
 	network.initiate();
 });
-}

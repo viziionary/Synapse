@@ -5,4 +5,4 @@ function getTimer(time,returnValue=null){
     },time);
   })
 }
-module.exports = getTimer;
+export default getTimer;
