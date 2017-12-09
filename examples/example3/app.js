@@ -1,6 +1,6 @@
-import Synapse  from '../../source/index';
-import Engine from '../resources/engine';
-import Viewer from '../resources/viewer';
+import Synapse  from '../../source/constructors/synapse.js';
+import Engine from '../resources/engine.js';
+import Viewer from '../resources/viewer.js';
 console.log(Viewer);
 
 window.addEventListener("load", function() {

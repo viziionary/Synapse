@@ -1,6 +1,6 @@
-import getRandomDecimal from './getrandomdecimal';
-import getRandomNumber from './getrandomnumber';
-import logb from './logb';
+import getRandomDecimal from './getrandomdecimal.js';
+import getRandomNumber from './getrandomnumber.js';
+import logb from './logb.js';
 
 function getRandomLowNumber(min=0, max=100, factor=0.9) {
 	var base = 1.0 / factor;

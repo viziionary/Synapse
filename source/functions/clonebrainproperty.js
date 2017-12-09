@@ -1,6 +1,6 @@
-import Connection from '../constructors/connection';
-import Neuron from '../constructors/neuron';
-import Brain from '../constructors/brain';
+import Connection from '../constructors/connection.js';
+import Neuron from '../constructors/neuron.js';
+import Brain from '../constructors/brain.js';
 var neurons = {};
 var connections = {};
 var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null) {

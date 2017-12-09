@@ -1,2 +1,2 @@
-const Synapse = require('./constructors/synapse');
-module.exports = Synapse;
+import Synapse from './constructors/synapse';
+export default Synapse;

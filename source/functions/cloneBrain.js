@@ -1,4 +1,4 @@
-import cloneBrainProperty from './clonebrainproperty';
+import cloneBrainProperty from './clonebrainproperty.js';
 
 function cloneBrain(brain) {
 	//console.log('Source Brain: ', brain);

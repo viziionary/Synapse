@@ -1,6 +1,6 @@
-import Brain from './brain';
+import Brain from './brain.js';
 import Worker from './file.worker.js'; 
-import cloneBrain from '../functions/clonebrain';
+import cloneBrain from '../functions/clonebrain.js';
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {

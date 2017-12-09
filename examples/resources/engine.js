@@ -1,4 +1,4 @@
-import Entity from './engine/entity';
+import Entity from './engine/entity.js';
 
 function Engine(run, child, tick, targetScore, maxGens, surroundings, self, bounds, width, height, target, viewer) {
 	var generationCount = 0;

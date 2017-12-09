@@ -1,10 +1,10 @@
-import drawNode from './viewer/drawnode';
-import drawLink from './viewer/drawlink';
-import findNewPoint from './engine/findnewpoint';
-import getRandomNumber from '../../source/functions/getrandomnumber';
-import renderNerve from './viewer/rendernerve';
-import renderObject from './viewer/renderobject';
-import renderLine from './viewer/renderline';
+import drawNode from './viewer/drawnode.js';
+import drawLink from './viewer/drawlink.js';
+import findNewPoint from './engine/findnewpoint.js';
+import getRandomNumber from '../../source/functions/getrandomnumber.js';
+import renderNerve from './viewer/rendernerve.js';
+import renderObject from './viewer/renderobject.js';
+import renderLine from './viewer/renderline.js';
 
 var debugHistory = [];
 
