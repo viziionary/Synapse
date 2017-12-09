@@ -1,8 +1,8 @@
-const getRandomProperty = require('./getrandomproperty');
-const getRandomNumber = require('./getrandomnumber');
-const getRandomDecimal = require('./getrandomdecimal');
-const getRandomLowNumber = require('./getrandomlownumber');
-const Neuron = require('../constructors/neuron');
+import getRandomProperty from './getrandomproperty';
+import getRandomNumber from './getrandomnumber';
+import getRandomDecimal from './getrandomdecimal';
+import getRandomLowNumber from './getrandomlownumber';
+import Neuron from '../constructors/neuron';
 
 var mutations = {
   connect: {
@@ -169,4 +169,4 @@ var mutations = {
   }
   */
 };
-module.exports = mutations;
+export default mutations;

@@ -4,13 +4,5 @@ module.exports = {
 		path: __dirname + "/build",
 		filename: "bundle.js"
 	},
-	watch: true,
-	module: {
-		rules: [{
-			test: /\.worker\.js$/,
-			use: {
-				loader: 'worker-loader'
-			}
-		}]
-	}
+	watch: true
 }

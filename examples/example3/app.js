@@ -1,7 +1,18 @@
-import Synapse  from '../../source/index';
+import Synapse from '../../source/index';
 import Engine from '../resources/engine';
 import Viewer from '../resources/viewer';
-console.log(Viewer);
+
+console.log(Worker.toString());
+const simWorker = new Worker('worker.js');
+setTimeout(() => {
+	simWorker.postMessage('hi');
+	console.log('worker created');
+	simWorker.onmessage = function(e) {
+		result.textContent = e.data;
+		console.log('Message received from worker: ', result.textContent);
+	};
+}, 10)
+
 
 window.addEventListener("load", function() {
 	var canvas1 = document.getElementById('brain');

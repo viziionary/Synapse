@@ -1,6 +1,6 @@
-const mutations = require('./mutations');
-const getRandomNumber = require('./getrandomnumber');
-const getRandomProperty = require('./getrandomproperty');
+import mutations from './mutations';
+import getRandomNumber from './getrandomnumber';
+import getRandomProperty from './getrandomproperty';
 var mutationList = [];
 Object.keys(mutations).map((key) => {
 	for (let i = 0; i < mutations[key].frequency; i++) {
@@ -20,4 +20,4 @@ function mutate(max, child) {
 	}
 }
 
-module.exports = mutate;
+export default mutate;
