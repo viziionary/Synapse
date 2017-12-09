@@ -1,9 +1,9 @@
-import findNewPoint from './findnewpoint';
-import interceptOnCircle from './entity/interceptoncircle';
-import lineSegmentIntersection from './entity/linesegmentintersection';
-import getDistance from './getdistance';
-import interceptCircles from './interceptcircles';
-import circleInBounds from './circleinbounds';
+import findNewPoint from './findnewpoint.js';
+import interceptOnCircle from './entity/interceptoncircle.js';
+import lineSegmentIntersection from './entity/linesegmentintersection.js';
+import getDistance from './getdistance.js';
+import interceptCircles from './interceptcircles.js';
+import circleInBounds from './circleinbounds.js';
 
 var debugHistory = [];
 

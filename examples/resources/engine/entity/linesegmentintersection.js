@@ -1,4 +1,4 @@
-import getDistance from '../getdistance';
+import getDistance from '../getdistance.js';
 
 function lineSegmentIntersection(line1, line2) {
 	var x1 = line1[0].x;

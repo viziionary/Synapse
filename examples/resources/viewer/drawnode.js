@@ -1,5 +1,5 @@
-import getRandomNumber from '../../../source/functions/getrandomnumber';
-import drawLink from './drawlink';
+import getRandomNumber from '../../../source/functions/getrandomnumber.js';
+import drawLink from './drawlink.js';
 function drawNode(node, ctx, x, y, neuron) {
   //ctx.strokeStyle = '#ffffff';
   //ctx.fillStyle = '#ffffff';

@@ -1,6 +1,6 @@
-const mutations = require('./mutations');
-const getRandomNumber = require('./getrandomnumber');
-const getRandomProperty = require('./getrandomproperty');
+const mutations = require('./mutations.js');
+const getRandomNumber = require('./getrandomnumber.js');
+const getRandomProperty = require('./getrandomproperty.js');
 var mutationList = [];
 Object.keys(mutations).map((key) => {
 	for (let i = 0; i < mutations[key].frequency; i++) {

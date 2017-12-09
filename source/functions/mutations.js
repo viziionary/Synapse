@@ -1,8 +1,8 @@
-const getRandomProperty = require('./getrandomproperty');
-const getRandomNumber = require('./getrandomnumber');
-const getRandomDecimal = require('./getrandomdecimal');
-const getRandomLowNumber = require('./getrandomlownumber');
-const Neuron = require('../constructors/neuron');
+const getRandomProperty = require('./getrandomproperty.js');
+const getRandomNumber = require('./getrandomnumber.js');
+const getRandomDecimal = require('./getrandomdecimal.js');
+const getRandomLowNumber = require('./getrandomlownumber.js');
+const Neuron = require('../constructors/neuron.js');
 
 var mutations = {
   connect: {

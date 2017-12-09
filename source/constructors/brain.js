@@ -1,8 +1,8 @@
-import Neuron from './neuron';
+import Neuron from './neuron.js';
 import mutate from '../functions/mutate.js';
-import getRandomNumber from '../functions/getrandomnumber';
-import getRandomLowNumber from '../functions/getrandomlownumber';
-import createStructure from '../functions/createstructure';
+import getRandomNumber from '../functions/getrandomnumber.js';
+import getRandomLowNumber from '../functions/getrandomlownumber.js';
+import createStructure from '../functions/createstructure.js';
 
 var list = {};
 var times = 1000000;

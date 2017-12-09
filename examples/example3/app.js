@@ -1,7 +1,6 @@
-import Synapse  from '../../source/constructors/synapse.js';
+import Synapse from '../../source/constructors/synapse.js';
 import Engine from '../resources/engine.js';
 import Viewer from '../resources/viewer.js';
-console.log(Viewer);
 
 window.addEventListener("load", function() {
 	var canvas1 = document.getElementById('brain');
@@ -98,3 +97,4 @@ window.addEventListener("load", function() {
 	});
 	network.initiate();
 });
+}

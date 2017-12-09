@@ -1,8 +1,8 @@
-import Connection from './connection';
-import isNumber from '../functions/isnumber';
-import getRandomNumber from '../functions/getrandomnumber';
-import getRandomLowNumber from '../functions/getrandomlownumber';
-import getRandomDecimal from '../functions/getrandomdecimal';
+import Connection from './connection.js';
+import isNumber from '../functions/isnumber.js';
+import getRandomNumber from '../functions/getrandomnumber.js';
+import getRandomLowNumber from '../functions/getrandomlownumber.js';
+import getRandomDecimal from '../functions/getrandomdecimal.js';
 
 class Neuron {
   constructor(brain, type) {

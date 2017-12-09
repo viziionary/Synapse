@@ -1,6 +1,6 @@
-import getRandomNumber from '../functions/getrandomnumber';
-import getRandomLowNumber from '../functions/getrandomlownumber';
-import getRandomDecimal from '../functions/getrandomdecimal';
+import getRandomNumber from '../functions/getrandomnumber.js';
+import getRandomLowNumber from '../functions/getrandomlownumber.js';
+import getRandomDecimal from '../functions/getrandomdecimal.js';
 
 class Connection {
   constructor(brain, source, target) {

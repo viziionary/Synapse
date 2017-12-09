@@ -1,5 +1,4 @@
 import Brain from './brain.js';
-import Worker from './file.worker.js'; 
 import cloneBrain from '../functions/clonebrain.js';
 
 class Synapse {
@@ -23,7 +22,7 @@ class Synapse {
   }
   async initiate() {
 
-    const simWorker = new Worker();
+    const simWorker = new Worker('worker.js');
     simWorker.postMessage('hi');
     myWorker.onmessage = function(e) {
       result.textContent = e.data;
