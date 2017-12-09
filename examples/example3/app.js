@@ -1,17 +1,17 @@
 import Synapse from '../../source/index';
 import Engine from '../resources/engine';
 import Viewer from '../resources/viewer';
-
-console.log(Worker.toString());
-const simWorker = new Worker('worker.js');
-setTimeout(() => {
+var Worker = require("worker-loader!worker.js")
+var simWorker = new Worker;
+//const simWorker = new Worker('worker.js');
+setTimeout(function() {
 	simWorker.postMessage('hi');
 	console.log('worker created');
 	simWorker.onmessage = function(e) {
 		result.textContent = e.data;
 		console.log('Message received from worker: ', result.textContent);
 	};
-}, 10)
+}, 10);
 
 
 window.addEventListener("load", function() {
