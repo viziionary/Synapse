@@ -1,6 +1,13 @@
+//import testFunc from './test.js';
+import Brain from '../constructors/brain.js';
+
 onmessage = function(e) {
-  console.log('Message received from main script:', e.data);
-  var workerResult = 'heyy';
-  console.log('Posting message back to main script');
-  postMessage(workerResult);
+	//testFunc();
+	//console.log(e.data[0])
+	var products = [];
+	for (var i1 = 0; i1 < e.data[0]; i1++) {
+		var brain = new Brain(20, 2);
+		brain.generate();
+	}
+	postMessage(e.data[1]);
 }

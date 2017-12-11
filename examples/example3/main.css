@@ -19,19 +19,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', end
 }
 
 .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
 }
 
 .canvas-wrapper {
-    width: 50%;
-    height: 100%;
-    flex: 1;
-    position: relative;
+    width: 50vw;
+    height: 100vh;
+    float:left;
+    
 }
 
-#environment, #brain  {
+.environment, .brain  {
     width: 400px;
     height: 400px;
     position: absolute;
@@ -44,21 +44,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', end
     max-height: 100%;
 }
 
-#environment {
+.environment {
     border-style: solid;
     border-width: 2px;
     border-color: #4fad8b;
 }
 
-#brain {
+.brain {
 }
 
-#overlay {
+.overlay {
     position:absolute;
     z-index:10;
 }
 
-#underlay {
+.underlay {
     position:absolute;
     z-index:-10;
 }

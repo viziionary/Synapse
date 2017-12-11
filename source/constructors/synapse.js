@@ -3,92 +3,63 @@ import cloneBrain from '../functions/clonebrain.js';
 
 class Synapse {
   constructor(inputSize, outputSize, runFunction) {
-
-    //var brain = new Brain(inputSize, outputSize);
-    //var child = cloneBrain(brain);
-    //brain.score = 100;
-    //child.score = 200;
-    //brain.score = 100;
-    //console.log('Brain score: ' + brain.score);
-    //console.log('Child score: ' + child.score);
-
+    this.topScore = false;
+    this.threads = [];
     this.inputSize = inputSize;
     this.outputSize = outputSize;
     this.runFunction = runFunction;
-    this.brain = new Brain(inputSize, outputSize);
-    //console.log('Global Reference Connections:',Object.entries(this.brain.globalReferenceConnections).length,this.brain.globalReferenceConnections);
-    this.initiate = this.initiate.bind(this);
-    this.getScoredChild = this.getScoredChild.bind(this);
-  }
-  async initiate() {
+    this.threadCount = navigator.hardwareConcurrency * 4;
+    for (let i1 = 0; i1 < this.threadCount; i1++) {
+      this.threads.push({});
+    }
+    for (let i1 = 0; i1 < threadCount; i1++) {
+      var that = this;
+      this.threads[i1] = {};
+      this.threads[i1].brain = new Brain(inputSize, outputSize);
+      this.threads[i1].active = true;
+      (async function run(i1) {
+        console.log('Running Synapse [THREAD ' + i1 + ']');
+        if (that.threads[i1].active) {
+          if (!that.threads[i1].complete) {
+            that.threads[i1].child = cloneBrain(that.threads[i1].brain);
+            that.threads[i1].child.generate();
+          } else {
+            for (let i2 = 0; i2 < threadCount; i2++) {
+              if (!that.threads[i2].complete) {
+                that.threads[i2].active = false;
+              }
+            }
+          }
 
-    const simWorker = new Worker('worker.js');
-    simWorker.postMessage('hi');
-    simWorker.onmessage = function(e) {
-      var result = e.data;
-      console.log('Message received from worker: ', result);
-    };
-
-    if (this.child) {
-      this.child = cloneBrain(this.brain);
-      this.child.generate();
-    } else {
-      var newChild = null;
-      for (let i = 0; i < 100; i++) {
-        console.log('Searching for Chosen One... [' + i + ']'); // expected execution order
-        var childData = await this.getScoredChild(); // debug 2 & 3 should execute here
-        //console.log('Debug 6'); // expected execution order
-        var child = childData[0];
-        var childScore = childData[1];
-        child.score = childScore;
-        if (newChild) {
-          console.log('Comparing top child score [' + newChild.score + '] to tested child score [' + child.score + ']');
+          if (that.threads[i1].child.score === that.topScore) {
+            that.threads[i1].child.leader = true;
+          } else {
+            that.threads[i1].child.leader = false;
+          }
+          var childScore = that.runFunction(that.threads[i1].child.input, that.threads[i1].child);
+          if (childScore instanceof Promise) {
+            childScore = await childScore;
+          }
+          that.threads[i1].child.score = childScore;
+          if (childScore === true) {
+            that.threads[i1].complete = true;
+          } else {
+            if (that.brain.score) {
+              if (that.brain.score < childScore) {
+                console.log('Evolved from ' + that.brain.score + ' to ' + that.threads[i1].child.score);
+                that.brain = that.threads[i1].child;
+              }
+            } else {
+              that.brain = that.threads[i1].child;
+              console.log('Brain born with score of ' + that.threads[i1].child.score);
+            }
+          }
+          run();
         }
-        if (newChild === null || newChild.score < child.score) {
-          newChild = child;
-        }
-      }
-      console.log('Chosen One:', newChild, 'Score:', newChild.score);
-      this.child = newChild;
+      })(i1);
     }
-
-    var childScore = this.runFunction(this.child.input, this.child);
-    if (childScore instanceof Promise) {
-      childScore = await childScore;
-      //console.log(childScore);
-    }
-    this.child.score = childScore;
-    if (childScore === false) {
-      return this.brain;
-    } else if (childScore instanceof Brain) {
-      this.brain = childScore;
-      return this.initiate();
-    } else {
-      if (this.brain.score) {
-        if (this.brain.score < childScore) {
-          console.log('EVOLVED from ' + this.brain.score + ' to ' + this.child.score);
-          this.brain = this.child;
-        }
-      } else {
-        this.brain = this.child;
-        console.log('Brain born with score of ' + brain.score);
-      }
-      return this.initiate();
-    }
-    //setTimeout(function(){}, 10);
   }
-  async getScoredChild() {
-    var child = new Brain(this.inputSize, this.outputSize);
-    child.generate();
-    child = cloneBrain(child);
-    let oldChild = this.child;
-    this.child = child;
-    var childScore = this.runFunction(child.input, child);
-    this.child = oldChild;
-    while (childScore instanceof Promise) {
-      childScore = await childScore;
-    }
-    return [child, childScore];
-  }
+
+
 }
 export default Synapse;

@@ -3,10 +3,31 @@ import Engine from '../resources/engine.js';
 import Viewer from '../resources/viewer.js';
 
 window.addEventListener("load", function() {
-	var canvas1 = document.getElementById('brain');
-	var canvas2 = document.getElementById('environment');
-	var canvas3 = document.getElementById('overlay');
-	var canvas4 = document.getElementById('underlay');
+	var threadCount = navigator.hardwareConcurrency * 4;
+	var canvasThreads = [];
+	for (let i1 = 0; i1 < threadCount; i1++) {
+		canvasThreads.push({});
+		var setWrapper = document.createElement('div');
+		setWrapper.classList.add('wrapper');
+		document.body.appendChild(setWrapper);
+		for (let i2 = 0; i2 < 4; i2++) {
+			var name = 'canvas' + i1 + 'x' + i2;
+			var canvasWrapper = document.createElement('div');
+			var canvas = document.createElement('canvas');
+			canvasWrapper.classList.add('canvas-wrapper');
+			canvasThreads[i1][name] = canvas;
+			canvas.id = name;
+
+			if (i2 > 1) {
+				setWrapper.appendChild(canvas);
+			} else {
+				setWrapper.appendChild(canvasWrapper);
+				canvasWrapper.appendChild(canvas);
+			}
+		}
+	}
+	console.log('Canvas threads: ', canvasThreads);
+	/*
 	var viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child) => {
@@ -90,10 +111,10 @@ window.addEventListener("load", function() {
 		if (score > targetScore) {
 			console.log('Done!');
 			console.log(child);
-			return false;
+			return true;
 		} else {
 			return score;
 		}
 	});
-	network.initiate();
+	*/
 });
