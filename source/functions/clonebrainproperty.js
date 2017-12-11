@@ -1,9 +1,7 @@
 import Connection from '../constructors/connection.js';
 import Neuron from '../constructors/neuron.js';
 import Brain from '../constructors/brain.js';
-var neurons = {};
-var connections = {};
-var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null) {
+var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null, neurons, connections) {
     var clonedProperty = sourceProperty;
     if (sourceProperty instanceof Brain) {
         if (clonedBrain == null) {
@@ -27,10 +25,10 @@ var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null) {
             clonedProperty = connections[sourceProperty.id];
         }
     }
-    if (typeof sourceProperty == 'object' && (!(sourceProperty instanceof Brain) || clonedBrain == null)) {
+    if (typeof sourceProperty == 'object' && (!(sourceProperty instanceof Brain))) {
         for (let prop in sourceProperty) {
             if (sourceProperty.hasOwnProperty(prop)) {
-                clonedProperty[prop] = clone(sourceProperty[prop], clonedBrain);
+                clonedProperty[prop] = clone(sourceProperty[prop], clonedBrain, neurons, connections);
             }
         }
     }

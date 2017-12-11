@@ -56,7 +56,7 @@ class Viewer {
     var self = entity.self;
     simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
 
-    if (brain.leader) {
+    if (this.brain.leader) {
       linkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
       underLinkContext.clearRect(0, 0, linkCanvas.width, linkCanvas.height);
       brainContext.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
@@ -64,7 +64,7 @@ class Viewer {
 
     // LINK CANVAS RENDERING
 
-    if (brain.leader) {
+    if (this.brain.leader) {
       var points = [];
       for (var i1 = 0; i1 < this.brain.inputSize; i1++) {
         var space = (linkCanvas.width / 2) / this.brain.inputSize;
@@ -111,7 +111,9 @@ class Viewer {
 
       entity.nerves[i1].points = [p2, p3];
       //console.log('Nerves', entity.nerves[i1])
-      renderNerve(simContext, entity.nerves[i1]);
+      if (this.brain.leader) {
+        renderNerve(simContext, entity.nerves[i1]);
+      }
       var sourcePoint = {
         location: {
           x: p3.x,
@@ -128,7 +130,9 @@ class Viewer {
         linkColor = '#69ff7a';
         borderColor = '#69ff7a';
       }
-      renderObject(linkContext, sourcePoint, offsetX, offsetY, linkColor);
+      if (this.brain.leader) {
+        renderObject(linkContext, sourcePoint, offsetX, offsetY, linkColor);
+      }
     }
     //console.log(self);
     renderObject(simContext, self);
@@ -136,7 +140,7 @@ class Viewer {
 
     // BRAIN CANVAS RENDERING
 
-    if (brain.leader) {
+    if (this.brain.leader) {
       var width = brainCanvas.width;
       var height = brainCanvas.height;
       //var structure = visualizeLayers(brain);

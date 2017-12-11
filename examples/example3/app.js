@@ -1,11 +1,10 @@
 import Synapse from '../../source/constructors/synapse.js';
 import Engine from '../resources/engine.js';
 import Viewer from '../resources/viewer.js';
-
 window.addEventListener("load", function() {
 	var threadCount = navigator.hardwareConcurrency * 4;
 	var canvasThreads = [];
-	var canvasClassList = ['']
+	var canvasClassList = ['brain', 'environment', 'overlay', 'underlay'];
 	for (let i1 = 0; i1 < threadCount; i1++) {
 		canvasThreads.push({});
 		var setWrapper = document.createElement('div');
@@ -14,25 +13,34 @@ window.addEventListener("load", function() {
 		for (let i2 = 0; i2 < 4; i2++) {
 			var name = 'canvas' + i1 + 'x' + i2;
 			var canvasWrapper = document.createElement('div');
+			var innerCanvasWrapper = document.createElement('div');
 			var canvas = document.createElement('canvas');
 			canvas.classList.add(canvasClassList[i2]);
+			canvas.setAttribute('width', '400');
+			canvas.setAttribute('height', '400');
 			canvasWrapper.classList.add('canvas-wrapper');
-			canvasThreads[i1][name] = canvas;
+			innerCanvasWrapper.classList.add('inner-canvas-wrapper');
+			canvasThreads[i1][i2] = canvas;
 			canvas.id = name;
 
 			if (i2 > 1) {
 				setWrapper.appendChild(canvas);
 			} else {
 				setWrapper.appendChild(canvasWrapper);
-				canvasWrapper.appendChild(canvas);
+				canvasWrapper.appendChild(innerCanvasWrapper);
+				innerCanvasWrapper.appendChild(canvas);
 			}
 		}
 	}
 	console.log('Canvas threads: ', canvasThreads);
-	/*
-	var viewer = new Viewer(canvas1, canvas2, canvas3, canvas4);
+	
 	var counter = 0;
-	var network = new Synapse(20, 2, async(run, child) => {
+	var network = new Synapse(20, 2, async(run, child, thread) => {
+		var canvas1 = canvasThreads[thread][0];
+		var canvas2 = canvasThreads[thread][1];
+		var canvas3 = canvasThreads[thread][2];
+		var canvas4 = canvasThreads[thread][3];
+		var viewer = new Viewer(canvas1, canvas2, canvas3, canvas4, child);
 		viewer.update(child);
 		canvas3.width = document.body.clientWidth;
 		canvas3.height = document.body.clientHeight;
@@ -118,5 +126,4 @@ window.addEventListener("load", function() {
 			return score;
 		}
 	});
-	*/
 });
