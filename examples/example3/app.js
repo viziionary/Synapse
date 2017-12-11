@@ -5,6 +5,7 @@ import Viewer from '../resources/viewer.js';
 window.addEventListener("load", function() {
 	var threadCount = navigator.hardwareConcurrency * 4;
 	var canvasThreads = [];
+	var canvasClassList = ['']
 	for (let i1 = 0; i1 < threadCount; i1++) {
 		canvasThreads.push({});
 		var setWrapper = document.createElement('div');
@@ -14,6 +15,7 @@ window.addEventListener("load", function() {
 			var name = 'canvas' + i1 + 'x' + i2;
 			var canvasWrapper = document.createElement('div');
 			var canvas = document.createElement('canvas');
+			canvas.classList.add(canvasClassList[i2]);
 			canvasWrapper.classList.add('canvas-wrapper');
 			canvasThreads[i1][name] = canvas;
 			canvas.id = name;
