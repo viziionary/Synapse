@@ -19,7 +19,7 @@ class Neuron {
     this.recentCharges = [];
     this.memory = getRandomLowNumber(1, 10, 0.5);
     //console.log('Memory', this.memory)
-    for (let i = 0; i < this.memory; i++){
+    for (let i = 0; i < this.memory; i++) {
       this.recentCharges.push(getRandomDecimal(0, 1));
     }
     this.polarization = getRandomDecimal(0, 1);
@@ -85,6 +85,16 @@ class Neuron {
     //this.polarization += charge * this.chargeRate;
     //if (this.polarization >= this.threshold) {
     //this.polarization = 0;
+    var connectionCounter = 0;
+    for (let prop in this.connections) {
+      if (this.connections.hasOwnProperty(prop)) {
+        connectionCounter++;
+      }
+    }
+    if (connectionCounter > 100) {
+      console.log('Neuron ', this, ' in ', this.brain, ' has ', connectionCounter, ' connections.');
+    }
+    
     Object.values(this.connections).forEach(connection => {
       connection.activate(charge, time);
     });

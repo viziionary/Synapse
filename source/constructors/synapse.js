@@ -15,50 +15,60 @@ class Synapse {
     for (let i1 = 0; i1 < this.threadCount; i1++) {
       var that = this;
       this.threads[i1] = {};
-      this.threads[i1].child = new Brain(inputSize, outputSize);
+      this.threads[i1].parent = new Brain(inputSize, outputSize);
       this.threads[i1].active = true;
       (async function run(i1) {
+
         console.log('Running Synapse [THREAD ' + i1 + ']');
         if (that.threads[i1].active) {
-          if (!that.threads[i1].complete) {
-            that.threads[i1].child = cloneBrain(that.threads[i1].child);
-            that.threads[i1].child.generate();
-          } else {
-            for (let i2 = 0; i2 < that.threadCount; i2++) {
-              if (!that.threads[i2].complete) {
-                that.threads[i2].active = false;
-              }
+          if (i1 === 0 && that.brain) {
+            var childScore = that.runFunction(that.brain.input, that.brain, i1);
+            if (childScore instanceof Promise) {
+              childScore = await childScore;
             }
-          }
-
-          if (that.threads[i1].child.score === that.topScore) {
-            that.threads[i1].child.leader = true;
+            run(i1);
           } else {
-            that.threads[i1].child.leader = false;
-          }
-          var childScore = that.runFunction(that.threads[i1].child.input, that.threads[i1].child, i1);
-          if (childScore instanceof Promise) {
-            childScore = await childScore;
-          }
-          that.threads[i1].child.score = childScore;
-          if (childScore === true) {
-            that.threads[i1].complete = true;
-          } else {
-            if (that.brain && that.brain.score) {
-              if (that.brain.score < childScore) {
-                console.log('Evolved from ' + that.brain.score + ' to ' + that.threads[i1].child.score);
-                that.brain = that.threads[i1].child;
-                that.threads[i1].child.leader = true;
-                console.log('brain in thread ' + i1 + ' became leader.');
-              } else {
-                that.threads[i1].child.leader = false;
-              }
+            if (!that.threads[i1].complete) {
+              that.threads[i1].child = cloneBrain(that.threads[i1].parent);
+              that.threads[i1].child.generate();
             } else {
-              that.brain = that.threads[i1].child;
-              console.log('Brain born with score of ' + that.threads[i1].child.score);
+              console.log('Thread ' + i1 + ' completed.');
+              that.threads[i1].active = false;
             }
+            var childScore = that.runFunction(that.threads[i1].child.input, that.threads[i1].child, i1);
+            if (childScore instanceof Promise) {
+              childScore = await childScore;
+            }
+            that.threads[i1].child.score = childScore;
+            if (childScore === true) {
+              that.threads[i1].complete = true;
+            } else {
+              if (that.brain && that.brain.score) {
+                //console.log('Synapse score: ' + that.brain.score)
+                //console.log('Thread ' + i1 + ' parent score: ' + that.threads[i1].parent.score);
+                //console.log('Thread ' + i1 + ' child score: ' + that.threads[i1].child.score);
+                if (!that.threads[i1].parent.score) {
+                  that.threads[i1].parent.score = childScore;
+                }
+                if (that.threads[i1].parent.score < childScore) {
+                  console.log('Thread ' + i1 + ' evolved from ' + that.threads[i1].parent.score + ' to ' + that.threads[i1].child.score + '. Synapse top score is ' + that.brain.score);
+                  that.threads[i1].parent = that.threads[i1].child;
+                }
+                if (that.brain.score < that.threads[i1].parent.score) {
+                  console.log('Synapse evolved from ' + that.brain.score + ' to ' + that.threads[i1].parent.score);
+                  that.brain = cloneBrain(that.threads[i1].parent);
+                  that.brain.leader = true;
+                  console.log('Thread ' + i1 + ' became leader.');
+                }
+              } else {
+                that.brain = that.threads[i1].child;
+                console.log('Brain born with score of ' + that.threads[i1].child.score);
+              }
+            }
+            run(i1);
           }
-          run(i1);
+        } else {
+          console.log('Thread ' + i1 + ' inactive.');
         }
       })(i1);
     }

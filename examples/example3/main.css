@@ -22,6 +22,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', end
     width: 100vw;
     height: 100vh;
     position:absolute;
+    opacity:0.3;
+}
+
+.main {
+    z-index: 10000;
+    opacity:1;
 }
 
 .canvas-wrapper {

@@ -9,6 +9,9 @@ window.addEventListener("load", function() {
 		canvasThreads.push({});
 		var setWrapper = document.createElement('div');
 		setWrapper.classList.add('wrapper');
+		if (i1 === 0) {
+			setWrapper.classList.add('main');
+		}
 		document.body.appendChild(setWrapper);
 		for (let i2 = 0; i2 < 4; i2++) {
 			var name = 'canvas' + i1 + 'x' + i2;
@@ -36,6 +39,7 @@ window.addEventListener("load", function() {
 	
 	var counter = 0;
 	var network = new Synapse(20, 2, async(run, child, thread) => {
+		//console.log('Running simulation with child: ', child);
 		var canvas1 = canvasThreads[thread][0];
 		var canvas2 = canvasThreads[thread][1];
 		var canvas3 = canvasThreads[thread][2];
