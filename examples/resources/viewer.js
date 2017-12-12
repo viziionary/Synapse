@@ -53,6 +53,10 @@ class Viewer {
     //console.log('x', offsetX);
     //console.log('y', offsetY);
 
+    if (this.brain.leader) {
+      console.log('!!!!!!!!!!!!!! LEADER !!!!!!!!!!!!!!!!!')
+    }
+
     var self = entity.self;
     simContext.clearRect(0, 0, simCanvas.width, simCanvas.height);
 

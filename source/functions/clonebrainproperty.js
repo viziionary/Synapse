@@ -1,7 +1,7 @@
 import Connection from '../constructors/connection.js';
 import Neuron from '../constructors/neuron.js';
 import Brain from '../constructors/brain.js';
-var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null, neurons, connections) {
+var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null, neurons, connections, parent = null, propertyName = null) {
     var clonedProperty = sourceProperty;
     if (sourceProperty instanceof Brain) {
         if (clonedBrain == null) {
@@ -18,20 +18,24 @@ var cloneBrainProperty = function clone(sourceProperty, clonedBrain = null, neur
             clonedProperty = neurons[sourceProperty.id];
         }
     } else if (sourceProperty instanceof Connection) {
-        if (!neurons[sourceProperty.id]) {
+        if (!connections[sourceProperty.id]) {
             clonedProperty = new Connection(clonedBrain, sourceProperty.source, sourceProperty.target);
             connections[sourceProperty.id] = clonedProperty;
         } else {
             clonedProperty = connections[sourceProperty.id];
         }
+    } else {
+        //console.log('Assigning key ' + propertyName + ' with value ', sourceProperty, ' to object ', parent)
+        parent[propertyName] = sourceProperty;
     }
-    if (typeof sourceProperty == 'object' && (!(sourceProperty instanceof Brain))) {
-        for (let prop in sourceProperty) {
-            if (sourceProperty.hasOwnProperty(prop)) {
-                clonedProperty[prop] = clone(sourceProperty[prop], clonedBrain, neurons, connections);
+
+    for (let prop in sourceProperty) {
+        if (sourceProperty.hasOwnProperty(prop)) {
+            if (typeof sourceProperty[prop] == 'object' && sourceProperty[prop] != null && !neurons[sourceProperty[prop].id] && !connections[sourceProperty[prop].id] && !(sourceProperty[prop] instanceof Brain)) {
+                clonedProperty[prop] = clone(sourceProperty[prop], clonedBrain, neurons, connections, clonedProperty, prop);
             }
         }
     }
     return clonedProperty;
 };
-export default cloneBrainProperty; 
+export default cloneBrainProperty;
