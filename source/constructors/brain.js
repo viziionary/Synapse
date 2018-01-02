@@ -83,13 +83,13 @@ class Brain {
     //  neuron.resistance = 0;
     //});
     this.getAllConnections().forEach(connection => {
-      connection.energy = 100;
+      connection.energy = 1;
     });
   }
-  input(array, time) {
+  input(array) {
     //console.log('Brain input', array, time)
     Object.values(this.layers.input).forEach((input, index) => {
-      input.transmit(array[index], time);
+      input.transmit(array[index]);
     });
     this.resetLimiters();
     return Object.values(this.layers.output).map(neuron => {

@@ -13,7 +13,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 			var timer = setInterval(() => {
 				time += tick;
 				entity.age = time;
-				var result = entity.think(bounds, width, height, time, child);
+				var result = entity.think(bounds, width, height, child);
 				//entity.surroundings = result.surroundings;
 				//entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {

@@ -50,13 +50,13 @@ class Synapse {
                 if (!that.threads[i1].parent.score) {
                   that.threads[i1].parent.score = childScore;
                 }
-                if (that.threads[i1].parent.score < childScore) {
+                if (that.threads[i1].parent.score < childScore) { 
                   console.log('Thread ' + i1 + ' evolved from ' + that.threads[i1].parent.score + ' to ' + that.threads[i1].child.score + '. Synapse top score is ' + that.brain.score);
                   that.threads[i1].parent = that.threads[i1].child;
                 }
                 if (that.brain.score < that.threads[i1].parent.score) {
                   console.log('Synapse evolved from ' + that.brain.score + ' to ' + that.threads[i1].parent.score);
-                  that.brain = cloneBrain(that.threads[i1].parent);
+                  that.brain = cloneBrain(that.threads[i1].child);
                   that.brain.leader = true;
                   console.log('Thread ' + i1 + ' became leader.');
                 }
@@ -73,7 +73,5 @@ class Synapse {
       })(i1);
     }
   }
-
-
 }
 export default Synapse;

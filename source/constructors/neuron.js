@@ -14,18 +14,19 @@ class Neuron {
     this.active = true;
     this.id = brain.counter;
     this.weight = 2;
+    this.lastInputTime = null;
     this.connected = {};
     this.connections = {};
     this.recentCharges = [];
-    this.memory = getRandomLowNumber(1, 10, 0.5);
+    this.memory = getRandomLowNumber(1, 10, 0.7);
     //console.log('Memory', this.memory)
     for (let i = 0; i < this.memory; i++) {
       this.recentCharges.push(getRandomDecimal(0, 1));
     }
     this.polarization = getRandomDecimal(0, 1);
-    this.depolarizationRate = 0.1;
+    this.threshold = 1; // getRandomDecimal(5, 10); 
+    this.depolarizationRate = 0.001; // * this.threshold; //getRandomLowNumber(0, 0.001);
     this.chargeRate = getRandomDecimal(0, 1);
-    this.threshold = getRandomLowNumber(1, 10);
     this.inverse = getRandomNumber(0, 1);
     this.bias = null;
     this.recentCharge = null;
@@ -70,35 +71,36 @@ class Neuron {
   measure() {
     return this.bias;
   }
-  transmit(charge, time) {
+  transmit(charge) {
     var total = 0;
     for (let i = 0; i < this.recentCharges.length; i++) {
       total += this.recentCharges[i];
     }
-    var bias = total / this.recentCharges.length;
+    var bias = ((total / this.recentCharges.length) + charge + charge + charge + charge) / 5;
     this.bias = bias;
+    //console.log('Bias: ' + bias);
     this.recentCharges.push(charge);
     if (this.recentCharges.length > this.memory) {
       this.recentCharges.splice(0, 1);
     }
     this.recentCharge = charge;
-    //this.polarization += charge * this.chargeRate;
-    //if (this.polarization >= this.threshold) {
-    //this.polarization = 0;
-    var connectionCounter = 0;
-    for (let prop in this.connections) {
-      if (this.connections.hasOwnProperty(prop)) {
-        connectionCounter++;
+    if (this.lastInputTime) {
+      var passed = performance.now() - this.lastInputTime;
+      this.polarization -= passed * this.depolarizationRate;
+      if (this.polarization < 0) {
+        this.polarization = 0;
       }
+      //console.log(passed + 'ms have passed, depolarized by ' + (passed * this.depolarizationRate) + ' for a resulting polarization of: ' + this.polarization + ' / ' + this.threshold + ' resulting in a bias of [' + this.bias + ']');
     }
-    if (connectionCounter > 100) {
-      console.log('Neuron ', this, ' in ', this.brain, ' has ', connectionCounter, ' connections.');
+    this.lastInputTime = performance.now();
+    this.polarization += charge * this.chargeRate;
+    if (this.polarization >= this.threshold) {
+      this.polarization = 0;
+      this.recentCharge = this.bias;
+      Object.values(this.connections).forEach(connection => {
+        connection.activate(this.bias);
+      });
     }
-    
-    Object.values(this.connections).forEach(connection => {
-      connection.activate(charge, time);
-    });
-    //}
   }
 }
 export default Neuron;

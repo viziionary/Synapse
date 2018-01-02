@@ -38,7 +38,7 @@ class Entity {
   bindMethods(self) {
     self.think = this.think.bind(self);
   }
-  think(bounds, width, height, time, child) {
+  think(bounds, width, height, child) {
     var reset = true;
     var input = [];
     for (var i1 = 0; i1 < this.nerveCount; i1++) {
@@ -68,24 +68,24 @@ class Entity {
         this.nerves[i1].size = Math.min(...totalCollisions);
       }
     }
-    var output = this.run(this.nerves.map(nerve => nerve.size / 50), time);
+    var output = this.run(this.nerves.map(nerve => (50 - nerve.size) / 50));
     var self = this.self;
     var surroundings = this.surroundings;
-    ///*
+    /*
     var speed = 7;
     if (output[0] >= 0.5) this.self.location.x += (0.5 - output[0]) * speed;
     if (output[0] < 0.5) this.self.location.x -= (output[0] - 0.5) * speed;
     if (output[1] >= 0.5) this.self.location.y += (0.5 - output[1]) * speed;
     if (output[1] < 0.5) this.self.location.y -= (output[1] - 0.5) * speed;
-    //*/
+    */
 
-    /*
+    ///*
     var speed = 2;
     if (output[0] >= 0.5) this.self.location.x += speed;
     if (output[0] < 0.5) this.self.location.x -= speed;
     if (output[1] >= 0.5) this.self.location.y += speed;
     if (output[1] < 0.5) this.self.location.y -= speed;
-    */
+    //*/
 
     var distanceFromTarget = getDistance(this.self.location, this.target.location);
     var distanceFromStart = getDistance(this.origin, this.self.location);

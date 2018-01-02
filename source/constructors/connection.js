@@ -25,7 +25,7 @@ class Connection {
         this.deresistanceRate = getRandomDecimal(0, 1);
         this.resistanceGain = getRandomDecimal(0, 0.001, 0.5);
         this.resistance = 0;
-        this.energy = 100;
+        this.energy = 1;
         this.lastTime = 0;
         this.lastCharge = null;
         this.inverse = getRandomNumber(0, 1);
@@ -51,48 +51,26 @@ class Connection {
         this.bindMethods(this);
       }
     } else {
-      console.log('!!! ANOMALY neuron failed to make connection because either target, source, or brain was invalid', source, target, brain);
+      console.log('Neuron failed to make connection because either target, source, or brain was invalid', source, target, brain);
+      throw '[ANOMALY]';
     }
   }
   bindMethods(self) {
-    self.updateBias = this.updateBias.bind(self);
     self.activate = this.activate.bind(self);
     self.delete = this.delete.bind(self);
   }
-  activate(charge, time) {
-    //if (time - this.lastTime > 1000) {
-    //this.lastTime = time;
-    //this.energy = 1000;
-    //}
-    this.energy--;
-    if (this.energy > 0) {
-      if (this.inverse === 1) {
-        charge = charge / 2;
-      }
+  activate(charge) {
       this.brain.activations++;
-      this.updateBias(charge);
       if (this.target) {
-        if (this.memory > 0) {
-          charge = ((charge + charge + this.bias) / 3);
-        }
         this.lastCharge = charge;
-        this.target.transmit(charge, time);
+        this.target.transmit(charge);
+      } else {
+        console.log('We found a neuron without a target.');
+        throw '[ANOMALY]';
       }
-    }
   }
   delete() {
     this.brain.deleteConnection(this.id);
-  }
-  updateBias(charge) {
-    if (this.active == true) {
-      var total = 0;
-      this.recentCharges.push(charge);
-      if (this.recentCharges.length > this.memory) this.recentCharges.splice(0, 1);
-      for (var i1 = 0; i1 < this.recentCharges.length; i1++) {
-        total += this.recentCharges[i1];
-      }
-      this.bias = total / this.recentCharges.length;
-    }
   }
 }
 export default Connection;

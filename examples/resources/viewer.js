@@ -165,7 +165,6 @@ class Viewer {
         });
       }
       Object.values(this.brain.layers.input).forEach((inputNeuron, index, inputArray) => {
-        //console.log('Debug 1')
         if (entity.nerves[index].size >= entity.nerveLength * 0.5) {
           linkColor = '#6e69ff';
         } else {
@@ -179,11 +178,11 @@ class Viewer {
           //console.log('Map', this.map);
           if (this.map[connection.source.id] && this.map[connection.target.id]) {
             //console.log('Connection', connection);
-            drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, brainContext, connection);
+            drawLink(this.map[connection.source.id].x, this.map[connection.source.id].y, this.map[connection.target.id].x, this.map[connection.target.id].y, brainContext, connection, this.brain.leader);
           }
         } else {
           if (typeof connection !== 'object' || connection.constructor.name !== 'Connection') {
-            console.log('Connection not correct type of object', onnection);
+            console.log('Connection not correct type of object', connection);
             //throw new Error('Connection is not a connection :(')
           }
           if (!connection.hasOwnProperty('source') || typeof connection.source !== 'object' || connection.source.constructor.name !== 'Neuron') {
