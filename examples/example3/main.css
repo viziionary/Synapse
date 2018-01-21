@@ -1,0 +1,86 @@
+div, html, body, canvas {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1f1c3a+0,274e75+100 */
+background: #1f1c3a; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #1f1c3a 0%, #274e75 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #1f1c3a 0%,#274e75 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #1f1c3a 0%,#274e75 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f1c3a', endColorstr='#274e75',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
+    opacity:0.3;
+}
+
+.main {
+    z-index: 10000;
+    opacity:1;
+}
+
+.canvas-wrapper {
+    width: 50vw;
+    height: 100vh;
+    float:right;
+    position:relative;
+}
+
+.inner-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items:center;
+    left:0;
+    height:100%;
+    width:100%;
+}
+
+.environment, .brain  {
+    width:400px;
+    height:400px;
+}
+
+.environment {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #4fad8b;
+}
+
+.brain {
+}
+
+.overlay {
+    position:absolute;
+    z-index:10;
+    width:100%;
+    height:100%;
+}
+
+.underlay {
+    position:absolute;
+    z-index:-10;
+    width:100%;
+    height:100%;
+}
+
+#title {
+    position:absolute;
+    width:100%;
+    text-align:center;
+    font-size:60;
+    top:2vh;
+    font-family: 'Montserrat';
+    color:#afd1dd;
+}
