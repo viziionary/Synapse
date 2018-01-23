@@ -10,9 +10,10 @@ In order to use Synapse, unlike in similar libraries where the developer require
 
 The GPU accelerated, multi threaded evolutionary process that goes on behind the scenes will rapidly search for the optimal design to accomplish the task at hand - the developer will only need to understand the most basic neural networking concepts to utilize Synapse:
 
-- A system can't figure out how to solve a problem if it doesn't have all the necessary information to do so, so it's important to consider what information is really needed to accomplish the task, and how that information can be clearly represented as decimals between 0 and 1. 
+- Neural networks can only input and output information in terms of impulse strength, so the user must consider how that information can be clearly represented as decimals between 0 and 1 in order to interact with the network properly. 
+- A system can't figure out how to solve a problem if it doesn't have all the necessary information to do so, so it's important to consider what information is really needed to accomplish the task.
 - The more complex the task, the longer it takes to train a network, with a task that's too hard to accomplish in one step requiring potentially infinite time to learn.
-- Therefore more complex tasks should be broken into sub tasks, each with its own instance of Synapse solving one piece of the puzzle at a time before passing their solution to the next instance. 
+- Therefore more complex tasks should be broken into sub tasks, each with its own instance of Synapse solving one piece of the puzzle at a time before passing their solution to the next instance. For example you probably couldn't figure out how to play Hearthstone without first being able to read the words on the cards. 
 
 And that's essentially all there is to it. Much of what's described here already works, but the GPU acceleration and easy to use developer interface are still on the list of things to do along with general polishing. 
 
