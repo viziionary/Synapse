@@ -7,6 +7,7 @@ import renderObject from './viewer/renderobject.js';
 import renderLine from './viewer/renderline.js';
 
 var debugHistory = [];
+var debugTimer = performance.now();
 
 //const visualizeLayers = require('./viewer/vizualizelayers');
 class Viewer {
@@ -90,6 +91,9 @@ class Viewer {
         borderColor = '#69ff7a';
       }
       if (this.brain.leader) {
+        var elapsed = (performance.now() - debugTimer) / 1000;
+        console.log('Rendering leader [' + this.brain.id + '] again after ' + elapsed + 'ms');
+        debugTimer = performance.now();
         renderObject(linkContext, points[i], false, false, borderColor);
         renderLine(underLinkContext, p3, points[i].location, linkColor, offsetX, offsetY);
       }

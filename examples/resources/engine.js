@@ -14,6 +14,7 @@ function Engine(run, child, tick, targetScore, maxGens, surroundings, self, boun
 				time += tick;
 				entity.age = time;
 				var result = entity.think(bounds, width, height, child);
+				//viewer.update(child);
 				//entity.surroundings = result.surroundings;
 				//entity.self = result.self;
 				if (result.state == 'complete' || time > maxTime) {
