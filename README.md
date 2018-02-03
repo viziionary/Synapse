@@ -4,11 +4,17 @@ This is an alpha stage neural network system aiming to make machine learning acc
 
 # Performance
 
-Synpase will soon feature GPU accelerated processing support. That, along side its multi threaded design, will make the system a powerful competitor in the market of JS based machine learning solutions. 
+Synpase will soon feature GPU accelerated processing support. That, along side its multi threaded design, will make the system a powerful competitor among the options for JS based machine learning solutions. 
 
 In order to use Synapse, unlike in similar libraries where the developer requires a deep understanding of neural network mechanics and must choose their own network design, Synapse allows the developer to simply call up a new instance of Synapse, tie the inputs and outputs into a test environment of their own design, and everything else will happen under the hood without any work on their part. 
 
-The GPU accelerated, multi threaded evolutionary process that goes on behind the scenes will rapidly search for the optimal design to accomplish the task at hand - the developer will only need to understand the most basic neural networking concepts to utilize Synapse:
+The GPU accelerated, multi threaded evolutionary process that goes on behind the scenes will rapidly search for the optimal design to accomplish the task at hand - the developer will only need to understand the most basic neural networking concepts to utilize Synapse.
+
+# Usage
+
+-
+
+# Needed Understandings:
 
 - Neural networks can only input and output information in terms of impulse strength, so the user must consider how that information can be clearly represented as decimals between 0 and 1 in order to interact with the network properly. 
 - A system can't figure out how to solve a problem if it doesn't have all the necessary information to do so, so it's important to consider what information is really needed to accomplish the task.
