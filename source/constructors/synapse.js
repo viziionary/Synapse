@@ -35,7 +35,9 @@ class Synapse {
               console.log('Thread ' + i1 + ' completed.');
               that.threads[i1].active = false;
             }
-            var childScore = that.runFunction(that.threads[i1].child.input, that.threads[i1].child, i1);
+            var testBrain = new Brain(inputSize, outputSize);
+            var childScore = that.runFunction(testBrain.input, testBrain, i1); //test
+            //var childScore = that.runFunction(that.threads[i1].child.input, that.threads[i1].child, i1);
             if (childScore instanceof Promise) {
               childScore = await childScore;
             }

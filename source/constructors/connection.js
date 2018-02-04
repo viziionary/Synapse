@@ -29,6 +29,7 @@ class Connection {
         this.lastTime = 0;
         this.lastCharge = null;
         this.inverse = getRandomNumber(0, 1);
+        this.unstarted = true;
 
         /*
 
@@ -60,9 +61,14 @@ class Connection {
     self.delete = this.delete.bind(self);
   }
   activate(charge) {
+      this.unstarted = false;
+      if (isNaN(charge)){
+        throw 'neuron fired a non numerical charge value.'
+      }
       this.brain.activations++;
       if (this.target) {
         this.lastCharge = charge;
+        //console.log('[Connection Internal Log] Last charge: ', this.lastCharge);
         this.target.transmit(charge);
       } else {
         console.log('We found a neuron without a target.');

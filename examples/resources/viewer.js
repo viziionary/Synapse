@@ -92,7 +92,7 @@ class Viewer {
       }
       if (this.brain.leader) {
         var elapsed = (performance.now() - debugTimer) / 1000;
-        console.log('Rendering leader [' + this.brain.id + '] again after ' + elapsed + 'ms');
+        //console.log('Rendering leader [' + this.brain.id + '] again after ' + elapsed + 'ms');
         debugTimer = performance.now();
         renderObject(linkContext, points[i], false, false, borderColor);
         renderLine(underLinkContext, p3, points[i].location, linkColor, offsetX, offsetY);
@@ -142,7 +142,7 @@ class Viewer {
     // BRAIN CANVAS RENDERING
 
     if (this.brain.leader) {
-      console.log('Rendering leader brain')
+      //console.log('Rendering leader brain');
       var width = brainCanvas.width;
       var height = brainCanvas.height;
       var hiddenList = Object.values(this.brain.layers.hidden);
@@ -153,7 +153,6 @@ class Viewer {
             x: (width / inputArray.length) * (index + 0.5),
             y: padding
           };
-
         });
         Object.values(this.brain.layers.output).forEach((outputNeuron, index, outputArray) => {
           this.map[outputNeuron.id] = {

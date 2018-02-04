@@ -1,4 +1,5 @@
 function drawLink(x1, y1, x2, y2, ctx, connection, log = false) {
+	console.log('Drawing connection:', connection);
 	if (connection.lastCharge === null){
 		ctx.strokeStyle = '#ffffff';
 	} else if (connection.lastCharge >= 0.5){
@@ -7,7 +8,7 @@ function drawLink(x1, y1, x2, y2, ctx, connection, log = false) {
 		ctx.strokeStyle = '#69ff7a';
 	}
 	if (log){
-		console.log(connection.lastCharge);
+		console.log('Last charge', connection.lastCharge);
 	}
 	connection.lastCharge == null;
 	ctx.lineWidth = 0.5;
