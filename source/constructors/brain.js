@@ -34,7 +34,6 @@ class Brain {
     this.activations = 0;
     this.mutationRate = 1;
 
-
     for (let i1 = 0; i1 < outputSize; i1++) {
       new Neuron(this, 'output');
     }

@@ -1,3 +1,5 @@
+// this file needs cleanup / separation into sub functions
+
 import Synapse from '../../source/constructors/synapse.js';
 import Engine from '../resources/engine.js';
 import Viewer from '../resources/viewer.js';
@@ -9,9 +11,9 @@ window.addEventListener("load", function() {
 		canvasThreads.push({});
 		var setWrapper = document.createElement('div');
 		setWrapper.classList.add('wrapper');
-		if (i1 === 0) {
-			setWrapper.classList.add('main');
-		}
+		//if (i1 === 0) {
+		//	setWrapper.classList.add('main');
+		//}
 		document.body.appendChild(setWrapper);
 		for (let i2 = 0; i2 < 4; i2++) {
 			var name = 'canvas' + i1 + 'x' + i2;
