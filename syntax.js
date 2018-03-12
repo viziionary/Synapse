@@ -45,3 +45,6 @@ var output = network1.input([0, 0, 0, 0]); // now network1, network2, and networ
 
 // this is useful in cases where, in the process of training, you established multiple networks that succeeded in accomplishing a task in different ways and you want to leverage each network's opinion. 
 // in the above example if network 1, 2, and 3 each arrive at different conclusions (outputs), network1's output will be used, but if both network 2 and 3 agree on a particular choice differing from network 1, their decision will be used. 
+
+//example
+

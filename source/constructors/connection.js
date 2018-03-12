@@ -23,30 +23,13 @@ class Connection {
           this.recentCharges.push(getRandomDecimal(0, 1));
         }
         this.deresistanceRate = getRandomDecimal(0, 1);
-        this.resistanceGain = getRandomDecimal(0, 0.001, 0.5);
+        this.resistanceGain = getRandomDecimal(0, 0.0001);
         this.resistance = 0;
         this.energy = 1;
         this.lastTime = 0;
         this.lastCharge = null;
         this.inverse = getRandomNumber(0, 1);
         this.unstarted = true;
-
-        /*
-
-        -|- -|- -|-              -|- -|- -|-
-        |_|_|_|_|_| NEVER FORGET |_|_|_|_|_|
-
-        .................
-        ..............................
-
-        source.connections[target.id] = this; // :( 
-
-        [][] https://i.imgur.com/PbSV9DP.png [][]
-
-        RIP Sunday Night Deadline - October 28th, 2017 - October 29th, 2017 -  It was born into a cruel, cruel world with high expectations, and was conquered brutally, meeting none of them.
-    
-        */
-
         source.connections[this.id] = this;
         target.connected[this.id] = this;
         this.bindMethods(this);
@@ -69,6 +52,9 @@ class Connection {
       if (this.target) {
         this.lastCharge = charge;
         //console.log('[Connection Internal Log] Last charge: ', this.lastCharge);
+        if (this.inverse) {
+
+        }
         this.target.transmit(charge);
       } else {
         console.log('We found a neuron without a target.');

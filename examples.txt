@@ -1,0 +1,52 @@
+
+var network1 = new Network(2, 1, (brain) => {
+  	var outputs = [];
+    var outputs[0] = brain.input([0, 0]);
+  	var outputs[1] = brain.input([1, 1]);
+  	var outputs[2] = brain.input([0, 1]);
+  	var outputs[3] = brain.input([1, 0]);
+    for (let i = 0; i < 4; i++) {
+        arr = splitst(bin(i));
+    	var outputs[i] = brain.input(arr);
+    }
+  	var score = 0;
+  	score += 0 - outputs[0];
+  	score += 0 - outputs[1];
+  	score += 0 + outputs[2];
+  	score += 0 + outputs[3];
+	return score;
+});
+
+var modifier1 = new Modifier((input) => { 
+	var output = input.forEach((int) => !int);
+	return output;
+});
+
+network1.feed(modifier1);
+network1.input([0, 1]); // -> 0 
+//normally, the XOR gate neural network would output 1, the correct result of [0, 1], but because of the modifier, which reverses each output value, 1 becomes 0. 
+
+var network1 = new Network(2, 1, (brain) => {
+  for (let i = 0; i < 4; i++) {
+    arr = splitst(bin(i));
+    var output = brain.input(arr);
+  }
+});
+
+function bin(dec){
+    return (dec >>> 0).toString(2);
+}
+
+function splitst(bin) {
+	var arr = ("" + bin).split("");
+  	for (let i = 0; i < arr.length; i) {
+      arr[i] = Number(arr[i]);
+    }
+  	if (2 > arr.length) {
+		arr.unshift(0);
+	}
+  	return arr;
+}
+  
+network1.fuse(network2, network3);
+

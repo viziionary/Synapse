@@ -28,7 +28,7 @@ class Neuron {
     this.depolarizationRate = 0.001; // * this.threshold; //getRandomLowNumber(0, 0.001);
     this.chargeRate = getRandomDecimal(0, 1);
     this.inverse = getRandomNumber(0, 1);
-    this.bias = null;
+    this.bias = getRandomNumber(0, 1);
     this.recentCharge = null;
     this.bindMethods(this);
     var initialChildrenCount = getRandomLowNumber(1, Object.keys(this.brain.globalReferenceNeurons).length, 0.65);

@@ -4,20 +4,6 @@ import getRandomNumber from '../functions/getrandomnumber.js';
 import getRandomLowNumber from '../functions/getrandomlownumber.js';
 import createStructure from '../functions/createstructure.js';
 
-var list = {};
-var times = 1000000;
-
-for (let i = 1; i < times; i++) {
-  var number = getRandomLowNumber(1, 100, 0.5);
-  if (typeof list[number] == 'number') {
-    list[number]++;
-  } else {
-    list[number] = 1;
-  }
-}
-
-console.log('List: ', list);
-
 class Brain {
   constructor(inputSize, outputSize) {
     this.bindMethods(this);
@@ -47,12 +33,6 @@ class Brain {
       this.layers.hidden[prop].test();
     }
 
-
-    //create(this, 'input', 0, inputSize);
-    //create(this, 'hidden', 0, 10); //getRandomLowNumber(Math.round((inputSize + outputSize) / 2), ((inputSize + outputSize) / 4)));
-    //create(this, 'output', 0, 2);
-    //console.log('Brain', this)
-
     function create(brain, type, count, max) {
       if (count < max) {
         count++;
@@ -60,7 +40,6 @@ class Brain {
         create(brain, type, count, max);
       }
     }
-
   }
   bindMethods(self) {
     self.deleteNeuron = this.deleteNeuron.bind(self);

@@ -142,6 +142,8 @@ class Viewer {
     // BRAIN CANVAS RENDERING
 
     if (this.brain.leader) {
+      var element = document.getElementById("myDIV");
+    element.classList.add("mystyle");
       //console.log('Rendering leader brain');
       var width = brainCanvas.width;
       var height = brainCanvas.height;
